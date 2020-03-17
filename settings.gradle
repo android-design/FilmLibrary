@@ -1,0 +1,4 @@
+rootProject.name='FilmLibrary'
+include ':ui'
+include ':domain'
+include ':data'
