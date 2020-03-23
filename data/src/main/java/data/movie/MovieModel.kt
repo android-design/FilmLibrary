@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class Movie (
+data class MovieModel (
     @Expose
     val id: Int,
 
