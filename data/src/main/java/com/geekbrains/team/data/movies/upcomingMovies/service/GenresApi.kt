@@ -1,4 +1,4 @@
-package data.retrofit
+package com.geekbrains.team.data.movies.upcomingMovies.service
 
 import io.reactivex.Single
 import retrofit2.http.GET
