@@ -1,20 +1,20 @@
-package com.geekbrains.team.data.movies.upcomingMovies.service.model
-
-import com.geekbrains.team.domain.movies.upcomingMovies.model.UpcomingMovie
+package com.geekbrains.team.data.movies.nowPlayingMovies.service.model
 import com.google.gson.annotations.SerializedName
 
 
-data class ResponseUpcomingMovies(
+data class ResponseNowPlayingMovies(
     @SerializedName("results")
-    val results: List<UpcomingMovieDataModel>,
+    val results: List<NowPlayingMovies>,
     @SerializedName("page")
     val page: Int,
     @SerializedName("total_results")
     val totalResults: Int,
+    @SerializedName("dates")
+    val dates: Dates,
     @SerializedName("total_pages")
     val totalPages: Int
 ) {
-    data class UpcomingMovieDataModel(
+    data class NowPlayingMovies(
         @SerializedName("popularity")
         val popularity: Double,
         @SerializedName("vote_count")
@@ -28,7 +28,7 @@ data class ResponseUpcomingMovies(
         @SerializedName("adult")
         val adult: Boolean,
         @SerializedName("backdrop_path")
-        val backdropPath: String?,
+        val backdropPath: String,
         @SerializedName("original_language")
         val originalLanguage: String,
         @SerializedName("original_title")
@@ -38,31 +38,17 @@ data class ResponseUpcomingMovies(
         @SerializedName("title")
         val title: String,
         @SerializedName("vote_average")
-        val voteAverage: Double,
+        val voteAverage: Int,
         @SerializedName("overview")
         val overview: String,
         @SerializedName("release_date")
         val releaseDate: String
     )
-}
 
-fun ResponseUpcomingMovies.toUpcomingMovie(): List<UpcomingMovie> {
-    return results.map { movie ->
-        UpcomingMovie(
-            id = movie.id,
-            title = movie.title,
-            originalTitle = movie.originalTitle,
-            popularity = movie.popularity,
-            voteCount = movie.voteCount,
-            video = movie.video,
-            posterPath = movie.posterPath,
-            adult = movie.adult,
-            backdropPath = movie.backdropPath ?: "",
-            originalLanguage = movie.originalLanguage,
-            genreIds = movie.genreIds,
-            voteAverage = (movie.voteAverage * 10).toInt(),
-            overview = movie.overview,
-            releaseDate = movie.releaseDate
-        )
-    }
+    data class Dates(
+        @SerializedName("maximum")
+        val maximum: String,
+        @SerializedName("minimum")
+        val minimum: String
+    )
 }
