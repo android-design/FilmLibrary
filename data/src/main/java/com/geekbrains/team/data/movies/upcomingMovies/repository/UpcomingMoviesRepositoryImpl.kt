@@ -6,11 +6,9 @@ import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.model.toUpcomingMovie
 import com.geekbrains.team.domain.movies.upcomingMovies.model.UpcomingMovie
 import com.geekbrains.team.domain.movies.upcomingMovies.repository.UpcomingMoviesRepository
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class UpcomingMoviesRepositoryImpl() : UpcomingMoviesRepository {
