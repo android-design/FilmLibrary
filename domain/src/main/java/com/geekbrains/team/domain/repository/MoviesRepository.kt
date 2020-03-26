@@ -1,6 +1,6 @@
 package com.geekbrains.team.domain.repository
 
-import com.geekbrains.team.domain.model.Movie
+import com.geekbrains.team.domain.movies.topRatedMovies.model.Movie
 import io.reactivex.Single
 
 interface MoviesRepository {

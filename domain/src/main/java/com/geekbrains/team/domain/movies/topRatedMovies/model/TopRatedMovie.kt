@@ -1,6 +1,8 @@
-package com.geekbrains.team.domain.movies.upcomingMovies.model
+package com.geekbrains.team.domain.movies.topRatedMovies.model
 
-data class TopRatedMovie (
+import java.util.*
+
+data class TopRatedMovie(
     val id: Int,
     val title: String,
     val originalTitle: String,

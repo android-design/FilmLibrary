@@ -1,11 +1,12 @@
 package com.geekbrains.team.data.movies.upcomingMovies.service.model
 
+import com.geekbrains.team.domain.movies.topRatedMovies.model.TopRatedMovie
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ResponseTopRatedMovies(
     @Expose
-    val result: List<TopRatedMovie>,
+    val results: List<TopRatedMovie>,
 
     @Expose
     val page: Int,
@@ -50,4 +51,23 @@ data class ResponseTopRatedMovies(
     )
 }
 
-fun ResponseTopRatedMovies.toTopRatedMovie():
+fun ResponseTopRatedMovies.toTopRatedMovie(): List<TopRatedMovie> {
+    return results.map { movie ->
+        TopRatedMovie(
+            id = movie.id,
+            title = movie.title,
+            originalTitle = movie.originalTitle,
+            popularity = movie.popularity,
+            voteCount = movie.voteCount,
+            video = movie.video,
+            posterPath = movie.posterPath,
+            adult = movie.adult,
+            backdropPath = movie.backdropPath ?: "",
+            originalLanguage = movie.originalLanguage,
+            genreIds = movie.genreIds,
+            voteAverage = (movie.voteAverage*10).toInt(),
+            overview = movie.overview,
+            releaseDate = movie.releaseDate
+        )
+    }
+}
