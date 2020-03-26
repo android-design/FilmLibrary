@@ -6,9 +6,9 @@ import com.geekbrains.team.data.movies.upcomingMovies.service.TopMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.model.toTopRatedMovie
 import com.geekbrains.team.domain.movies.topRatedMovies.model.TopRatedMovie
 import com.geekbrains.team.domain.movies.topRatedMovies.repository.TopMoviesRepository
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Single
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class TopMoviesRepositoryImpl(val topMoviesApi: TopMoviesApi): TopMoviesRepository {
