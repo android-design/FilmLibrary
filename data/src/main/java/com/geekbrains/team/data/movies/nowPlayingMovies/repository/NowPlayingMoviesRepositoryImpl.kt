@@ -15,13 +15,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class NowPlayingMoviesRepositoryImpl() : UpcomingMoviesRepository {
-    // TODO Move do dagger
-    private val api: NowPlayingMoviesApi = Retrofit.Builder()
-        .baseUrl("https://api.themoviedb.org/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build()
-        .create(NowPlayingMoviesApi::class.java)
+//    // TODO Move do dagger
+//    private val api: NowPlayingMoviesApi = Retrofit.Builder()
+//        .baseUrl("https://api.themoviedb.org/")
+//        .addConverterFactory(GsonConverterFactory.create())
+//        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//        .build()
+//        .create(NowPlayingMoviesApi::class.java)
 
     override fun fetch(page: Int): Single<List<UpcomingMovie>> {
         TODO("Not yet implemented")
