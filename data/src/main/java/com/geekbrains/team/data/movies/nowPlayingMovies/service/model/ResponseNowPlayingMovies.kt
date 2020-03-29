@@ -1,10 +1,12 @@
 package com.geekbrains.team.data.movies.nowPlayingMovies.service.model
+
+import com.geekbrains.team.domain.movies.nowPlayingMovies.model.NowPlayingMovies
 import com.google.gson.annotations.SerializedName
 
 
 data class ResponseNowPlayingMovies(
     @SerializedName("results")
-    val results: List<NowPlayingMovies>,
+    val results: List<NowPlayingMovieDataModel>,
     @SerializedName("page")
     val page: Int,
     @SerializedName("total_results")
@@ -14,7 +16,7 @@ data class ResponseNowPlayingMovies(
     @SerializedName("total_pages")
     val totalPages: Int
 ) {
-    data class NowPlayingMovies(
+    data class NowPlayingMovieDataModel(
         @SerializedName("popularity")
         val popularity: Double,
         @SerializedName("vote_count")
@@ -52,3 +54,23 @@ data class ResponseNowPlayingMovies(
         val minimum: String
     )
 }
+
+fun ResponseNowPlayingMovies.toNowPlayingMovies(): List<NowPlayingMovies> =
+    results.map {
+        NowPlayingMovies(
+            it.id,
+            it.title,
+            it.originalTitle,
+            it.popularity,
+            it.voteCount,
+            it.video,
+            it.posterPath,
+            it.adult,
+            it.backdropPath,
+            it.originalLanguage,
+            it.genreIds,
+            it.voteAverage,
+            it.overview,
+            it.releaseDate
+        )
+    }

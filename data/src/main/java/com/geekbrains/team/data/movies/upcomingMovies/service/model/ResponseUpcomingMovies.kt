@@ -46,8 +46,8 @@ data class ResponseUpcomingMovies(
     )
 }
 
-fun ResponseUpcomingMovies.toUpcomingMovie(): List<UpcomingMovie> {
-    return results.map { movie ->
+fun ResponseUpcomingMovies.toUpcomingMovie(): List<UpcomingMovie> =
+    results.map { movie ->
         UpcomingMovie(
             id = movie.id,
             title = movie.title,
@@ -65,4 +65,3 @@ fun ResponseUpcomingMovies.toUpcomingMovie(): List<UpcomingMovie> {
             releaseDate = movie.releaseDate
         )
     }
-}

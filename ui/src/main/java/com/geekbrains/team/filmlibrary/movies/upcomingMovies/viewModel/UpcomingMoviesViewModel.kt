@@ -15,11 +15,9 @@ class UpcomingMoviesViewModel @Inject constructor(private val useCase: GetUpcomi
 
     fun loadUpcomingMovies(page: Int) =
         useCase.execute(params = page)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleMovieList, ::handleFailure)
 
-    private fun handleMovieList(upcomingMovies: List<UpcomingMovie>) {
-        data.value = upcomingMovies.map { it.toUpcomingMovieView() }
+    private fun handleMovieList(list: List<UpcomingMovie>) {
+        data.value = list.map { it.toUpcomingMovieView() }
     }
 }
