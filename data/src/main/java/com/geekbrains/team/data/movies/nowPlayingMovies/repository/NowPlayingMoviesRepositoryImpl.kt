@@ -1,7 +1,7 @@
 package com.geekbrains.team.data.movies.nowPlayingMovies.repository
 
-import com.geekbrains.team.data.Const.API_KEY
 import com.geekbrains.team.data.Const.LANGUAGE
+import com.geekbrains.team.data.Key.API_KEY
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.model.toNowPlayingMovies
 import com.geekbrains.team.domain.movies.nowPlayingMovies.model.NowPlayingMovies

@@ -1,4 +1,4 @@
-package com.geekbrains.team.data.movies.upcomingMovies.service.model
+package com.geekbrains.team.data.movies.topRatedMovies.service
 
 import com.geekbrains.team.domain.movies.topRatedMovies.model.TopRatedMovie
 import com.google.gson.annotations.Expose

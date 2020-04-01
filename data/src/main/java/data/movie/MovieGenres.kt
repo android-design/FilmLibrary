@@ -2,7 +2,6 @@ package data.movie
 
 import com.google.gson.annotations.Expose
 
-data class MovieGenres(
-    @Expose
-    val
-)
+//data class MovieGenres(
+//
+//)

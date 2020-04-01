@@ -1,11 +1,13 @@
 package com.geekbrains.team.data.di
 
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
+import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -32,4 +34,8 @@ class RemoteModule {
     @Provides
     fun getUpcomingMoviesApi(retrofit: Retrofit): UpcomingMoviesApi =
         retrofit.create(UpcomingMoviesApi::class.java)
+
+    @Provides
+    fun getTopRatedMoviesApi(retrofit: Retrofit): TopRatedMoviesApi =
+        retrofit.create(TopRatedMoviesApi::class.java)
 }
