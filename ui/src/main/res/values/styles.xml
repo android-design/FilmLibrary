@@ -1,11 +1,79 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Темы. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/dayBackgroundLight</item>
+        <item name="colorPrimaryDark">@color/dayBackgroundDark</item>
+        <item name="colorAccent">@color/IconPrimary</item>
+        <item name="android:textColorPrimary">@color/dayTextPrimary</item>
+        <item name="android:textColorSecondary">@color/dayTextSecondary</item>
+        <item name="android:windowBackground">@color/dayBackgroundDark</item>
     </style>
 
+    <style name="NightTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/nightBackgroundLight</item>
+        <item name="colorPrimaryDark">@color/nightBackgroundDark</item>
+        <item name="colorAccent">@color/IconPrimary</item>
+        <item name="android:textColorPrimary">@color/nightTextPrimary</item>
+        <item name="android:textColorSecondary">@color/nightTextSecondary</item>
+        <item name="android:windowBackground">@color/nightBackgroundDark</item>
+    </style>
+
+
+    <!-- Тексты. -->
+    <style name="Headline1" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Headline2" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Headline3" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Subtitle1" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Subtitle2" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Rate" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Search" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Buttons" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Chips" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+    </style>
 </resources>
