@@ -10,11 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/nightBackgroundSearchTopBar"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
             tools:ignore="NewApi">
 
             <TextView

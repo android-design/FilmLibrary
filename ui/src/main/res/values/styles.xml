@@ -9,6 +9,7 @@
         <item name="android:textColorPrimary">@color/dayTextPrimary</item>
         <item name="android:textColorSecondary">@color/dayTextSecondary</item>
         <item name="android:windowBackground">@color/dayBackgroundDark</item>
+        <item name="cardBackgroundColor">@color/dayBackgroundLight</item>
     </style>
 
     <style name="NightTheme" parent="Theme.MaterialComponents.NoActionBar">
@@ -18,8 +19,12 @@
         <item name="android:textColorPrimary">@color/nightTextPrimary</item>
         <item name="android:textColorSecondary">@color/nightTextSecondary</item>
         <item name="android:windowBackground">@color/nightBackgroundDark</item>
+        <item name="cardBackgroundColor">@color/nightBackgroundLight</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!-- Тексты. -->
     <style name="Headline1" parent="@android:style/TextAppearance.Medium">
