@@ -1,6 +1,6 @@
 package com.geekbrains.team.filmlibrary.movies.upcomingMovies.model
 
-import com.geekbrains.team.domain.movies.upcomingMovies.model.UpcomingMovie
+import com.geekbrains.team.domain.movies.model.Movie
 
 data class UpcomingMovieView(
     val id: Int,
@@ -17,14 +17,14 @@ data class UpcomingMovieView(
     val releaseDate: String
 )
 
-fun UpcomingMovie.toUpcomingMovieView(): UpcomingMovieView = UpcomingMovieView(
+fun Movie.toUpcomingMovieView(): UpcomingMovieView = UpcomingMovieView(
     id = id,
     title = title,
     originalTitle = originalTitle,
     popularity = popularity.toString(),
     voteCount = voteCount.toString(),
-    posterPath = posterPath,
-    backdropPath = backdropPath,
+    posterPath = posterPath ?: "",
+    backdropPath = backdropPath ?: "",
     originalLanguage = originalLanguage,
     genreIds = genreIds,
     voteAverage = voteAverage.toString(),

@@ -1,6 +1,6 @@
 package com.geekbrains.team.data.movies.nowPlayingMovies.service.model
 
-import com.geekbrains.team.domain.movies.nowPlayingMovies.model.NowPlayingMovies
+import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
 
@@ -24,13 +24,13 @@ data class ResponseNowPlayingMovies(
         @SerializedName("video")
         val video: Boolean,
         @SerializedName("poster_path")
-        val posterPath: String,
+        val posterPath: String?,
         @SerializedName("id")
         val id: Int,
         @SerializedName("adult")
         val adult: Boolean,
         @SerializedName("backdrop_path")
-        val backdropPath: String,
+        val backdropPath: String?,
         @SerializedName("original_language")
         val originalLanguage: String,
         @SerializedName("original_title")
@@ -40,7 +40,7 @@ data class ResponseNowPlayingMovies(
         @SerializedName("title")
         val title: String,
         @SerializedName("vote_average")
-        val voteAverage: Int,
+        val voteAverage: Double,
         @SerializedName("overview")
         val overview: String,
         @SerializedName("release_date")
@@ -55,22 +55,22 @@ data class ResponseNowPlayingMovies(
     )
 }
 
-fun ResponseNowPlayingMovies.toNowPlayingMovies(): List<NowPlayingMovies> =
-    results.map {
-        NowPlayingMovies(
-            it.id,
-            it.title,
-            it.originalTitle,
-            it.popularity,
-            it.voteCount,
-            it.video,
-            it.posterPath,
-            it.adult,
-            it.backdropPath,
-            it.originalLanguage,
-            it.genreIds,
-            it.voteAverage,
-            it.overview,
-            it.releaseDate
+fun ResponseNowPlayingMovies.toMovie(): List<Movie> =
+    results.map { movie ->
+        Movie(
+            id = movie.id,
+            title = movie.title,
+            originalTitle = movie.originalTitle,
+            popularity = movie.popularity,
+            voteCount = movie.voteCount,
+            video = movie.video,
+            posterPath = movie.posterPath,
+            adult = movie.adult,
+            backdropPath = movie.backdropPath ?: "",
+            originalLanguage = movie.originalLanguage,
+            genreIds = movie.genreIds,
+            voteAverage = (movie.voteAverage * 10).toInt(),
+            overview = movie.overview,
+            releaseDate = movie.releaseDate
         )
     }

@@ -1,6 +1,6 @@
 package com.geekbrains.team.data.movies.upcomingMovies.service.model
 
-import com.geekbrains.team.domain.movies.upcomingMovies.model.UpcomingMovie
+import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
 
@@ -46,9 +46,9 @@ data class ResponseUpcomingMovies(
     )
 }
 
-fun ResponseUpcomingMovies.toUpcomingMovie(): List<UpcomingMovie> =
+fun ResponseUpcomingMovies.toMovie(): List<Movie> =
     results.map { movie ->
-        UpcomingMovie(
+        Movie(
             id = movie.id,
             title = movie.title,
             originalTitle = movie.originalTitle,

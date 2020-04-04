@@ -1,58 +1,53 @@
-package com.geekbrains.team.data.movies.topRatedMovies.service
+package com.geekbrains.team.data.movies.searchMovies.service.model
 
 import com.geekbrains.team.domain.movies.model.Movie
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ResponseTopRatedMovies(
-    @Expose
-    val results: List<TopRatedMovie>,
 
-    @Expose
+data class ResponseSearchMovies(
+    @SerializedName("page")
     val page: Int,
-
-    @Expose
+    @SerializedName("total_results")
+    val totalResults: Int,
     @SerializedName("total_pages")
     val totalPages: Int,
-
-    @Expose
-    @SerializedName("total_result")
-    val totalResult: Int
+    @SerializedName("results")
+    val results: List<SearchMovieResult>
 ) {
-    data class TopRatedMovie(
+    data class SearchMovieResult(
         @SerializedName("popularity")
         val popularity: Double,
-        @SerializedName("vote_count")
-        val voteCount: Int,
-        @SerializedName("video")
-        val video: Boolean,
-        @SerializedName("poster_path")
-        val posterPath: String,
         @SerializedName("id")
         val id: Int,
-        @SerializedName("adult")
-        val adult: Boolean,
-        @SerializedName("backdrop_path")
-        val backdropPath: String?,
+        @SerializedName("video")
+        val video: Boolean,
+        @SerializedName("vote_count")
+        val voteCount: Int,
+        @SerializedName("vote_average")
+        val voteAverage: Double,
+        @SerializedName("title")
+        val title: String,
+        @SerializedName("release_date")
+        val releaseDate: String,
         @SerializedName("original_language")
         val originalLanguage: String,
         @SerializedName("original_title")
         val originalTitle: String,
         @SerializedName("genre_ids")
         val genreIds: List<Int>,
-        @SerializedName("title")
-        val title: String,
-        @SerializedName("vote_average")
-        val voteAverage: Double,
+        @SerializedName("backdrop_path")
+        val backdropPath: String?,
+        @SerializedName("adult")
+        val adult: Boolean,
         @SerializedName("overview")
         val overview: String,
-        @SerializedName("release_date")
-        val releaseDate: String
+        @SerializedName("poster_path")
+        val posterPath: String?
     )
 }
 
-fun ResponseTopRatedMovies.toMovie(): List<Movie> {
-    return results.map { movie ->
+fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
+    results.map {movie ->
         Movie(
             id = movie.id,
             title = movie.title,
@@ -70,4 +65,3 @@ fun ResponseTopRatedMovies.toMovie(): List<Movie> {
             releaseDate = movie.releaseDate
         )
     }
-}
