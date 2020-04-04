@@ -1,10 +1,5 @@
 package com.geekbrains.team.filmlibrary
 
-import com.geekbrains.team.data.movies.upcomingMovies.repository.UpcomingMoviesRepositoryImpl
-import com.geekbrains.team.domain.base.SingleUseCase
-import com.geekbrains.team.domain.movies.upcomingMovies.interactor.GetUpcomingMovies
-import com.geekbrains.team.domain.movies.upcomingMovies.model.UpcomingMovie
-import com.geekbrains.team.domain.movies.upcomingMovies.repository.UpcomingMoviesRepository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
