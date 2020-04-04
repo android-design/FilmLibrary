@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+/data/src/main/java/com/geekbrains/team/data/Key.kt
+

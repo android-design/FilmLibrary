@@ -1,5 +1,6 @@
 package com.geekbrains.team.data.di
 
+import com.geekbrains.team.data.Const.baseUrl
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
@@ -18,8 +19,6 @@ class RemoteModule {
 
     @Provides
     fun getRetrofit(): Retrofit {
-        val baseUrl = "https://api.themoviedb.org/"
-
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
