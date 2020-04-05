@@ -1,7 +1,7 @@
 package com.geekbrains.team.data.movies.searchMovies.repository
 
+import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const
-import com.geekbrains.team.data.Key
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.model.toSearchMovie
 import com.geekbrains.team.domain.movies.model.Movie
@@ -14,7 +14,7 @@ class SearchMoviesRepositoryImpl @Inject constructor(private val api: SearchMovi
     override fun fetch(query: String, releaseYear: Int, page: Int)
             : Single<List<Movie>> {
         return api.getSearchMovies(
-            apiKey = Key.API_KEY,
+            apiKey = BuildConfig.API_KEY,
             language = Const.LANGUAGE,
             query = query,
             releaseYear = releaseYear,

@@ -1,7 +1,7 @@
 package com.geekbrains.team.data.movies.upcomingMovies.repository
 
+import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const.LANGUAGE
-import com.geekbrains.team.data.Key.API_KEY
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.model.toMovie
 import com.geekbrains.team.domain.movies.model.Movie
@@ -13,7 +13,7 @@ class UpcomingMoviesRepositoryImpl @Inject constructor(private val api: Upcoming
     UpcomingMoviesRepository {
 
     override fun fetch(page: Int): Single<List<Movie>> =
-        api.getUpcomingMovies(apiKey = API_KEY, language = LANGUAGE, page = page)
+        api.getUpcomingMovies(apiKey = BuildConfig.API_KEY, language = LANGUAGE, page = page)
             .map { response ->
                 response.toMovie()
             }

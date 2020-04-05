@@ -1,7 +1,7 @@
 package com.geekbrains.team.data.movies.searchMovies.repository
 
+import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const
-import com.geekbrains.team.data.Key
 import com.geekbrains.team.data.movies.searchMovies.service.SearchTVShowApi
 import com.geekbrains.team.data.tv.searchTVShow.service.model.toTVShow
 import com.geekbrains.team.domain.tv.model.TVShow
@@ -14,7 +14,7 @@ class SearchTVRepositoryImpl @Inject constructor(private val api: SearchTVShowAp
     override fun fetch(query: String, page: Int)
             : Single<List<TVShow>> {
         return api.getSearchTVShow(
-            apiKey = Key.API_KEY,
+            apiKey = BuildConfig.API_KEY,
             language = Const.LANGUAGE,
             query = query,
             page = page
