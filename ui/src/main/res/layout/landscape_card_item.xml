@@ -11,9 +11,11 @@
             name="movie"
             type="com.geekbrains.team.domain.movies.model.Movie" />
 
+        <variable
+            name="tvShow"
+            type="com.geekbrains.team.domain.tv.model.TVShow" />
 
     </data>
-
 
     <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -32,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
-                app:url="@{movie.posterPath}"
+                app:url="@{movie == null ? tvShow.posterPath : movie.posterPath}"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -43,7 +45,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="bottom"
-                android:text="@{movie.title}"
+                android:text="@{movie == null ? tvShow.name : movie.title}"
                 app:layout_constraintStart_toEndOf="@id/cover_iv"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +54,7 @@
                 style="@style/Subtitle2"
                 android:layout_width="234dp"
                 android:layout_height="16dp"
-                android:text="@{movie.originalTitle}"
+                android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
                 app:layout_constraintStart_toStartOf="@id/title_tv"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
@@ -92,7 +94,7 @@
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@{String.valueOf(movie.voteAverage)}"
+                    android:text="@{movie == null ? String.copyValueOf(tvShow.voteAverage) : String.copyValueOf(movie.voteAverage)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>

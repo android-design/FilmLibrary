@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.team.domain.movies.model.Movie;
+import com.geekbrains.team.domain.tv.model.TVShow;
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.SmallCardItemBinding;
 import com.squareup.picasso.Picasso;
@@ -17,13 +18,21 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-class MovieSmallCardAdapter extends RecyclerView.Adapter<MovieSmallCardAdapter.SmallCardHolder> {
-
+public class MovieSmallCardAdapter extends RecyclerView.Adapter<MovieSmallCardAdapter.SmallCardHolder> {
     private List<Movie> movies = new ArrayList<>();
+    private List<TVShow> tvShows = new ArrayList<>();
 
-    public void setData(List<Movie> data) {
+    public MovieSmallCardAdapter() {
+    }
+
+    public void setMovies(List<Movie> data) {
         movies.clear();
         movies.addAll(data);
+    }
+
+    public void setTvShows(List<TVShow> data) {
+        tvShows.clear();
+        tvShows.addAll(data);
     }
 
     @BindingAdapter({"app:url"})
@@ -41,7 +50,10 @@ class MovieSmallCardAdapter extends RecyclerView.Adapter<MovieSmallCardAdapter.S
 
     @Override
     public void onBindViewHolder(@NonNull SmallCardHolder holder, int position) {
-        holder.bind(movies.get(position));
+        if (!movies.isEmpty())
+            holder.bindMovie(movies.get(position));
+        else
+            holder.bindTVShow(tvShows.get(position));
     }
 
     @Override
@@ -58,8 +70,13 @@ class MovieSmallCardAdapter extends RecyclerView.Adapter<MovieSmallCardAdapter.S
             this.binding = binding;
         }
 
-        void bind(Movie movie) {
+        void bindMovie(Movie movie) {
             binding.setMovie(movie);
+            binding.executePendingBindings();
+        }
+
+        void bindTVShow(TVShow tvShow) {
+            binding.setTvShow(tvShow);
             binding.executePendingBindings();
         }
     }
