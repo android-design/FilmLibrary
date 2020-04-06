@@ -1,85 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    app:cardCornerRadius="4dp"
-    app:cardMaxElevation="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="movie"
+            type="com.geekbrains.team.domain.movies.model.Movie" />
+
+
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp"
+        app:cardCornerRadius="4dp"
+        app:cardMaxElevation="8dp">
 
-        <ImageView
-            android:id="@+id/cover_iv"
-            android:layout_width="68dp"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/title_tv"
-            style="@style/Headline3"
-            android:layout_width="244dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:gravity="bottom"
-            android:text="Название"
-            app:layout_constraintStart_toEndOf="@id/cover_iv"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/original_title_tv"
-            style="@style/Subtitle2"
-            android:layout_width="234dp"
-            android:layout_height="16dp"
-            android:text="Original title"
-            app:layout_constraintStart_toStartOf="@id/title_tv"
-            app:layout_constraintTop_toBottomOf="@id/title_tv" />
-
-        <TextView
-            android:id="@+id/genre_tv"
-            style="@style/Subtitle1"
-            android:layout_width="234dp"
-            android:layout_height="16dp"
-            android:text="жанр"
-            app:layout_constraintStart_toStartOf="@id/original_title_tv"
-            app:layout_constraintTop_toBottomOf="@id/original_title_tv" />
-
-        <LinearLayout
-            android:id="@+id/rating_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="UseCompoundDrawables">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="16dp"
+                android:id="@+id/cover_iv"
+                android:layout_width="68dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_imdb"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:url="@{movie.posterPath}"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/series_rating_tv"
-                style="@style/Subtitle1"
-                android:layout_width="16dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="8.5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </LinearLayout>
+                android:id="@+id/title_tv"
+                style="@style/Headline3"
+                android:layout_width="244dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                android:text="@{movie.title}"
+                app:layout_constraintStart_toEndOf="@id/cover_iv"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/original_title_tv"
+                style="@style/Subtitle2"
+                android:layout_width="234dp"
+                android:layout_height="16dp"
+                android:text="@{movie.originalTitle}"
+                app:layout_constraintStart_toStartOf="@id/title_tv"
+                app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+            <TextView
+                android:id="@+id/genre_tv"
+                style="@style/Subtitle1"
+                android:layout_width="234dp"
+                android:layout_height="16dp"
+                android:text="жанр"
+                app:layout_constraintStart_toStartOf="@id/original_title_tv"
+                app:layout_constraintTop_toBottomOf="@id/original_title_tv" />
+
+            <LinearLayout
+                android:id="@+id/rating_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_imdb"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/series_rating_tv"
+                    style="@style/Subtitle1"
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(movie.voteAverage)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
