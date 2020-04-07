@@ -6,12 +6,12 @@ import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchTVShowApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
-
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 /**
  * Dagger module for connection instances.
