@@ -2,5 +2,23 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#00BCD4</color>
+
+    <color name="IconPrimary">#00BCD4</color>
+    <color name="IconSecondary">#5B787F</color>
+
+    <!-- Day -->
+    <color name="dayBackgroundDark">#F4F4F4</color>
+    <color name="dayBackgroundLight">#FAFAFA</color>
+    <color name="dayTextPrimary">#263238</color>
+    <color name="dayTextSecondary">#5B787F</color>
+
+    <!-- Night -->
+    <color name="nightBackgroundDark">#263238</color>
+    <color name="nightBackgroundLight">#32424A</color>
+    <color name="nightBackgroundSearchTopBar">#5B787F</color>
+    <color name="nightTextPrimary">#FAFAFA</color>
+    <color name="nightTextSecondary">#BDBDBD</color>
+    <color name="nightRateText">#5B787F</color>
+
 </resources>

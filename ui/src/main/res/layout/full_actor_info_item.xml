@@ -1,0 +1,105 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/series_card"
+    android:layout_width="match_parent"
+    android:layout_height="273dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="32dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/series_tv">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/photo_iv"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/like_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_favorite_unactive"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/photo_iv"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            style="@style/Headline2"
+            android:layout_width="290dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            android:text="Имя Фамилия"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/photo_iv" />
+
+        <TextView
+            android:id="@+id/original_name_tv"
+            style="@style/Subtitle2"
+            android:layout_width="290dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="16dp"
+            android:text="Name Surname"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_tv" />
+
+        <TextView
+            android:id="@+id/roles_tv"
+            style="@style/Subtitle1"
+            android:layout_width="290dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="16dp"
+            android:text="амплуа"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/original_name_tv" />
+
+        <LinearLayout
+            android:layout_width="268dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/date_of_birth_tv"
+                style="@style/Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="	9 июня, 1981 (38 лет)" />
+
+            <TextView
+                android:id="@+id/motherland_tv"
+                style="@style/Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:text="	Иерусалим, Израиль" />
+
+            <TextView
+                android:id="@+id/height_tv"
+                style="@style/Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:text="	1.60 м" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
