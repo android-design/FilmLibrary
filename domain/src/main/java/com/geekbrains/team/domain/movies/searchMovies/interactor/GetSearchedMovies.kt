@@ -12,9 +12,9 @@ class GetSearchedMovies @Inject constructor(private val repository: SearchMovies
         return repository.fetch(
             query = params.query,
             releaseYear = params.releaseYear,
-            page = params.params
+            page = params.page
         )
     }
 
-    data class Params(val query: String, val releaseYear: Int, val params: Int)
+    data class Params(val query: String, val releaseYear: Int, val page: Int)
 }

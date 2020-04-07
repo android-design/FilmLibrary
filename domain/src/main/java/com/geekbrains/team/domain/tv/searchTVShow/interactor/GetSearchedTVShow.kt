@@ -11,9 +11,9 @@ class GetSearchedTVShow @Inject constructor(private val repository: SearchTVShow
     override fun execute(params: Params): Single<List<TVShow>> {
         return repository.fetch(
             query = params.query,
-            page = params.params
+            page = params.page
         )
     }
 
-    data class Params(val query: String, val params: Int)
+    data class Params(val query: String, val page: Int)
 }

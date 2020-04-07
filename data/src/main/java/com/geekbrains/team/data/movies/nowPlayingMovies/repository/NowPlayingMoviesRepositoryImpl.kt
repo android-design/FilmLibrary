@@ -1,7 +1,7 @@
 package com.geekbrains.team.data.movies.nowPlayingMovies.repository
 
+import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const.LANGUAGE
-import com.geekbrains.team.data.Key.API_KEY
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.model.toMovie
 import com.geekbrains.team.domain.movies.model.Movie
@@ -13,6 +13,6 @@ class NowPlayingMoviesRepositoryImpl @Inject constructor(private val api: NowPla
     NowPlayingMoviesRepository {
 
     override fun fetch(page: Int): Single<List<Movie>> =
-        api.getNowPlayingMovies(apiKey = API_KEY, language = LANGUAGE, page = page)
+        api.getNowPlayingMovies(apiKey = BuildConfig.API_KEY, language = LANGUAGE, page = page)
             .map { response -> response.toMovie() }
 }

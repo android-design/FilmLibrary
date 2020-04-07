@@ -2,6 +2,8 @@ package com.geekbrains.team.data.di
 
 import com.geekbrains.team.data.Const.baseUrl
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
+import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
+import com.geekbrains.team.data.movies.searchMovies.service.SearchTVShowApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
 
@@ -37,4 +39,12 @@ class RemoteModule {
     @Provides
     fun getTopRatedMoviesApi(retrofit: Retrofit): TopRatedMoviesApi =
         retrofit.create(TopRatedMoviesApi::class.java)
+
+    @Provides
+    fun getSearchMoviesApi(retrofit: Retrofit): SearchMoviesApi =
+        retrofit.create(SearchMoviesApi::class.java)
+
+    @Provides
+    fun getSearchTVShowApi(retrofit: Retrofit): SearchTVShowApi =
+        retrofit.create(SearchTVShowApi::class.java)
 }
