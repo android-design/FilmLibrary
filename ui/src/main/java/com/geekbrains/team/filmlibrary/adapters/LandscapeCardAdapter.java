@@ -9,30 +9,30 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.geekbrains.team.domain.movies.model.Movie;
-import com.geekbrains.team.domain.tv.model.TVShow;
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.LandscapeCardItemBinding;
+import com.geekbrains.team.filmlibrary.model.MovieView;
+import com.geekbrains.team.filmlibrary.model.TVShowView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class MovieLandscapeCardAdapter extends RecyclerView.Adapter<MovieLandscapeCardAdapter.LandscapeCardHolder> {
-    private List<Movie> movies = new ArrayList<>();
-    private List<TVShow> tvShows = new ArrayList<>();
+class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdapter.LandscapeCardHolder> {
+    private List<MovieView> movie = new ArrayList<>();
+    private List<TVShowView> tvShow = new ArrayList<>();
 
-    public MovieLandscapeCardAdapter() {
+    public LandscapeCardAdapter() {
     }
 
-    public void setMovies(List<Movie> data) {
-        movies.clear();
-        movies.addAll(data);
+    public void setNowPlayingMovie(List<MovieView> data) {
+        movie.clear();
+        movie.addAll(data);
     }
 
-    public void setTvShows(List<TVShow> data) {
-        tvShows.clear();
-        tvShows.addAll(data);
+    public void setUpcomingMovie(List<TVShowView> data) {
+        tvShow.clear();
+        tvShow.addAll(data);
     }
 
     @BindingAdapter({"app:url"})
@@ -50,15 +50,18 @@ class MovieLandscapeCardAdapter extends RecyclerView.Adapter<MovieLandscapeCardA
 
     @Override
     public void onBindViewHolder(@NonNull LandscapeCardHolder holder, int position) {
-        if (!movies.isEmpty())
-            holder.bindMovie(movies.get(position));
+        if (!movie.isEmpty())
+            holder.bindNowPlayingMovie(movie.get(position));
         else
-            holder.bindTVShow(tvShows.get(position));
+            holder.bindUpcomingMovie(tvShow.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        if (!movie.isEmpty())
+            return movie.size();
+        else
+            return tvShow.size();
     }
 
     class LandscapeCardHolder extends RecyclerView.ViewHolder {
@@ -70,13 +73,13 @@ class MovieLandscapeCardAdapter extends RecyclerView.Adapter<MovieLandscapeCardA
             this.binding = binding;
         }
 
-        void bindMovie(Movie movie) {
+        void bindNowPlayingMovie(MovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
         }
 
-        void bindTVShow(TVShow tvShow) {
-            binding.setTvShow(tvShow);
+        void bindUpcomingMovie(TVShowView movie) {
+            binding.setTvShow(movie);
             binding.executePendingBindings();
         }
     }

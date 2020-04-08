@@ -70,39 +70,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                android:text="@{movie == null ? tvShow.genreIds.toString() : movie.genreIds.toString()}"
+                android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
-            <LinearLayout
-                android:id="@+id/rating_layout"
+            <TextView
+                android:id="@+id/date"
+                style="@style/Headline3"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text='@{movie == null ? tvShow.firstAirDate : movie.releaseDate}'
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_imdb"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/rating_tv"
-                    style="@style/Subtitle1"
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:text='@{movie == null ? tvShow.voteAverage : movie.voteAverage}'
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-            </LinearLayout>
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

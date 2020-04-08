@@ -1,7 +1,9 @@
 package com.geekbrains.team.filmlibrary.adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -9,29 +11,29 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.geekbrains.team.domain.movies.model.Movie;
-import com.geekbrains.team.domain.tv.model.TVShow;
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.BigCardItemBinding;
+import com.geekbrains.team.filmlibrary.model.MovieView;
+import com.geekbrains.team.filmlibrary.model.TVShowView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class MovieBigCardAdapter extends RecyclerView.Adapter<MovieBigCardAdapter.BigCardHolder> {
-    private List<Movie> movies = new ArrayList<>();
-    private List<TVShow> tvShows = new ArrayList<>();
+class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> {
+    private List<MovieView> movie = new ArrayList<>();
+    private List<TVShowView> tvShow = new ArrayList<>();
 
-    public MovieBigCardAdapter() {}
+    public BigCardAdapter() {}
 
-    public void setMovies(List<Movie> data) {
-        movies.clear();
-        movies.addAll(data);
+    public void setNowPlayingMovie(List<MovieView> data) {
+        movie.clear();
+        movie.addAll(data);
     }
 
-    public void setTvShows(List<TVShow> data) {
-        tvShows.clear();
-        tvShows.addAll(data);
+    public void setUpcomingMovie(List<TVShowView> data) {
+        tvShow.clear();
+        tvShow.addAll(data);
     }
 
     @BindingAdapter({"app:url"})
@@ -49,33 +51,49 @@ class MovieBigCardAdapter extends RecyclerView.Adapter<MovieBigCardAdapter.BigCa
 
     @Override
     public void onBindViewHolder(@NonNull BigCardHolder holder, int position) {
-        if (!movies.isEmpty())
-            holder.bindMovie(movies.get(position));
+        if (!movie.isEmpty())
+            holder.bindNowPlayingMovie(movie.get(position));
         else
-            holder.bindTVShow(tvShows.get(position));
+            holder.bindUpcomingMovie(tvShow.get(position));
+
+        holder.play.setOnClickListener(playListener);
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        if (!movie.isEmpty())
+            return movie.size();
+        else
+            return tvShow.size();
     }
 
+    private View.OnClickListener playListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //todo обработка нажания на плэй
+        }
+    };
+
     class BigCardHolder extends RecyclerView.ViewHolder {
+        private ImageButton like;
+        private ImageButton play;
 
         BigCardItemBinding binding;
 
         BigCardHolder(BigCardItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            like = binding.getRoot().findViewById(R.id.like_btn);
+            play = binding.getRoot().findViewById(R.id.play_btn);
         }
 
-        void bindMovie(Movie movie) {
+        void bindNowPlayingMovie(MovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
         }
 
-        void bindTVShow(TVShow tvShow) {
-            binding.setTvShow(tvShow);
+        void bindUpcomingMovie(TVShowView movie) {
+            binding.setTvShow(movie);
             binding.executePendingBindings();
         }
     }

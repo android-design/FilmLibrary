@@ -9,11 +9,11 @@
 
         <variable
             name="movie"
-            type="com.geekbrains.team.domain.movies.model.Movie" />
+            type="com.geekbrains.team.filmlibrary.model.MovieView" />
 
         <variable
             name="tvShow"
-            type="com.geekbrains.team.domain.tv.model.TVShow" />
+            type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
     </data>
 
@@ -58,15 +58,6 @@
                 app:layout_constraintStart_toStartOf="@id/title_tv"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
-            <TextView
-                android:id="@+id/genre_tv"
-                style="@style/Subtitle1"
-                android:layout_width="234dp"
-                android:layout_height="16dp"
-                android:text="жанр"
-                app:layout_constraintStart_toStartOf="@id/original_title_tv"
-                app:layout_constraintTop_toBottomOf="@id/original_title_tv" />
-
             <LinearLayout
                 android:id="@+id/rating_layout"
                 android:layout_width="wrap_content"
@@ -94,7 +85,7 @@
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@{movie == null ? String.copyValueOf(tvShow.voteAverage) : String.copyValueOf(movie.voteAverage)}"
+                    android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>

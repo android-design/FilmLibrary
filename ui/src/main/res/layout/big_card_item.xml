@@ -9,11 +9,11 @@
 
         <variable
             name="movie"
-            type="com.geekbrains.team.domain.movies.model.Movie" />
+            type="com.geekbrains.team.filmlibrary.model.MovieView" />
 
         <variable
             name="tvShow"
-            type="com.geekbrains.team.domain.tv.model.TVShow" />
+            type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
     </data>
 
@@ -109,7 +109,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="@{movie == null ? String.copyValueOf(tvShow.voteAverage) : String.copyValueOf(movie.voteAverage)}"
+                android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
