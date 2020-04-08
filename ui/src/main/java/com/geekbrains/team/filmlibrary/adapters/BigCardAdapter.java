@@ -26,12 +26,12 @@ class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> 
 
     public BigCardAdapter() {}
 
-    public void setNowPlayingMovie(List<MovieView> data) {
+    public void setMovies(List<MovieView> data) {
         movie.clear();
         movie.addAll(data);
     }
 
-    public void setUpcomingMovie(List<TVShowView> data) {
+    public void setTVShows(List<TVShowView> data) {
         tvShow.clear();
         tvShow.addAll(data);
     }
@@ -52,9 +52,9 @@ class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> 
     @Override
     public void onBindViewHolder(@NonNull BigCardHolder holder, int position) {
         if (!movie.isEmpty())
-            holder.bindNowPlayingMovie(movie.get(position));
+            holder.bindMovie(movie.get(position));
         else
-            holder.bindUpcomingMovie(tvShow.get(position));
+            holder.bindTVShow(tvShow.get(position));
 
         holder.play.setOnClickListener(playListener);
     }
@@ -85,12 +85,12 @@ class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> 
             play = binding.getRoot().findViewById(R.id.play_btn);
         }
 
-        void bindNowPlayingMovie(MovieView movie) {
+        void bindMovie(MovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
         }
 
-        void bindUpcomingMovie(TVShowView movie) {
+        void bindTVShow(TVShowView movie) {
             binding.setTvShow(movie);
             binding.executePendingBindings();
         }

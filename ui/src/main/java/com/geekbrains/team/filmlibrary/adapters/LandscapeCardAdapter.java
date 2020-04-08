@@ -25,12 +25,12 @@ class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdapter.Lan
     public LandscapeCardAdapter() {
     }
 
-    public void setNowPlayingMovie(List<MovieView> data) {
+    public void setMovies(List<MovieView> data) {
         movie.clear();
         movie.addAll(data);
     }
 
-    public void setUpcomingMovie(List<TVShowView> data) {
+    public void setTVShows(List<TVShowView> data) {
         tvShow.clear();
         tvShow.addAll(data);
     }
@@ -51,9 +51,9 @@ class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdapter.Lan
     @Override
     public void onBindViewHolder(@NonNull LandscapeCardHolder holder, int position) {
         if (!movie.isEmpty())
-            holder.bindNowPlayingMovie(movie.get(position));
+            holder.bindMovie(movie.get(position));
         else
-            holder.bindUpcomingMovie(tvShow.get(position));
+            holder.bindTVShow(tvShow.get(position));
     }
 
     @Override
@@ -73,12 +73,12 @@ class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdapter.Lan
             this.binding = binding;
         }
 
-        void bindNowPlayingMovie(MovieView movie) {
+        void bindMovie(MovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
         }
 
-        void bindUpcomingMovie(TVShowView movie) {
+        void bindTVShow(TVShowView movie) {
             binding.setTvShow(movie);
             binding.executePendingBindings();
         }

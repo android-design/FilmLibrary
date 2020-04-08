@@ -25,12 +25,12 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Smal
     public SmallCardAdapter() {
     }
 
-    public void setMovie(List<MovieView> data) {
+    public void setMovies(List<MovieView> data) {
         movie.clear();
         movie.addAll(data);
     }
 
-    public void setTvShow(List<TVShowView> data) {
+    public void setTvShows(List<TVShowView> data) {
         tvShow.clear();
         tvShow.addAll(data);
     }
@@ -51,9 +51,9 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Smal
     @Override
     public void onBindViewHolder(@NonNull SmallCardHolder holder, int position) {
         if (!movie.isEmpty())
-            holder.bindNowPlayingMovie(movie.get(position));
+            holder.bindMovie(movie.get(position));
         else
-            holder.bindUpcomingMovie(tvShow.get(position));
+            holder.bindTVShow(tvShow.get(position));
     }
 
     @Override
@@ -73,12 +73,12 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Smal
             this.binding = binding;
         }
 
-        void bindNowPlayingMovie(MovieView movie) {
+        void bindMovie(MovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
         }
 
-        void bindUpcomingMovie(TVShowView movie) {
+        void bindTVShow(TVShowView movie) {
             binding.setTvShow(movie);
             binding.executePendingBindings();
         }
