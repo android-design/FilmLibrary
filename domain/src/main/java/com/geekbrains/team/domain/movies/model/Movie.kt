@@ -7,6 +7,7 @@ data class Movie(
     val popularity: Double,
     val voteCount: Int,
     val video: Boolean,
+    val trailer: String,
     val posterPath: String?,
     val adult: Boolean,
     val backdropPath: String?,
