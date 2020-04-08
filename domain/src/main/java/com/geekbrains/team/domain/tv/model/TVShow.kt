@@ -5,6 +5,7 @@ data class TVShow(
     val originalName: String,
     val name: String,
     val popularity: Double,
+    val trailer: String,
     val genreIds: List<Int>,
     val overview: String,
     val originCountry: List<String>,

@@ -1,8 +1,8 @@
-package com.geekbrains.team.filmlibrary.fragments.mainScreen.model
+package com.geekbrains.team.filmlibrary.model
 
 import com.geekbrains.team.domain.movies.model.Movie
 
-data class UpcomingMovieView(
+data class MovieView(
     val id: Int,
     val title: String,
     val originalTitle: String,
@@ -18,8 +18,8 @@ data class UpcomingMovieView(
     val releaseDate: String
 )
 
-fun Movie.toUpcomingMovieView(): UpcomingMovieView =
-    UpcomingMovieView(
+fun Movie.toMovieView() =
+    MovieView(
         id = id,
         title = title,
         originalTitle = originalTitle,
