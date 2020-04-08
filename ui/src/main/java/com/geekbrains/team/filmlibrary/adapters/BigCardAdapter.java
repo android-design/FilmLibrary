@@ -75,7 +75,6 @@ class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> 
     };
 
     class BigCardHolder extends RecyclerView.ViewHolder {
-        private ImageButton like;
         private ImageButton play;
 
         BigCardItemBinding binding;
@@ -83,7 +82,6 @@ class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> 
         BigCardHolder(BigCardItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            like = binding.getRoot().findViewById(R.id.like_btn);
             play = binding.getRoot().findViewById(R.id.play_btn);
         }
 
