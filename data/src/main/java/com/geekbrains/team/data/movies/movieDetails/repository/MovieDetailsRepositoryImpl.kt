@@ -54,3 +54,6 @@ class MovieDetailsRepositoryImpl @Inject constructor(private val api: MovieDetai
         return flowable
     }
 }
+/*
+    Использовать функцию zip()
+ */
