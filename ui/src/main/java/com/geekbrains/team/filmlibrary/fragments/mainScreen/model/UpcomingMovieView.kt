@@ -12,7 +12,7 @@ data class UpcomingMovieView(
     val posterPath: String,
     val backdropPath: String,
     val originalLanguage: String,
-    val genreIds: List<Int>,
+    val genres: String,
     val voteAverage: String,
     val overview: String,
     val releaseDate: String
@@ -26,10 +26,10 @@ fun Movie.toUpcomingMovieView(): UpcomingMovieView =
         popularity = popularity.toString(),
         voteCount = voteCount.toString(),
         trailer = trailer,
-        posterPath = posterPath ?: "",
-        backdropPath = backdropPath ?: "",
+        posterPath = posterPath,
+        backdropPath = backdropPath,
         originalLanguage = originalLanguage,
-        genreIds = genreIds,
+        genres = genres?.map { it.name }.toString(),
         voteAverage = voteAverage.toString(),
         overview = overview,
         releaseDate = releaseDate
