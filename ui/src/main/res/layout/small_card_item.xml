@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                android:text="@{movie == null ? tvShow.genreIds.toString() : movie.genreIds.toString()}"
+                android:text="@{movie == null ? tvShow.genres.toString() : movie.genres.toString()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
@@ -99,7 +99,7 @@
                     style="@style/Subtitle1"
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
-                    android:text='@{movie == null ? tvShow.voteAverage : movie.voteAverage}'
+                    android:text='@{movie == null ? tvShow.popularity : movie.popularity}'
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>

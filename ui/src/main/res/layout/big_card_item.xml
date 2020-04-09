@@ -40,7 +40,7 @@
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
-                app:url="@{movie == null ? tvShow.backdropPath : movie.backdropPath}"
+                app:url="@{movie == null ? tvShow.images.get(0) : movie.backdropPath}"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -109,7 +109,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
+                android:text="@{movie == null ? tvShow.popularity : movie.popularity}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
