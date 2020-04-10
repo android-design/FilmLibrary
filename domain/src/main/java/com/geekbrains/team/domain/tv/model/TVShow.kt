@@ -1,5 +1,7 @@
 package com.geekbrains.team.domain.tv.model
 
+import com.geekbrains.team.domain.base.model.MovieAndTVShow
+
 data class TVShow(
     val backdropPath: String,
     val createdBy: List<CreatedBy>? = null,
@@ -33,7 +35,7 @@ data class TVShow(
     // TODO Add class for actors.
     val cast: List<String>? = null, // Актеры
     val images: List<String>? = null
-) {
+) : MovieAndTVShow() {
     data class CreatedBy(
         val creditId: String,
         val gender: Int,

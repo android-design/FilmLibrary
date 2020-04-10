@@ -1,5 +1,7 @@
 package com.geekbrains.team.domain.movies.model
 
+import com.geekbrains.team.domain.base.model.MovieAndTVShow
+
 data class Movie(
     val adult: Boolean,
     val backdropPath: String,
@@ -32,7 +34,7 @@ data class Movie(
     val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int
-) {
+) : MovieAndTVShow() {
     data class Genre(
         val id: Int,
         val name: String
