@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.filmlibrary.R
+import kotlinx.android.synthetic.main.small_card_item.view.*
 
 class FavoriteMoviesRVAdapter : RecyclerView.Adapter<FavoriteMoviesRVAdapter.ViewHolder>() {
 
@@ -25,7 +26,8 @@ class FavoriteMoviesRVAdapter : RecyclerView.Adapter<FavoriteMoviesRVAdapter.Vie
         holder.bind(movies[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(note: Movie) = with(itemView) {
+        fun bind(movie: Movie) = with(itemView) {
+            title_tv.text = movie.title
 
         }
     }
