@@ -11,7 +11,7 @@ data class MovieView(
     val images: List<String>, // Массив больших фото (строки, url)
     val trailer: String, // Ссылка на трейлер (строка, url)
     val posterPath: String, // Маленькое фото (постер, строка, url)
-    val genres: List<String>, // Жанры (строки)
+    val genres: String, // Жанры (строки)
     val backdropPath: String, // Картинка из фильма
     val productionCountries: String, // Страны производства (строка)
     val runtime: String, // Продолжительность (строка)
@@ -28,7 +28,7 @@ fun Movie.toMovieView() =
         images = images ?: listOf(),
         trailer = trailer,
         posterPath = posterPath,
-        genres = genres?.map { it.name }?: listOf(),
+        genres = genres.toString(),
         backdropPath = backdropPath,
         productionCountries = productionCountries.toString(),
         runtime = runtime.toString(),

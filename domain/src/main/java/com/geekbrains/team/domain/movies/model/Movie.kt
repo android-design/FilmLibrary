@@ -7,7 +7,8 @@ data class Movie(
     val backdropPath: String,
     val belongsToCollection: Boolean? = null,
     val budget: Int? = 0,
-    val genres: List<Genre>? = null,
+    val genreIds: List<Int>? = null,
+    val genres: MutableList<String> = ArrayList(),
     val id: Int,
     val images: List<String>? = null,
     val trailer: String = "",
@@ -35,10 +36,6 @@ data class Movie(
     val voteAverage: Double,
     val voteCount: Int
 ) : MovieAndTVShow() {
-    data class Genre(
-        val id: Int,
-        val name: String
-    )
 
     data class ProductionCompany(
         val id: Int,

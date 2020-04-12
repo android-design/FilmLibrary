@@ -1,5 +1,6 @@
 package com.geekbrains.team.data.movies.searchMovies.service.model
 
+import com.geekbrains.team.data.Const.imagePrefix
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -47,17 +48,18 @@ data class ResponseSearchMovies(
 }
 
 fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
-    results.map {movie ->
+    results.map { movie ->
         Movie(
             id = movie.id,
             title = movie.title,
             originalTitle = movie.originalTitle,
             popularity = movie.popularity,
             voteCount = movie.voteCount,
+            genreIds = movie.genreIds,
             video = movie.video,
-            posterPath = movie.posterPath?:"",
+            posterPath = movie.posterPath?.let { imagePrefix + it } ?: "",
             adult = movie.adult,
-            backdropPath = movie.backdropPath ?: "",
+            backdropPath = movie.backdropPath?.let { imagePrefix + it } ?: "",
             originalLanguage = movie.originalLanguage,
             voteAverage = movie.voteAverage * 10,
             overview = movie.overview,

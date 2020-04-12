@@ -1,4 +1,4 @@
-package com.geekbrains.team.domain.tv.searchTVShow.repository
+package com.geekbrains.team.domain.search.repository
 
 import com.geekbrains.team.domain.tv.model.TVShow
 import io.reactivex.Single
