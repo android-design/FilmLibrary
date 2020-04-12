@@ -47,18 +47,17 @@ data class ResponseSearchTVShow(
 fun ResponseSearchTVShow.toTVShow(): List<TVShow> =
     results.map {
         TVShow(
-            it.id,
-            it.originalName,
-            it.name,
-            it.popularity,
-            it.genreIds,
-            it.overview,
-            it.originCountry,
-            it.voteCount,
-            it.backdropPath?:"",
-            it.originalLanguage,
-            (it.voteAverage * 10).toInt(),
-            it.posterPath?:"",
-            it.firstAirDate
+            id = it.id,
+            originalName = it.originalName,
+            name = it.name,
+            popularity = it.popularity,
+            overview = it.overview,
+            originCountry = it.originCountry,
+            voteCount = it.voteCount,
+            backdropPath = it.backdropPath?:"",
+            originalLanguage = it.originalLanguage,
+            voteAverage = it.voteAverage * 10,
+            posterPath = it.posterPath?:"",
+            firstAirDate = it.firstAirDate
         )
     }

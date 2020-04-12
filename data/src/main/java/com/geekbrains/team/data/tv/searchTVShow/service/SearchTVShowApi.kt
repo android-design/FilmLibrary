@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SearchTVShowApi {
-    @GET("/search/tv?")
+    @GET("/3/search/tv?")
     fun getSearchTVShow(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,

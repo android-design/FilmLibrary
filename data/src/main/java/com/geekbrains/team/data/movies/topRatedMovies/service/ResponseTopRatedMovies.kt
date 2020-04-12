@@ -64,8 +64,7 @@ fun ResponseTopRatedMovies.toMovie(): List<Movie> {
             adult = movie.adult,
             backdropPath = movie.backdropPath ?: "",
             originalLanguage = movie.originalLanguage,
-            genreIds = movie.genreIds,
-            voteAverage = (movie.voteAverage * 10).toInt(),
+            voteAverage = movie.voteAverage * 10,
             overview = movie.overview,
             releaseDate = movie.releaseDate
         )

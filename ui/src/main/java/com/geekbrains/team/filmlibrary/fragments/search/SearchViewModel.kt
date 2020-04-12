@@ -1,32 +1,31 @@
 package com.geekbrains.team.filmlibrary.fragments.search
 
 import androidx.lifecycle.MutableLiveData
+import com.geekbrains.team.domain.base.model.MovieAndTVShow
 import com.geekbrains.team.domain.movies.model.Movie
-import com.geekbrains.team.domain.movies.searchMovies.interactor.GetSearchedMovies
+import com.geekbrains.team.domain.search.interactor.GetSearchedResult
 import com.geekbrains.team.domain.tv.model.TVShow
 import com.geekbrains.team.domain.tv.searchTVShow.interactor.GetSearchedTVShow
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
-import com.geekbrains.team.filmlibrary.fragments.search.model.SearchedMovieView
-import com.geekbrains.team.filmlibrary.fragments.search.model.SearchedTVShowView
-import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedMovieView
-import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedTVShowView
+import com.geekbrains.team.filmlibrary.fragments.search.model.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val useCaseSearchedMovies: GetSearchedMovies,
+    private val useCaseSearchedResult: GetSearchedResult,
     private val useCaseSearchedTVShow: GetSearchedTVShow
 ) :
     BaseViewModel() {
-    var currentReleaseYear: Int = 0
+    var currentReleaseYear: Int? = null
+    var isNeedSearchMovies: Boolean = true
+    var isNeedSearchTVShows: Boolean = true
 
-    var searchedMoviesData: MutableLiveData<List<SearchedMovieView>> = MutableLiveData()
-    var searchedTVShowsData: MutableLiveData<List<SearchedTVShowView>> = MutableLiveData()
+    var searchedMoviesData: MutableLiveData<List<SearchView>> = MutableLiveData()
 
     fun loadSearchedMovies(query: String, page: Int) =
-        useCaseSearchedMovies.execute(
-            params = GetSearchedMovies.Params(
+        useCaseSearchedResult.execute(
+            params = GetSearchedResult.Params(
                 query = query,
                 releaseYear = currentReleaseYear,
                 page = page
@@ -36,22 +35,13 @@ class SearchViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadSearchedMovies, ::handleFailure)
 
-    private fun handleOnSuccessLoadSearchedMovies(list: List<Movie>) {
-        searchedMoviesData.value = list.map { it.toSearchedMovieView() }
-    }
-
-    fun loadSearchedTVShows(query: String, page: Int) =
-        useCaseSearchedTVShow.execute(
-            params = GetSearchedTVShow.Params(
-                query = query,
-                page = page
-            )
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::handleOnSuccessLoadSearchedTVShows, ::handleFailure)
-
-    private fun handleOnSuccessLoadSearchedTVShows(list: List<TVShow>) {
-        searchedTVShowsData.value = list.map { it.toSearchedTVShowView() }
+    private fun handleOnSuccessLoadSearchedMovies(list: List<MovieAndTVShow>) {
+        searchedMoviesData.value = list.map {
+            when (it) {
+                is Movie -> it.toSearchedMovieView()
+                is TVShow -> it.toSearchedTVShowView()
+                else -> throw Throwable("Ooops")
+            }
+        }
     }
 }
