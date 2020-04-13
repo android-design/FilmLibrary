@@ -3,4 +3,9 @@
     <string name="search_edit_text_hint">Фильмы, сериалы</string>
     <string name="movie_image_description">Movie image</string>
     <string name="tv_show_image">TV show image</string>
+    <string name="search_settings_title">Поиск по параметрам</string>
+    <string name="search_settings_tab_all">Все</string>
+    <string name="search_settings_tab_movies">Фильмы</string>
+    <string name="search_settings_tab_tv_show">Сериалы</string>
+    <string name="search_btn_settings_description">Search button settings</string>
 </resources>

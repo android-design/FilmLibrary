@@ -1,6 +1,8 @@
 package com.geekbrains.team.domain.movies.model
 
+import com.geekbrains.team.domain.base.model.Genre
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
+import com.geekbrains.team.domain.tv.model.TVShow
 
 data class Movie(
     val adult: Boolean,
@@ -54,3 +56,18 @@ data class Movie(
         val name: String
     )
 }
+
+fun fillMoviesGenres(
+    moviesGenres: List<Genre>,
+    movies: List<Movie>
+): List<MovieAndTVShow> =
+    movies.apply {
+        val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
+
+        map { movie ->
+            movie.genreIds?.map {
+                val result = genresMoviesMap[it]
+                result?.let { movie.genres.add(result) }
+            }
+        }
+    }

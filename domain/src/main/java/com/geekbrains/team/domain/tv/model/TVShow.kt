@@ -1,5 +1,6 @@
 package com.geekbrains.team.domain.tv.model
 
+import com.geekbrains.team.domain.base.model.Genre
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
 
 data class TVShow(
@@ -88,3 +89,18 @@ data class TVShow(
         val seasonNumber: Int
     )
 }
+
+fun fillTVGenres(
+    tvGenres: List<Genre>,
+    tv: List<TVShow>
+): List<MovieAndTVShow> =
+    tv.apply {
+        val genresTVMap = tvGenres.map { it.id to it.name }.toMap()
+
+        map { tvShow ->
+            tvShow.genreIds?.map {
+                val result = genresTVMap[it]
+                result?.let { tvShow.genres.add(result) }
+            }
+        }
+    }

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.fragments.search.adapter.SearchAdapter
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -24,7 +25,8 @@ class SearchFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<SearchViewModel> { viewModelFactory }
+    private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
+
     private val mAdapter = SearchAdapter()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +58,17 @@ class SearchFragment : DaggerFragment() {
                 viewModel.loadSearchedMovies(search_et.text.toString(), 1)
             }
             true
+        }
+
+        btn_search_settings.setOnClickListener {
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.let {
+                val fragment = SearchSettingsFragment()
+                it.replace(R.id.fragmentContainer, fragment)
+                it.addToBackStack(null)
+                it.commit()
+            }
+
         }
 
         search_rv.apply {

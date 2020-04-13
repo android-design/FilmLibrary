@@ -12,6 +12,8 @@
     <color name="dayBackgroundLight">#FAFAFA</color>
     <color name="dayTextPrimary">#263238</color>
     <color name="dayTextSecondary">#5B787F</color>
+    <color name="backgroundSearchTopBar">#7EA8B1</color>
+
 
     <!-- Night -->
     <color name="nightBackgroundDark">#263238</color>

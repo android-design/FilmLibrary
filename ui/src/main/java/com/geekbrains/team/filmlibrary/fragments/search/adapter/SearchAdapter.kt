@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.databinding.SearchMovieItemRvBinding
-import com.geekbrains.team.filmlibrary.databinding.SearchTvshowItemRvBinding
+import com.geekbrains.team.filmlibrary.databinding.SearchTvItemRvBinding
 import com.geekbrains.team.filmlibrary.fragments.search.model.SearchView
 import com.geekbrains.team.filmlibrary.fragments.search.model.SearchedMovieView
 import com.geekbrains.team.filmlibrary.fragments.search.model.SearchedTVShowView
@@ -32,7 +32,7 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 MovieViewHolder(binding)
             }
             else -> {
-                val binding = SearchTvshowItemRvBinding.inflate(inflater, parent, false)
+                val binding = SearchTvItemRvBinding.inflate(inflater, parent, false)
                 TVShowViewHolder(binding)
             }
         }
@@ -65,7 +65,7 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class TVShowViewHolder(private val binding: SearchTvshowItemRvBinding) :
+    class TVShowViewHolder(private val binding: SearchTvItemRvBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(tvshow: SearchedTVShowView) {

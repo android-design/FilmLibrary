@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.searchMovies.service.model
 
 import com.geekbrains.team.data.Const.imagePrefix
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -63,6 +64,6 @@ fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
             originalLanguage = movie.originalLanguage,
             voteAverage = movie.voteAverage * 10,
             overview = movie.overview,
-            releaseDate = movie.releaseDate
+            releaseDate = movie.releaseDate.getYear()
         )
     }

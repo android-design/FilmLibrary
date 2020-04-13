@@ -19,7 +19,7 @@ class SearchViewModel @Inject constructor(
     BaseViewModel() {
     var currentReleaseYear: Int? = null
     var isNeedSearchMovies: Boolean = true
-    var isNeedSearchTVShows: Boolean = false
+    var isNeedSearchTVShows: Boolean = true
 
     var searchedMoviesData: MutableLiveData<List<SearchView>> = MutableLiveData()
 

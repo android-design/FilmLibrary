@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.tv.searchTVShow.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.domain.tv.model.TVShow
 import com.google.gson.annotations.SerializedName
 
@@ -59,6 +60,6 @@ fun ResponseSearchTVShow.toTVShow(): List<TVShow> =
             originalLanguage = tvShow.originalLanguage,
             voteAverage = tvShow.voteAverage * 10,
             posterPath = tvShow.posterPath?.let { Const.imagePrefix + it } ?: "",
-            firstAirDate = tvShow.firstAirDate ?: ""
+            firstAirDate = tvShow.firstAirDate?.getYear() ?: ""
         )
     }
