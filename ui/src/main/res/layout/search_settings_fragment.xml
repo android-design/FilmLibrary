@@ -25,7 +25,7 @@
                 style="@style/Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Поиск по параметрам"
+                android:text="@string/searchByParameters"
                 android:textColor="@color/nightTextPrimary" />
         </Toolbar>
 

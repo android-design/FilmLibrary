@@ -18,7 +18,7 @@ data class NowPlayingMovieView(
     val releaseDate: String
 )
 
-fun Movie.toMovieView(): NowPlayingMovieView = NowPlayingMovieView(
+fun Movie.toNowPlayingMovieView(): NowPlayingMovieView = NowPlayingMovieView(
     id = id,
     title = title,
     originalTitle = originalTitle,

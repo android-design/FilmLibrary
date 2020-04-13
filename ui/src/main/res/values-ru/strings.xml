@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FilmLibrary</string>
+    <string name="search_edit_text_hint">Фильмы, сериалы, актёры</string>
+    <string name="favorites">Избранное</string>
+    <string name="movies">Фильмы</string>
+    <string name="tvShows">Сериалы</string>
+    <string name="filmography">Фильмография</string>
+    <string name="awards">Награды</string>
+    <string name="crew">Весь состав</string>
+    <string name="filmMakers">Создатели</string>
+    <string name="director">Режиссёр</string>
+    <string name="screenPlay">Сценарий</string>
+    <string name="producer">Продюсеры</string>
+    <string name="starring">В ролях</string>
+    <string name="related">Похожие</string>
+    <string name="affiche">Афиша</string>
+    <string name="nowInTheatres">Сейчас в кино</string>
+    <string name="comingSoon">Скоро в кино</string>
+    <string name="movieOfTheWeek">Фильм недели</string>
+    <string name="seriesPremier">Премьера сериала</string>
+    <string name="searchHint">Фильмы, сериалы, актёры</string>
+    <string name="searchByParameters">Поиск по параметрам</string>
+    <string name="year">Год</string>
+    <string name="country">Страна</string>
+    <string name="genre">Жанр</string>
+    <string name="rating">Рейтинг</string>
+    <string name="imdb">IMDb</string>
+    <string name="show">показать</string>
+    <string name="top">Топ лучших фильмов и сериалов</string>
+</resources>

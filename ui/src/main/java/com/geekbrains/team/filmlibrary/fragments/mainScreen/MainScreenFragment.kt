@@ -33,5 +33,11 @@ class MainScreenFragment : DaggerFragment() {
                 //Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.nowPlayingMoviesData.observe(viewLifecycleOwner, Observer { data ->
+            data?.let {
+                //Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

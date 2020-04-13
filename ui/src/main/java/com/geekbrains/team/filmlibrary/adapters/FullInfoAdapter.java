@@ -18,7 +18,7 @@ import com.geekbrains.team.filmlibrary.model.MovieView;
 import com.geekbrains.team.filmlibrary.model.TVShowView;
 import com.squareup.picasso.Picasso;
 
-public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.ViewHolder> {
+public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullInfoCardHolder> {
     private MovieView movie;
     private TVShowView tvShow;
 
@@ -40,14 +40,14 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FullInfoCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         FullFilmInfoItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.full_film_info_item, parent, false);
-        return new ViewHolder(binding);
+        return new FullInfoCardHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FullInfoCardHolder holder, int position) {
         String trailer;
         String backDrop;
 
@@ -74,13 +74,13 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.ViewHo
             return tvShow.getImages().size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class FullInfoCardHolder extends RecyclerView.ViewHolder {
         private ImageButton play;
         private ImageView backDrop;
 
         FullFilmInfoItemBinding binding;
 
-        ViewHolder(FullFilmInfoItemBinding binding) {
+        FullInfoCardHolder(FullFilmInfoItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             play = binding.getRoot().findViewById(R.id.play_btn);
