@@ -6,5 +6,4 @@ import io.reactivex.Single
 
 interface MovieDetailsRepository {
     fun getMovie(id: Int): Single<Movie>
-    fun getMovieList(ids: List<Int>): Flowable<List<Movie>>
 }

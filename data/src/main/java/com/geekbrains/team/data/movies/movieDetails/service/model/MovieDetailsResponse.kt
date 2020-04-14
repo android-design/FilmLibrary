@@ -68,7 +68,7 @@ data class MovieDetailsResponse(
     )
 }
 
-fun MovieDetailsResponse.toListOfGenreIds(): List<Int> = genres.map { _ ->  id}
+fun MovieDetailsResponse.toMovieGenre(): List<Movie.Genre> = genres.map { it ->  Movie.Genre(id  = it.id, name = it.name)}
 
 fun MovieDetailsResponse.toMovie() = Movie(
     id = this.id,
@@ -77,28 +77,12 @@ fun MovieDetailsResponse.toMovie() = Movie(
     popularity = this.popularity,
     voteCount = this.voteCount,
     video = this.video,
-    posterPath = this.posterPath,
+    posterPath = this.posterPath ?: "",
     adult = this.adult,
-    backdropPath = this.backdropPath,
+    backdropPath = this.backdropPath ?: "",
     originalLanguage = this.originalLanguage,
-    genreIds = this.toListOfGenreIds(),
-    voteAverage = (this.voteAverage * 10).toInt(),
+    genres = this.toMovieGenre(),
+    voteAverage = this.voteAverage,
     overview = this.overview ?: Const.NO_OVERVIEW,
     releaseDate = this.releaseDate
 )
-/*
-    val id: Int,
-    val title: String,
-    val originalTitle: String,
-    val popularity: Double,
-    val voteCount: Int,
-    val video: Boolean,
-    val posterPath: String?,
-    val adult: Boolean,
-    val backdropPath: String?,
-    val originalLanguage: String,
-    val genreIds: List<Int>,
-    val voteAverage: Int,
-    val overview: String,
-    val releaseDate: String
- */

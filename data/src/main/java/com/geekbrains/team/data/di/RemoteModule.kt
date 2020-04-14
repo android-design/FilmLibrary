@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.di
 
 import com.geekbrains.team.data.Const.baseUrl
+import com.geekbrains.team.data.movies.movieDetails.service.MovieDetailsApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchTVShowApi
@@ -27,7 +28,9 @@ class RemoteModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
-
+    @Provides
+    fun getMovieDetailsApi(retrofit: Retrofit): MovieDetailsApi =
+        retrofit.create(MovieDetailsApi::class.java)
     @Provides
     fun getNowPlayingMoviesApi(retrofit: Retrofit): NowPlayingMoviesApi =
         retrofit.create(NowPlayingMoviesApi::class.java)
