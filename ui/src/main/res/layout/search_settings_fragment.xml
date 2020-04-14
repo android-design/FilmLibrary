@@ -25,7 +25,7 @@
                 style="@style/Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_settings_title"
+                android:text="@string/searchByParameters"
                 android:textColor="@color/nightTextPrimary" />
         </Toolbar>
 
@@ -41,17 +41,17 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_settings_tab_all" />
+                android:text="@string/all" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_settings_tab_movies" />
+                android:text="@string/movies" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_settings_tab_tv_show" />
+                android:text="@string/tvShows" />
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

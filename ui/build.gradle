@@ -73,8 +73,12 @@ dependencies {
     // Retrofit
     def retrofit_version = "2.6.2"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    // Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    //Picasso
+    def picasso_version = "2.71828"
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //ViewPager2
+    def viewpager2_version = "1.0.0"
+    implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
 }

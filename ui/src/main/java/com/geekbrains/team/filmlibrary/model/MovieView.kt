@@ -18,8 +18,7 @@ data class MovieView(
     val overview: String // Описание (строка)
 )
 
-fun Movie.toMovieView() =
-    MovieView(
+fun Movie.toMovieView() = MovieView(
         id = id,
         title = title,
         originalTitle = originalTitle,

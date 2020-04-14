@@ -16,7 +16,7 @@ abstract class MainScreenFragmentModule {
             ViewModelBuilder::class
         ]
     )
-    internal abstract fun preferenceFragment(): MainScreenFragment
+    internal abstract fun mainScreenFragment(): MainScreenFragment
 
     @Binds
     @IntoMap

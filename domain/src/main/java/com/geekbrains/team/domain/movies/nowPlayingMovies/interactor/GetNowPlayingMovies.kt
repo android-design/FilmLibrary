@@ -8,9 +8,7 @@ import javax.inject.Inject
 
 class GetNowPlayingMovies @Inject constructor(private val repository: NowPlayingMoviesRepository) :
     UseCase<List<Movie>, GetNowPlayingMovies.Params> {
-    override fun execute(params: Params): Single<List<Movie>> {
-        return repository.fetch(page = params.page)
-    }
+    override fun execute(params: Params): Single<List<Movie>> = repository.fetch(page = params.page)
 
     data class Params(val page: Int)
 }
