@@ -15,36 +15,10 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
 
-class GetMoviesDetailsUseCase @Inject constructor(private val detailsRepository: MovieDetailsRepository,
-private val idsRepository: FavoriteMoviesRepository): UseCaseFlowable<List<Movie>, List<Int>> {
-    override fun execute(params: List<Int>): Flowable<List<Movie>> {
-        val list = mutableListOf<Movie>()
-        idsRepository.getFavoriteMoviesIds().subscribeOn(io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : DisposableSingleObserver<List<Int>>() {
-                override fun onSuccess(result: List<Int>) {
-                    Flowable.fromIterable(result).subscribe{
-                        detailsRepository.getMovie(it).subscribeOn(io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(object : DisposableSingleObserver<Movie>(){
-                                override fun onSuccess(t: Movie) {
-                                    list.add(t)
-                                }
 
-                                override fun onError(e: Throwable) {
-                                    throw e
-                                }
+class GetMoviesDetailsUseCase @Inject constructor(private val repository: MovieDetailsRepository): UseCaseFlowable<List<Movie>, List<Int>> {
 
-                            })
-                    }
-                }
+    override fun execute(params: List<Int>): Flowable<List<Movie>> =
+        repository.getMovieList(params)
 
-                override fun onError(e: Throwable) {
-
-                }
-
-
-            })
-        return Flowable.just(list)
-    }
 }
