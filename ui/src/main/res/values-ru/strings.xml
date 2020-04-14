@@ -28,4 +28,10 @@
     <string name="imdb">IMDb</string>
     <string name="show">показать</string>
     <string name="top">Топ лучших фильмов и сериалов</string>
+    <string name="home">home</string>
+    <string name="list">list</string>
+    <string name="search">search</string>
+    <string name="heart">heart</string>
+    <string name="settings">settings</string>
+    <string name="reset">Сбросить</string>
 </resources>

@@ -27,4 +27,10 @@
     <string name="imdb">IMDb</string>
     <string name="show">show</string>
     <string name="top">Top best movies and TV shows</string>
+    <string name="home">home</string>
+    <string name="list">list</string>
+    <string name="search">search</string>
+    <string name="heart">heart</string>
+    <string name="settings">settings</string>
+    <string name="reset">Reset</string>
 </resources>
