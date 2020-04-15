@@ -16,9 +16,10 @@ import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
 
 
-class GetMoviesDetailsUseCase @Inject constructor(private val repository: MovieDetailsRepository): UseCaseFlowable<List<Movie>, List<Int>> {
+class GetMoviesDetailsUseCase @Inject constructor(private val repository: MovieDetailsRepository): UseCase<Movie, Int> {
+    override fun execute(params: Int): Single<Movie> {
+        return repository.getMovie(params)
+    }
 
-    override fun execute(params: List<Int>): Flowable<List<Movie>> =
-        repository.getMovieList(params)
 
 }

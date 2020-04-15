@@ -1,7 +1,9 @@
 package com.geekbrains.team.filmlibrary.fragments.favoriteMovies
 
 import androidx.lifecycle.MutableLiveData
+import com.geekbrains.team.domain.base.None
 import com.geekbrains.team.domain.movies.favoriteMovie.interactor.GetFavoriteMoviesIdsUseCase
+import com.geekbrains.team.domain.movies.favoriteMovie.interactor.GetFavoriteMoviesUseCase
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.movies.movieDetails.interactor.GetMoviesDetailsUseCase
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
@@ -16,43 +18,20 @@ import javax.inject.Inject
 
 class FavoriteMoviesViewModel @Inject constructor(
     private val getFavoriteMoviesIdsUseCase: GetFavoriteMoviesIdsUseCase,
-    private val getMoviesDetailsUseCase: GetMoviesDetailsUseCase): BaseViewModel() {
+    private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase): BaseViewModel() {
     val liveData = MutableLiveData<List<Movie>>()
 
-    fun loadMovies(ids: List<Int>) {
-        getMoviesDetailsUseCase.execute(ids).subscribeOn(io()).observeOn(AndroidSchedulers.mainThread()).
-                subscribe(object : FlowableSubscriber<List<Movie>> {
-                    override fun onComplete() {
-                    }
-
-                    override fun onSubscribe(s: Subscription) {
-
-                    }
-
-                    override fun onNext(t: List<Movie>?) {
-                        liveData.value = t
-                    }
-
-                    override fun onError(t: Throwable?) {
-                        TODO("Not yet implemented")
-                    }
-                })
-    }
-
     fun loadFavoriteMoviesIds() {
-        getFavoriteMoviesIdsUseCase.execute().subscribeOn(io()).
-        observeOn(AndroidSchedulers.mainThread()).
-        subscribe()
-        getFavoriteMoviesIdsUseCase.execute().subscribeOn(io()).
-        observeOn(AndroidSchedulers.mainThread()).
-        subscribe(object : DisposableSingleObserver<List<Int>>(){
-            override fun onSuccess(result: List<Int>) {
-                loadMovies(result)
-            }
+        getFavoriteMoviesUseCase.execute(None()).subscribeOn(io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : DisposableSingleObserver<List<Movie>>(){
+                override fun onSuccess(t: List<Movie>) {
+                    liveData.value = t
+                }
 
-            override fun onError(e: Throwable) {
+                override fun onError(e: Throwable) {
 
-            }
-        } )
+                }
+            })
     }
 }

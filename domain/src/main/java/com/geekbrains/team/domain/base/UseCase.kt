@@ -14,3 +14,5 @@ interface UseCaseFlowable<R, in Params> {
 interface UseCaseWithoutParameters<R> {
     fun execute(): Single<R>
 }
+
+class None
