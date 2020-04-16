@@ -5,5 +5,4 @@ import io.reactivex.Single
 
 interface SearchMoviesRepository {
     fun fetch(query: String, releaseYear: Int?, page: Int): Single<List<Movie>>
-    //fun fetch(query: String, page: Int): Single<List<Movie>>
 }

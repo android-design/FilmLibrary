@@ -1,13 +1,16 @@
 package com.geekbrains.team.domain.movies.model
 
+import com.geekbrains.team.domain.base.model.Genre
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
+import com.geekbrains.team.domain.tv.model.TVShow
 
 data class Movie(
     val adult: Boolean,
     val backdropPath: String,
     val belongsToCollection: Boolean? = null,
     val budget: Int? = 0,
-    val genres: List<Genre>? = null,
+    val genreIds: List<Int>? = null,
+    val genres: MutableList<String> = ArrayList(),
     val id: Int,
     val images: List<String>? = null,
     val trailer: String = "",
@@ -35,10 +38,6 @@ data class Movie(
     val voteAverage: Double,
     val voteCount: Int
 ) : MovieAndTVShow() {
-    data class Genre(
-        val id: Int,
-        val name: String
-    )
 
     data class ProductionCompany(
         val id: Int,
@@ -57,3 +56,18 @@ data class Movie(
         val name: String
     )
 }
+
+fun fillMoviesGenres(
+    moviesGenres: List<Genre>,
+    movies: List<Movie>
+): List<MovieAndTVShow> =
+    movies.apply {
+        val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
+
+        map { movie ->
+            movie.genreIds?.map {
+                val result = genresMoviesMap[it]
+                result?.let { movie.genres.add(result) }
+            }
+        }
+    }

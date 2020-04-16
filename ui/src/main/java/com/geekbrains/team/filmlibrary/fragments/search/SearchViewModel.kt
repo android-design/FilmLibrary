@@ -5,16 +5,16 @@ import com.geekbrains.team.domain.base.model.MovieAndTVShow
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.search.interactor.GetSearchedResult
 import com.geekbrains.team.domain.tv.model.TVShow
-import com.geekbrains.team.domain.tv.searchTVShow.interactor.GetSearchedTVShow
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
-import com.geekbrains.team.filmlibrary.fragments.search.model.*
+import com.geekbrains.team.filmlibrary.fragments.search.model.SearchView
+import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedMovieView
+import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedTVShowView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val useCaseSearchedResult: GetSearchedResult,
-    private val useCaseSearchedTVShow: GetSearchedTVShow
+    private val useCaseSearchedResult: GetSearchedResult
 ) :
     BaseViewModel() {
     var currentReleaseYear: Int? = null
@@ -28,7 +28,9 @@ class SearchViewModel @Inject constructor(
             params = GetSearchedResult.Params(
                 query = query,
                 releaseYear = currentReleaseYear,
-                page = page
+                page = page,
+                isNeedSearchMovies = isNeedSearchMovies,
+                isNeedSearchTVShows = isNeedSearchTVShows
             )
         )
             .subscribeOn(Schedulers.io())

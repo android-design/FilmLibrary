@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragmentContainer"
@@ -11,8 +11,9 @@
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btv"
+        app:layout_constraintTop_toTopOf="parent"
         android:gravity="center" />
 
 <!--    <View-->
@@ -26,8 +27,8 @@
         android:id="@+id/btv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:itemIconTint="@color/bottom_nav_menu_selector"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

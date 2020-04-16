@@ -12,7 +12,7 @@
         android:layout_height="16dp"
         android:layout_margin="16dp"
         android:gravity="bottom"
-        android:text="Фильмы"
+        android:text="@string/movies"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
         android:layout_height="16dp"
         android:layout_margin="16dp"
         android:gravity="bottom"
-        android:text="Сериалы"
+        android:text="@string/tvShows"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/films_rv" />
 

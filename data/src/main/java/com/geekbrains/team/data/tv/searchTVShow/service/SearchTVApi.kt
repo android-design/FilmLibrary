@@ -5,7 +5,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SearchTVShowApi {
+interface SearchTVApi {
     @GET("/3/search/tv?")
     fun getSearchTVShow(
         @Query("api_key") apiKey: String,

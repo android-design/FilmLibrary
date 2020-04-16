@@ -19,7 +19,7 @@ data class SearchedTVShowView(
     val voteAverage: String,
     val posterPath: String,
     val firstAirDate: String
-):SearchView()
+) : SearchView()
 
 data class SearchedMovieView(
     val id: Int,
@@ -34,7 +34,7 @@ data class SearchedMovieView(
     val voteAverage: String,
     val overview: String,
     val releaseDate: String
-):SearchView()
+) : SearchView()
 
 fun Movie.toSearchedMovieView(): SearchedMovieView =
     SearchedMovieView(
@@ -46,12 +46,11 @@ fun Movie.toSearchedMovieView(): SearchedMovieView =
         posterPath = posterPath,
         backdropPath = backdropPath,
         originalLanguage = originalLanguage,
-        genres = genres?.map { it.name }.toString(),
+        genres = genres.joinToString(),
         voteAverage = voteAverage.toString(),
         overview = overview,
         releaseDate = releaseDate
     )
-
 
 
 fun TVShow.toSearchedTVShowView() =
@@ -60,7 +59,7 @@ fun TVShow.toSearchedTVShowView() =
         originalName = originalName,
         name = name,
         popularity = popularity.toString(),
-        genres = genres?.map { it.name }.toString(),
+        genres = genres.joinToString(),
         overview = overview,
         originCountry = originCountry?.map { name }.toString(),
         voteCount = voteCount.toString(),

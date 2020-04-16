@@ -24,7 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    dataBinding {
+        enabled true
+    }
     compileOptions {
         sourceCompatibility "1.8"
         targetCompatibility "1.8"
@@ -75,5 +77,12 @@ dependencies {
     // Retrofit
     def retrofit_version = "2.6.2"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //Picasso
+    def picasso_version = "2.71828"
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //ViewPager2
+    def viewpager2_version = "1.0.0"
+    implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
 }
