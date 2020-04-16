@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainScreenFragment"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.mainScreen.MainScreenFragment"
+        android:label="MainScreenFragment">
+        <action
+            android:id="@+id/action_mainScreenFragment_to_topFragment"
+            app:destination="@id/topFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.top.TopFragment"
+        android:label="TopFragment">
+        <action
+            android:id="@+id/action_topFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" />
+
+</navigation>
