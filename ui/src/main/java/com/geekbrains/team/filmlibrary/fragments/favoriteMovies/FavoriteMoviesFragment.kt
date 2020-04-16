@@ -35,7 +35,7 @@ class FavoriteMoviesFragment: DaggerFragment() {
         val filmsRv = view.findViewById<View>(R.id.films_rv) as? RecyclerView
         filmsRv?.layoutManager = GridLayoutManager(this.context, 2)
         filmsRv?.adapter = adapter
-        viewModel.loadFavoriteMoviesIds()
+        viewModel.loadFavoriteMovies()
         viewModel.liveData.observe(viewLifecycleOwner, Observer { it ->
             adapter.movies = it })
     }

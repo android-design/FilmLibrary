@@ -1,5 +1,6 @@
 package com.geekbrains.team.domain.base
 
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
@@ -13,6 +14,10 @@ interface UseCaseFlowable<R, in Params> {
 
 interface UseCaseWithoutParameters<R> {
     fun execute(): Single<R>
+}
+
+interface UseCaseCompletable<in Params> {
+    fun execute(params: Params): Completable
 }
 
 class None
