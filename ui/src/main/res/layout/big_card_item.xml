@@ -21,7 +21,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/series_card"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="32dp"
@@ -38,9 +38,11 @@
                 android:id="@+id/title_iv"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:layout_marginBottom="80dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="parent"
-                app:url="@{movie == null ? tvShow.images.get(0) : movie.backdropPath}"
+                android:src="@drawable/ic_no_poster"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:url='@{movie == null ? (tvShow.images.get(0).equals("https://image.tmdb.org/t/p/w185/") ? "": tvShow.images.get(0)) : (movie.backdropPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : movie.backdropPath)}'
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -51,8 +53,8 @@
                 android:layout_marginEnd="4dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_favorite_unactive"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/title_iv"
+                app:layout_constraintTop_toTopOf="@id/title_iv"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -77,7 +79,7 @@
                 android:src="@drawable/ic_no_poster"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:url="@{movie == null ? tvShow.posterPath : movie.posterPath}"
+                app:url='@{movie == null ? (tvShow.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : tvShow.posterPath) : (movie.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : movie.posterPath)}'
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -90,17 +92,18 @@
                 android:text="@{movie == null ? tvShow.name : movie.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cover_iv"
-                app:layout_constraintTop_toBottomOf="@id/title_iv" />
+                app:layout_constraintBottom_toTopOf="@id/original_title_tv" />
 
             <TextView
                 android:id="@+id/original_title_tv"
                 style="@style/Subtitle2"
                 android:layout_width="190dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
                 android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cover_iv"
-                app:layout_constraintTop_toBottomOf="@id/title_tv" />
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:id="@+id/rating_tv"

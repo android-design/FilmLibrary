@@ -1,6 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,7 @@ class SearchFragment : DaggerFragment() {
 
         viewModel.searchedMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
+                Log.d("ANSWER", it.toString())
                 val diffUtilCallback = DiffUtilsCallback(mAdapter.mDataList, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 mAdapter.setData(it)

@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
  * адаптер для верхнего вьюпейджера на главной
  */
 public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCardAdapter.TopRatedBigCardHolder> {
-    private MovieView movie;
+    public MovieView movie;
 
     public TopRatedBigCardAdapter() {
     }
@@ -31,7 +31,7 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
         Picasso.get().load(url).into(view);
     }
 
-    public void setMovie(MovieView data) {
+    public void setMovies(MovieView data) {
         movie = data;
     }
 
@@ -52,7 +52,7 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
 
     @Override
     public int getItemCount() {
-        return movie.getImages().size();
+        return 1;
     }
 
     class TopRatedBigCardHolder extends RecyclerView.ViewHolder {

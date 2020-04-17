@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.BigCardItemBinding;
+import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding;
 import com.geekbrains.team.filmlibrary.model.MovieView;
 import com.geekbrains.team.filmlibrary.model.TVShowView;
 import com.squareup.picasso.Picasso;
@@ -21,9 +22,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> {
-    private List<MovieView> movie = new ArrayList<>();
-    private List<TVShowView> tvShow = new ArrayList<>();
+public class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> {
+    public List<MovieView> movie = new ArrayList<>();
+    public List<TVShowView> tvShow = new ArrayList<>();
 
     public BigCardAdapter() {
     }

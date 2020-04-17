@@ -22,13 +22,13 @@ class MainScreenViewModel @Inject constructor(
     private val useCaseTopRatedMovies: GetTopRatedMovies
 ) :
     BaseViewModel() {
-    var nowPlayingMoviesData: MutableLiveData<List<NowPlayingMovieView>> = MutableLiveData()
-    var upcomingMoviesData: MutableLiveData<List<UpcomingMovieView>> = MutableLiveData()
-    var topRatedMoviesData: MutableLiveData<MovieView> = MutableLiveData()
+    val nowPlayingMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
+    val upcomingMoviesData: MutableLiveData<List<UpcomingMovieView>> = MutableLiveData()
+    val topRatedMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
 
     //todo изменить на правильное отображение для двух нижних карточек
-    var movieOfTheWeek: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
-    var tvShowPremier: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
+    var movieOfTheWeek: MutableLiveData<MovieView> = MutableLiveData()
+    var tvShowPremier: MutableLiveData<MovieView> = MutableLiveData()
 
     fun loadNowPlayingMovies(page: Int) =
         useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
@@ -37,7 +37,7 @@ class MainScreenViewModel @Inject constructor(
             .subscribe(::handleOnSuccessLoadNowPlayingMovies, ::handleFailure)
 
     private fun handleOnSuccessLoadNowPlayingMovies(list: List<Movie>) {
-        nowPlayingMoviesData.value = list.map { it.toNowPlayingMovieView() }
+        nowPlayingMoviesData.value = list.map { it.toMovieView() }
     }
 
     fun loadUpcomingMovies(page: Int) =
@@ -60,11 +60,11 @@ class MainScreenViewModel @Inject constructor(
 
     //берём рандомнуый фильм из страницы (для большего рандома)
     private fun handleOnSuccessLoadTopRatedMovies(list: List<Movie>) {
-        topRatedMoviesData.value = list[generateRandomPage()].toMovieView()
+        topRatedMoviesData.value = list.map { it.toMovieView() }
     }
 
     private fun generateRandomPage(): Int {
-        return (0..19).random()
+        return (0..349).random()
     }
 
 
@@ -76,7 +76,7 @@ class MainScreenViewModel @Inject constructor(
             .subscribe(::handleOnSuccessLoadMovieOfTheWeek, ::handleFailure)
 
     private fun handleOnSuccessLoadMovieOfTheWeek(list: List<Movie>) {
-        movieOfTheWeek.value = list[0].toNowPlayingMovieView()
+        movieOfTheWeek.value = list[0].toMovieView()
     }
 
     fun loadTvShowPremier(page: Int) =
@@ -86,6 +86,6 @@ class MainScreenViewModel @Inject constructor(
             .subscribe(::handleOnSuccessLoadTvShowPremier, ::handleFailure)
 
     private fun handleOnSuccessLoadTvShowPremier(list: List<Movie>) {
-        tvShowPremier.value = list[0].toNowPlayingMovieView()
+        tvShowPremier.value = list[0].toMovieView()
     }
 }
