@@ -5,10 +5,8 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +15,6 @@ import com.geekbrains.team.filmlibrary.databinding.BigCardItemBinding;
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding;
 import com.geekbrains.team.filmlibrary.model.MovieView;
 import com.geekbrains.team.filmlibrary.model.TVShowView;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +24,6 @@ public class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardH
     public List<TVShowView> tvShow = new ArrayList<>();
 
     public BigCardAdapter() {
-    }
-
-    @BindingAdapter({"app:url"})
-    public static void loadImage(ImageView view, String url) {
-        Picasso.get().load(url).into(view);
     }
 
     public void setMovies(List<MovieView> data) {

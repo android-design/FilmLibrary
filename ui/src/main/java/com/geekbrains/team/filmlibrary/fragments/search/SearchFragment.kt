@@ -70,10 +70,9 @@ class SearchFragment : DaggerFragment() {
                 it.addToBackStack(null)
                 it.commit()
             }
-
         }
 
-        search_rv.apply {
+        search_rv?.apply {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = mAdapter
         }

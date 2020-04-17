@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.geekbrains.team.filmlibrary.fragments.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
@@ -34,7 +34,7 @@
 
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.geekbrains.team.filmlibrary.fragments.favorites.FavoritesFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.favorites.FavoriteFragment"
         android:label="FavoritesFragment" />
 
 </navigation>
