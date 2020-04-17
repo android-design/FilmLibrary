@@ -12,7 +12,7 @@ import javax.inject.Inject
 class TopRatedMoviesRepositoryImpl @Inject constructor(private val api: TopRatedMoviesApi) :
     TopRatedMoviesRepository {
 
-    override fun fetch(page: Int): Single<List<Movie>> {
+    override fun fetch(page: Int): Single<MutableList<Movie>> {
         return api.getTopMovies(apiKey = BuildConfig.API_KEY, language = LANGUAGE, page = page)
             .map { response ->
                 response.toMovie()

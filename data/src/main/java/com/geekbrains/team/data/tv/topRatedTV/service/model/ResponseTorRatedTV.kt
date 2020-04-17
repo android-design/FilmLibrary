@@ -1,4 +1,8 @@
-package com.geekbrains.team.data.tv.topRatedTV.service
+package com.geekbrains.team.data.tv.topRatedTV.service.model
+
+import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.getYear
+import com.geekbrains.team.domain.tv.model.TVShow
 import com.google.gson.annotations.SerializedName
 
 
@@ -26,7 +30,7 @@ data class ResponseTopRatedTV(
         @SerializedName("vote_count")
         val voteCount: Int,
         @SerializedName("first_air_date")
-        val firstAirDate: String,
+        val firstAirDate: String?,
         @SerializedName("backdrop_path")
         val backdropPath: Any?,
         @SerializedName("original_language")
@@ -38,6 +42,24 @@ data class ResponseTopRatedTV(
         @SerializedName("overview")
         val overview: String,
         @SerializedName("poster_path")
-        val posterPath: String
+        val posterPath: String?
     )
 }
+
+fun ResponseTopRatedTV.toTVShow(): MutableList<TVShow> =
+    results.map { tvShow ->
+        TVShow(
+            id = tvShow.id,
+            originalName = tvShow.originalName,
+            name = tvShow.name,
+            popularity = tvShow.popularity,
+            overview = tvShow.overview,
+            originCountry = tvShow.originCountry,
+            voteCount = tvShow.voteCount,
+            backdropPath = tvShow.backdropPath?.let { Const.imagePrefix + it } ?: "",
+            originalLanguage = tvShow.originalLanguage,
+            voteAverage = tvShow.voteAverage * 10,
+            posterPath = tvShow.posterPath?.let { Const.imagePrefix + it } ?: "",
+            firstAirDate = tvShow.firstAirDate?.getYear() ?: ""
+        )
+    }.toMutableList()

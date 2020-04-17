@@ -51,22 +51,20 @@ data class ResponseTopRatedMovies(
     )
 }
 
-fun ResponseTopRatedMovies.toMovie(): List<Movie> {
-    return results.map { movie ->
-        Movie(
-            id = movie.id,
-            title = movie.title,
-            originalTitle = movie.originalTitle,
-            popularity = movie.popularity,
-            voteCount = movie.voteCount,
-            video = movie.video,
-            posterPath = movie.posterPath,
-            adult = movie.adult,
-            backdropPath = movie.backdropPath ?: "",
-            originalLanguage = movie.originalLanguage,
-            voteAverage = movie.voteAverage * 10,
-            overview = movie.overview,
-            releaseDate = movie.releaseDate
-        )
-    }
-}
+fun ResponseTopRatedMovies.toMovie(): MutableList<Movie> = results.map { movie ->
+    Movie(
+        id = movie.id,
+        title = movie.title,
+        originalTitle = movie.originalTitle,
+        popularity = movie.popularity,
+        voteCount = movie.voteCount,
+        video = movie.video,
+        posterPath = movie.posterPath,
+        adult = movie.adult,
+        backdropPath = movie.backdropPath ?: "",
+        originalLanguage = movie.originalLanguage,
+        voteAverage = movie.voteAverage * 10,
+        overview = movie.overview,
+        releaseDate = movie.releaseDate
+    )
+}.toMutableList()

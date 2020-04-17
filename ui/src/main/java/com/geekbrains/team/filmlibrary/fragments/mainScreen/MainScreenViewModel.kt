@@ -1,9 +1,11 @@
 package com.geekbrains.team.filmlibrary.fragments.mainScreen
 
 import androidx.lifecycle.MutableLiveData
+import com.geekbrains.team.domain.base.None
 import com.geekbrains.team.domain.movies.model.Movie
+import com.geekbrains.team.domain.movies.nowPlayingMovies.interactor.GetFirstNowPlayingMovie
 import com.geekbrains.team.domain.movies.nowPlayingMovies.interactor.GetNowPlayingMovies
-import com.geekbrains.team.domain.movies.topRatedMovies.interactor.GetTopRatedMovies
+import com.geekbrains.team.domain.movies.topRatedMovies.interactor.GetRandomTopRatedMovie
 import com.geekbrains.team.domain.movies.upcomingMovies.interactor.GetUpcomingMovies
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.NowPlayingMovieView
@@ -19,16 +21,17 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor(
     private val useCaseUpcomingMovies: GetUpcomingMovies,
     private val useCaseNowPlayingMovies: GetNowPlayingMovies,
-    private val useCaseTopRatedMovies: GetTopRatedMovies
+    private val useCaseRandomTopRatedMovie: GetRandomTopRatedMovie,
+    private val useCaseFirstNowPlayingMovie: GetFirstNowPlayingMovie
 ) :
     BaseViewModel() {
-    var nowPlayingMoviesData: MutableLiveData<List<NowPlayingMovieView>> = MutableLiveData()
-    var upcomingMoviesData: MutableLiveData<List<UpcomingMovieView>> = MutableLiveData()
-    var topRatedMoviesData: MutableLiveData<MovieView> = MutableLiveData()
+    val nowPlayingMoviesData: MutableLiveData<List<NowPlayingMovieView>> = MutableLiveData()
+    val upcomingMoviesData: MutableLiveData<List<UpcomingMovieView>> = MutableLiveData()
+    val randomTopRatedMovieData: MutableLiveData<MovieView> = MutableLiveData()
 
     //todo изменить на правильное отображение для двух нижних карточек
-    var movieOfTheWeek: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
-    var tvShowPremier: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
+    val movieOfTheWeek: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
+    val tvShowPremier: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
 
     fun loadNowPlayingMovies(page: Int) =
         useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
@@ -46,39 +49,32 @@ class MainScreenViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadUpcomingMovies, ::handleFailure)
 
-
     private fun handleOnSuccessLoadUpcomingMovies(list: List<Movie>) {
         upcomingMoviesData.value = list.map { it.toUpcomingMovieView() }
     }
 
-    //берём рандомную страницу из первых 20
-    fun loadTopRatedMovies() =
-        useCaseTopRatedMovies.execute(params = GetTopRatedMovies.Params(page = generateRandomPage()))
+    fun loadRandomTopRatedMovie() =
+        useCaseRandomTopRatedMovie.execute(None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::handleOnSuccessLoadTopRatedMovies, ::handleFailure)
+            .subscribe(::handleOnSuccessLoadRandomTopRatedMovie, ::handleFailure)
 
     //берём рандомнуый фильм из страницы (для большего рандома)
-    private fun handleOnSuccessLoadTopRatedMovies(list: List<Movie>) {
-        topRatedMoviesData.value = list[generateRandomPage()].toMovieView()
+    private fun handleOnSuccessLoadRandomTopRatedMovie(randomTopRatedMovie: Movie) {
+        randomTopRatedMovieData.value = randomTopRatedMovie.toMovieView()
     }
 
-    private fun generateRandomPage(): Int {
-        return (0..19).random()
-    }
-
-
-    //todo изменить на правильное отображение для двух нижних карточек
     fun loadMovieOfTheWeek(page: Int) =
-        useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
+        useCaseFirstNowPlayingMovie.execute(params = None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadMovieOfTheWeek, ::handleFailure)
 
-    private fun handleOnSuccessLoadMovieOfTheWeek(list: List<Movie>) {
-        movieOfTheWeek.value = list[0].toNowPlayingMovieView()
+    private fun handleOnSuccessLoadMovieOfTheWeek(movie: Movie) {
+        movieOfTheWeek.value = movie.toNowPlayingMovieView()
     }
 
+    //todo изменить на правильное отображение для двух нижних карточек
     fun loadTvShowPremier(page: Int) =
         useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
             .subscribeOn(Schedulers.io())

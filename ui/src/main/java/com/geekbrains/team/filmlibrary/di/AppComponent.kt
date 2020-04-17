@@ -13,7 +13,8 @@ import javax.inject.Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class, RemoteModule::class, MainScreenFragmentModule::class,
         SearchFragmentModule::class, UpcomingMoviesModule::class, SearchMoviesModule::class,
-        SearchTVModule::class, GenresModule::class, NowPlayingMoviesModule::class, TopRatedMoviesModule::class]
+        SearchTVModule::class, GenresModule::class, NowPlayingMoviesModule::class, TopRatedMoviesModule::class,
+        TopRatedTVModule::class, TopFragmentModule::class]
 )
 interface AppComponent : AndroidInjector<App> {
     @Component.Factory
