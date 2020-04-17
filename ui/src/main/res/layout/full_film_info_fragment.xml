@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.viewpager.widget.ViewPager
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/topPager"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -70,7 +70,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line1" />
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/description_tv"
@@ -78,7 +79,6 @@
                 android:layout_width="224dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="24dp"
-                android:text="1942 год. Новым капитаном эсминца ВМС США «Грейхаунд» становится морской офицер Эрнст Краузе, который до этого еще не участвовал в военных действиях."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cover_iv"
                 app:layout_constraintTop_toBottomOf="@id/line1" />
@@ -99,7 +99,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:gravity="bottom"
-                android:text="Создатели"
+                android:text="@string/filmMakers"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line2" />
 
@@ -111,7 +111,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="bottom"
-                android:text="Режиссёр"
+                android:text="@string/director"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/creators_tv" />
 
@@ -123,9 +123,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:gravity="bottom"
-                android:text="Аарон Шнайдер"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/director_title_tv" />
+                app:layout_constraintTop_toBottomOf="@id/director_title_tv"
+                tools:text="Аарон Шнайдер" />
 
             <TextView
                 android:id="@+id/screenplay_title_tv"
@@ -135,7 +135,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="bottom"
-                android:text="Сценарий"
+                android:text="@string/screenPlay"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/director_tv" />
 
@@ -147,9 +147,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:gravity="bottom"
-                android:text="Том Хэнкс, Сесил Скотт Форестер"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv" />
+                app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv"
+                tools:text="Том Хэнкс, Сесил Скотт Форестер" />
 
             <TextView
                 android:id="@+id/producer_title_tv"
@@ -159,7 +159,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:gravity="bottom"
-                android:text="Продюсер"
+                android:text="@string/producer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/screenplay_tv" />
 
@@ -171,9 +171,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:gravity="bottom"
-                android:text="Гари Гоэцман, Джейсон Клот, Дэвид Коутсворт"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/producer_title_tv" />
+                app:layout_constraintTop_toBottomOf="@id/producer_title_tv"
+                tools:text="Гари Гоэцман, Джейсон Клот, Дэвид Коутсворт" />
 
             <TextView
                 android:id="@+id/whole_crew_tv"
@@ -183,7 +183,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:gravity="bottom"
-                android:text="Весь состав"
+                android:text="@string/crew"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/producer_tv" />
 
@@ -215,7 +215,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:gravity="bottom"
-                android:text="В главных ролях"
+                android:text="@string/starring"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line3" />
 
@@ -256,7 +256,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:gravity="bottom"
-                android:text="Похожие фильмы"
+                android:text="@string/related"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/line4" />
 

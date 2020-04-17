@@ -1,9 +1,11 @@
 package com.geekbrains.team.data.di
 
 import com.geekbrains.team.data.Const.baseUrl
+import com.geekbrains.team.data.movies.genresMovies.service.GenresMoviesApi
+import com.geekbrains.team.data.movies.genresMovies.service.GenresTVApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
-import com.geekbrains.team.data.movies.searchMovies.service.SearchTVShowApi
+import com.geekbrains.team.data.movies.searchMovies.service.SearchTVApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
 import dagger.Module
@@ -45,6 +47,14 @@ class RemoteModule {
         retrofit.create(SearchMoviesApi::class.java)
 
     @Provides
-    fun getSearchTVShowApi(retrofit: Retrofit): SearchTVShowApi =
-        retrofit.create(SearchTVShowApi::class.java)
+    fun getSearchTVShowApi(retrofit: Retrofit): SearchTVApi =
+        retrofit.create(SearchTVApi::class.java)
+
+    @Provides
+    fun getGenresMoviesApi(retrofit: Retrofit): GenresMoviesApi =
+        retrofit.create(GenresMoviesApi::class.java)
+
+    @Provides
+    fun getGenresTVApi(retrofit: Retrofit): GenresTVApi =
+        retrofit.create(GenresTVApi::class.java)
 }

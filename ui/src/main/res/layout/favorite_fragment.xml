@@ -24,7 +24,7 @@
                 style="@style/Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Избранное"
+                android:text="@string/favorites"
                 android:textColor="@color/nightTextPrimary" />
         </Toolbar>
 

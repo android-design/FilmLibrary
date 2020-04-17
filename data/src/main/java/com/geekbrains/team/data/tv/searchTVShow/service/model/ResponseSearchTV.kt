@@ -1,5 +1,7 @@
 package com.geekbrains.team.data.tv.searchTVShow.service.model
 
+import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.domain.tv.model.TVShow
 import com.google.gson.annotations.SerializedName
 
@@ -28,7 +30,7 @@ data class ResponseSearchTVShow(
         @SerializedName("vote_count")
         val voteCount: Int,
         @SerializedName("first_air_date")
-        val firstAirDate: String,
+        val firstAirDate: String?,
         @SerializedName("backdrop_path")
         val backdropPath: String?,
         @SerializedName("original_language")
@@ -45,19 +47,19 @@ data class ResponseSearchTVShow(
 }
 
 fun ResponseSearchTVShow.toTVShow(): List<TVShow> =
-    results.map {
+    results.map { tvShow ->
         TVShow(
-            id = it.id,
-            originalName = it.originalName,
-            name = it.name,
-            popularity = it.popularity,
-            overview = it.overview,
-            originCountry = it.originCountry,
-            voteCount = it.voteCount,
-            backdropPath = it.backdropPath?:"",
-            originalLanguage = it.originalLanguage,
-            voteAverage = it.voteAverage * 10,
-            posterPath = it.posterPath?:"",
-            firstAirDate = it.firstAirDate
+            id = tvShow.id,
+            originalName = tvShow.originalName,
+            name = tvShow.name,
+            popularity = tvShow.popularity,
+            overview = tvShow.overview,
+            originCountry = tvShow.originCountry,
+            voteCount = tvShow.voteCount,
+            backdropPath = tvShow.backdropPath?.let { Const.imagePrefix + it } ?: "",
+            originalLanguage = tvShow.originalLanguage,
+            voteAverage = tvShow.voteAverage * 10,
+            posterPath = tvShow.posterPath?.let { Const.imagePrefix + it } ?: "",
+            firstAirDate = tvShow.firstAirDate?.getYear() ?: ""
         )
     }

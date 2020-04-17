@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/search_settings_discard"
-        android:title="Сбросить"
+        android:title="@string/reset"
         app:showAsAction="always" />
 
 </menu>

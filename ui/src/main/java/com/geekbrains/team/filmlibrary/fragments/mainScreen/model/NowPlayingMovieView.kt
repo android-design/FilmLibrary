@@ -18,7 +18,7 @@ data class NowPlayingMovieView(
     val releaseDate: String
 )
 
-fun Movie.toMovieView(): NowPlayingMovieView = NowPlayingMovieView(
+fun Movie.toNowPlayingMovieView(): NowPlayingMovieView = NowPlayingMovieView(
     id = id,
     title = title,
     originalTitle = originalTitle,
@@ -28,7 +28,7 @@ fun Movie.toMovieView(): NowPlayingMovieView = NowPlayingMovieView(
     posterPath = posterPath,
     backdropPath = backdropPath,
     originalLanguage = originalLanguage,
-    genres = genres?.map { it.name }.toString(),
+    genres = genres.toString(),
     voteAverage = voteAverage.toString(),
     overview = overview,
     releaseDate = releaseDate

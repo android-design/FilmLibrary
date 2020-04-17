@@ -45,13 +45,13 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="Subtitle1" parent="@android:style/TextAppearance.Medium">
+    <style name="Subtitle1" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">10sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="Subtitle2" parent="@android:style/TextAppearance.Medium">
+    <style name="Subtitle2" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">10sp</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">normal</item>
@@ -80,5 +80,15 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="SearchSettingsTab" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/dayTextSecondary</item>
+        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="tabIndicatorColor">@color/colorAccent</item>
+
     </style>
 </resources>

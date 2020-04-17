@@ -1,11 +1,15 @@
 package com.geekbrains.team.domain.tv.model
 
+import com.geekbrains.team.domain.base.model.Genre
+import com.geekbrains.team.domain.base.model.MovieAndTVShow
+
 data class TVShow(
     val backdropPath: String,
     val createdBy: List<CreatedBy>? = null,
     val episodeRunTime: List<Int>? = null,
     val firstAirDate: String,
-    val genres: List<Genre>? = null,
+    val genreIds: List<Int>? = null,
+    val genres: MutableList<String> = ArrayList(),
     val homepage: String = "",
     val id: Int,
     val trailer: String = "",
@@ -33,7 +37,7 @@ data class TVShow(
     // TODO Add class for actors.
     val cast: List<String>? = null, // Актеры
     val images: List<String>? = null
-) {
+) : MovieAndTVShow() {
     data class CreatedBy(
         val creditId: String,
         val gender: Int,
@@ -85,3 +89,18 @@ data class TVShow(
         val seasonNumber: Int
     )
 }
+
+fun fillTVGenres(
+    tvGenres: List<Genre>,
+    tv: List<TVShow>
+): List<MovieAndTVShow> =
+    tv.apply {
+        val genresTVMap = tvGenres.map { it.id to it.name }.toMap()
+
+        map { tvShow ->
+            tvShow.genreIds?.map {
+                val result = genresTVMap[it]
+                result?.let { tvShow.genres.add(result) }
+            }
+        }
+    }

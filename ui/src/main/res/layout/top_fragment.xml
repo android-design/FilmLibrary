@@ -24,7 +24,7 @@
                 style="@style/Headline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Топ лучших фильмов и сериалов"
+                android:text="@string/top"
                 android:textColor="@color/nightTextPrimary" />
         </Toolbar>
 
