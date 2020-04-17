@@ -1,4 +1,4 @@
-package com.geekbrains.team.filmlibrary.fragments.favoriteMovies
+package com.geekbrains.team.filmlibrary.fragments.favorites
 
 import androidx.lifecycle.MutableLiveData
 import com.geekbrains.team.domain.base.None
@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class FavoriteMoviesViewModel @Inject constructor(
+class FavoriteViewModel @Inject constructor(
     private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase
 ) : BaseViewModel() {
     val favoriteMoviesData = MutableLiveData<List<Movie>>()

@@ -1,4 +1,4 @@
-package com.geekbrains.team.filmlibrary.fragments.favoriteMovies.adapter
+package com.geekbrains.team.filmlibrary.fragments.favorites.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.filmlibrary.R
 import kotlinx.android.synthetic.main.small_card_item.view.*
 
-class FavoriteMoviesAdapter : RecyclerView.Adapter<FavoriteMoviesAdapter.ViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     var movies: List<Movie> = listOf()
         set(value) {

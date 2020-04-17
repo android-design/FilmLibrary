@@ -15,6 +15,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
 
 
@@ -51,6 +53,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.android.support:multidex:1.0.3'
 
     // Tests
     testImplementation 'junit:junit:4.13'
@@ -72,7 +75,7 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     // Ktx android
-    implementation 'androidx.fragment:fragment-ktx:1.2.3'
+    implementation 'androidx.fragment:fragment-ktx:1.2.4'
 
     // Retrofit
     def retrofit_version = "2.6.2"
@@ -85,4 +88,23 @@ dependencies {
     //ViewPager2
     def viewpager2_version = "1.0.0"
     implementation "androidx.viewpager2:viewpager2:$viewpager2_version"
+
+    /**
+     * Navigation component
+     */
+    def nav_version = "2.3.0-alpha05"
+
+    // Java language implementation
+    implementation "androidx.navigation:navigation-fragment:$nav_version"
+    implementation "androidx.navigation:navigation-ui:$nav_version"
+
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Dynamic Feature Module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+    // Testing Navigation 
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 }
