@@ -9,12 +9,16 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetFavoriteMoviesUseCase @Inject constructor(private val idsRepository: FavoriteMoviesRepository,
-private val movieDetailsRepository: MovieDetailsRepository): UseCase<List<Movie>, None> {
-    override fun execute(params: None): Single<List<Movie>> {
-        return idsRepository.getFavoriteMoviesIds().flatMapObservable{list ->
-            Observable.fromIterable(list)}.flatMapSingle { item ->
-            movieDetailsRepository.getMovie(item) }.toList()
-    }
-
+class GetFavoriteMoviesUseCase @Inject constructor(
+    private val favoriteMoviesRepository: FavoriteMoviesRepository,
+    private val movieDetailsRepository: MovieDetailsRepository
+) : UseCase<List<Movie>, None> {
+    override fun execute(params: None): Single<List<Movie>> =
+        favoriteMoviesRepository.getFavoriteMoviesIds()
+            .flatMapObservable { list ->
+                Observable.fromIterable(list)
+            }.flatMapSingle { item ->
+                movieDetailsRepository.fetch(item)
+            }
+            .toList()
 }

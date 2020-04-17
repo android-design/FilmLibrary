@@ -6,11 +6,12 @@ import io.reactivex.Completable
 import javax.inject.Inject
 
 class AddFavoriteMovieIdUseCase @Inject constructor(
-    private val repository: FavoriteMoviesRepository):
-    UseCaseCompletable<Int> {
+    private val repository: FavoriteMoviesRepository
+) :
+    UseCaseCompletable<AddFavoriteMovieIdUseCase.Params> {
 
-    override fun execute(params: Int): Completable {
-        return repository.addFavoriteMovieId(params)
-    }
+    override fun execute(params: Params): Completable =
+        repository.addFavoriteMovieId(id = params.id)
 
+    data class Params(val id: Int)
 }

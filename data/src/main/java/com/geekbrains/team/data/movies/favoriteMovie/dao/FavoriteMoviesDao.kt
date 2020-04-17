@@ -1,4 +1,4 @@
-package com.geekbrains.team.data.movies.favoriteMovie.database
+package com.geekbrains.team.data.movies.favoriteMovie.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

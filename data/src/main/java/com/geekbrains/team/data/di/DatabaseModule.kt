@@ -2,8 +2,8 @@ package com.geekbrains.team.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.geekbrains.team.data.movies.favoriteMovie.database.AppDatabase
-import com.geekbrains.team.data.movies.favoriteMovie.database.FavoriteMoviesDao
+import com.geekbrains.team.data.AppDatabase
+import com.geekbrains.team.data.movies.favoriteMovie.dao.FavoriteMoviesDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

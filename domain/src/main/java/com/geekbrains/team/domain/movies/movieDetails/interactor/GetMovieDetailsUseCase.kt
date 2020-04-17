@@ -6,9 +6,10 @@ import com.geekbrains.team.domain.movies.movieDetails.repository.MovieDetailsRep
 import io.reactivex.Single
 import javax.inject.Inject
 
-class GetMovieDetailsUseCase @Inject constructor(private val repository: MovieDetailsRepository):
-    UseCase<Movie, Int> {
+class GetMovieDetailsUseCase @Inject constructor(private val repository: MovieDetailsRepository) :
+    UseCase<Movie, GetMovieDetailsUseCase.Params> {
 
-    override fun execute(params: Int): Single<Movie> = repository.getMovie(params)
+    override fun execute(params: Params): Single<Movie> = repository.fetch(id = params.id)
 
+    data class Params(val id: Int)
 }

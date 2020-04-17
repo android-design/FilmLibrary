@@ -11,6 +11,7 @@ interface MovieDetailsApi {
     @GET("/3/movie/{id}?")
     fun getMovieDetails(
         @Query("api_key") apiKey: String,
-        @Query("language")language: String,
-        @Path("id") id: Int): Single<MovieDetailsResponse>
+        @Query("language") language: String,
+        @Path("id") id: Int
+    ): Single<MovieDetailsResponse>
 }

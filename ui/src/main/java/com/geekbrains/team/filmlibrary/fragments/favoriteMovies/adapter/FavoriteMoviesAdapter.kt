@@ -1,4 +1,4 @@
-package com.geekbrains.team.filmlibrary.fragments.favoriteMovies
+package com.geekbrains.team.filmlibrary.fragments.favoriteMovies.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.filmlibrary.R
 import kotlinx.android.synthetic.main.small_card_item.view.*
 
-class FavoriteMoviesRVAdapter : RecyclerView.Adapter<FavoriteMoviesRVAdapter.ViewHolder>() {
+class FavoriteMoviesAdapter : RecyclerView.Adapter<FavoriteMoviesAdapter.ViewHolder>() {
 
     var movies: List<Movie> = listOf()
         set(value) {
@@ -17,8 +17,9 @@ class FavoriteMoviesRVAdapter : RecyclerView.Adapter<FavoriteMoviesRVAdapter.Vie
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ViewHolder(LayoutInflater.from(parent.context).
-        inflate(R.layout.small_card_item, parent, false))
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.small_card_item, parent, false)
+        )
 
     override fun getItemCount(): Int = movies.size
 
@@ -28,7 +29,6 @@ class FavoriteMoviesRVAdapter : RecyclerView.Adapter<FavoriteMoviesRVAdapter.Vie
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) = with(itemView) {
             title_tv.text = movie.title
-
         }
     }
 }

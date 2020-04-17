@@ -11,6 +11,5 @@ abstract class FavoriteMoviesModule {
 
     @Binds
     @Singleton
-    abstract fun provideRepositoryFavoriteMovies(repository: FavoriteMoviesRepositoryImpl):
-            FavoriteMoviesRepository
+    abstract fun provideRepositoryFavoriteMovies(repository: FavoriteMoviesRepositoryImpl): FavoriteMoviesRepository
 }

@@ -2,10 +2,8 @@ package com.geekbrains.team.filmlibrary.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +11,6 @@ import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.UpcomingSmallCardItemBinding;
 import com.geekbrains.team.filmlibrary.model.MovieView;
 import com.geekbrains.team.filmlibrary.model.TVShowView;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +20,6 @@ public class UpcomingSmallCardAdapter extends RecyclerView.Adapter<UpcomingSmall
     private List<TVShowView> tvShow = new ArrayList<>();
 
     public UpcomingSmallCardAdapter() {
-    }
-
-    @BindingAdapter({"app:url"})
-    public static void loadImage(ImageView view, String url) {
-        Picasso.get().load(url).into(view);
     }
 
     public void setMovies(List<MovieView> data) {

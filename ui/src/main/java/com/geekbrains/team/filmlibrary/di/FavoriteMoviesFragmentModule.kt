@@ -15,7 +15,7 @@ abstract class FavoriteMoviesFragmentModule {
             ViewModelBuilder::class
         ]
     )
-    internal abstract fun preferenceFragment(): FavoriteMoviesFragment
+    internal abstract fun favoriteMoviesFragment(): FavoriteMoviesFragment
 
     @Binds
     @IntoMap

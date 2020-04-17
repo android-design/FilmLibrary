@@ -8,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,11 +23,6 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
     private MovieView movie;
 
     public TopRatedBigCardAdapter() {
-    }
-
-    @BindingAdapter({"app:url"})
-    public static void loadImage(ImageView view, String url) {
-        Picasso.get().load(url).into(view);
     }
 
     public void setMovie(MovieView data) {

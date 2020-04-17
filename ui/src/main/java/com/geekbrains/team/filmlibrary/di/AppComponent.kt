@@ -10,21 +10,11 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class,
-    RemoteModule::class,
-    DatabaseModule::class,
-    MainScreenFragmentModule::class,
-    SearchFragmentModule::class,
-    UpcomingMoviesModule::class,
-    SearchMoviesModule::class,
-    SearchTVShowModule::class,
-    FavoriteMoviesFragmentModule::class,
-    FavoriteMoviesModule::class,
-    MovieDetailsModule::class])
 @Component(
-    modules = [AndroidSupportInjectionModule::class, RemoteModule::class, MainScreenFragmentModule::class,
-        SearchFragmentModule::class, UpcomingMoviesModule::class, SearchMoviesModule::class,
-        SearchTVModule::class, GenresModule::class, NowPlayingMoviesModule::class, TopRatedMoviesModule::class]
+    modules = [AndroidSupportInjectionModule::class, DatabaseModule::class, RemoteModule::class, MainScreenFragmentModule::class,
+        SearchFragmentModule::class, FavoriteMoviesFragmentModule::class, FavoriteMoviesModule::class, UpcomingMoviesModule::class,
+        SearchMoviesModule::class, SearchTVModule::class, GenresModule::class,
+        NowPlayingMoviesModule::class, TopRatedMoviesModule::class, MovieDetailsModule::class]
 )
 interface AppComponent : AndroidInjector<App> {
     @Component.Factory

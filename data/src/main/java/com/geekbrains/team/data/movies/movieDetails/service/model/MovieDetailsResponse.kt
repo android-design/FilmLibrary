@@ -44,45 +44,47 @@ data class MovieDetailsResponse(
     data class Genre(
         val id: Int,
         val name: String
-    )
-
-    data class ProductionCompany(
-        val name: String,
-        val id: Int,
-        @SerializedName("logo_path")
-        val logoPath: String?,
-        @SerializedName("origin_country")
-        val originCountry: String
-    )
-
-    data class ProductionCountry(
-        val name: String,
-        @SerializedName("iso_3166_1")
-        val iso: String
-    )
-
-    data class SpokenLanguage(
-        val name: String,
-        @SerializedName("iso_639_1")
-        val iso: String
-    )
+    ) {
+        override fun toString(): String {
+            return name
+        }
+    }
 }
 
-fun MovieDetailsResponse.toMovieGenre(): List<Movie.Genre> = genres.map { it ->  Movie.Genre(id  = it.id, name = it.name)}
+data class ProductionCompany(
+    val name: String,
+    val id: Int,
+    @SerializedName("logo_path")
+    val logoPath: String?,
+    @SerializedName("origin_country")
+    val originCountry: String
+)
+
+data class ProductionCountry(
+    val name: String,
+    @SerializedName("iso_3166_1")
+    val iso: String
+)
+
+data class SpokenLanguage(
+    val name: String,
+    @SerializedName("iso_639_1")
+    val iso: String
+)
 
 fun MovieDetailsResponse.toMovie() = Movie(
-    id = this.id,
-    title = this.title,
-    originalTitle = this.originalTitle,
-    popularity = this.popularity,
-    voteCount = this.voteCount,
-    video = this.video,
-    posterPath = this.posterPath ?: "",
-    adult = this.adult,
-    backdropPath = this.backdropPath ?: "",
-    originalLanguage = this.originalLanguage,
-    genres = this.toMovieGenre(),
-    voteAverage = this.voteAverage,
-    overview = this.overview ?: Const.NO_OVERVIEW,
-    releaseDate = this.releaseDate
+    id = id,
+    title = title,
+    originalTitle = originalTitle,
+    popularity = popularity,
+    voteCount = voteCount,
+    video = video,
+    posterPath = posterPath ?: "",
+    adult = adult,
+    backdropPath = backdropPath ?: "",
+    originalLanguage = originalLanguage,
+    genres = genres.map { it.name }.toMutableList(),
+    voteAverage = voteAverage,
+    overview = overview ?: Const.NO_OVERVIEW,
+    releaseDate = releaseDate
 )
