@@ -21,7 +21,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/series_card"
         android:layout_width="match_parent"
-        android:layout_height="273dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="32dp"
@@ -38,7 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="80dp"
+                android:src="@drawable/ic_no_backdrop"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -49,8 +51,8 @@
                 android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_favorite_unactive"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_iv"
+                app:layout_constraintEnd_toEndOf="@id/title_iv"
+                app:layout_constraintTop_toTopOf="@id/title_iv"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -63,7 +65,8 @@
                 app:layout_constraintEnd_toEndOf="@id/title_iv"
                 app:layout_constraintStart_toStartOf="@id/title_iv"
                 app:layout_constraintTop_toTopOf="@id/title_iv"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                android:visibility="@{movie == null ? (TextUtils.isEmpty(tvShow.trailer) ? View.GONE : View.VISIBLE) : (TextUtils.isEmpty(movie.trailer) ? View.GONE : View.VISIBLE)}"/>
 
             <TextView
                 android:id="@+id/title_tv"
@@ -75,17 +78,17 @@
                 android:gravity="bottom"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_iv" />
+                app:layout_constraintBottom_toTopOf="@id/original_title_tv" />
 
             <TextView
-                android:id="@+id/genre_tv"
+                android:id="@+id/original_title_tv"
                 style="@style/Subtitle2"
                 android:layout_width="290dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
                 android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_tv" />
+                app:layout_constraintBottom_toTopOf="@id/genres_tv" />
 
             <TextView
                 android:id="@+id/genres_tv"
@@ -93,9 +96,10 @@
                 android:layout_width="290dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginBottom="32dp"
                 android:text="@{movie == null ? tvShow.genres.toString() : movie.genres.toString()}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/genre_tv" />
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <LinearLayout
                 android:layout_width="268dp"

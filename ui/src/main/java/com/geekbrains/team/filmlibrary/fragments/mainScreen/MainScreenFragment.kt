@@ -1,5 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.mainScreen
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -40,9 +42,25 @@ class MainScreenFragment : DaggerFragment() {
     private val nowPlayingAdapter = SmallCardAdapter()
     private val topRatedMovieAdapter = BigCardAdapter()
 
-    private val defaultMovie = MovieView(1, "", "", "", "", listOf(""), "", "", "", "", "", "", "")
+    private val defaultMovie = MovieView(
+        1, "", "", "", "", listOf(
+            "https://image.tmdb.org/t/p/w500/3lu6iHT189M6SL8q9OSmISYDoop.jpg",
+            "https://image.tmdb.org/t/p/w500/4VGR3bzjfVQ0skc8T1O92ieyKLa.jpg",
+            "https://image.tmdb.org/t/p/w500/oZibj2AItah70g4CzFgOw3jiFln.jpg",
+            "https://image.tmdb.org/t/p/w500/elvVHhtKYFLoGGhfyKhhA0wQ4kc.jpg",
+            "https://image.tmdb.org/t/p/w500/axqGyWPzkN8WNdl6wGwOd3EdRKE.jpg"
+        ), "https://www.youtube.com/watch?v=P6AaSMfXHbA", "", "", "", "", "", ""
+    )
     private val defaultTvShow =
-        TVShowView(1, "", "", "", "", "", listOf(""), "", "", "", "", "", 1, "", listOf(""), "")
+        TVShowView(
+            1, "Ad Astra", "К Звёздам", "", "8.5", "", listOf(
+                "https://image.tmdb.org/t/p/w500/3lu6iHT189M6SL8q9OSmISYDoop.jpg",
+                "https://image.tmdb.org/t/p/w500/4VGR3bzjfVQ0skc8T1O92ieyKLa.jpg",
+                "https://image.tmdb.org/t/p/w500/oZibj2AItah70g4CzFgOw3jiFln.jpg",
+                "https://image.tmdb.org/t/p/w500/elvVHhtKYFLoGGhfyKhhA0wQ4kc.jpg",
+                "https://image.tmdb.org/t/p/w500/axqGyWPzkN8WNdl6wGwOd3EdRKE.jpg"
+            ), "https://www.youtube.com/watch?v=P6AaSMfXHbA", "https://image.tmdb.org/t/p/w500/axqGyWPzkN8WNdl6wGwOd3EdRKE.jpg", "", "", "", 1, "", listOf(""), ""
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,12 +116,29 @@ class MainScreenFragment : DaggerFragment() {
         viewModel.movieOfTheWeek.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 binding.movieOfTheWeek = it
+                film_of_week_play_btn.setOnClickListener {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(data.trailer)
+                        )
+                    )
+                }
             }
         })
 
         viewModel.tvShowPremier.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
 //                binding.tvShowPremier = it
+                series_play_btn.setOnClickListener {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(defaultTvShow.trailer)
+//                                    Uri.parse(data.trailer)
+                        )
+                    )
+                }
             }
         })
     }

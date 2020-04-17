@@ -45,7 +45,6 @@ class SearchFragment : DaggerFragment() {
 
         viewModel.searchedMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                Log.d("ANSWER", it.toString())
                 val diffUtilCallback = DiffUtilsCallback(mAdapter.mDataList, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 mAdapter.setData(it)

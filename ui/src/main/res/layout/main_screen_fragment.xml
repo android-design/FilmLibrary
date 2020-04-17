@@ -3,6 +3,10 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
         <variable
             name="movieOfTheWeek"
             type="com.geekbrains.team.filmlibrary.model.MovieView" />
@@ -178,7 +182,8 @@
                             app:layout_constraintEnd_toEndOf="@id/film_of_week_title_iv"
                             app:layout_constraintStart_toStartOf="@id/film_of_week_title_iv"
                             app:layout_constraintTop_toTopOf="@id/film_of_week_title_iv"
-                            tools:ignore="ContentDescription" />
+                            tools:ignore="ContentDescription"
+                            android:visibility="@{TextUtils.isEmpty(movieOfTheWeek.trailer) ? View.GONE : View.VISIBLE}"/>
 
                         <ImageView
                             android:id="@+id/film_of_week_cover_iv"
@@ -295,11 +300,13 @@
                             android:layout_width="33dp"
                             android:layout_height="33dp"
                             android:background="@android:color/transparent"
+                            android:src="@drawable/ic_play_circle"
                             app:layout_constraintBottom_toBottomOf="@id/series_title_iv"
                             app:layout_constraintEnd_toEndOf="@id/series_title_iv"
                             app:layout_constraintStart_toStartOf="@id/series_title_iv"
                             app:layout_constraintTop_toTopOf="@id/series_title_iv"
-                            tools:ignore="ContentDescription" />
+                            tools:ignore="ContentDescription"
+                            android:visibility="@{TextUtils.isEmpty(tvShowPremier.trailer) ? View.GONE : View.VISIBLE}"/>
 
                         <ImageView
                             android:id="@+id/series_cover_iv"

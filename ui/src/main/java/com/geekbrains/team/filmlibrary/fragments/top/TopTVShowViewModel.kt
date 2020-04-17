@@ -10,14 +10,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-//todo здесь нужно заменить GetTopRatedMovies в типе useCaseTopRatedTVShows на запрос топа сериалов с сервера
-class TopViewModel @Inject constructor(
-    private val useCaseTopRatedMovies: GetTopRatedMovies,
-    private val useCaseTopRatedTVShows: GetTopRatedMovies
+class TopTVShowViewModel @Inject constructor(
+    private val useCaseTopRatedMovies: GetTopRatedMovies
 ) :
     BaseViewModel() {
     var topRatedMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
-//    var topRatedTVShowsData: MutableLiveData<List<TVShowView>> = MutableLiveData()
 
     fun loadTopRatedMovies(page: Int) =
         useCaseTopRatedMovies.execute(params = GetTopRatedMovies.Params(page = page))
@@ -28,14 +25,4 @@ class TopViewModel @Inject constructor(
     private fun handleOnSuccessLoadTopRatedMovies(list: List<Movie>) {
         topRatedMoviesData.value = list.map { it.toMovieView() }
     }
-
-//    fun loadTopRatedTVShows(page: Int) =
-//        useCaseTopRatedTVShows.execute(params = GetTopRatedMovies.Params(page = page))
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(::handleOnSuccessLoadTopRatedTVShows, ::handleFailure)
-//
-//    private fun handleOnSuccessLoadTopRatedTVShows(list: List<TVShow>) {
-//        topRatedTVShowsData.value = list.map { it.toTVShowView() }
-//    }
 }

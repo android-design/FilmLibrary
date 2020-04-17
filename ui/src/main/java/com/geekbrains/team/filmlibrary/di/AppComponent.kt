@@ -11,8 +11,9 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [AndroidSupportInjectionModule::class, DatabaseModule::class, RemoteModule::class, MainScreenFragmentModule::class,
-        SearchFragmentModule::class, FavoriteFragmentModule::class, TopFragmentModule::class, UpcomingMoviesModule::class,
+    modules = [AndroidSupportInjectionModule::class, DatabaseModule::class, RemoteModule::class,
+        MainScreenFragmentModule::class, SearchFragmentModule::class, FavoriteFragmentModule::class,
+        TopMovieFragmentModule:: class, TopTVShowsFragmentModule::class, TopFragmentModule::class, UpcomingMoviesModule::class,
         SearchMoviesModule::class, SearchTVModule::class, GenresModule::class, FavoriteMoviesModule::class,
         NowPlayingMoviesModule::class, TopRatedMoviesModule::class, MovieDetailsModule::class]
 )
