@@ -15,7 +15,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpNavigation() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-        NavigationUI.setupWithNavController(btv, navHostFragment!!.navController)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+        navHostFragment?.let {
+            NavigationUI.setupWithNavController(btv, it.navController)
+        }
     }
 }
