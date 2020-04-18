@@ -8,7 +8,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,11 +22,6 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
     private TVShowView tvShow;
 
     public FullInfoAdapter() {
-    }
-
-    @BindingAdapter({"app:url"})
-    public static void loadImage(ImageView view, String url) {
-        Picasso.get().load(url).into(view);
     }
 
     public void setMovie(MovieView data) {

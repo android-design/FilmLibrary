@@ -1,6 +1,6 @@
 package com.geekbrains.team.data.movies.searchMovies.service.model
 
-import com.geekbrains.team.data.Const.imagePrefix
+import com.geekbrains.team.data.Const.IMAGE_PREFIX
 import com.geekbrains.team.data.getYear
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
@@ -58,9 +58,9 @@ fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
             voteCount = movie.voteCount,
             genreIds = movie.genreIds,
             video = movie.video,
-            posterPath = movie.posterPath?.let { imagePrefix + it } ?: "",
+            posterPath = movie.posterPath?.let { IMAGE_PREFIX + it } ?: "",
             adult = movie.adult,
-            backdropPath = movie.backdropPath?.let { imagePrefix + it } ?: "",
+            backdropPath = movie.backdropPath?.let { IMAGE_PREFIX + it } ?: "",
             originalLanguage = movie.originalLanguage,
             voteAverage = movie.voteAverage * 10,
             overview = movie.overview,
