@@ -1,4 +1,4 @@
-package com.geekbrains.team.domain.movies.movieDetails.interactor
+package com.geekbrains.team.domain.movies.favoriteMovie.interactor
 
 import com.geekbrains.team.domain.base.UseCaseCompletable
 import com.geekbrains.team.domain.movies.favoriteMovie.repository.FavoriteMoviesRepository

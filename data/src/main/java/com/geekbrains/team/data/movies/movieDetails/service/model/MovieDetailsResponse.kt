@@ -49,28 +49,28 @@ data class MovieDetailsResponse(
             return name
         }
     }
+
+    data class ProductionCompany(
+        val name: String,
+        val id: Int,
+        @SerializedName("logo_path")
+        val logoPath: String?,
+        @SerializedName("origin_country")
+        val originCountry: String
+    )
+
+    data class ProductionCountry(
+        val name: String,
+        @SerializedName("iso_3166_1")
+        val iso: String
+    )
+
+    data class SpokenLanguage(
+        val name: String,
+        @SerializedName("iso_639_1")
+        val iso: String
+    )
 }
-
-data class ProductionCompany(
-    val name: String,
-    val id: Int,
-    @SerializedName("logo_path")
-    val logoPath: String?,
-    @SerializedName("origin_country")
-    val originCountry: String
-)
-
-data class ProductionCountry(
-    val name: String,
-    @SerializedName("iso_3166_1")
-    val iso: String
-)
-
-data class SpokenLanguage(
-    val name: String,
-    @SerializedName("iso_639_1")
-    val iso: String
-)
 
 fun MovieDetailsResponse.toMovie() = Movie(
     id = id,

@@ -3,6 +3,7 @@ package com.geekbrains.team.data.di
 import com.geekbrains.team.data.Const.BASE_URL
 import com.geekbrains.team.data.movies.genresMovies.service.GenresMoviesApi
 import com.geekbrains.team.data.movies.genresMovies.service.GenresTVApi
+import com.geekbrains.team.data.movies.movieCreadits.service.MovieCreditsApi
 import com.geekbrains.team.data.movies.movieDetails.service.MovieDetailsApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
@@ -62,4 +63,8 @@ class RemoteModule {
     @Provides
     fun getGenresTVApi(retrofit: Retrofit): GenresTVApi =
         retrofit.create(GenresTVApi::class.java)
+
+    @Provides
+    fun getMovieCreditsApi(retrofit: Retrofit): MovieCreditsApi =
+        retrofit.create(MovieCreditsApi::class.java)
 }
