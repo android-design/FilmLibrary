@@ -1,4 +1,4 @@
-package com.geekbrains.team.domain.movies.movieCredits.repository
+package com.geekbrains.team.domain.movies.commonRepository
 
 import com.geekbrains.team.domain.movies.model.Credits
 import io.reactivex.Single
