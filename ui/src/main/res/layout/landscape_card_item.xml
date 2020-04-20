@@ -35,7 +35,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_poster"
                 app:layout_constraintStart_toStartOf="parent"
-                app:url='@{movie == null ? tvShow.posterPath + " (сериал " + tvShow.firstAirDate + " - " + tvShow.lastAirDate : movie.posterPath}'
+                app:url='@{movie == null ? tvShow.posterPath : movie.posterPath}'
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:gravity="bottom"
-                android:text="@{movie == null ? tvShow.name : movie.title}"
+                android:text='@{movie == null ? tvShow.name : movie.title}'
                 app:layout_constraintStart_toEndOf="@id/cover_iv"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -28,8 +28,16 @@ fun TVShow.toTVShowView() =
         name = name,
         numberOfSeasons = numberOfSeasons.toString(),
         popularity = popularity.toString(),
-        trailer = trailer,
-        images = images ?: listOf(),
+        // TODO Fix this to feature.
+        trailer = "https://www.youtube.com/watch?v=P6AaSMfXHbA",
+        // TODO Fix this to feature.
+        images = images ?: listOf(
+            "https://image.tmdb.org/t/p/w500/3lu6iHT189M6SL8q9OSmISYDoop.jpg",
+            "https://image.tmdb.org/t/p/w500/4VGR3bzjfVQ0skc8T1O92ieyKLa.jpg",
+            "https://image.tmdb.org/t/p/w500/oZibj2AItah70g4CzFgOw3jiFln.jpg",
+            "https://image.tmdb.org/t/p/w500/elvVHhtKYFLoGGhfyKhhA0wQ4kc.jpg",
+            "https://image.tmdb.org/t/p/w500/axqGyWPzkN8WNdl6wGwOd3EdRKE.jpg"
+        ),
         firstAirDate = firstAirDate,
         episodeRunTime = episodeRunTime?.firstOrNull() ?: 0,
         lastAirDate = lastAirDate ?: "",

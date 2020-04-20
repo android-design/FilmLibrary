@@ -56,10 +56,10 @@ fun ResponseTopRatedTV.toTVShow(): MutableList<TVShow> =
             overview = tvShow.overview,
             originCountry = tvShow.originCountry,
             voteCount = tvShow.voteCount,
-            backdropPath = tvShow.backdropPath?.let { Const.imagePrefix + it } ?: "",
+            backdropPath = tvShow.backdropPath?.let { Const.IMAGE_PREFIX + it } ?: "",
             originalLanguage = tvShow.originalLanguage,
             voteAverage = tvShow.voteAverage * 10,
-            posterPath = tvShow.posterPath?.let { Const.imagePrefix + it } ?: "",
+            posterPath = tvShow.posterPath?.let { Const.IMAGE_PREFIX + it } ?: "",
             firstAirDate = tvShow.firstAirDate?.getYear() ?: ""
         )
     }.toMutableList()

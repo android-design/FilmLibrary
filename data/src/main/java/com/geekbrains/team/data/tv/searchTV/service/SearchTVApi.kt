@@ -1,6 +1,6 @@
 package com.geekbrains.team.data.movies.searchMovies.service
 
-import com.geekbrains.team.data.tv.searchTVShow.service.model.ResponseSearchTVShow
+import com.geekbrains.team.data.tv.searchTV.service.model.ResponseSearchTVShow
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

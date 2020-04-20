@@ -6,7 +6,7 @@ import com.geekbrains.team.domain.movies.commonRepository.MoviesGenresRepository
 import com.geekbrains.team.domain.movies.commonRepository.TVGenresRepository
 import com.geekbrains.team.domain.movies.model.fillMoviesGenres
 import com.geekbrains.team.domain.search.repository.SearchMoviesRepository
-import com.geekbrains.team.domain.search.repository.SearchTVShowRepository
+import com.geekbrains.team.domain.search.repository.SearchTVRepository
 import com.geekbrains.team.domain.tv.model.fillTVGenres
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class GetSearchedResult @Inject constructor(
     private val repositoryMovies: SearchMoviesRepository,
-    private val repositoryTVShow: SearchTVShowRepository,
+    private val repositoryTV: SearchTVRepository,
     private val repositoryMoviesGenres: MoviesGenresRepository,
     private val repositoryTVGenres: TVGenresRepository
 ) :
@@ -31,7 +31,7 @@ class GetSearchedResult @Inject constructor(
                         releaseYear = params.releaseYear,
                         page = params.page
                     ),
-                    repositoryTVShow.fetch(query = params.query, page = params.page),
+                    repositoryTV.fetch(query = params.query, page = params.page),
                     Function4 { moviesGenres, tvGenres, movies, tv ->
                         listOf(
                             fillMoviesGenres(moviesGenres, movies),
@@ -54,7 +54,7 @@ class GetSearchedResult @Inject constructor(
             }
             params.isNeedSearchTVShows -> {
                 return Single.zip(repositoryTVGenres.fetch(),
-                    repositoryTVShow.fetch(query = params.query, page = params.page),
+                    repositoryTV.fetch(query = params.query, page = params.page),
                     BiFunction { tvGenres, tv -> fillTVGenres(tvGenres, tv) })
             }
             else -> throw IllegalArgumentException()

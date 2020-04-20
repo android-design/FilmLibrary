@@ -1,8 +1,9 @@
 package com.geekbrains.team.domain.movies.model
 
 import com.geekbrains.team.domain.base.model.Genre
+import com.geekbrains.team.domain.base.model.Images
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
-import com.geekbrains.team.domain.tv.model.TVShow
+import com.geekbrains.team.domain.base.model.Video
 
 data class Movie(
     val adult: Boolean,
@@ -12,8 +13,8 @@ data class Movie(
     val genreIds: List<Int>? = null,
     val genres: MutableList<String> = ArrayList(),
     val id: Int,
-    val images: List<String>? = null,
-    val trailer: String = "",
+    var videosNew: List<Video>? = null,
+    var imagesNew: Images? = null,
     val homepage: String? = null,
     val imdbId: String? = "",
     val originalLanguage: String,

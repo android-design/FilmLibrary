@@ -1,6 +1,9 @@
 package com.geekbrains.team.filmlibrary.model
 
 import com.geekbrains.team.domain.movies.model.Movie
+import com.geekbrains.team.filmlibrary.Const.TRAILER
+import com.geekbrains.team.filmlibrary.Const.YOUTUBE
+import com.geekbrains.team.filmlibrary.Const.YOUTUBE_SITE
 
 data class MovieView(
     val id: Int,
@@ -19,17 +22,32 @@ data class MovieView(
 )
 
 fun Movie.toMovieView() = MovieView(
-        id = id,
-        title = title,
-        originalTitle = originalTitle,
-        popularity = popularity.toString(),
-        releaseDate = releaseDate,
-        images = images ?: listOf(),
-        trailer = trailer,
-        posterPath = posterPath,
-        genres = genres.toString(),
-        backdropPath = backdropPath,
-        productionCountries = productionCountries.toString(),
-        runtime = runtime.toString(),
-        overview = overview
+    id = id,
+    title = title,
+    originalTitle = originalTitle,
+    popularity = popularity.toString(),
+    releaseDate = releaseDate,
+    images = movieImages(),
+    trailer = movieTrailer(),
+    posterPath = posterPath,
+    genres = genres.toString(),
+    backdropPath = backdropPath,
+    productionCountries = productionCountries.toString(),
+    runtime = runtime.toString(),
+    overview = overview
+)
+
+private fun Movie.movieImages(): List<String> = imagesNew?.let { imagesToMap ->
+    imagesToMap.posters.map {
+        it.url
+    }
+} ?: listOf()
+
+private fun Movie.movieTrailer(): String = videosNew?.firstOrNull {
+    it.site.equals(YOUTUBE, true) && it.type.equals(
+        TRAILER,
+        true
     )
+}?.let {
+    YOUTUBE_SITE + it.key
+} ?: ""

@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseGenres(
     @SerializedName("genres")
-    val genres: List<Genre>
+    val genres: List<GenreDataModel>
 ) {
-    data class Genre(
+    data class GenreDataModel(
         @SerializedName("id")
         val id: Int,
         @SerializedName("name")

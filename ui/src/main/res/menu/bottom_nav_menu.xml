@@ -2,22 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/mainScreenFragment"
         android:icon="@drawable/home_active"
+        android:orderInCategory="1"
         android:title="@string/home" />
 
     <item
-        android:id="@+id/navigation_list"
+        android:id="@+id/topFragment"
         android:icon="@drawable/list_active"
+        android:orderInCategory="2"
         android:title="@string/list" />
 
     <item
-        android:id="@+id/navigation_search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/search_active"
+        android:orderInCategory="3"
         android:title="@string/search" />
 
     <item
-        android:id="@+id/navigation_favorite"
+        android:id="@+id/favoritesFragment"
         android:icon="@drawable/heart_active"
+        android:orderInCategory="4"
         android:title="@string/heart" />
 </menu>
