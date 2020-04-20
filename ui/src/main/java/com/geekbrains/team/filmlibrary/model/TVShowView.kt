@@ -21,8 +21,7 @@ data class TVShowView(
     val productionCompanies: String // Площадка, на которой показывался (строка)
 )
 
-fun TVShow.toTVShowView() =
-    TVShowView(
+fun TVShow.toTVShowView() = TVShowView(
         id = id,
         originalName = originalName,
         name = name,
