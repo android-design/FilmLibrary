@@ -4,6 +4,8 @@ import com.geekbrains.team.data.Const.BASE_URL
 import com.geekbrains.team.data.movies.detailsMovies.service.MovieDetailsApi
 import com.geekbrains.team.data.movies.genresMovies.service.GenresMoviesApi
 import com.geekbrains.team.data.movies.imagesMovies.service.ImagesMoviesApi
+import com.geekbrains.team.data.movies.movieCreadits.service.MovieCreditsApi
+import com.geekbrains.team.data.movies.movieImages.service.MovieImagesApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
@@ -19,6 +21,7 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 /**
  * Dagger module for connection instances.
@@ -70,6 +73,14 @@ class RemoteModule {
     @Provides
     fun getGenresTVApi(retrofit: Retrofit): GenresTVApi =
         retrofit.create(GenresTVApi::class.java)
+
+    @Provides
+    fun getMovieCreditsApi(retrofit: Retrofit): MovieCreditsApi =
+        retrofit.create(MovieCreditsApi::class.java)
+
+    @Provides
+    fun getMovieImagesApi(retrofit: Retrofit): MovieImagesApi =
+        retrofit.create(MovieImagesApi::class.java)
 
     @Provides
     fun getTopRatedTVApi(retrofit: Retrofit): TopRatedTVApi =

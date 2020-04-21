@@ -16,10 +16,12 @@ abstract class MainScreenFragmentModule {
             ViewModelBuilder::class
         ]
     )
+
     internal abstract fun mainScreenFragment(): MainScreenFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(MainScreenViewModel::class)
     abstract fun bindViewModel(viewModel: MainScreenViewModel): ViewModel
+
 }

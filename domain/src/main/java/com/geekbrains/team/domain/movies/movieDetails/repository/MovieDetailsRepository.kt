@@ -1,4 +1,4 @@
-package com.geekbrains.team.domain.movies.detailsMovies.repository
+package com.geekbrains.team.domain.movies.movieDetails.repository
 
 import com.geekbrains.team.domain.movies.model.Movie
 import io.reactivex.Single
