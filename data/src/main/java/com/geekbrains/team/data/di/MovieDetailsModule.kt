@@ -10,5 +10,5 @@ import javax.inject.Singleton
 abstract class MovieDetailsModule {
     @Binds
     @Singleton
-    abstract fun provideRepositoryFavoriteMovies(repository: MovieDetailsRepositoryImpl): MovieDetailsRepository
+    abstract fun provideMovieDetailsRepository(repository: MovieDetailsRepositoryImpl): MovieDetailsRepository
 }

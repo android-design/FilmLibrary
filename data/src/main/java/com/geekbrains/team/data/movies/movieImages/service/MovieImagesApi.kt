@@ -1,6 +1,6 @@
 package com.geekbrains.team.data.movies.movieImages.service
 
-import com.geekbrains.team.data.movies.movieDetails.service.model.MovieDetailsResponse
+import com.geekbrains.team.data.movies.movieImages.service.model.MovieImagesResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,6 +11,6 @@ interface MovieImagesApi {
     fun getMovieImages(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
-        @Path("id") id: Int
-    ): Single<MovieDetailsResponse>
+        @Path("movie_id") id: Int
+    ): Single<MovieImagesResponse>
 }
