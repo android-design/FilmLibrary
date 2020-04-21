@@ -15,9 +15,9 @@ import com.geekbrains.team.filmlibrary.model.TVShowView;
 import java.util.ArrayList;
 import java.util.List;
 
-class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdapter.LandscapeCardHolder> {
-    private List<MovieView> movie = new ArrayList<>();
-    private List<TVShowView> tvShow = new ArrayList<>();
+public class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdapter.LandscapeCardHolder> {
+    public List<MovieView> movie = new ArrayList<>();
+    public List<TVShowView> tvShow = new ArrayList<>();
 
     public LandscapeCardAdapter() {
     }

@@ -26,7 +26,7 @@ data class TVShow(
     val originalLanguage: String,
     val originalName: String,
     val overview: String,
-    val popularity: Double,
+    val popularity: Int,
     val posterPath: String,
     val productionCompanies: List<ProductionCompany>? = null,
     val seasons: List<Season>? = null,

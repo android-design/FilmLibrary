@@ -29,7 +29,7 @@ class GetRandomTopRatedMovie @Inject constructor(
                             moviesImagesRepository.fetch(movie.id),
                             moviesVideoRepository.fetch(movie.id),
                             BiFunction { images, videos ->
-                                movie.imagesNew = images
+                                movie.images = images
                                 movie.videosNew = videos
                             })
                         movie

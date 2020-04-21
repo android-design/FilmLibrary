@@ -21,6 +21,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
         app:cardMaxElevation="8dp">
 
@@ -35,7 +36,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_poster"
                 app:layout_constraintStart_toStartOf="parent"
-                app:url='@{movie == null ? tvShow.posterPath : movie.posterPath}'
+                app:poster='@{movie == null ? tvShow.posterPath : movie.posterPath}'
                 tools:ignore="ContentDescription" />
 
             <TextView

@@ -14,7 +14,7 @@
             android:layout_width="68dp"
             android:layout_height="100dp"
             android:contentDescription="@string/tv_show_image"
-            app:url="@{tvshow.posterPath}"
+            app:poster="@{tvshow.posterPath}"
             tools:src="@mipmap/ic_launcher" />
 
         <LinearLayout

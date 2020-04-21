@@ -18,16 +18,16 @@ import com.geekbrains.team.filmlibrary.model.TVShowView;
 import java.util.ArrayList;
 import java.util.List;
 
-class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> {
-    private List<MovieView> movie = new ArrayList<>();
-    private List<TVShowView> tvShow = new ArrayList<>();
+public class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> {
+    public List<MovieView> movie = new ArrayList<>();
+    public List<TVShowView> tvShow = new ArrayList<>();
 
     public BigCardAdapter() {
     }
 
-    public void setMovies(List<MovieView> data) {
+    public void setMovies(MovieView data) {
         movie.clear();
-        movie.addAll(data);
+        movie.add(data);
     }
 
     public void setTVShows(List<TVShowView> data) {
@@ -66,7 +66,7 @@ class BigCardAdapter extends RecyclerView.Adapter<BigCardAdapter.BigCardHolder> 
             return tvShow.size();
     }
 
-    class BigCardHolder extends RecyclerView.ViewHolder {
+    static class BigCardHolder extends RecyclerView.ViewHolder {
         BigCardItemBinding binding;
         private ImageButton play;
 

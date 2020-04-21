@@ -12,6 +12,7 @@ data class TVShowView(
     val images: List<String>, // Массив больших фото (строки, url)
     val trailer: String, // Ссылка на трейлер (строка, url)
     val posterPath: String, // Маленькое фото (постер, строка, url)
+    val backdropPath: String,
     val genres: String, // Жанры (строки)
     val firstAirDate: String, // Год выхода первого сезона (строка, для уже вышедших. можно объединить, по аналогии с фильмами, если там объединяем)
     val originCountry: String, // Страны производства (строка)
@@ -25,6 +26,7 @@ fun TVShow.toTVShowView() =
     TVShowView(
         id = id,
         originalName = originalName,
+        backdropPath = backdropPath,
         name = name,
         numberOfSeasons = numberOfSeasons.toString(),
         popularity = popularity.toString(),

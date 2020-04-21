@@ -9,7 +9,7 @@
 
         <variable
             name="movie"
-            type="com.geekbrains.team.filmlibrary.model.MovieView" />
+            type="com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView" />
 
         <variable
             name="tvShow"
@@ -19,13 +19,11 @@
 
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="99dp"
+        android:layout_width="115dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="32dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/series_tv">
+        app:cardElevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,7 +36,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_poster"
                 app:layout_constraintTop_toTopOf="parent"
-                app:url="@{movie == null ? tvShow.posterPath : movie.posterPath}"
+                app:poster="@{movie == null ? tvShow.posterPath : movie.posterPath}"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -60,6 +58,9 @@
                 android:layout_height="32dp"
                 android:layout_margin="4dp"
                 android:gravity="top"
+                android:ellipsize="end"
+                android:lines="2"
+                android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_iv" />
@@ -71,6 +72,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />

@@ -9,20 +9,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.UpcomingSmallCardItemBinding;
-import com.geekbrains.team.filmlibrary.model.MovieView;
+import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView;
 import com.geekbrains.team.filmlibrary.model.TVShowView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UpcomingSmallCardAdapter extends RecyclerView.Adapter<UpcomingSmallCardAdapter.UpcomingSmallCardHolder> {
-    private List<MovieView> movie = new ArrayList<>();
-    private List<TVShowView> tvShow = new ArrayList<>();
+    public List<UpcomingMovieView> movie = new ArrayList<>();
+    public List<TVShowView> tvShow = new ArrayList<>();
 
     public UpcomingSmallCardAdapter() {
     }
 
-    public void setMovies(List<MovieView> data) {
+    public void setMovies(List<UpcomingMovieView> data) {
         movie.clear();
         movie.addAll(data);
     }
@@ -65,7 +65,7 @@ public class UpcomingSmallCardAdapter extends RecyclerView.Adapter<UpcomingSmall
             this.binding = binding;
         }
 
-        void bindMovie(MovieView movie) {
+        void bindMovie(UpcomingMovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
         }

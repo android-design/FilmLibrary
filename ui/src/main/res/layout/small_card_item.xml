@@ -19,9 +19,9 @@
     </data>
 
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="99dp"
+        android:layout_width="115dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="32dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +38,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_poster"
                 app:layout_constraintTop_toTopOf="parent"
-                app:url="@{movie == null ? tvShow.posterPath : movie.posterPath}"
+                app:poster="@{movie == null ? tvShow.posterPath : movie.posterPath}"
                 tools:ignore="ContentDescription" />
 
             <ImageButton
@@ -60,6 +60,9 @@
                 android:layout_height="32dp"
                 android:layout_margin="4dp"
                 android:gravity="top"
+                android:ellipsize="end"
+                android:lines="2"
+                android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_iv" />
@@ -71,7 +74,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                android:text="@{movie == null ? tvShow.genres.toString() : movie.genres.toString()}"
+                android:ellipsize="end"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:text='@{movie == null ? tvShow.genres : movie.genres}'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />
 

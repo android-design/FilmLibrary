@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.SmallCardHolder> {
-    private List<MovieView> movie = new ArrayList<>();
-    private List<TVShowView> tvShow = new ArrayList<>();
+    public List<MovieView> movie = new ArrayList<>();
+    public List<TVShowView> tvShow = new ArrayList<>();
 
     public SmallCardAdapter() {
     }
@@ -56,7 +56,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Smal
             return tvShow.size();
     }
 
-    class SmallCardHolder extends RecyclerView.ViewHolder {
+    static class SmallCardHolder extends RecyclerView.ViewHolder {
 
         SmallCardItemBinding binding;
 

@@ -37,7 +37,7 @@ fun Movie.toMovieView() = MovieView(
     overview = overview
 )
 
-private fun Movie.movieImages(): List<String> = imagesNew?.let { imagesToMap ->
+private fun Movie.movieImages(): List<String> = images?.let { imagesToMap ->
     imagesToMap.posters.map {
         it.url
     }

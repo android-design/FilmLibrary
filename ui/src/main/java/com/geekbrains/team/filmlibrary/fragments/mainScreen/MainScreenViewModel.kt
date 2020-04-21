@@ -10,9 +10,7 @@ import com.geekbrains.team.domain.movies.upcomingMovies.interactor.GetUpcomingMo
 import com.geekbrains.team.domain.tv.model.TVShow
 import com.geekbrains.team.domain.tv.nowPlayingTV.interactor.GetFirstNowPlayingTV
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
-import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.NowPlayingMovieView
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView
-import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.toNowPlayingMovieView
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.toUpcomingMovieView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
@@ -30,23 +28,23 @@ class MainScreenViewModel @Inject constructor(
     private val useCaseFirstNowPlayingTV: GetFirstNowPlayingTV
 ) :
     BaseViewModel() {
-    val nowPlayingMoviesData: MutableLiveData<List<NowPlayingMovieView>> = MutableLiveData()
+    val nowPlayingMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
     val upcomingMoviesData: MutableLiveData<List<UpcomingMovieView>> = MutableLiveData()
     val randomTopRatedMovieData: MutableLiveData<MovieView> = MutableLiveData()
-    val movieOfTheWeekData: MutableLiveData<NowPlayingMovieView> = MutableLiveData()
+    val movieOfTheWeekData: MutableLiveData<MovieView> = MutableLiveData()
     val tvShowPremierData: MutableLiveData<TVShowView> = MutableLiveData()
 
-    fun loadNowPlayingMovies(page: Int) =
+    fun loadNowPlayingMovies(page: Int = 1) =
         useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadNowPlayingMovies, ::handleFailure)
 
     private fun handleOnSuccessLoadNowPlayingMovies(list: List<Movie>) {
-        nowPlayingMoviesData.value = list.map { it.toNowPlayingMovieView() }
+        nowPlayingMoviesData.value = list.map { it.toMovieView() }
     }
 
-    fun loadUpcomingMovies(page: Int) =
+    fun loadUpcomingMovies(page: Int = 1) =
         useCaseUpcomingMovies.execute(params = GetUpcomingMovies.Params(page = page))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -73,10 +71,10 @@ class MainScreenViewModel @Inject constructor(
             .subscribe(::handleOnSuccessLoadMovieOfTheWeek, ::handleFailure)
 
     private fun handleOnSuccessLoadMovieOfTheWeek(movie: Movie) {
-        movieOfTheWeekData.value = movie.toNowPlayingMovieView()
+        movieOfTheWeekData.value = movie.toMovieView()
     }
 
-    fun loadTvShowPremier(page: Int) =
+    fun loadTvShowPremier() =
         useCaseFirstNowPlayingTV.execute(None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

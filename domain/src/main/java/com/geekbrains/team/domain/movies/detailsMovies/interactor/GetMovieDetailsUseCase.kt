@@ -22,7 +22,7 @@ class GetMovieDetailsUseCase @Inject constructor(
             moviesImagesRepository.fetch(id = params.id),
             moviesVideoRepository.fetch(id = params.id),
             Function3 { movie, images, videos ->
-                movie.imagesNew = images
+                movie.images = images
                 movie.videosNew = videos
                 movie
             }
