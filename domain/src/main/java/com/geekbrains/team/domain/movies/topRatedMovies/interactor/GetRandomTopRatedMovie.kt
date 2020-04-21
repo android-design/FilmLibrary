@@ -24,15 +24,15 @@ class GetRandomTopRatedMovie @Inject constructor(
         topRatedMoviesRepository.fetch(randomPage())
             .flatMap { topRatedMovies ->
                 Single.just(topRatedMovies.random())
-                    .map { movie ->
-                        Single.zip<Images, List<Video>, Unit>(
-                            moviesImagesRepository.fetch(movie.id),
-                            moviesVideoRepository.fetch(movie.id),
-                            BiFunction { images, videos ->
-                                movie.images = images
-                                movie.videosNew = videos
-                            })
+            }
+            .flatMap { movie ->
+                Single.zip<Images, List<Video>, Movie>(
+                    moviesImagesRepository.fetch(movie.id),
+                    moviesVideoRepository.fetch(movie.id),
+                    BiFunction { images, videos ->
+                        movie.images = images
+                        movie.videosNew = videos
                         movie
-                    }
+                    })
             }
 }

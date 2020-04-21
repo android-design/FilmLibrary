@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.BigCardAdapter
 import com.geekbrains.team.filmlibrary.adapters.SmallCardAdapter
+import com.geekbrains.team.filmlibrary.adapters.TopRatedBigCardAdapter
 import com.geekbrains.team.filmlibrary.adapters.UpcomingSmallCardAdapter
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -37,7 +37,7 @@ class MainScreenFragment : DaggerFragment() {
 
     private val upcomingAdapter = UpcomingSmallCardAdapter()
     private val nowPlayingAdapter = SmallCardAdapter()
-    private val topRatedMovieAdapter = BigCardAdapter()
+    private val topRatedMovieAdapter = TopRatedBigCardAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,17 +74,14 @@ class MainScreenFragment : DaggerFragment() {
             }
         })
 
-//        viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
-//            data?.let {
-//                Log.d("ANSWER", it.toString())
-//                val diffUtilCallback = DiffUtilsCallback(topRatedMovieAdapter.movie, it)
-//                val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-//                topRatedMovieAdapter.setMovies(it)
-//                startIndicators()
-//                setCurrentIndicator(0)
-//                diffResult.dispatchUpdatesTo(topRatedMovieAdapter)
-//            }
-//        })
+        viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
+            data?.let {
+                topRatedMovieAdapter.setMovies(it)
+                topRatedMovieAdapter.notifyDataSetChanged()
+                startIndicators()
+                setCurrentIndicator(0)
+            }
+        })
 
         viewModel.movieOfTheWeekData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {

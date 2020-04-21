@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.BigCardItemBinding;
 import com.geekbrains.team.filmlibrary.model.MovieView;
+import com.squareup.picasso.Picasso;
 
 /**
  * адаптер для верхнего вьюпейджера на главной
@@ -38,9 +39,11 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
 
     @Override
     public void onBindViewHolder(@NonNull TopRatedBigCardHolder holder, int position) {
-        holder.bindMovie(movie);
-        holder.play.setOnClickListener(v -> v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(movie.getTrailer()))));
-        //Picasso.get().load(movie.getImages().get(position)).into(holder.backDrop);
+        if (movie != null) {
+            holder.bindMovie(movie);
+            holder.play.setOnClickListener(v -> v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(movie.getTrailer()))));
+            Picasso.get().load(movie.getImages().get(position)).into(holder.backDrop);
+        }
     }
 
     @Override
