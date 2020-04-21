@@ -25,12 +25,14 @@ class TopFragment : Fragment() {
             MyTabAdapter(
                 it,
                 listOf(TopMovieFragment(), TopTVShowFragment()),
-                arrayListOf("Films", "Serials")
+                arrayListOf(getString(R.string.movies), getString(R.string.tvShows))
             )
+
         }
 
         mAdapter?.let {
             viewPager.adapter = mAdapter
+            tabs.setupWithViewPager(viewPager)
         }
     }
 }

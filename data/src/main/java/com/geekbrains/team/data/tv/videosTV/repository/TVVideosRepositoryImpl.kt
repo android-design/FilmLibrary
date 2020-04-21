@@ -1,17 +1,17 @@
-package com.geekbrains.team.data.movies.videosMovies.repository
+package com.geekbrains.team.data.tv.videosTV.repository
 
 import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.common.videos.model.toVideo
-import com.geekbrains.team.data.movies.videosMovies.service.VideosMoviesApi
+import com.geekbrains.team.data.tv.videosTV.service.VideosTVApi
 import com.geekbrains.team.domain.base.model.Video
 import com.geekbrains.team.domain.movies.commonRepository.VideosRepository
 import io.reactivex.Single
 import javax.inject.Inject
 
-class MoviesVideosRepositoryImpl @Inject constructor(private val api: VideosMoviesApi) :
+class TVVideosRepositoryImpl @Inject constructor(private val api: VideosTVApi) :
     VideosRepository {
 
     override fun fetch(id: Int): Single<List<Video>> =
-        api.getMoviesVideos(apiKey = BuildConfig.API_KEY, id = id)
+        api.getTVVideos(apiKey = BuildConfig.API_KEY, id = id)
             .map { response -> response.toVideo() }
 }

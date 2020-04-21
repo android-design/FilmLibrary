@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.upcomingMovies.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -58,10 +59,10 @@ fun ResponseUpcomingMovies.toMovie(): List<Movie> =
             video = movie.video,
             posterPath = movie.posterPath?.let { Const.IMAGE_PREFIX + it } ?: "",
             adult = movie.adult,
-            backdropPath = movie.backdropPath?.let { Const.IMAGE_PREFIX + it } ?: "",
+            backdropPath = movie.backdropPath?.let { Const.POSTER_AND_BACKDROP_PREFIX + it } ?: "",
             originalLanguage = movie.originalLanguage,
-            voteAverage = movie.voteAverage * 10,
+            voteAverage = (movie.voteAverage * 10).toInt(),
             overview = movie.overview,
-            releaseDate = movie.releaseDate
+            releaseDate = movie.releaseDate.parseToDate()
         )
     }

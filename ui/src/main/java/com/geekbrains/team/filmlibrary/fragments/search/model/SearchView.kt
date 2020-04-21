@@ -2,6 +2,7 @@ package com.geekbrains.team.filmlibrary.fragments.search.model
 
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.tv.model.TVShow
+import com.geekbrains.team.filmlibrary.parseToYear
 
 sealed class SearchView
 
@@ -49,7 +50,7 @@ fun Movie.toSearchedMovieView(): SearchedMovieView =
         genres = genres.joinToString(),
         voteAverage = voteAverage.toString(),
         overview = overview,
-        releaseDate = releaseDate
+        releaseDate = releaseDate.parseToYear()
     )
 
 

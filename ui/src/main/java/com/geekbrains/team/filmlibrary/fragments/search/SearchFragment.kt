@@ -28,6 +28,7 @@ class SearchFragment : DaggerFragment() {
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
 
     private val mAdapter = SearchAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -1,6 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.mainScreen.model
 
 import com.geekbrains.team.domain.movies.model.Movie
+import com.geekbrains.team.filmlibrary.parseToNormalFormat
 
 data class NowPlayingMovieView(
     val id: Int,
@@ -29,5 +30,5 @@ fun Movie.toNowPlayingMovieView(): NowPlayingMovieView = NowPlayingMovieView(
     genres = genres.toString(),
     voteAverage = voteAverage.toString(),
     overview = overview,
-    releaseDate = releaseDate
+    releaseDate = releaseDate.parseToNormalFormat()
 )

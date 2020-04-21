@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.detailsMovies.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -84,7 +85,7 @@ fun MovieDetailsResponse.toMovie() = Movie(
     backdropPath = backdropPath?.let { Const.IMAGE_PREFIX + it } ?: "",
     originalLanguage = originalLanguage,
     genres = genres.map { it.name }.toMutableList(),
-    voteAverage = voteAverage,
+    voteAverage = (voteAverage * 10).toInt(),
     overview = overview ?: Const.NO_OVERVIEW,
-    releaseDate = releaseDate
+    releaseDate = releaseDate.parseToDate()
 )

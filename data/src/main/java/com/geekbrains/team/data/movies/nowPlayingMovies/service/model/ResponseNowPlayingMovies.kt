@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.nowPlayingMovies.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -65,12 +66,13 @@ fun ResponseNowPlayingMovies.toMovie(): List<Movie> =
             popularity = (movie.popularity).toInt(),
             voteCount = movie.voteCount,
             video = movie.video,
+            genreIds = movie.genreIds,
             posterPath = movie.posterPath?.let { Const.IMAGE_PREFIX + it } ?: "",
             adult = movie.adult,
-            backdropPath = movie.backdropPath?.let { Const.IMAGE_PREFIX + it } ?: "",
+            backdropPath = movie.backdropPath?.let { Const.POSTER_AND_BACKDROP_PREFIX + it } ?: "",
             originalLanguage = movie.originalLanguage,
-            voteAverage = movie.voteAverage * 10,
+            voteAverage = (movie.voteAverage * 10).toInt(),
             overview = movie.overview,
-            releaseDate = movie.releaseDate
+            releaseDate = movie.releaseDate.parseToDate()
         )
     }

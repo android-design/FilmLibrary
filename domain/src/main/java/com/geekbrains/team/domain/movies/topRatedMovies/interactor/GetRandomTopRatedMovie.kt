@@ -12,11 +12,12 @@ import com.geekbrains.team.domain.randomPage
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
+import javax.inject.Named
 
 class GetRandomTopRatedMovie @Inject constructor(
     private val topRatedMoviesRepository: TopRatedMoviesRepository,
     private val moviesImagesRepository: MoviesImagesRepository,
-    private val moviesVideoRepository: VideosRepository
+    @param:Named("MovieVideos") private val moviesVideoRepository: VideosRepository
 
 ) :
     UseCase<Movie, None> {
@@ -31,7 +32,7 @@ class GetRandomTopRatedMovie @Inject constructor(
                     moviesVideoRepository.fetch(movie.id),
                     BiFunction { images, videos ->
                         movie.images = images
-                        movie.videosNew = videos
+                        movie.videos = videos
                         movie
                     })
             }

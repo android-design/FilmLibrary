@@ -2,10 +2,10 @@ package com.geekbrains.team.data.tv.genresTV.repository
 
 import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const.LANGUAGE
-import com.geekbrains.team.data.movies.genresMovies.service.GenresTVApi
 import com.geekbrains.team.data.common.genre.model.toGenres
+import com.geekbrains.team.data.tv.genresTV.service.GenresTVApi
 import com.geekbrains.team.domain.base.model.Genre
-import com.geekbrains.team.domain.movies.commonRepository.TVGenresRepository
+import com.geekbrains.team.domain.tv.commonRepository.TVGenresRepository
 import io.reactivex.Single
 import javax.inject.Inject
 

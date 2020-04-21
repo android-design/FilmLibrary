@@ -2,6 +2,7 @@ package com.geekbrains.team.domain.tv.model
 
 import com.geekbrains.team.domain.base.model.Genre
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
+import com.geekbrains.team.domain.base.model.Video
 
 data class TVShow(
     val backdropPath: String,
@@ -32,7 +33,8 @@ data class TVShow(
     val seasons: List<Season>? = null,
     val status: String? = null,
     val type: String? = null,
-    val voteAverage: Double,
+    var videos: List<Video>? = null,
+    val voteAverage: Int,
     val voteCount: Int,
     // TODO Add class for actors.
     val cast: List<String>? = null, // Актеры

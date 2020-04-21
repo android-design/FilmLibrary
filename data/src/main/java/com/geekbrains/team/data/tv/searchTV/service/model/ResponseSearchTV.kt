@@ -58,7 +58,7 @@ fun ResponseSearchTVShow.toTVShow(): List<TVShow> =
             voteCount = tvShow.voteCount,
             backdropPath = tvShow.backdropPath?.let { Const.IMAGE_PREFIX + it } ?: "",
             originalLanguage = tvShow.originalLanguage,
-            voteAverage = tvShow.voteAverage * 10,
+            voteAverage = (tvShow.voteAverage * 10).toInt(),
             posterPath = tvShow.posterPath?.let { Const.IMAGE_PREFIX + it } ?: "",
             firstAirDate = tvShow.firstAirDate?.getYear() ?: ""
         )

@@ -1,7 +1,8 @@
 package com.geekbrains.team.data.movies.searchMovies.service.model
 
 import com.geekbrains.team.data.Const.IMAGE_PREFIX
-import com.geekbrains.team.data.getYear
+import com.geekbrains.team.data.Const.POSTER_AND_BACKDROP_PREFIX
+import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -60,10 +61,10 @@ fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
             video = movie.video,
             posterPath = movie.posterPath?.let { IMAGE_PREFIX + it } ?: "",
             adult = movie.adult,
-            backdropPath = movie.backdropPath?.let { IMAGE_PREFIX + it } ?: "",
+            backdropPath = movie.backdropPath?.let { POSTER_AND_BACKDROP_PREFIX + it } ?: "",
             originalLanguage = movie.originalLanguage,
-            voteAverage = movie.voteAverage * 10,
+            voteAverage = (movie.voteAverage * 10).toInt(),
             overview = movie.overview,
-            releaseDate = movie.releaseDate.getYear()
+            releaseDate = movie.releaseDate.parseToDate()
         )
     }

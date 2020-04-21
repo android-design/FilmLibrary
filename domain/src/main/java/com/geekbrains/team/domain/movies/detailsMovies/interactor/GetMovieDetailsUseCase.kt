@@ -8,11 +8,12 @@ import com.geekbrains.team.domain.movies.model.Movie
 import io.reactivex.Single
 import io.reactivex.functions.Function3
 import javax.inject.Inject
+import javax.inject.Named
 
 class GetMovieDetailsUseCase @Inject constructor(
     private val movieDetailsRepository: MovieDetailsRepository,
     private val moviesImagesRepository: MoviesImagesRepository,
-    private val moviesVideoRepository: VideosRepository
+    @param:Named("MovieVideos") private val moviesVideoRepository: VideosRepository
 ) :
     UseCase<Movie, GetMovieDetailsUseCase.Params> {
 
@@ -23,7 +24,7 @@ class GetMovieDetailsUseCase @Inject constructor(
             moviesVideoRepository.fetch(id = params.id),
             Function3 { movie, images, videos ->
                 movie.images = images
-                movie.videosNew = videos
+                movie.videos = videos
                 movie
             }
         )

@@ -4,6 +4,8 @@ import com.geekbrains.team.domain.base.model.Genre
 import com.geekbrains.team.domain.base.model.Images
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
 import com.geekbrains.team.domain.base.model.Video
+import java.util.*
+import kotlin.collections.ArrayList
 
 data class Movie(
     val adult: Boolean,
@@ -13,7 +15,7 @@ data class Movie(
     val genreIds: List<Int>? = null,
     val genres: MutableList<String> = ArrayList(),
     val id: Int,
-    var videosNew: List<Video>? = null,
+    var videos: List<Video>? = null,
     var images: Images? = null,
     val homepage: String? = null,
     val imdbId: String? = "",
@@ -25,7 +27,7 @@ data class Movie(
     val posterPath: String,
     val productionCompanies: List<ProductionCompany>? = null,
     val productionCountries: List<ProductionCountry>? = null,
-    val releaseDate: String,
+    val releaseDate: Date,
     val revenue: Int = 0,
     val runtime: Int = 0,
     // TODO Add class for actors.
@@ -37,7 +39,7 @@ data class Movie(
     val tagline: String? = null,
     val title: String,
     val video: Boolean,
-    val voteAverage: Double,
+    val voteAverage: Int,
     val voteCount: Int
 ) : MovieAndTVShow() {
 
@@ -62,7 +64,7 @@ data class Movie(
 fun fillMoviesGenres(
     moviesGenres: List<Genre>,
     movies: List<Movie>
-): List<MovieAndTVShow> =
+): List<Movie> =
     movies.apply {
         val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
 

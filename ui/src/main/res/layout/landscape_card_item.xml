@@ -87,7 +87,7 @@
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@{movie == null ? tvShow.popularity : movie.popularity}"
+                    android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>
