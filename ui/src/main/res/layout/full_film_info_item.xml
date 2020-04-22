@@ -41,8 +41,8 @@
                 android:id="@+id/title_iv"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:scaleType="centerCrop"
                 android:layout_marginBottom="90dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_backdrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="ContentDescription" />
@@ -65,11 +65,11 @@
                 android:layout_height="33dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_play_circle"
+                android:visibility="@{movie == null ? (TextUtils.isEmpty(tvShow.trailer) ? View.GONE : View.VISIBLE) : (TextUtils.isEmpty(movie.trailer) ? View.GONE : View.VISIBLE)}"
                 app:layout_constraintBottom_toBottomOf="@id/title_iv"
                 app:layout_constraintEnd_toEndOf="@id/title_iv"
                 app:layout_constraintStart_toStartOf="@id/title_iv"
                 app:layout_constraintTop_toTopOf="@id/title_iv"
-                android:visibility="@{movie == null ? (TextUtils.isEmpty(tvShow.trailer) ? View.GONE : View.VISIBLE) : (TextUtils.isEmpty(movie.trailer) ? View.GONE : View.VISIBLE)}"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -81,8 +81,8 @@
                 android:layout_marginTop="8dp"
                 android:gravity="bottom"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/original_title_tv" />
+                app:layout_constraintBottom_toTopOf="@id/original_title_tv"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/original_title_tv"
@@ -91,8 +91,8 @@
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
                 android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/genres_tv" />
+                app:layout_constraintBottom_toTopOf="@id/genres_tv"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/genres_tv"
@@ -102,8 +102,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="32dp"
                 android:text="@{movie == null ? tvShow.genres.toString() : movie.genres.toString()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <LinearLayout
                 android:layout_width="268dp"

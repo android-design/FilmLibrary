@@ -43,8 +43,8 @@
                     style="@style/Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/nightTextPrimary"
-                    android:text="@{movie == null ? tvShow.name : movie.title}"/>
+                    android:text="@{movie == null ? tvShow.name : movie.title}"
+                    android:textColor="@color/nightTextPrimary" />
             </Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -69,8 +69,8 @@
                     android:id="@+id/indicator"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_horizontal"
+                    android:orientation="horizontal"
                     android:padding="15dp"
                     app:layout_constraintEnd_toEndOf="@id/topPager"
                     app:layout_constraintStart_toStartOf="@id/topPager"
@@ -148,9 +148,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
+                    android:text="@{movie == null ? tvShow.overview : movie.director}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/director_title_tv"
-                    android:text="@{movie == null ? tvShow.overview : movie.director}" />
+                    app:layout_constraintTop_toBottomOf="@id/director_title_tv" />
 
                 <TextView
                     android:id="@+id/screenplay_title_tv"
@@ -172,9 +172,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
+                    android:text="@{movie == null ? tvShow.overview : movie.writer}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv"
-                    android:text="@{movie == null ? tvShow.overview : movie.writer}" />
+                    app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv" />
 
                 <TextView
                     android:id="@+id/producer_title_tv"
@@ -196,9 +196,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
+                    android:text="@{movie == null ? tvShow.overview : movie.producer}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/producer_title_tv"
-                    android:text="@{movie == null ? tvShow.overview : movie.producer}" />
+                    app:layout_constraintTop_toBottomOf="@id/producer_title_tv" />
 
                 <TextView
                     android:id="@+id/whole_crew_tv"

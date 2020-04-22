@@ -26,9 +26,9 @@
         android:layout_width="115dp"
         android:layout_height="255dp"
         android:layout_margin="5dp"
+        android:onClick="@{() -> listener.mainOpenItemInfo(movie == null ? tvShow.id : movie.id)}"
         app:cardCornerRadius="4dp"
-        app:cardElevation="8dp"
-        android:onClick="@{() -> listener.mainOpenItemInfo(movie == null ? tvShow.id : movie.id)}">
+        app:cardElevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,6 +38,7 @@
                 android:id="@+id/title_iv"
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_poster"
                 app:layout_constraintTop_toTopOf="parent"
                 app:poster="@{movie == null ? tvShow.posterPath : movie.posterPath}"

@@ -9,8 +9,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        app:cardCornerRadius="6dp"
-        android:onClick="@{() -> listener.mainOpenItemInfo(tvshow.id)}">
+        android:onClick="@{() -> listener.mainOpenItemInfo(tvshow.id)}"
+        app:cardCornerRadius="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
