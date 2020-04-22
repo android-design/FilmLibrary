@@ -65,7 +65,7 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
     @Override
     public int getItemCount() {
         if (movie == null && tvShow == null)
-            return 0;
+            return 1;
         else {
             if (movie != null)
                 return movie.getImages().size();
