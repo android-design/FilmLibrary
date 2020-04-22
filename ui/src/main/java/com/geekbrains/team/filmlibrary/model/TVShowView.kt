@@ -1,13 +1,14 @@
 package com.geekbrains.team.filmlibrary.model
 
 import com.geekbrains.team.domain.tv.model.TVShow
+import com.geekbrains.team.filmlibrary.Const
 
 data class TVShowView(
     val id: Int,
     val originalName: String, // Оригинальное название (строка)
     val name: String, // Название (строка)
     val numberOfSeasons: String, // Количество сезонов (строка)
-    val popularity: String,  // Рейтинг imdb
+    val voteAverage: String,  // Рейтинг imdb
     val lastAirDate: String, // Дата выхода (строка, для будущих)
     val images: List<String>, // Массив больших фото (строки, url)
     val trailer: String, // Ссылка на трейлер (строка, url)
@@ -29,11 +30,16 @@ fun TVShow.toTVShowView() =
         backdropPath = backdropPath,
         name = name,
         numberOfSeasons = numberOfSeasons.toString(),
-        popularity = popularity.toString(),
-        // TODO Fix this to feature.
-        trailer = trailer,
-        // TODO Fix this to feature.
-        images = images ?: listOf(),
+        voteAverage = voteAverage.toString(),
+        trailer = trailer(),
+        // TODO Fix this to fea ture.
+        images = images ?: listOf(
+            "https://image.tmdb.org/t/p/w500/3lu6iHT189M6SL8q9OSmISYDoop.jpg",
+            "https://image.tmdb.org/t/p/w500/4VGR3bzjfVQ0skc8T1O92ieyKLa.jpg",
+            "https://image.tmdb.org/t/p/w500/oZibj2AItah70g4CzFgOw3jiFln.jpg",
+            "https://image.tmdb.org/t/p/w500/elvVHhtKYFLoGGhfyKhhA0wQ4kc.jpg",
+            "https://image.tmdb.org/t/p/w500/axqGyWPzkN8WNdl6wGwOd3EdRKE.jpg"
+        ),
         firstAirDate = firstAirDate,
         episodeRunTime = episodeRunTime?.firstOrNull() ?: 0,
         lastAirDate = lastAirDate ?: "",
@@ -44,3 +50,12 @@ fun TVShow.toTVShowView() =
         cast = cast ?: listOf(),
         productionCompanies = productionCompanies?.map { it.name }.toString()
     )
+
+private fun TVShow.trailer(): String = videos?.firstOrNull {
+    it.site.equals(Const.YOUTUBE, true) && it.type.equals(
+        Const.TRAILER,
+        true
+    )
+}?.let {
+    Const.YOUTUBE_SITE + it.key
+} ?: ""

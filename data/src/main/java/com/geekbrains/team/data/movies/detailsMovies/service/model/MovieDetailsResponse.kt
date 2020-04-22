@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.detailsMovies.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
@@ -49,28 +50,28 @@ data class MovieDetailsResponse(
             return name
         }
     }
+
+    data class ProductionCompany(
+        val name: String,
+        val id: Int,
+        @SerializedName("logo_path")
+        val logoPath: String?,
+        @SerializedName("origin_country")
+        val originCountry: String
+    )
+
+    data class ProductionCountry(
+        val name: String,
+        @SerializedName("iso_3166_1")
+        val iso: String
+    )
+
+    data class SpokenLanguage(
+        val name: String,
+        @SerializedName("iso_639_1")
+        val iso: String
+    )
 }
-
-data class ProductionCompany(
-    val name: String,
-    val id: Int,
-    @SerializedName("logo_path")
-    val logoPath: String?,
-    @SerializedName("origin_country")
-    val originCountry: String
-)
-
-data class ProductionCountry(
-    val name: String,
-    @SerializedName("iso_3166_1")
-    val iso: String
-)
-
-data class SpokenLanguage(
-    val name: String,
-    @SerializedName("iso_639_1")
-    val iso: String
-)
 
 fun MovieDetailsResponse.toMovie() = Movie(
     id = id,
@@ -84,7 +85,7 @@ fun MovieDetailsResponse.toMovie() = Movie(
     backdropPath = backdropPath?.let { Const.IMAGE_PREFIX + it } ?: "",
     originalLanguage = originalLanguage,
     genres = genres.map { it.name }.toMutableList(),
-    voteAverage = voteAverage,
+    voteAverage = (voteAverage * 10).toInt(),
     overview = overview ?: Const.NO_OVERVIEW,
-    releaseDate = releaseDate
+    releaseDate = releaseDate.parseToDate()
 )

@@ -23,7 +23,7 @@ fun loadBackdrop(view: ImageView, url: String?) {
         if (url.isNotEmpty()) {
             Picasso.get().load(url).into(view)
         } else {
-            Picasso.get().load(R.drawable.ic_no_poster).into(view)
+            Picasso.get().load(R.drawable.ic_no_backdrop).into(view)
         }
     }
 }

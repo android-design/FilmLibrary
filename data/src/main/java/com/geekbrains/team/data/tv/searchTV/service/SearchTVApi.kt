@@ -1,4 +1,4 @@
-package com.geekbrains.team.data.movies.searchMovies.service
+package com.geekbrains.team.data.tv.searchTV.service
 
 import com.geekbrains.team.data.tv.searchTV.service.model.ResponseSearchTVShow
 import io.reactivex.Single

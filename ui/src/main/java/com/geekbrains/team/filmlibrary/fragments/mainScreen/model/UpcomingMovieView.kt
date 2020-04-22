@@ -1,6 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.mainScreen.model
 
 import com.geekbrains.team.domain.movies.model.Movie
+import com.geekbrains.team.filmlibrary.parseToShortFormat
 
 data class UpcomingMovieView(
     val id: Int,
@@ -32,5 +33,5 @@ fun Movie.toUpcomingMovieView(): UpcomingMovieView =
         genres = genres.toString(),
         voteAverage = voteAverage.toString(),
         overview = overview,
-        releaseDate = releaseDate
+        releaseDate = releaseDate.parseToShortFormat()
     )

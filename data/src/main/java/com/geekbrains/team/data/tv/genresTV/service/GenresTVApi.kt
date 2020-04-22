@@ -1,4 +1,4 @@
-package com.geekbrains.team.data.movies.genresMovies.service
+package com.geekbrains.team.data.tv.genresTV.service
 
 import com.geekbrains.team.data.common.genre.model.ResponseGenres
 import io.reactivex.Single

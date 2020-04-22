@@ -1,8 +1,8 @@
-package com.geekbrains.team.data.movies.searchMovies.repository
+package com.geekbrains.team.data.tv.searchTV.repository
 
 import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const
-import com.geekbrains.team.data.movies.searchMovies.service.SearchTVApi
+import com.geekbrains.team.data.tv.searchTV.service.SearchTVApi
 import com.geekbrains.team.data.tv.searchTV.service.model.toTVShow
 import com.geekbrains.team.domain.search.repository.SearchTVRepository
 import com.geekbrains.team.domain.tv.model.TVShow

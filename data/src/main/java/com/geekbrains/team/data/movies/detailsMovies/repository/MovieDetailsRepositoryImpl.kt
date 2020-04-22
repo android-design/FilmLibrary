@@ -4,8 +4,8 @@ import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const
 import com.geekbrains.team.data.movies.detailsMovies.service.MovieDetailsApi
 import com.geekbrains.team.data.movies.detailsMovies.service.model.toMovie
-import com.geekbrains.team.domain.movies.detailsMovies.repository.MovieDetailsRepository
 import com.geekbrains.team.domain.movies.model.Movie
+import com.geekbrains.team.domain.movies.movieDetails.repository.MovieDetailsRepository
 import io.reactivex.Single
 import javax.inject.Inject
 

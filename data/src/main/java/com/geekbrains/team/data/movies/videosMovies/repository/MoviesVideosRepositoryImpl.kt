@@ -12,6 +12,6 @@ class MoviesVideosRepositoryImpl @Inject constructor(private val api: VideosMovi
     VideosRepository {
 
     override fun fetch(id: Int): Single<List<Video>> =
-        api.getMovieVideos(apiKey = BuildConfig.API_KEY, id = id)
+        api.getMoviesVideos(apiKey = BuildConfig.API_KEY, id = id)
             .map { response -> response.toVideo() }
 }

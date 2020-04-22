@@ -3,10 +3,10 @@ package com.geekbrains.team.domain.search.interactor
 import com.geekbrains.team.domain.base.UseCase
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
 import com.geekbrains.team.domain.movies.commonRepository.MoviesGenresRepository
-import com.geekbrains.team.domain.movies.commonRepository.TVGenresRepository
 import com.geekbrains.team.domain.movies.model.fillMoviesGenres
 import com.geekbrains.team.domain.search.repository.SearchMoviesRepository
 import com.geekbrains.team.domain.search.repository.SearchTVRepository
+import com.geekbrains.team.domain.tv.commonRepository.TVGenresRepository
 import com.geekbrains.team.domain.tv.model.fillTVGenres
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
