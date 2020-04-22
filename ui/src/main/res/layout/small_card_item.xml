@@ -63,7 +63,7 @@
                 android:layout_height="32dp"
                 android:layout_margin="4dp"
                 android:ellipsize="end"
-                android:gravity="top"
+                android:gravity="bottom"
                 android:lines="2"
                 android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
