@@ -47,7 +47,6 @@ class FullFilmInfoFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
-            Log.d("Answer", msg.localizedMessage )
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
@@ -73,7 +72,6 @@ class FullFilmInfoFragment : DaggerFragment() {
             })
         }
     }
-
 
 
     private fun startIndicators() {
@@ -124,6 +122,4 @@ class FullFilmInfoFragment : DaggerFragment() {
             }
         }
     }
-
-    private val movie = MovieView(666, "title", "originalTitle", "85", "2020", listOf(), "", "", "horror", "", "", "", "fsfcashjcbdjahcvsjcvasdh", "1","2", "3")
 }
