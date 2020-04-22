@@ -46,7 +46,6 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
         String trailer;
         String backDrop;
 
-
         if (movie != null) {
             holder.bindMovie(movie);
             trailer = movie.getTrailer();
@@ -65,7 +64,7 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
     @Override
     public int getItemCount() {
         if (movie == null && tvShow == null)
-            return 1;
+            return 0;
         else {
             if (movie != null)
                 return movie.getImages().size();
