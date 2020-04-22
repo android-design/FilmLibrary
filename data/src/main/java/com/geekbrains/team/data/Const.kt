@@ -1,7 +1,9 @@
 package com.geekbrains.team.data
 
+import java.util.*
+
 object Const {
-    const val LANGUAGE = "ru"
+    val LANGUAGE = Locale.getDefault().toLanguageTag()
     const val BASE_URL = "https://api.themoviedb.org/"
 
     const val NO_OVERVIEW = "NO DATA"

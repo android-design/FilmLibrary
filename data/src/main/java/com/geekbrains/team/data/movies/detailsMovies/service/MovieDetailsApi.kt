@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 
 interface MovieDetailsApi {
-    @GET("/3/movie/{id}?")
+    @GET("/3/movie/{id}?") // /3/movie/{movie_id}?
     fun getMovieDetails(
         @Path("id") id: Int,
         @Query("api_key") apiKey: String,

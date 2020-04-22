@@ -9,8 +9,8 @@ import retrofit2.http.Query
 interface MovieImagesApi {
     @GET("/3/movie/{movie_id}/images?")
     fun getMovieImages(
+        @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String,
-        @Query("language") language: String,
-        @Path("movie_id") id: Int
+        @Query("language") language: String
     ): Single<MovieImagesResponse>
 }

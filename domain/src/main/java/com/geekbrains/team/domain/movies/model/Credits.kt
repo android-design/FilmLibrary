@@ -1,8 +1,8 @@
 package com.geekbrains.team.domain.movies.model
 
 data class Credits(
-    val cast: List<CastPerson>,
-    val crew: List<CrewPerson>
+    val cast: List<CastPerson>?,
+    val crew: List<CrewPerson>?
 ) {
     data class CastPerson(
 

@@ -12,7 +12,7 @@ import javax.inject.Inject
 class MovieImagesRepositoryImpl @Inject constructor(private val api: MovieImagesApi) :
     MovieImagesRepository {
     override fun fetch(id: Int): Single<List<String>> {
-        return api.getMovieImages(BuildConfig.API_KEY, Const.LANGUAGE, id)
+        return api.getMovieImages(apiKey = BuildConfig.API_KEY, language = Const.LANGUAGE, id = id)
             .map { response: MovieImagesResponse ->
                 response.toPostersList()
             }
