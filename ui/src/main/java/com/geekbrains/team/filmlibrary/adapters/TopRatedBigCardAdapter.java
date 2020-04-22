@@ -48,7 +48,8 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
 
     @Override
     public int getItemCount() {
-        return 1;
+        if (movie == null) return 0;
+        else return movie.getImages().size();
     }
 
     class TopRatedBigCardHolder extends RecyclerView.ViewHolder {
