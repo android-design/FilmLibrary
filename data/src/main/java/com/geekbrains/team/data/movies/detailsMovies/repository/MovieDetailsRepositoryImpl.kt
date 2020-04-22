@@ -1,5 +1,6 @@
 package com.geekbrains.team.data.movies.detailsMovies.repository
 
+import android.util.Log
 import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const
 import com.geekbrains.team.data.movies.detailsMovies.service.MovieDetailsApi
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class MovieDetailsRepositoryImpl @Inject constructor(private val api: MovieDetailsApi) :
     MovieDetailsRepository {
     override fun fetch(id: Int): Single<Movie> {
-        return api.getMovieDetails(BuildConfig.API_KEY, Const.LANGUAGE, id)
+        return api.getMovieDetails(id, BuildConfig.API_KEY, Const.LANGUAGE)
             .map { movieDetailsResponse -> movieDetailsResponse.toMovie() }
     }
 }

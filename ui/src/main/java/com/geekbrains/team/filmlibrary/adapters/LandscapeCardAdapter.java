@@ -19,7 +19,13 @@ public class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdap
     public List<MovieView> movie = new ArrayList<>();
     public List<TVShowView> tvShow = new ArrayList<>();
 
+    private OnItemSelectedListener listener;
+
     public LandscapeCardAdapter() {
+    }
+
+    public void attachListener(OnItemSelectedListener listener) {
+        this.listener = listener;
     }
 
     public void setMovies(List<MovieView> data) {
@@ -37,7 +43,7 @@ public class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdap
     public LandscapeCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         LandscapeCardItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.landscape_card_item, parent, false);
-        return new LandscapeCardHolder(binding);
+        return new LandscapeCardHolder(binding, listener);
     }
 
     @Override
@@ -59,19 +65,23 @@ public class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdap
     class LandscapeCardHolder extends RecyclerView.ViewHolder {
 
         LandscapeCardItemBinding binding;
+        OnItemSelectedListener listener;
 
-        LandscapeCardHolder(LandscapeCardItemBinding binding) {
+        LandscapeCardHolder(LandscapeCardItemBinding binding, OnItemSelectedListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.listener = listener;
         }
 
         void bindMovie(MovieView movie) {
+            binding.setListener(listener);
             binding.setMovie(movie);
             binding.executePendingBindings();
 
         }
 
         void bindTVShow(TVShowView movie) {
+            binding.setListener(listener);
             binding.setTvShow(movie);
             binding.executePendingBindings();
         }

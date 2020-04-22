@@ -48,7 +48,7 @@ class MainScreenFragment : DaggerFragment() {
         if (context is OnItemSelectedListener) {
             listener = context
         } else {
-            throw RuntimeException("$context must implement OnAlbumSelectedListener")
+            throw RuntimeException("$context must implement OnItemSelectedListener")
         }
     }
 
@@ -63,11 +63,16 @@ class MainScreenFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        nowPlayingAdapter.attachListener(listener)
-
+        attachListeners()
         startObservers()
         getInfoFromServer()
         showInfo()
+    }
+
+    private fun attachListeners() {
+        nowPlayingAdapter.attachListener(listener)
+        upcomingAdapter.attachListener(listener)
+        topRatedMovieAdapter.attachListener(listener)
     }
 
     private fun startObservers() {

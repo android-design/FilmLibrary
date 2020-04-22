@@ -151,7 +151,7 @@
                     android:gravity="bottom"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/director_title_tv"
-                    tools:text="Аарон Шнайдер" />
+                    android:text="@{movie == null ? tvShow.overview : movie.director}" />
 
                 <TextView
                     android:id="@+id/screenplay_title_tv"
@@ -175,7 +175,7 @@
                     android:gravity="bottom"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv"
-                    tools:text="Том Хэнкс, Сесил Скотт Форестер" />
+                    android:text="@{movie == null ? tvShow.overview : movie.writer}" />
 
                 <TextView
                     android:id="@+id/producer_title_tv"
@@ -199,7 +199,7 @@
                     android:gravity="bottom"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/producer_title_tv"
-                    tools:text="Гари Гоэцман, Джейсон Клот, Дэвид Коутсворт" />
+                    android:text="@{movie == null ? tvShow.overview : movie.producer}" />
 
                 <TextView
                     android:id="@+id/whole_crew_tv"

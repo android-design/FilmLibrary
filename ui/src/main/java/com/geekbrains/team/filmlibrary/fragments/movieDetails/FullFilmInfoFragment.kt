@@ -17,14 +17,13 @@ import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.FullInfoAdapter
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
+import com.geekbrains.team.filmlibrary.model.MovieView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
 import javax.inject.Inject
 
 class FullFilmInfoFragment : DaggerFragment() {
     private val args: FullFilmInfoFragmentArgs by navArgs()
-
-    private val idAA = 550
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -44,7 +43,6 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.loadTopRatedMovies(idAA)
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
@@ -56,7 +54,7 @@ class FullFilmInfoFragment : DaggerFragment() {
             }
         })
 
-        viewModel.loadTopRatedMovies(args.id)
+        viewModel.loadMovieInfo(args.id)
 
         topPager.apply {
             adapter = infoAdapter
@@ -119,18 +117,6 @@ class FullFilmInfoFragment : DaggerFragment() {
             }
         }
     }
-}
 
-/*
-class TopFragment : DaggerFragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.top_fragment, container, false)
-    }
+    private val movie = MovieView(666, "title", "originalTitle", "85", "2020", listOf(), "", "", "horror", "", "", "", "fsfcashjcbdjahcvsjcvasdh", "1","2", "3")
 }
-*/

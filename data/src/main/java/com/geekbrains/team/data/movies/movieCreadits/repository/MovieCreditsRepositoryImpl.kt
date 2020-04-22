@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MovieCreditsRepositoryImpl @Inject constructor(private val api: MovieCreditsApi) :
     MovieCreditsRepository {
     override fun fetch(id: Int): Single<Credits> {
-        return api.getMovieCredits(BuildConfig.API_KEY, Const.LANGUAGE, id).map { it.toCredits() }
+        return api.getMovieCredits(id, BuildConfig.API_KEY, Const.LANGUAGE).map { it.toCredits() }
     }
 
 

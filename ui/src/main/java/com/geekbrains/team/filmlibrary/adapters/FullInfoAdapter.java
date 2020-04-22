@@ -19,15 +19,10 @@ import com.geekbrains.team.filmlibrary.model.TVShowView;
 import com.squareup.picasso.Picasso;
 
 public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullInfoCardHolder> {
-    private MovieDetails fullMovie;
     private MovieView movie;
     private TVShowView tvShow;
 
     public FullInfoAdapter() {
-    }
-
-    public void setFullMovie(MovieDetails data) {
-        fullMovie = data;
     }
 
     public void setMovie(MovieView data) {
@@ -51,18 +46,16 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
         String trailer;
         String backDrop;
 
-        holder.bindFullMovie(fullMovie);
 
-//        if (movie != null) {
+        if (movie != null) {
             holder.bindMovie(movie);
             trailer = movie.getTrailer();
             backDrop = movie.getImages().get(position);
-//        }
-//        else {
-//            holder.bindTVShow(tvShow);
-//            trailer = tvShow.getTrailer();
-//            backDrop = tvShow.getImages().get(position);
-//        }
+        } else {
+            holder.bindTVShow(tvShow);
+            trailer = tvShow.getTrailer();
+            backDrop = tvShow.getImages().get(position);
+        }
 
         String finalTrailer = trailer;
         holder.play.setOnClickListener(v -> v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(finalTrailer))));
@@ -71,12 +64,14 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
 
     @Override
     public int getItemCount() {
-        if (movie == null) return 0;
-        else return movie.getImages().size();
-//        if (movie != null)
-//            return movie.getImages().size();
-//        else
-//            return tvShow.getImages().size();
+        if (movie == null && tvShow == null)
+            return 0;
+        else {
+            if (movie != null)
+                return movie.getImages().size();
+            else
+                return tvShow.getImages().size();
+        }
     }
 
     class FullInfoCardHolder extends RecyclerView.ViewHolder {
@@ -89,11 +84,6 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
             this.binding = binding;
             play = binding.getRoot().findViewById(R.id.play_btn);
             backDrop = binding.getRoot().findViewById(R.id.title_iv);
-        }
-
-        void bindFullMovie(MovieDetails movie) {
-            binding.setFullMovie(movie);
-            binding.executePendingBindings();
         }
 
         void bindMovie(MovieView movie) {

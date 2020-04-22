@@ -22,7 +22,13 @@ import com.squareup.picasso.Picasso;
 public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCardAdapter.TopRatedBigCardHolder> {
     public MovieView movie;
 
+    private OnItemSelectedListener listener;
+
     public TopRatedBigCardAdapter() {
+    }
+
+    public void attachListener(OnItemSelectedListener listener) {
+        this.listener = listener;
     }
 
     public void setMovies(MovieView data) {
@@ -34,7 +40,7 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
     public TopRatedBigCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         BigCardItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.big_card_item, parent, false);
-        return new TopRatedBigCardHolder(binding);
+        return new TopRatedBigCardHolder(binding, listener);
     }
 
     @Override
@@ -54,17 +60,20 @@ public class TopRatedBigCardAdapter extends RecyclerView.Adapter<TopRatedBigCard
 
     class TopRatedBigCardHolder extends RecyclerView.ViewHolder {
         BigCardItemBinding binding;
+        OnItemSelectedListener listener;
         private ImageButton play;
         private ImageView backDrop;
 
-        TopRatedBigCardHolder(BigCardItemBinding binding) {
+        TopRatedBigCardHolder(BigCardItemBinding binding, OnItemSelectedListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.listener = listener;
             play = binding.getRoot().findViewById(R.id.play_btn);
             backDrop = binding.getRoot().findViewById(R.id.title_iv);
         }
 
         void bindMovie(MovieView movie) {
+            binding.setListener(listener);
             binding.setMovie(movie);
             binding.executePendingBindings();
         }

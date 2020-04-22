@@ -10,7 +10,5 @@ import javax.inject.Singleton
 abstract class MovieImagesModule {
     @Binds
     @Singleton
-    abstract fun provideMovieImagesRepository(
-        repository: MovieImagesRepositoryImpl
-    ): MovieImagesRepository
+    abstract fun provideMovieImagesRepository(repository: MovieImagesRepositoryImpl): MovieImagesRepository
 }

@@ -20,7 +20,15 @@ class TopFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showInfo()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        showInfo()
+    }
+
+    private fun showInfo() {
         val mAdapter = fragmentManager?.let {
             MyTabAdapter(
                 it,
