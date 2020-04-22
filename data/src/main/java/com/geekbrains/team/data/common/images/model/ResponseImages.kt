@@ -50,6 +50,6 @@ data class ResponseImages(
 
 fun ResponseImages.toImages(): Images =
     Images(
-        backdrops.take(15).map { Images.Backdrop(POSTER_AND_BACKDROP_PREFIX + it.filePath) },
-        posters.take(15).map { Images.Poster(POSTER_AND_BACKDROP_PREFIX + it.filePath) }
+        backdrops.take(5).map { Images.Backdrop(POSTER_AND_BACKDROP_PREFIX + it.filePath) },
+        posters.take(5).map { Images.Poster(POSTER_AND_BACKDROP_PREFIX + it.filePath) }
     )

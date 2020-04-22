@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.geekbrains.team.domain.movies.model.MovieDetails;
 import com.geekbrains.team.filmlibrary.R;
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoItemBinding;
 import com.geekbrains.team.filmlibrary.model.MovieView;
@@ -65,7 +64,7 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
     @Override
     public int getItemCount() {
         if (movie == null && tvShow == null)
-            return 1;
+            return 0;
         else {
             if (movie != null)
                 return movie.getImages().size();
