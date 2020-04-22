@@ -1,6 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,8 +47,10 @@ class FullFilmInfoFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
+            Log.d("Answer", msg.localizedMessage )
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
         })
+
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 infoAdapter.setMovie(it)
@@ -121,6 +124,4 @@ class FullFilmInfoFragment : DaggerFragment() {
             }
         }
     }
-
-    private val movie = MovieView(666, "title", "originalTitle", "85", "2020", listOf(), "", "", "horror", "", "", "", "fsfcashjcbdjahcvsjcvasdh", "1","2", "3")
 }
