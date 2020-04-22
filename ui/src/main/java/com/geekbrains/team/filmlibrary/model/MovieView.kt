@@ -45,7 +45,7 @@ fun Movie.toMovieView() = MovieView(
 )
 
 private fun Movie.movieImages(): List<String> = images?.let { imagesToMap ->
-    imagesToMap.posters.map {
+    imagesToMap.backdrops.map {
         it.url
     }
 } ?: listOf()

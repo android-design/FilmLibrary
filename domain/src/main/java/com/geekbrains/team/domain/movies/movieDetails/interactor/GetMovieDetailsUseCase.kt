@@ -8,7 +8,7 @@ import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.movies.model.fillMovieGenres
 import com.geekbrains.team.domain.movies.movieDetails.repository.MovieDetailsRepository
 import io.reactivex.Single
-import io.reactivex.functions.Function3
+import io.reactivex.functions.Function4
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -25,9 +25,11 @@ class GetMovieDetailsUseCase @Inject constructor(
             detailsRepository.fetch(params.id),
             moviesImagesRepository.fetch(params.id),
             moviesGenresRepository.fetch(),
-            Function3 { sourceMovie, sourceImages, listGenres ->
+            moviesVideoRepository.fetch(params.id),
+            Function4 { sourceMovie, sourceImages, listGenres, videos ->
                 val movie = fillMovieGenres(listGenres, sourceMovie)
                 movie.images = sourceImages
+                movie.videos = videos
                 movie
             }
         )
