@@ -9,7 +9,7 @@ import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class MovieDetailsFragmentModule {
+abstract class FullFilmInfoFragmentModule {
 
     @ContributesAndroidInjector(
         modules = [
@@ -17,7 +17,7 @@ abstract class MovieDetailsFragmentModule {
         ]
     )
 
-    internal abstract fun movieDetailsFragment(): FullFilmInfoFragment
+    internal abstract fun fullInfoFilmFragment(): FullFilmInfoFragment
 
     @Binds
     @IntoMap

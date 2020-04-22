@@ -30,7 +30,7 @@ data class MovieDetailsResponse(
     @SerializedName("release_date")
     val releaseDate: String,
     val revenue: String,
-    val runtime: String,
+    val runtime: Int,
     val status: String,
     @SerializedName("spoken_languages")
     val spokenLanguages: List<SpokenLanguage>,
@@ -87,5 +87,9 @@ fun MovieDetailsResponse.toMovie() = Movie(
     genres = genres.map { it.name }.toMutableList(),
     voteAverage = (voteAverage * 10).toInt(),
     overview = overview ?: Const.NO_OVERVIEW,
-    releaseDate = releaseDate.parseToDate()
+    releaseDate = releaseDate.parseToDate(),
+    productionCountries = productionCountries.map{ Movie.ProductionCountry(it.name, it.iso)},
+    productionCompanies = productionCompanies.map { Movie.ProductionCompany(id = it.id,
+        logoPath = it.logoPath, name = it.name, originCountry = it.originCountry) },
+    runtime = runtime
 )

@@ -20,8 +20,8 @@ import com.squareup.picasso.Picasso;
 
 public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullInfoCardHolder> {
     private MovieDetails fullMovie;
-//    private MovieView movie;
-//    private TVShowView tvShow;
+    private MovieView movie;
+    private TVShowView tvShow;
 
     public FullInfoAdapter() {
     }
@@ -30,13 +30,13 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
         fullMovie = data;
     }
 
-//    public void setMovie(MovieView data) {
-//        movie = data;
-//    }
-//
-//    public void setTvShow(TVShowView data) {
-//        tvShow = data;
-//    }
+    public void setMovie(MovieView data) {
+        movie = data;
+    }
+
+    public void setTvShow(TVShowView data) {
+        tvShow = data;
+    }
 
     @NonNull
     @Override
@@ -54,30 +54,30 @@ public class FullInfoAdapter extends RecyclerView.Adapter<FullInfoAdapter.FullIn
         holder.bindFullMovie(fullMovie);
 
 //        if (movie != null) {
-//            holder.bindMovie(movie);
-//            trailer = movie.getTrailer();
-//            backDrop = movie.getImages().get(position);
-//        } else {
+            holder.bindMovie(movie);
+            trailer = movie.getTrailer();
+            backDrop = movie.getImages().get(position);
+//        }
+//        else {
 //            holder.bindTVShow(tvShow);
 //            trailer = tvShow.getTrailer();
 //            backDrop = tvShow.getImages().get(position);
 //        }
 
-//        String finalTrailer = trailer;
-//        holder.play.setOnClickListener(v -> v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(finalTrailer))));
-//        Picasso.get().load(backDrop).into(holder.backDrop);
+        String finalTrailer = trailer;
+        holder.play.setOnClickListener(v -> v.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(finalTrailer))));
+        Picasso.get().load(backDrop).into(holder.backDrop);
     }
 
     @Override
     public int getItemCount() {
-        if (fullMovie == null) return 0;
-        else return 5;
-    }
+        if (movie == null) return 0;
+        else return movie.getImages().size();
 //        if (movie != null)
 //            return movie.getImages().size();
 //        else
 //            return tvShow.getImages().size();
-//    }
+    }
 
     class FullInfoCardHolder extends RecyclerView.ViewHolder {
         FullFilmInfoItemBinding binding;

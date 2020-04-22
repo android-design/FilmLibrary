@@ -31,18 +31,33 @@ data class Movie(
     val revenue: Int = 0,
     val runtime: Int = 0,
     // TODO Add class for actors.
-    val cast: List<String>? = null, // Актеры
+    var cast: List<Actor>? = null, // Актеры
     // TODO Add class for crew
-    val crew: List<String>? = null, // Команда
+    var crew: List<Member>? = null, // Команда
     val spokenLanguages: List<SpokenLanguage>? = null,
     val status: String? = null,
     val tagline: String? = null,
     val title: String,
     val video: Boolean,
     val voteAverage: Int,
-    val voteCount: Int
+    val voteCount: Int,
+    var producer: String? = null,
+    var writer: String? = null,
+    var director: String? = null
 ) : MovieAndTVShow() {
 
+    data class Actor(
+        val id: Int,
+        val name: String,
+        val path: String?,
+        val character: String
+    )
+
+    data class Member(
+
+        val name: String,
+        val job: String
+    )
     data class ProductionCompany(
         val id: Int,
         val logoPath: Any?,

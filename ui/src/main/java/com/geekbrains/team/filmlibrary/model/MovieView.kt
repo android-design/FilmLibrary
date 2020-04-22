@@ -19,7 +19,10 @@ data class MovieView(
     val backdropPath: String, // Картинка из фильма
     val productionCountries: String, // Страны производства (строка)
     val runtime: String, // Продолжительность (строка)
-    val overview: String // Описание (строка)
+    val overview: String, // Описание (строка)
+    val producer: String,
+    val writer: String,
+    val director: String
 )
 
 fun Movie.toMovieView() = MovieView(
@@ -35,7 +38,10 @@ fun Movie.toMovieView() = MovieView(
     backdropPath = backdropPath,
     productionCountries = productionCountries.toString(),
     runtime = runtime.toString(),
-    overview = overview
+    overview = overview,
+    producer = producer ?: "",
+    writer = writer ?: "",
+    director = director ?: ""
 )
 
 private fun Movie.movieImages(): List<String> = images?.let { imagesToMap ->

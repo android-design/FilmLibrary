@@ -1,8 +1,7 @@
 package com.geekbrains.team.data.movies.movieCreadits.service.model
 
-import com.geekbrains.team.domain.movies.model.CastPerson
 import com.geekbrains.team.domain.movies.model.Credits
-import com.geekbrains.team.domain.movies.model.CrewPerson
+import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MovieCreditsResponse(
@@ -22,7 +21,14 @@ data class MovieCreditsResponse(
         val order: Int,
         @SerializedName("profile_path")
         val profilePath: String?
-    )
+    ) {
+        fun toMovieActor() = Movie.Actor(
+            id = this.id,
+            name = this.name,
+            character = this.character,
+            path = this.profilePath
+        )
+    }
 
     data class Member(
         @SerializedName("credit_id")
@@ -34,10 +40,15 @@ data class MovieCreditsResponse(
         val name: String,
         @SerializedName("profile_path")
         val profilePath: String?
-    )
+    ) {
+        fun toMovieMember() = Movie.Member(
+            name = this.name,
+            job =  this.job
+        )
+    }
 }
 
-fun MovieCreditsResponse.Cast.toCastPerson(): CastPerson = CastPerson(
+fun MovieCreditsResponse.Cast.toCastPerson(): Credits.CastPerson = Credits.CastPerson(
     castId = this.castId,
     character = this.character,
     creditId = this.creditId,
@@ -48,7 +59,7 @@ fun MovieCreditsResponse.Cast.toCastPerson(): CastPerson = CastPerson(
     profilePath = this.profilePath
 )
 
-fun MovieCreditsResponse.Member.toCrewPerson(): CrewPerson = CrewPerson(
+fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.CrewPerson(
     creditId = this.creditId,
     department = this.department,
     gender = this.gender,

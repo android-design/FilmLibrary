@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.geekbrains.team.filmlibrary.fragments.movieDetails.MovieDetailsFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.movieDetails.FullFilmInfoFragment"
         android:label="MovieDetailsFragment" >
         <argument
             android:name="id"
