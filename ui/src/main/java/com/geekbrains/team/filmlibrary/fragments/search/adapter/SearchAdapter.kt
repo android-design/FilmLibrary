@@ -3,6 +3,7 @@ package com.geekbrains.team.filmlibrary.fragments.search.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.databinding.SearchMovieItemRvBinding
 import com.geekbrains.team.filmlibrary.databinding.SearchTvItemRvBinding
 import com.geekbrains.team.filmlibrary.fragments.search.model.SearchView
@@ -18,6 +19,12 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val mDataList: MutableList<SearchView> = ArrayList()
 
+    private var listener: OnItemSelectedListener? = null
+
+    fun attachListener(listener: OnItemSelectedListener?) {
+        this.listener = listener
+    }
+
     fun setData(data: List<SearchView>) {
         mDataList.clear()
         mDataList.addAll(data)
@@ -29,11 +36,11 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (viewType) {
             VIEW_TYPE_MOVIE -> {
                 val binding = SearchMovieItemRvBinding.inflate(inflater, parent, false)
-                MovieViewHolder(binding)
+                MovieViewHolder(binding, delegate = listener)
             }
             else -> {
                 val binding = SearchTvItemRvBinding.inflate(inflater, parent, false)
-                TVShowViewHolder(binding)
+                TVShowViewHolder(binding, delegate = listener)
             }
         }
     }
@@ -56,19 +63,29 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    class MovieViewHolder(private val binding: SearchMovieItemRvBinding) :
+    class MovieViewHolder(
+        private val binding: SearchMovieItemRvBinding,
+        private val delegate: OnItemSelectedListener?
+    ) :
         RecyclerView.ViewHolder(binding.root) {
+        var listener: OnItemSelectedListener? = null
 
         fun bind(movie: SearchedMovieView) {
+            binding.listener = delegate
             binding.movie = movie
             binding.executePendingBindings()
         }
     }
 
-    class TVShowViewHolder(private val binding: SearchTvItemRvBinding) :
+    class TVShowViewHolder(
+        private val binding: SearchTvItemRvBinding,
+        private val delegate: OnItemSelectedListener?
+    ) :
         RecyclerView.ViewHolder(binding.root) {
+        var listener: OnItemSelectedListener? = null
 
         fun bind(tvshow: SearchedTVShowView) {
+            binding.listener = delegate
             binding.tvshow = tvshow
             binding.executePendingBindings()
         }

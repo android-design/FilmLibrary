@@ -106,6 +106,7 @@ class MainScreenFragment : DaggerFragment() {
         viewModel.movieOfTheWeekData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 binding.movieOfTheWeek = it
+                binding.listener = listener
                 film_of_week_play_btn.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.trailer)))
                 }
@@ -115,6 +116,7 @@ class MainScreenFragment : DaggerFragment() {
         viewModel.tvShowPremierData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 binding.tvShowPremier = it
+                binding.listener = listener
                 series_play_btn.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.trailer)))
                 }

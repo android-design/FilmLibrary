@@ -1,11 +1,13 @@
 package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -43,6 +45,11 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
+            Log.d("Answer", msg.localizedMessage )
+            Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
+        })
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
