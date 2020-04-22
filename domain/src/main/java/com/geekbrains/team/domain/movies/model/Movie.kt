@@ -58,6 +58,7 @@ data class Movie(
         val name: String,
         val job: String
     )
+
     data class ProductionCompany(
         val id: Int,
         val logoPath: Any?,
@@ -88,5 +89,20 @@ fun fillMoviesGenres(
                 val result = genresMoviesMap[it]
                 result?.let { movie.genres.add(result) }
             }
+        }
+    }
+
+// TODO Fix this to one function
+fun fillMovieGenres(
+    moviesGenres: List<Genre>,
+    movie: Movie
+): Movie =
+    movie.apply {
+        val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
+
+        movie.genreIds?.map {
+            val result = genresMoviesMap[it]
+            result?.let { movie.genres.add(result) }
+
         }
     }

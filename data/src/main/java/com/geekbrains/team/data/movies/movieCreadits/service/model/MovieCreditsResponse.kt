@@ -70,6 +70,6 @@ fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.Cre
 )
 
 fun MovieCreditsResponse.toCredits(): Credits = Credits(
-    crew = this.crew.map { member -> member.toCrewPerson() },
-    cast = this.casts.map { cast -> cast.toCastPerson() }
+    crew = listOf(),//this.crew.map { member -> member.toCrewPerson() },
+    cast = listOf()//this.casts.map { cast -> cast.toCastPerson() }
 )
