@@ -16,6 +16,10 @@
             name="tvShow"
             type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
+        <variable
+            name="listener"
+            type="com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener" />
+
     </data>
 
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,8 +28,7 @@
         android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/series_tv">
+        android:onClick="@{() -> listener.mainOpenItemInfo(movie == null ? tvShow.id : movie.id)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -58,8 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:layout_margin="4dp"
-                android:gravity="top"
                 android:ellipsize="end"
+                android:gravity="top"
                 android:lines="2"
                 android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
@@ -106,6 +109,7 @@
                     style="@style/Subtitle1"
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />

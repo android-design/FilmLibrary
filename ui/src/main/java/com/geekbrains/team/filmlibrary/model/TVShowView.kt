@@ -33,13 +33,7 @@ fun TVShow.toTVShowView() =
         voteAverage = voteAverage.toString(),
         trailer = trailer(),
         // TODO Fix this to fea ture.
-        images = images ?: listOf(
-            "https://image.tmdb.org/t/p/w500/3lu6iHT189M6SL8q9OSmISYDoop.jpg",
-            "https://image.tmdb.org/t/p/w500/4VGR3bzjfVQ0skc8T1O92ieyKLa.jpg",
-            "https://image.tmdb.org/t/p/w500/oZibj2AItah70g4CzFgOw3jiFln.jpg",
-            "https://image.tmdb.org/t/p/w500/elvVHhtKYFLoGGhfyKhhA0wQ4kc.jpg",
-            "https://image.tmdb.org/t/p/w500/axqGyWPzkN8WNdl6wGwOd3EdRKE.jpg"
-        ),
+        images = images ?: listOf(),
         firstAirDate = firstAirDate,
         episodeRunTime = episodeRunTime?.firstOrNull() ?: 0,
         lastAirDate = lastAirDate ?: "",

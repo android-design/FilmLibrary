@@ -68,6 +68,7 @@ public class LandscapeCardAdapter extends RecyclerView.Adapter<LandscapeCardAdap
         void bindMovie(MovieView movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
+
         }
 
         void bindTVShow(TVShowView movie) {

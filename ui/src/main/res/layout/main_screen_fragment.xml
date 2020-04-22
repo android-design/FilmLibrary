@@ -41,9 +41,9 @@
                     android:id="@+id/indicator"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:orientation="horizontal"
                     android:padding="15dp"
-                    android:gravity="center_horizontal"
                     app:layout_constraintEnd_toEndOf="@id/topPager"
                     app:layout_constraintStart_toStartOf="@id/topPager"
                     app:layout_constraintTop_toBottomOf="@id/topPager" />
@@ -155,8 +155,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="180dp"
                             android:scaleType="centerCrop"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:backdrop="@{movieOfTheWeek.backdropPath}"
+                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="ContentDescription" />
 
                         <ImageButton
@@ -177,12 +177,13 @@
                             android:layout_width="33dp"
                             android:layout_height="33dp"
                             android:background="@android:color/transparent"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_play_circle"
+                            android:visibility="@{TextUtils.isEmpty(movieOfTheWeek.trailer) ? View.GONE : View.VISIBLE}"
                             app:layout_constraintBottom_toBottomOf="@id/film_of_week_title_iv"
                             app:layout_constraintEnd_toEndOf="@id/film_of_week_title_iv"
                             app:layout_constraintStart_toStartOf="@id/film_of_week_title_iv"
                             app:layout_constraintTop_toTopOf="@id/film_of_week_title_iv"
-                            android:visibility="@{TextUtils.isEmpty(movieOfTheWeek.trailer) ? View.GONE : View.VISIBLE}"
                             tools:ignore="ContentDescription" />
 
                         <ImageView
@@ -232,10 +233,10 @@
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:layout_marginEnd="28dp"
-                            android:layout_marginBottom="9dp"
+                            android:layout_marginBottom="8dp"
                             android:adjustViewBounds="true"
                             android:src="@drawable/ic_imdb"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -300,12 +301,13 @@
                             android:layout_width="33dp"
                             android:layout_height="33dp"
                             android:background="@android:color/transparent"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/ic_play_circle"
+                            android:visibility="@{TextUtils.isEmpty(tvShowPremier.trailer) ? View.GONE : View.VISIBLE}"
                             app:layout_constraintBottom_toBottomOf="@id/series_title_iv"
                             app:layout_constraintEnd_toEndOf="@id/series_title_iv"
                             app:layout_constraintStart_toStartOf="@id/series_title_iv"
                             app:layout_constraintTop_toTopOf="@id/series_title_iv"
-                            android:visibility="@{TextUtils.isEmpty(tvShowPremier.trailer) ? View.GONE : View.VISIBLE}"
                             tools:ignore="ContentDescription" />
 
                         <ImageView
@@ -346,7 +348,7 @@
                         <TextView
                             android:id="@+id/series_rating_tv"
                             style="@style/Subtitle1"
-                            android:layout_width="20dp"
+                            android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="8dp"
@@ -356,10 +358,10 @@
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
                             android:layout_marginEnd="28dp"
-                            android:layout_marginBottom="9dp"
+                            android:layout_marginBottom="8dp"
                             android:adjustViewBounds="true"
                             android:src="@drawable/ic_imdb"
                             app:layout_constraintBottom_toBottomOf="parent"

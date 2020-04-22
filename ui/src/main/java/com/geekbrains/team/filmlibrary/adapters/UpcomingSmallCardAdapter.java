@@ -19,7 +19,13 @@ public class UpcomingSmallCardAdapter extends RecyclerView.Adapter<UpcomingSmall
     public List<UpcomingMovieView> movie = new ArrayList<>();
     public List<TVShowView> tvShow = new ArrayList<>();
 
+    private OnItemSelectedListener listener;
+
     public UpcomingSmallCardAdapter() {
+    }
+
+    public void attachListener(OnItemSelectedListener listener) {
+        this.listener = listener;
     }
 
     public void setMovies(List<UpcomingMovieView> data) {
@@ -37,7 +43,7 @@ public class UpcomingSmallCardAdapter extends RecyclerView.Adapter<UpcomingSmall
     public UpcomingSmallCardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         UpcomingSmallCardItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.upcoming_small_card_item, parent, false);
-        return new UpcomingSmallCardHolder(binding);
+        return new UpcomingSmallCardHolder(binding, listener);
     }
 
     @Override
@@ -59,18 +65,22 @@ public class UpcomingSmallCardAdapter extends RecyclerView.Adapter<UpcomingSmall
     class UpcomingSmallCardHolder extends RecyclerView.ViewHolder {
 
         UpcomingSmallCardItemBinding binding;
+        OnItemSelectedListener listener;
 
-        UpcomingSmallCardHolder(UpcomingSmallCardItemBinding binding) {
+        UpcomingSmallCardHolder(UpcomingSmallCardItemBinding binding, OnItemSelectedListener listener) {
             super(binding.getRoot());
             this.binding = binding;
+            this.listener = listener;
         }
 
         void bindMovie(UpcomingMovieView movie) {
+            binding.setListener(listener);
             binding.setMovie(movie);
             binding.executePendingBindings();
         }
 
         void bindTVShow(TVShowView movie) {
+            binding.setListener(listener);
             binding.setTvShow(movie);
             binding.executePendingBindings();
         }

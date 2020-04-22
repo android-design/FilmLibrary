@@ -1,5 +1,6 @@
 package com.geekbrains.team.filmlibrary.fragments.mainScreen
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
+import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.SmallCardAdapter
 import com.geekbrains.team.filmlibrary.adapters.TopRatedBigCardAdapter
 import com.geekbrains.team.filmlibrary.adapters.UpcomingSmallCardAdapter
@@ -34,10 +36,21 @@ class MainScreenFragment : DaggerFragment() {
 
     private val viewModel by viewModels<MainScreenViewModel> { viewModelFactory }
     lateinit var binding: MainScreenFragmentBinding
+    private lateinit var listener: OnItemSelectedListener
 
     private val upcomingAdapter = UpcomingSmallCardAdapter()
     private val nowPlayingAdapter = SmallCardAdapter()
     private val topRatedMovieAdapter = TopRatedBigCardAdapter()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnItemSelectedListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnAlbumSelectedListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +62,8 @@ class MainScreenFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        nowPlayingAdapter.attachListener(listener)
 
         startObservers()
         getInfoFromServer()

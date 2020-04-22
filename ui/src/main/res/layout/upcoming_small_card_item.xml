@@ -15,6 +15,10 @@
             name="tvShow"
             type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
+        <variable
+            name="listener"
+            type="com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener" />
+
     </data>
 
     <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +27,8 @@
         android:layout_height="255dp"
         android:layout_margin="5dp"
         app:cardCornerRadius="4dp"
-        app:cardElevation="8dp">
+        app:cardElevation="8dp"
+        android:onClick="@{() -> listener.mainOpenItemInfo(movie == null ? tvShow.id : movie.id)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
