@@ -15,7 +15,7 @@ class TopTVShowViewModel @Inject constructor(
     private val useCaseTopRatedMovies: GetTopRatedMovies
 ) :
     BaseViewModel() {
-    var topRatedMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
+    private var topRatedMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
 
     fun loadTopRatedMovies() =
         useCaseTopRatedMovies.execute(params = None())

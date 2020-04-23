@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
-import com.geekbrains.team.filmlibrary.adapters.SmallCardAdapter
-import com.geekbrains.team.filmlibrary.adapters.TopRatedBigCardAdapter
-import com.geekbrains.team.filmlibrary.adapters.UpcomingSmallCardAdapter
+import com.geekbrains.team.filmlibrary.adapters.*
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
@@ -38,9 +35,9 @@ class MainScreenFragment : DaggerFragment() {
     lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
 
-    private val upcomingAdapter = UpcomingSmallCardAdapter()
-    private val nowPlayingAdapter = SmallCardAdapter()
-    private val topRatedMovieAdapter = TopRatedBigCardAdapter()
+    private val upcomingAdapter = UpcomingMoviesAdapter()
+    private val nowPlayingAdapter = SmallCardAdapterK()
+    private val topRatedMovieAdapter = TopRatedBigCardAdapterK()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

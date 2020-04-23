@@ -18,9 +18,8 @@ import com.geekbrains.team.filmlibrary.fragments.search.SearchFragmentDirections
 import com.geekbrains.team.filmlibrary.fragments.top.TopFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity(), OnItemSelectedListener {
-    val minLux = 20
+    val minLux = 15
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
@@ -33,8 +32,7 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     private fun setUpNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
         NavigationUI.setupWithNavController(btv, navController)
     }
 

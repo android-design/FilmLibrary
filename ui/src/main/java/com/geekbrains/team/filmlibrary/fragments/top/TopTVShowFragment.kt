@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.LandscapeCardAdapter
+import com.geekbrains.team.filmlibrary.adapters.LandscapeAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
@@ -27,7 +27,7 @@ class TopTVShowFragment : DaggerFragment() {
 
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
-    private val tvShowsAdapter = LandscapeCardAdapter()
+    private val tvShowsAdapter = LandscapeAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

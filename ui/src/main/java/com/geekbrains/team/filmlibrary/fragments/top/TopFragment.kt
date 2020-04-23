@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.MyTabAdapter
+import com.geekbrains.team.filmlibrary.adapters.TabAdapter
 import kotlinx.android.synthetic.main.top_fragment.*
 
 class TopFragment : Fragment() {
@@ -30,7 +30,7 @@ class TopFragment : Fragment() {
 
     private fun showInfo() {
         val mAdapter = fragmentManager?.let {
-            MyTabAdapter(
+            TabAdapter(
                 it,
                 listOf(TopMovieFragment(), TopTVShowFragment()),
                 arrayListOf(getString(R.string.movies), getString(R.string.tvShows))

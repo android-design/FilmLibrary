@@ -1,7 +1,6 @@
 package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.FullInfoAdapter
+import com.geekbrains.team.filmlibrary.adapters.FullInfoAdapterK
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
-import com.geekbrains.team.filmlibrary.model.MovieView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
 import javax.inject.Inject
@@ -32,7 +30,7 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     private val viewModel by viewModels<FullFilmInfoViewModel>({ activity as MainActivity }) { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
-    private val infoAdapter = FullInfoAdapter()
+    private val infoAdapter = FullInfoAdapterK()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +70,6 @@ class FullFilmInfoFragment : DaggerFragment() {
             })
         }
     }
-
 
     private fun startIndicators() {
         indicator.removeAllViews()
