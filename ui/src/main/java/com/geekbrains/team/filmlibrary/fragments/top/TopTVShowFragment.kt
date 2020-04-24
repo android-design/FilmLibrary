@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.LandscapeAdapter
+import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.top_inner_fragment.*
@@ -27,7 +28,7 @@ class TopTVShowFragment : DaggerFragment() {
 
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
-    private val tvShowsAdapter = LandscapeAdapter()
+    private lateinit var tvShowsAdapter: GenericAdapter<TVShowView>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,17 +50,28 @@ class TopTVShowFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowsAdapter.attachListener(listener)
+        initAdapters()
+        startObservers()
+        getInfoFromServer()
+    }
 
+    private fun initAdapters() {
+        tvShowsAdapter = object : GenericAdapter<TVShowView>(listener) {
+            override fun getLayoutId(position: Int, obj: TVShowView): Int =
+                R.layout.landscape_tv_show_card_item
+        }
+    }
+
+    private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.topRatedTVShowsData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(tvShowsAdapter.tvShow, it)
+                val diffUtilCallback = DiffUtilsCallback(tvShowsAdapter.itemList, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                tvShowsAdapter.setTVShows(it)
+                tvShowsAdapter.update(it)
                 diffResult.dispatchUpdatesTo(tvShowsAdapter)
                 inner_top_recycler.apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -67,7 +79,9 @@ class TopTVShowFragment : DaggerFragment() {
                 }
             }
         })
+    }
 
+    private fun getInfoFromServer() {
         viewModel.loadTopRatedTVShows()
     }
 }

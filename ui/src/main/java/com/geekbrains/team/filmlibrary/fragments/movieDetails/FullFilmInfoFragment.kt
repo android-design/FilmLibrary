@@ -16,8 +16,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.FullInfoAdapterK
+import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
+import com.geekbrains.team.filmlibrary.model.MovieView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     private val viewModel by viewModels<FullFilmInfoViewModel>({ activity as MainActivity }) { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
-    private val infoAdapter = FullInfoAdapterK()
+    private lateinit var infoAdapter: GenericAdapter<MovieView>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,22 +45,40 @@ class FullFilmInfoFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initAdapter()
+        startObservers()
+        getInfoFromServer()
+        showInfo()
+    }
+
+    private fun initAdapter() {
+        infoAdapter = object : GenericAdapter<MovieView>() {
+            override fun getLayoutId(position: Int, obj: MovieView): Int =
+                R.layout.full_film_info_item
+        }
+    }
+
+    private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                infoAdapter.setMovie(it)
+                infoAdapter.updateOneItem(it)
                 infoAdapter.notifyDataSetChanged()
                 startIndicators()
                 setCurrentIndicator(0)
                 binding.movie = it
             }
         })
+    }
 
+    private fun getInfoFromServer() {
         viewModel.loadMovieInfo(args.id)
+    }
 
+    private fun showInfo() {
         topPager.apply {
             adapter = infoAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

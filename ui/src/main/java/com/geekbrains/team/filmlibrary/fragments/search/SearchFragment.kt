@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.SearchAdapter
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.search_fragment.*
@@ -27,7 +28,7 @@ class SearchFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
-    private val mAdapter = com.geekbrains.team.filmlibrary.adapters.SearchAdapter()
+    private val mAdapter = SearchAdapter()
     private lateinit var listener: OnItemSelectedListener
 
     override fun onAttach(context: Context) {

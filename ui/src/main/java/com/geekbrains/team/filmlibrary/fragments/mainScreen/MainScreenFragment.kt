@@ -21,6 +21,8 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.*
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
+import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView
+import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
@@ -34,10 +36,9 @@ class MainScreenFragment : DaggerFragment() {
     private val viewModel by viewModels<MainScreenViewModel> { viewModelFactory }
     lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
-
-    private val upcomingAdapter = UpcomingMoviesAdapter()
-    private val nowPlayingAdapter = SmallCardAdapterK()
-    private val topRatedMovieAdapter = TopRatedBigCardAdapterK()
+    private lateinit var nowPlayingAdapter: GenericAdapter<MovieView>
+    private lateinit var upcomingAdapter: GenericAdapter<UpcomingMovieView>
+    private lateinit var topRatedMovieAdapter: GenericAdapter<MovieView>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,40 +61,47 @@ class MainScreenFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        attachListeners()
+        initAdapters()
         startObservers()
         getInfoFromServer()
         showInfo()
     }
 
-    private fun attachListeners() {
-        nowPlayingAdapter.attachListener(listener)
-        upcomingAdapter.attachListener(listener)
-        topRatedMovieAdapter.attachListener(listener)
+    private fun initAdapters() {
+        upcomingAdapter = object : GenericAdapter<UpcomingMovieView>(listener) {
+            override fun getLayoutId(position: Int, obj: UpcomingMovieView): Int =
+                R.layout.upcoming_small_card_item
+        }
+        nowPlayingAdapter = object : GenericAdapter<MovieView>(listener) {
+            override fun getLayoutId(position: Int, obj: MovieView): Int = R.layout.small_card_item
+        }
+        topRatedMovieAdapter = object : GenericAdapter<MovieView>(listener) {
+            override fun getLayoutId(position: Int, obj: MovieView): Int = R.layout.big_card_item
+        }
     }
 
     private fun startObservers() {
         viewModel.upcomingMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(upcomingAdapter.movie, it)
+                val diffUtilCallback = DiffUtilsCallback(upcomingAdapter.itemList, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                upcomingAdapter.setMovies(it.toMutableList())
+                upcomingAdapter.update(it)
                 diffResult.dispatchUpdatesTo(upcomingAdapter)
             }
         })
 
         viewModel.nowPlayingMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(nowPlayingAdapter.movie, it)
+                val diffUtilCallback = DiffUtilsCallback(nowPlayingAdapter.itemList, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                nowPlayingAdapter.setMovies(it.toMutableList())
+                nowPlayingAdapter.update(it)
                 diffResult.dispatchUpdatesTo(nowPlayingAdapter)
             }
         })
 
         viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                topRatedMovieAdapter.setMovies(it)
+                topRatedMovieAdapter.updateOneItem(it)
                 topRatedMovieAdapter.notifyDataSetChanged()
                 startIndicators()
                 setCurrentIndicator(0)
