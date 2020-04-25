@@ -49,14 +49,15 @@ data class Movie(
     data class Actor(
         val id: Int,
         val name: String,
-        val path: String?,
+        val posterPath: String?,
         val character: String
     )
 
     data class Member(
-
+        val id: Int,
         val name: String,
-        val job: String
+        val job: String,
+        val posterPath: String?
     )
 
     data class ProductionCompany(

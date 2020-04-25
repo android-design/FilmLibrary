@@ -1,12 +1,12 @@
 package com.geekbrains.team.data.movies.movieCreadits.service.model
 
+import com.geekbrains.team.data.Const
 import com.geekbrains.team.domain.movies.model.Credits
-import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MovieCreditsResponse(
     val id: Int,
-    val casts: List<Cast>,
+    val cast: List<Cast>,
     val crew: List<Member>
 ) {
     data class Cast(
@@ -21,14 +21,7 @@ data class MovieCreditsResponse(
         val order: Int,
         @SerializedName("profile_path")
         val profilePath: String?
-    ) {
-        fun toMovieActor() = Movie.Actor(
-            id = this.id,
-            name = this.name,
-            character = this.character,
-            path = this.profilePath
-        )
-    }
+    )
 
     data class Member(
         @SerializedName("credit_id")
@@ -40,12 +33,7 @@ data class MovieCreditsResponse(
         val name: String,
         @SerializedName("profile_path")
         val profilePath: String?
-    ) {
-        fun toMovieMember() = Movie.Member(
-            name = this.name,
-            job =  this.job
-        )
-    }
+    )
 }
 
 fun MovieCreditsResponse.Cast.toCastPerson(): Credits.CastPerson = Credits.CastPerson(
@@ -56,7 +44,7 @@ fun MovieCreditsResponse.Cast.toCastPerson(): Credits.CastPerson = Credits.CastP
     id = this.id,
     name = this.name,
     order = this.order,
-    profilePath = this.profilePath
+    profilePath = this.profilePath?.let { Const.IMAGE_PREFIX + it } ?: ""
 )
 
 fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.CrewPerson(
@@ -66,10 +54,10 @@ fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.Cre
     id = this.id,
     job = this.job,
     name = this.name,
-    profilePath = this.profilePath
+    profilePath = this.profilePath.let { Const.IMAGE_PREFIX + it }
 )
 
 fun MovieCreditsResponse.toCredits(): Credits = Credits(
-    crew = listOf(),//this.crew.map { member -> member.toCrewPerson() },
-    cast = listOf()//this.casts.map { cast -> cast.toCastPerson() }
+    cast = cast.map { it.toCastPerson() },
+    crew = crew.map { it.toCrewPerson() }
 )

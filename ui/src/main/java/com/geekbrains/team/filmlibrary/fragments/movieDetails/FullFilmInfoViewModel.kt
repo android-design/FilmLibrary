@@ -4,7 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.movies.movieDetails.interactor.GetMovieDetailsUseCase
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
+import com.geekbrains.team.filmlibrary.model.ActorView
 import com.geekbrains.team.filmlibrary.model.MovieView
+import com.geekbrains.team.filmlibrary.model.toActorView
 import com.geekbrains.team.filmlibrary.model.toMovieView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -15,6 +17,8 @@ class FullFilmInfoViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val movieDetailsLiveData: MutableLiveData<MovieView> = MutableLiveData()
+    val actorsLiveData: MutableLiveData<List<ActorView>> = MutableLiveData()
+    val crewLiveData: MutableLiveData<List<ActorView>> = MutableLiveData()
 
     fun loadMovieInfo(id: Int) {
         useCaseMovieInfo.execute(params = GetMovieDetailsUseCase.Params(id = id))
@@ -25,6 +29,8 @@ class FullFilmInfoViewModel @Inject constructor(
 
     private fun handleOnSuccessLoadMovieDetails(details: Movie) {
         movieDetailsLiveData.value = details.toMovieView()
+        actorsLiveData.value = details.cast?.map { it.toActorView() }
+        crewLiveData.value = details.crew?.map { it.toActorView() }
     }
 
 }
