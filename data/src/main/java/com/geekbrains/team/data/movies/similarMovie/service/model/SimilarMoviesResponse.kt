@@ -45,7 +45,7 @@ data class SimilarMoviesResponse(
     )
 }
 
-fun SimilarMoviesResponse.toMovie(): List<Movie> =
+fun SimilarMoviesResponse.toMovieList(): List<Movie> =
     results.map { movie ->
         Movie(
             id = movie.id,

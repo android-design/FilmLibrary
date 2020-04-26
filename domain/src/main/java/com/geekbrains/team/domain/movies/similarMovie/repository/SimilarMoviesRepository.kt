@@ -4,5 +4,5 @@ import com.geekbrains.team.domain.movies.model.Movie
 import io.reactivex.Single
 
 interface SimilarMoviesRepository {
-    fun fetch(page: Int): Single<MutableList<Movie>>
+    fun fetch(id: Int, page: Int): Single<List<Movie>>
 }

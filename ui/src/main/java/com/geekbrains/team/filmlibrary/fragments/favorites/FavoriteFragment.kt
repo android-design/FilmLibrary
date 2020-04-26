@@ -22,6 +22,7 @@ class FavoriteFragment : DaggerFragment() {
 
     private val mAdapter = FavoriteAdapter()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

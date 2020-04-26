@@ -1,5 +1,6 @@
 package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.FullInfoAdapter
+import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.SmallActorCardAdapter
 import com.geekbrains.team.filmlibrary.adapters.SmallCardAdapter
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
@@ -39,10 +41,20 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     private val viewModel by viewModels<FullFilmInfoViewModel>({ activity as MainActivity }) { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
+    private lateinit var listener: OnItemSelectedListener
     private val infoAdapter = FullInfoAdapter()
     private val crewAdapter = SmallActorCardAdapter()
     private val starringAdapter = SmallActorCardAdapter()
+    private val similarMoviesAdapter = SmallCardAdapter()
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is OnItemSelectedListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnItemSelectedListener")
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -87,8 +99,19 @@ class FullFilmInfoFragment : DaggerFragment() {
             }
         })
 
+        viewModel.similarMoviesLiveData.observe(viewLifecycleOwner, Observer { data ->
+            data?.let {
+                similarMoviesAdapter.setMovies(it)
+                similarMoviesAdapter.notifyDataSetChanged()
+                startIndicators()
+                setCurrentIndicator(0)
+            }
+        })
+
+        //attachListener()
 
         viewModel.loadMovieInfo(args.id)
+        viewModel.loadSimilarMovies(args.id, 1)
 
         showInfo()
 
@@ -110,6 +133,15 @@ class FullFilmInfoFragment : DaggerFragment() {
             adapter = starringAdapter
         }
 
+        similar_rv.apply{
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = similarMoviesAdapter
+        }
+
+    }
+
+    private fun attachListener() {
+        similarMoviesAdapter.attachListener(listener)
     }
 
     private fun startIndicators() {
