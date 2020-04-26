@@ -9,7 +9,7 @@
 
         <variable
             name="movie"
-            type="com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView" />
+            type="com.geekbrains.team.filmlibrary.model.MovieView" />
 
         <variable
             name="tvShow"

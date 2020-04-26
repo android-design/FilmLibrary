@@ -28,7 +28,7 @@ class SearchFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
-    private val mAdapter = SearchAdapter()
+    private val mAdapter by lazy { SearchAdapter() }
     private lateinit var listener: OnItemSelectedListener
 
     override fun onAttach(context: Context) {
@@ -54,9 +54,7 @@ class SearchFragment : DaggerFragment() {
         mAdapter.attachListener(listener)
 
         startObservers()
-
         initUI()
-
         showInfo()
     }
 

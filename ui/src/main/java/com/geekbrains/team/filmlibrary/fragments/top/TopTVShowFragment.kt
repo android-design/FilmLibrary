@@ -28,7 +28,13 @@ class TopTVShowFragment : DaggerFragment() {
 
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
-    private lateinit var tvShowsAdapter: GenericAdapter<TVShowView>
+
+    private val tvShowsAdapter: GenericAdapter<TVShowView> by lazy {
+        GenericAdapter<TVShowView>(
+            clickListener = listener,
+            layout = R.layout.landscape_tv_show_card_item
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,16 +56,8 @@ class TopTVShowFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapters()
         startObservers()
-        getInfoFromServer()
-    }
-
-    private fun initAdapters() {
-        tvShowsAdapter = object : GenericAdapter<TVShowView>(listener) {
-            override fun getLayoutId(position: Int, obj: TVShowView): Int =
-                R.layout.landscape_tv_show_card_item
-        }
+        loadTopRatedTVShows()
     }
 
     private fun startObservers() {
@@ -81,7 +79,7 @@ class TopTVShowFragment : DaggerFragment() {
         })
     }
 
-    private fun getInfoFromServer() {
+    private fun loadTopRatedTVShows() {
         viewModel.loadTopRatedTVShows()
     }
 }

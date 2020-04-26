@@ -5,7 +5,6 @@ import com.geekbrains.team.data.movies.detailsMovies.service.MovieDetailsApi
 import com.geekbrains.team.data.movies.genresMovies.service.GenresMoviesApi
 import com.geekbrains.team.data.movies.imagesMovies.service.ImagesMoviesApi
 import com.geekbrains.team.data.movies.movieCreadits.service.MovieCreditsApi
-import com.geekbrains.team.data.movies.movieImages.service.MovieImagesApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
@@ -79,16 +78,12 @@ class RemoteModule {
         retrofit.create(MovieCreditsApi::class.java)
 
     @Provides
-    fun getMovieImagesApi(retrofit: Retrofit): MovieImagesApi =
-        retrofit.create(MovieImagesApi::class.java)
+    fun getMovieImagesApi(retrofit: Retrofit): ImagesMoviesApi =
+        retrofit.create(ImagesMoviesApi::class.java)
 
     @Provides
     fun getTopRatedTVApi(retrofit: Retrofit): TopRatedTVApi =
         retrofit.create(TopRatedTVApi::class.java)
-
-    @Provides
-    fun getImagesMoviesApi(retrofit: Retrofit): ImagesMoviesApi =
-        retrofit.create(ImagesMoviesApi::class.java)
 
     @Provides
     fun getVideosMoviesApi(retrofit: Retrofit): VideosMoviesApi =

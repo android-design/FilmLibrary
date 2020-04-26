@@ -6,16 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 
-abstract class GenericAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    var itemList = mutableListOf<T>()
-    var item: T? = null
-    private var clickListener: OnItemSelectedListener? = null
+class GenericAdapter<T>(
+    private var clickListener: OnItemSelectedListener? = null,
+    private val layout: Int
+) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    constructor()
-
-    constructor(listener: OnItemSelectedListener) {
-        clickListener = listener
-    }
+    val itemList: ArrayList<T> = ArrayList()
+    private var item: T? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,38 +21,49 @@ abstract class GenericAdapter<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (item == null) (holder as Binder<T>).bind(itemList[position], null, clickListener)
-        else (holder as Binder<T>).bind(item  as T, (item as MovieView).images[position], clickListener)
-    }
+        when (item) {
+            null -> (holder as? Binder)?.bind(
+                data = itemList[position],
+                listener = clickListener
+            )
 
-    override fun getItemCount(): Int {
-        return if (item == null) itemList.size
-        else {
-            if (item is MovieView) (item as MovieView).images.size
-            else (item as TVShowView).images.size
+            else -> (holder as? Binder)?.bind(
+                data = item,
+                position = position,
+                listener = clickListener
+            )
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return item?.let { getLayoutId(position, it) } ?: getLayoutId(position, itemList[position])
-    }
+    override fun getItemCount(): Int =
+        if (item == null) itemList.size
+        else {
+            when (item) {
+                is MovieView -> (item as MovieView).images.size
+                is TVShowView -> (item as TVShowView).images.size
+                else -> 0
+            }
+        }
+
+    override fun getItemViewType(position: Int): Int = layout
 
     fun update(items: List<T>) {
-        itemList = items.toMutableList()
-        notifyDataSetChanged()
+        itemList.clear()
+        itemList.addAll(items)
     }
 
     fun updateOneItem(oneItem: T) {
         item = oneItem
     }
 
-    protected abstract fun getLayoutId(position: Int, obj: T): Int
+    private fun getViewHolder(
+        inflater: LayoutInflater,
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerView.ViewHolder =
+        ViewHolderFactory.create(inflater, parent, viewType)
 
-    protected open fun getViewHolder(inflater: LayoutInflater, parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ViewHolderFactory.create(inflater, parent, viewType)
-    }
-
-    internal interface Binder<T> {
-        fun bind(data: T, list: String? = null, listener: OnItemSelectedListener?)
+    internal interface Binder {
+        fun <T> bind(data: T, position: Int = 0, listener: OnItemSelectedListener?)
     }
 }

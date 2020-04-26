@@ -32,7 +32,7 @@ fun TVShow.toTVShowView() =
         numberOfSeasons = numberOfSeasons.toString(),
         voteAverage = voteAverage.toString(),
         trailer = trailer(),
-        // TODO Fix this to fea ture.
+        // TODO Fix this to feature.
         images = images ?: listOf(),
         firstAirDate = firstAirDate,
         episodeRunTime = episodeRunTime?.firstOrNull() ?: 0,

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -19,13 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.*
+import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
+import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
-import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
+import kotlinx.android.synthetic.main.pager_indicator_item.*
 import javax.inject.Inject
 
 class MainScreenFragment : DaggerFragment() {
@@ -34,11 +34,25 @@ class MainScreenFragment : DaggerFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<MainScreenViewModel> { viewModelFactory }
-    lateinit var binding: MainScreenFragmentBinding
+    private lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
-    private lateinit var nowPlayingAdapter: GenericAdapter<MovieView>
-    private lateinit var upcomingAdapter: GenericAdapter<UpcomingMovieView>
-    private lateinit var topRatedMovieAdapter: GenericAdapter<MovieView>
+
+    private val nowPlayingAdapter: GenericAdapter<MovieView> by lazy {
+        GenericAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
+    }
+    private val upcomingAdapter: GenericAdapter<MovieView> by lazy {
+        GenericAdapter<MovieView>(
+            clickListener = listener,
+            layout = R.layout.upcoming_small_card_item
+        )
+    }
+
+    private val topRatedMovieAdapter: GenericAdapter<MovieView> by lazy {
+        GenericAdapter<MovieView>(
+            clickListener = listener,
+            layout = R.layout.big_card_item
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,23 +75,9 @@ class MainScreenFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapters()
         startObservers()
         getInfoFromServer()
         showInfo()
-    }
-
-    private fun initAdapters() {
-        upcomingAdapter = object : GenericAdapter<UpcomingMovieView>(listener) {
-            override fun getLayoutId(position: Int, obj: UpcomingMovieView): Int =
-                R.layout.upcoming_small_card_item
-        }
-        nowPlayingAdapter = object : GenericAdapter<MovieView>(listener) {
-            override fun getLayoutId(position: Int, obj: MovieView): Int = R.layout.small_card_item
-        }
-        topRatedMovieAdapter = object : GenericAdapter<MovieView>(listener) {
-            override fun getLayoutId(position: Int, obj: MovieView): Int = R.layout.big_card_item
-        }
     }
 
     private fun startObservers() {
@@ -161,11 +161,9 @@ class MainScreenFragment : DaggerFragment() {
 
     private fun startIndicators() {
         indicator.removeAllViews()
+
         val indicators = arrayOfNulls<ImageView>(topRatedMovieAdapter.itemCount)
-        val layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        layoutParams.setMargins(8, 0, 8, 0)
+
         for (i in indicators.indices) {
             indicators[i] = ImageView(context)
             indicators[i]?.setImageDrawable(
@@ -176,7 +174,7 @@ class MainScreenFragment : DaggerFragment() {
                     )
                 }
             )
-            indicators[i]?.layoutParams = layoutParams
+            indicators[i]?.layoutParams = indicator_item.layoutParams
             indicator.addView(indicators[i])
         }
     }

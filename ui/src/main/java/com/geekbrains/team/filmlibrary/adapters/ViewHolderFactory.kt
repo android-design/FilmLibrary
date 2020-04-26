@@ -10,7 +10,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.databinding.*
-import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.squareup.picasso.Picasso
@@ -47,77 +46,79 @@ object ViewHolderFactory {
 
     class SmallCardHolder(
         private val binding: SmallCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<MovieView> {
-        override fun bind(data: MovieView, list: String?, listener: OnItemSelectedListener?) {
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
-            binding.movie = data
+            binding.movie = data as? MovieView
             binding.executePendingBindings()
         }
     }
 
     class UpcomingSmallCardHolder(
         private val binding: UpcomingSmallCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<UpcomingMovieView> {
-        override fun bind(data: UpcomingMovieView, list: String?, listener: OnItemSelectedListener?) {
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
-            binding.movie = data
+            binding.movie = data as? MovieView
             binding.executePendingBindings()
-
         }
     }
 
     class LandscapeCardHolder(
         private val binding: LandscapeCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<MovieView> {
-        override fun bind(data: MovieView, list: String?, listener: OnItemSelectedListener?) {
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
-            binding.movie = data
+            binding.movie = data as? MovieView
             binding.executePendingBindings()
-
         }
     }
 
     class LandscapeTVCardHolder(
         private val binding: LandscapeTvShowCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<TVShowView> {
-        override fun bind(data: TVShowView, list: String?, listener: OnItemSelectedListener?) {
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
-            binding.tvShow = data
+            binding.tvShow = data as? TVShowView
             binding.executePendingBindings()
-
         }
     }
 
     class TopRatedCardHolder(
         private val binding: BigCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<MovieView> {
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
         private val play: ImageButton = binding.root.play_btn
         private val backDrop: ImageView = binding.root.title_iv
 
-        override fun bind(data: MovieView, list: String?, listener: OnItemSelectedListener?) {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
-            binding.movie = data
-            binding.executePendingBindings()
-            play.setOnClickListener { v: View ->
-                v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.trailer)))
+            binding.movie = data as? MovieView
+
+            binding.movie?.let {
+                binding.executePendingBindings()
+                play.setOnClickListener { v: View ->
+                    v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.trailer)))
+                }
+                Picasso.get().load(it.images[position]).into(backDrop)
             }
-            Picasso.get().load(list).into(backDrop)
         }
     }
 
     class FullInfoCardHolder(
         private val binding: FullFilmInfoItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder<MovieView> {
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
         private val play: ImageButton = binding.root.play_btn
         private val backDrop: ImageView = binding.root.title_iv
 
-        override fun bind(data: MovieView, list: String?, listener: OnItemSelectedListener?) {
-            binding.movie = data
-            binding.executePendingBindings()
-            play.setOnClickListener { v: View ->
-                v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(data.trailer)))
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+            binding.movie = data as? MovieView
+            binding.movie?.let {
+                binding.executePendingBindings()
+                play.setOnClickListener { v: View ->
+                    v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.trailer)))
+                }
+                Picasso.get().load(it.images[position]).into(backDrop)
             }
-            Picasso.get().load(list).into(backDrop)
         }
     }
 }

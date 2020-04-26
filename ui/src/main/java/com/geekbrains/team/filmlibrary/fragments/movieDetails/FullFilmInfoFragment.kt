@@ -31,7 +31,9 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     private val viewModel by viewModels<FullFilmInfoViewModel>({ activity as MainActivity }) { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
-    private lateinit var infoAdapter: GenericAdapter<MovieView>
+    private val infoAdapter: GenericAdapter<MovieView> by lazy {
+        GenericAdapter<MovieView>(layout = R.layout.full_film_info_item)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,17 +47,9 @@ class FullFilmInfoFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapter()
         startObservers()
-        getInfoFromServer()
-        showInfo()
-    }
-
-    private fun initAdapter() {
-        infoAdapter = object : GenericAdapter<MovieView>() {
-            override fun getLayoutId(position: Int, obj: MovieView): Int =
-                R.layout.full_film_info_item
-        }
+        loadMovieDetails()
+        showMovieDetails()
     }
 
     private fun startObservers() {
@@ -74,11 +68,11 @@ class FullFilmInfoFragment : DaggerFragment() {
         })
     }
 
-    private fun getInfoFromServer() {
+    private fun loadMovieDetails() {
         viewModel.loadMovieInfo(args.id)
     }
 
-    private fun showInfo() {
+    private fun showMovieDetails() {
         topPager.apply {
             adapter = infoAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

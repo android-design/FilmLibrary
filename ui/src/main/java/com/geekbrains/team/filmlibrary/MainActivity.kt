@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.geekbrains.team.filmlibrary.Const.MIN_LUX
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.fragments.favorites.FavoriteFragmentDirections
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.MainScreenFragmentDirections
@@ -19,13 +20,13 @@ import com.geekbrains.team.filmlibrary.fragments.top.TopFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), OnItemSelectedListener {
-    val minLux = 15
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setUpNavigation()
         setSensor()
@@ -55,10 +56,10 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         override fun onSensorChanged(event: SensorEvent) {
             if (event.sensor.type == Sensor.TYPE_LIGHT) {
                 val currentLux = event.values[0]
-                if (currentLux < minLux && AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
+                if (currentLux < MIN_LUX && AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     recreate()
-                } else if (currentLux > minLux && AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO) {
+                } else if (currentLux > MIN_LUX && AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_NO) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     recreate()
                 }

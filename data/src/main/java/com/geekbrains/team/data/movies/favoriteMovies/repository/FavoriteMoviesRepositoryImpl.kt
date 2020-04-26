@@ -15,5 +15,4 @@ class FavoriteMoviesRepositoryImpl @Inject constructor(private val dao: Favorite
     override fun addFavoriteMovieId(id: Int): Completable = dao.insert(FavoriteMovieEntity(id = id))
 
     override fun deleteMovieFromFavorite(id: Int): Completable = dao.delete(id)
-
 }

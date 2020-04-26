@@ -1,3 +1,3 @@
 package com.geekbrains.team.domain.base.model
 
-abstract class MovieAndTVShow
+abstract class MovieAndTVShow()

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.TabAdapter
 import kotlinx.android.synthetic.main.top_fragment.*
@@ -29,16 +30,15 @@ class TopFragment : Fragment() {
     }
 
     private fun showInfo() {
-        val mAdapter = fragmentManager?.let {
+        val mAdapter = ((context as MainActivity).supportFragmentManager).run {
             TabAdapter(
-                it,
+                this,
                 listOf(TopMovieFragment(), TopTVShowFragment()),
                 arrayListOf(getString(R.string.movies), getString(R.string.tvShows))
             )
-
         }
 
-        mAdapter?.let {
+        mAdapter.let {
             viewPager.adapter = mAdapter
             tabs.setupWithViewPager(viewPager)
         }

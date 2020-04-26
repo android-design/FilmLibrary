@@ -28,7 +28,13 @@ class TopMovieFragment : DaggerFragment() {
 
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
-    private lateinit var moviesAdapter: GenericAdapter<MovieView>
+
+    private val moviesAdapter: GenericAdapter<MovieView> by lazy {
+        GenericAdapter<MovieView>(
+            clickListener = listener,
+            layout = R.layout.landscape_card_item
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,16 +56,8 @@ class TopMovieFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapters()
         startObservers()
-        getInfoFromServer()
-    }
-
-    private fun initAdapters() {
-        moviesAdapter = object : GenericAdapter<MovieView>(listener) {
-            override fun getLayoutId(position: Int, obj: MovieView): Int =
-                R.layout.landscape_card_item
-        }
+        loadTopRatedMovies()
     }
 
     private fun startObservers() {
@@ -81,7 +79,7 @@ class TopMovieFragment : DaggerFragment() {
         })
     }
 
-    private fun getInfoFromServer() {
+    private fun loadTopRatedMovies() {
         viewModel.loadTopRatedMovies()
     }
 }
