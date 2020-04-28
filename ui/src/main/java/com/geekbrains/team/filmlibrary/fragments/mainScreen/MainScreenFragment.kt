@@ -18,8 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.OneItemAdapter
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -37,18 +38,19 @@ class MainScreenFragment : DaggerFragment() {
     private lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
 
-    private val nowPlayingAdapter: GenericAdapter<MovieView> by lazy {
-        GenericAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
+    private val nowPlayingAdapter by lazy {
+        ItemsAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
     }
-    private val upcomingAdapter: GenericAdapter<MovieView> by lazy {
-        GenericAdapter<MovieView>(
+
+    private val upcomingAdapter by lazy {
+        ItemsAdapter<MovieView>(
             clickListener = listener,
             layout = R.layout.upcoming_small_card_item
         )
     }
 
-    private val topRatedMovieAdapter: GenericAdapter<MovieView> by lazy {
-        GenericAdapter<MovieView>(
+    private val topRatedMovieAdapter by lazy {
+        OneItemAdapter<MovieView>(
             clickListener = listener,
             layout = R.layout.big_card_item
         )
@@ -83,7 +85,7 @@ class MainScreenFragment : DaggerFragment() {
     private fun startObservers() {
         viewModel.upcomingMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(upcomingAdapter.itemList, it)
+                val diffUtilCallback = DiffUtilsCallback(upcomingAdapter.data, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 upcomingAdapter.update(it)
                 diffResult.dispatchUpdatesTo(upcomingAdapter)
@@ -92,7 +94,7 @@ class MainScreenFragment : DaggerFragment() {
 
         viewModel.nowPlayingMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(nowPlayingAdapter.itemList, it)
+                val diffUtilCallback = DiffUtilsCallback(nowPlayingAdapter.data, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 nowPlayingAdapter.update(it)
                 diffResult.dispatchUpdatesTo(nowPlayingAdapter)
@@ -101,8 +103,7 @@ class MainScreenFragment : DaggerFragment() {
 
         viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                topRatedMovieAdapter.updateOneItem(it)
-                topRatedMovieAdapter.notifyDataSetChanged()
+                topRatedMovieAdapter.update(it)
                 startIndicators()
                 setCurrentIndicator(0)
             }

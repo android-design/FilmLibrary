@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -16,11 +15,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
+import com.geekbrains.team.filmlibrary.adapters.OneItemAdapter
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
+import kotlinx.android.synthetic.main.pager_indicator_item.*
 import javax.inject.Inject
 
 class FullFilmInfoFragment : DaggerFragment() {
@@ -31,8 +31,8 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     private val viewModel by viewModels<FullFilmInfoViewModel>({ activity as MainActivity }) { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
-    private val infoAdapter: GenericAdapter<MovieView> by lazy {
-        GenericAdapter<MovieView>(layout = R.layout.full_film_info_item)
+    private val infoAdapter by lazy {
+        OneItemAdapter<MovieView>(layout = R.layout.full_film_info_item)
     }
 
     override fun onCreateView(
@@ -59,8 +59,7 @@ class FullFilmInfoFragment : DaggerFragment() {
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                infoAdapter.updateOneItem(it)
-                infoAdapter.notifyDataSetChanged()
+                infoAdapter.update(it)
                 startIndicators()
                 setCurrentIndicator(0)
                 binding.movie = it
@@ -87,10 +86,7 @@ class FullFilmInfoFragment : DaggerFragment() {
     private fun startIndicators() {
         indicator.removeAllViews()
         val indicators = arrayOfNulls<ImageView>(infoAdapter.itemCount)
-        val layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-        layoutParams.setMargins(8, 0, 8, 0)
+
         for (i in indicators.indices) {
             indicators[i] = ImageView(context)
             indicators[i]?.setImageDrawable(
@@ -101,7 +97,7 @@ class FullFilmInfoFragment : DaggerFragment() {
                     )
                 }
             )
-            indicators[i]?.layoutParams = layoutParams
+            indicators[i]?.layoutParams = indicator_item.layoutParams
             indicator.addView(indicators[i])
         }
     }

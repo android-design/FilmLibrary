@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -29,8 +29,8 @@ class TopTVShowFragment : DaggerFragment() {
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val tvShowsAdapter: GenericAdapter<TVShowView> by lazy {
-        GenericAdapter<TVShowView>(
+    private val tvShowsAdapter: ItemsAdapter<TVShowView> by lazy {
+        ItemsAdapter<TVShowView>(
             clickListener = listener,
             layout = R.layout.landscape_tv_show_card_item
         )
@@ -67,7 +67,7 @@ class TopTVShowFragment : DaggerFragment() {
 
         viewModel.topRatedTVShowsData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(tvShowsAdapter.itemList, it)
+                val diffUtilCallback = DiffUtilsCallback(tvShowsAdapter.data, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 tvShowsAdapter.update(it)
                 diffResult.dispatchUpdatesTo(tvShowsAdapter)

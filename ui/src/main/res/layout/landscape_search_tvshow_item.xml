@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="5dp"
-        android:onClick="@{() -> listener.searchOpenItemInfo(tvShow.id)}"
+        android:onClick="@{() -> listener.openMovieDetails(tvShow.id)}"
         app:cardCornerRadius="4dp"
         app:cardMaxElevation="8dp">
 

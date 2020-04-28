@@ -79,6 +79,8 @@
                     app:layout_constraintStart_toStartOf="@id/topPager"
                     app:layout_constraintTop_toBottomOf="@id/topPager" />
 
+                <include layout="@layout/pager_indicator_item" />
+
                 <View
                     android:id="@+id/line1"
                     android:layout_width="match_parent"

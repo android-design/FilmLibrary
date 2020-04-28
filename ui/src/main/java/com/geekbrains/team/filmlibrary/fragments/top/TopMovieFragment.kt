@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.GenericAdapter
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -29,8 +29,8 @@ class TopMovieFragment : DaggerFragment() {
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val moviesAdapter: GenericAdapter<MovieView> by lazy {
-        GenericAdapter<MovieView>(
+    private val moviesAdapter: ItemsAdapter<MovieView> by lazy {
+        ItemsAdapter<MovieView>(
             clickListener = listener,
             layout = R.layout.landscape_card_item
         )
@@ -67,7 +67,7 @@ class TopMovieFragment : DaggerFragment() {
 
         viewModel.topRatedMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(moviesAdapter.itemList, it)
+                val diffUtilCallback = DiffUtilsCallback(moviesAdapter.data, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 moviesAdapter.update(it)
                 diffResult.dispatchUpdatesTo(moviesAdapter)
