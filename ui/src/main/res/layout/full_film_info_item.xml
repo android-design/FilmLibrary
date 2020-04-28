@@ -79,7 +79,10 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:ellipsize="end"
                 android:gravity="bottom"
+                android:lines="1"
+                android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.name : movie.title}"
                 app:layout_constraintBottom_toTopOf="@id/original_title_tv"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -90,6 +93,9 @@
                 android:layout_width="290dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:scrollHorizontally="true"
                 android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
                 app:layout_constraintBottom_toTopOf="@id/genres_tv"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -135,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
-                    android:text='@{movie == null ? String.valueOf(tvShow.episodeRunTime) + @string/min : movie.runtime + @string/min}' />
+                    android:text='@{movie == null ? String.valueOf(tvShow.episodeRunTime) + " " + @string/min : movie.runtime + " " + @string/min}' />
 
             </LinearLayout>
 

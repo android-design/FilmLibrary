@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.LandscapeCardAdapter
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.top_inner_fragment.*
@@ -27,7 +28,13 @@ class TopMovieFragment : DaggerFragment() {
 
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
-    private val moviesAdapter = LandscapeCardAdapter()
+
+    private val moviesAdapter: ItemsAdapter<MovieView> by lazy {
+        ItemsAdapter<MovieView>(
+            clickListener = listener,
+            layout = R.layout.landscape_card_item
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,17 +56,20 @@ class TopMovieFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        moviesAdapter.attachListener(listener)
+        startObservers()
+        loadTopRatedMovies()
+    }
 
+    private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.topRatedMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(moviesAdapter.movie, it)
+                val diffUtilCallback = DiffUtilsCallback(moviesAdapter.data, it)
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                moviesAdapter.setMovies(it)
+                moviesAdapter.update(it)
                 diffResult.dispatchUpdatesTo(moviesAdapter)
                 inner_top_recycler.apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -67,7 +77,9 @@ class TopMovieFragment : DaggerFragment() {
                 }
             }
         })
+    }
 
+    private fun loadTopRatedMovies() {
         viewModel.loadTopRatedMovies()
     }
 }

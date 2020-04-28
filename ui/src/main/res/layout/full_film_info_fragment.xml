@@ -43,6 +43,9 @@
                     style="@style/Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:scrollHorizontally="true"
                     android:text="@{movie == null ? tvShow.name : movie.title}"
                     android:textColor="@color/nightTextPrimary" />
             </Toolbar>
@@ -76,6 +79,8 @@
                     app:layout_constraintStart_toStartOf="@id/topPager"
                     app:layout_constraintTop_toBottomOf="@id/topPager" />
 
+                <include layout="@layout/pager_indicator_item" />
+
                 <View
                     android:id="@+id/line1"
                     android:layout_width="match_parent"
@@ -97,16 +102,22 @@
                     app:poster='@{movie == null ? (tvShow.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : tvShow.posterPath) : (movie.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : movie.posterPath)}'
                     tools:ignore="ContentDescription" />
 
-                <TextView
-                    android:id="@+id/description_tv"
-                    style="@style/Subtitle2"
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="224dp"
                     android:layout_height="120dp"
                     android:layout_marginTop="24dp"
-                    android:text="@{movie == null ? tvShow.overview : movie.overview}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cover_iv"
-                    app:layout_constraintTop_toBottomOf="@id/line1" />
+                    app:layout_constraintTop_toBottomOf="@id/line1">
+
+                        <TextView
+                            android:id="@+id/description_tv"
+                            style="@style/Subtitle2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{movie == null ? tvShow.overview : movie.overview}" />
+
+                </androidx.core.widget.NestedScrollView>
 
                 <View
                     android:id="@+id/line2"

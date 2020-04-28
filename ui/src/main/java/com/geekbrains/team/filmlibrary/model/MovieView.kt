@@ -44,9 +44,9 @@ fun Movie.toMovieView() = MovieView(
     director = director ?: "No data"
 )
 
-private fun Movie.movieImages(): List<String> = images?.let { imagesToMap ->
-    imagesToMap.backdrops.map {
-        it.url
+private fun Movie.movieImages(): List<String> = images?.let {
+    it.backdrops.map { backdrop ->
+        backdrop.url
     }
 } ?: listOf()
 

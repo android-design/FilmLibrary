@@ -9,7 +9,7 @@
 
         <variable
             name="movie"
-            type="com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView" />
+            type="com.geekbrains.team.filmlibrary.model.MovieView" />
 
         <variable
             name="tvShow"
@@ -26,7 +26,7 @@
         android:layout_width="115dp"
         android:layout_height="255dp"
         android:layout_margin="5dp"
-        android:onClick="@{() -> listener.mainOpenItemInfo(movie == null ? tvShow.id : movie.id)}"
+        android:onClick="@{() -> listener.openMovieDetails(movie == null ? tvShow.id : movie.id)}"
         app:cardCornerRadius="4dp"
         app:cardElevation="8dp">
 

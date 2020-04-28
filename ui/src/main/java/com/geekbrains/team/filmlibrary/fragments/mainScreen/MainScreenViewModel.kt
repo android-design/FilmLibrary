@@ -10,8 +10,6 @@ import com.geekbrains.team.domain.movies.upcomingMovies.interactor.GetUpcomingMo
 import com.geekbrains.team.domain.tv.model.TVShow
 import com.geekbrains.team.domain.tv.nowPlayingTV.interactor.GetFirstNowPlayingTV
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
-import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.UpcomingMovieView
-import com.geekbrains.team.filmlibrary.fragments.mainScreen.model.toUpcomingMovieView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.geekbrains.team.filmlibrary.model.toMovieView
@@ -29,7 +27,7 @@ class MainScreenViewModel @Inject constructor(
 ) :
     BaseViewModel() {
     val nowPlayingMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
-    val upcomingMoviesData: MutableLiveData<List<UpcomingMovieView>> = MutableLiveData()
+    val upcomingMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
     val randomTopRatedMovieData: MutableLiveData<MovieView> = MutableLiveData()
     val movieOfTheWeekData: MutableLiveData<MovieView> = MutableLiveData()
     val tvShowPremierData: MutableLiveData<TVShowView> = MutableLiveData()
@@ -51,7 +49,7 @@ class MainScreenViewModel @Inject constructor(
             .subscribe(::handleOnSuccessLoadUpcomingMovies, ::handleFailure)
 
     private fun handleOnSuccessLoadUpcomingMovies(list: List<Movie>) {
-        upcomingMoviesData.value = list.map { it.toUpcomingMovieView() }
+        upcomingMoviesData.value = list.map { it.toMovieView() }
     }
 
     fun loadRandomTopRatedMovie() =

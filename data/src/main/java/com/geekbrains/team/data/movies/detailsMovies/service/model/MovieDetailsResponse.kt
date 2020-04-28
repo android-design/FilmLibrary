@@ -86,12 +86,14 @@ fun MovieDetailsResponse.toMovie() = Movie(
     originalLanguage = originalLanguage,
     genres = genres.map { it.name }.toMutableList(),
     voteAverage = (voteAverage * 10).toInt(),
-    overview = overview ?: Const.NO_OVERVIEW,
+    overview = overview ?: "",
     releaseDate = releaseDate.parseToDate(),
     productionCountries = productionCountries?.map { Movie.ProductionCountry(it.name, it.iso) },
     productionCompanies = productionCompanies?.map {
         Movie.ProductionCompany(
             id = it.id,
-        logoPath = it.logoPath, name = it.name, originCountry = it.originCountry) },
+            logoPath = it.logoPath, name = it.name, originCountry = it.originCountry
+        )
+    },
     runtime = runtime
 )
