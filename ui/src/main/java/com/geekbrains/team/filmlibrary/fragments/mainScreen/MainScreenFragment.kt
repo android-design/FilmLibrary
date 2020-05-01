@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
+import com.geekbrains.team.filmlibrary.adapters.Indicator
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.OneItemAdapter
@@ -37,6 +40,7 @@ class MainScreenFragment : DaggerFragment() {
     private val viewModel by viewModels<MainScreenViewModel> { viewModelFactory }
     private lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
+    private lateinit var mIndicator: Indicator
 
     private val nowPlayingAdapter by lazy {
         ItemsAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
@@ -77,6 +81,7 @@ class MainScreenFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mIndicator = Indicator(context, indicator, indicator_item, topRatedMovieAdapter)
         startObservers()
         getInfoFromServer()
         showInfo()
@@ -104,8 +109,11 @@ class MainScreenFragment : DaggerFragment() {
         viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 topRatedMovieAdapter.update(it)
-                startIndicators()
-                setCurrentIndicator(0)
+                topPager.currentItem = 0
+                mIndicator.startIndicators()
+                mIndicator.setCurrentIndicator(0)
+                mainProgress.visibility = GONE
+                scroll.visibility = VISIBLE
             }
         })
 
@@ -154,56 +162,9 @@ class MainScreenFragment : DaggerFragment() {
             registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    setCurrentIndicator(position)
+                    mIndicator.setCurrentIndicator(position)
                 }
             })
-        }
-    }
-
-    private fun startIndicators() {
-        indicator.removeAllViews()
-
-        val indicators = arrayOfNulls<ImageView>(topRatedMovieAdapter.itemCount)
-
-        for (i in indicators.indices) {
-            indicators[i] = ImageView(context)
-            indicators[i]?.setImageDrawable(
-                context?.let {
-                    ContextCompat.getDrawable(
-                        it,
-                        R.drawable.indicator_inactive
-                    )
-                }
-            )
-            indicators[i]?.layoutParams = indicator_item.layoutParams
-            indicator.addView(indicators[i])
-        }
-    }
-
-    private fun setCurrentIndicator(index: Int) {
-        val childCount: Int = indicator.childCount
-        for (i in 0 until childCount) {
-            val imageView =
-                indicator.getChildAt(i) as ImageView
-            if (i == index) {
-                imageView.setImageDrawable(
-                    context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.indicator_active
-                        )
-                    }
-                )
-            } else {
-                imageView.setImageDrawable(
-                    context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.indicator_inactive
-                        )
-                    }
-                )
-            }
         }
     }
 }

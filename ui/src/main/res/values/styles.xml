@@ -59,13 +59,13 @@
     </style>
 
     <style name="Subtitle1" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="Subtitle2" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">normal</item>
     </style>

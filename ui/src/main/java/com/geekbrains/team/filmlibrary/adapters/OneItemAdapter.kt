@@ -29,4 +29,9 @@ class OneItemAdapter<T>(
         is TVShowView -> (data as TVShowView).images.size
         else -> 0
     }
+
+    fun clear() {
+        data = null
+        notifyDataSetChanged()
+    }
 }

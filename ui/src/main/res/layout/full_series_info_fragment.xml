@@ -10,10 +10,6 @@
         <import type="android.text.TextUtils" />
 
         <variable
-            name="movie"
-            type="com.geekbrains.team.filmlibrary.model.MovieView" />
-
-        <variable
             name="tvShow"
             type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
@@ -47,7 +43,7 @@
                     android:ellipsize="end"
                     android:lines="1"
                     android:scrollHorizontally="true"
-                    android:text="@{movie == null ? tvShow.name : movie.title}"
+                    android:text="@{tvShow.name}"
                     android:textColor="@color/nightTextPrimary" />
             </Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -110,7 +106,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/description_tv"
                     app:layout_constraintTop_toTopOf="@+id/description_tv"
-                    app:poster='@{movie == null ? (tvShow.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : tvShow.posterPath) : (movie.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : movie.posterPath)}'
+                    app:poster='@{tvShow.posterPath.equals("https://image.tmdb.org/t/p/w185/") ? "" : tvShow.posterPath}'
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -122,7 +118,7 @@
                     android:layout_marginTop="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cover_iv"
-                    android:text="@{movie == null ? tvShow.overview : movie.overview}" />
+                    android:text="@{tvShow.overview}" />
 
                 <View
                     android:id="@+id/line2"
@@ -164,7 +160,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
-                    android:text="@{movie == null ? tvShow.overview : movie.director}"
+                    android:text="@{tvShow.overview}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/director_title_tv" />
 
@@ -188,7 +184,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
-                    android:text="@{movie == null ? tvShow.overview : movie.writer}"
+                    android:text="@{tvShow.overview}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv" />
 
@@ -212,7 +208,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
-                    android:text="@{movie == null ? tvShow.overview : movie.producer}"
+                    android:text="@{tvShow.overview}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/producer_title_tv" />
 
