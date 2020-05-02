@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.databinding.*
+import com.geekbrains.team.filmlibrary.model.ActorView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.squareup.picasso.Picasso
@@ -39,6 +40,9 @@ object ViewHolderFactory {
             )
             R.layout.full_film_info_item -> FullInfoCardHolder(
                 FullFilmInfoItemBinding.inflate(inflater, parent, false)
+            )
+            R.layout.small_actor_card_item -> SmallActorCardItemHolder(
+                SmallActorCardItemBinding.inflate(inflater, parent, false)
             )
             else -> throw Exception("Wrong view type")
         }
@@ -119,6 +123,15 @@ object ViewHolderFactory {
                 }
                 Picasso.get().load(it.images[position]).into(backDrop)
             }
+        }
+    }
+
+    class SmallActorCardItemHolder(
+        private val binding: SmallActorCardItemBinding
+    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+            binding.actor = data as? ActorView
+            binding.executePendingBindings()
         }
     }
 }
