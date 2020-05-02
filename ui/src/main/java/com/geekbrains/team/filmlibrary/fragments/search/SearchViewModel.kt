@@ -10,6 +10,7 @@ import com.geekbrains.team.filmlibrary.fragments.search.model.SearchView
 import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedMovieView
 import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedTVShowView
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -17,14 +18,15 @@ class SearchViewModel @Inject constructor(
     private val useCaseSearchedResult: GetSearchedResult
 ) :
     BaseViewModel() {
+
     var currentReleaseYear: Int? = null
     var isNeedSearchMovies: Boolean = true
     var isNeedSearchTVShows: Boolean = true
 
     var searchedMoviesData: MutableLiveData<List<SearchView>> = MutableLiveData()
 
-    fun loadSearchedMovies(query: String, page: Int) =
-        useCaseSearchedResult.execute(
+    fun loadSearchedMovies(query: String, page: Int) {
+        val disposable = useCaseSearchedResult.execute(
             params = GetSearchedResult.Params(
                 query = query,
                 releaseYear = currentReleaseYear,
@@ -36,6 +38,10 @@ class SearchViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadSearchedMovies, ::handleFailure)
+
+        addDisposable(disposable)
+    }
+
 
     private fun handleOnSuccessLoadSearchedMovies(list: List<MovieAndTVShow>) {
         searchedMoviesData.value = list.map {

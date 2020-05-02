@@ -15,10 +15,12 @@ class FavoriteViewModel @Inject constructor(
     val favoriteMoviesData = MutableLiveData<List<Movie>>()
 
     fun loadFavoriteMovies() {
-        getFavoriteMoviesUseCase.execute(None())
+        val disposable = getFavoriteMoviesUseCase.execute(None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadFavoriteMovies, ::handleFailure)
+
+        addDisposable(disposable)
     }
 
     private fun handleOnSuccessLoadFavoriteMovies(data: List<Movie>) {

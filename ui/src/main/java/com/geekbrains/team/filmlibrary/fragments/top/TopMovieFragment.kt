@@ -30,7 +30,7 @@ class TopMovieFragment : DaggerFragment() {
     private lateinit var listener: OnItemSelectedListener
 
     private val moviesAdapter: ItemsAdapter<MovieView> by lazy {
-        ItemsAdapter<MovieView>(
+        ItemsAdapter<MovieView> (
             clickListener = listener,
             layout = R.layout.landscape_card_item
         )

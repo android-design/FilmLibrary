@@ -17,14 +17,15 @@ class FullFilmInfoViewModel @Inject constructor(
     val movieDetailsLiveData: MutableLiveData<MovieView> = MutableLiveData()
 
     fun loadMovieInfo(id: Int) {
-        useCaseMovieInfo.execute(params = GetMovieDetailsUseCase.Params(id = id))
+        val disposable = useCaseMovieInfo.execute(params = GetMovieDetailsUseCase.Params(id = id))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadMovieDetails, ::handleFailure)
+
+        addDisposable(disposable)
     }
 
     private fun handleOnSuccessLoadMovieDetails(details: Movie) {
         movieDetailsLiveData.value = details.toMovieView()
     }
-
 }

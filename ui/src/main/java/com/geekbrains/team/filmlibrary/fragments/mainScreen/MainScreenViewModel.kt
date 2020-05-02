@@ -32,51 +32,68 @@ class MainScreenViewModel @Inject constructor(
     val movieOfTheWeekData: MutableLiveData<MovieView> = MutableLiveData()
     val tvShowPremierData: MutableLiveData<TVShowView> = MutableLiveData()
 
-    fun loadNowPlayingMovies(page: Int = 1) =
-        useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::handleOnSuccessLoadNowPlayingMovies, ::handleFailure)
+    fun loadNowPlayingMovies(page: Int = 1) {
+        val disposable =
+            useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(::handleOnSuccessLoadNowPlayingMovies, ::handleFailure)
+
+        addDisposable(disposable)
+    }
 
     private fun handleOnSuccessLoadNowPlayingMovies(list: List<Movie>) {
         nowPlayingMoviesData.value = list.map { it.toMovieView() }
     }
 
-    fun loadUpcomingMovies(page: Int = 1) =
-        useCaseUpcomingMovies.execute(params = GetUpcomingMovies.Params(page = page))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::handleOnSuccessLoadUpcomingMovies, ::handleFailure)
+    fun loadUpcomingMovies(page: Int = 1) {
+        val disposable =
+            useCaseUpcomingMovies.execute(params = GetUpcomingMovies.Params(page = page))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(::handleOnSuccessLoadUpcomingMovies, ::handleFailure)
+
+        addDisposable(disposable)
+    }
 
     private fun handleOnSuccessLoadUpcomingMovies(list: List<Movie>) {
         upcomingMoviesData.value = list.map { it.toMovieView() }
     }
 
-    fun loadRandomTopRatedMovie() =
-        useCaseRandomTopRatedMovie.execute(None())
+    fun loadRandomTopRatedMovie() {
+        val disposable = useCaseRandomTopRatedMovie.execute(None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadRandomTopRatedMovie, ::handleFailure)
+
+        addDisposable(disposable)
+    }
 
     private fun handleOnSuccessLoadRandomTopRatedMovie(randomTopRatedMovie: Movie) {
         randomTopRatedMovieData.value = randomTopRatedMovie.toMovieView()
     }
 
-    fun loadMovieOfTheWeek() =
-        useCaseFirstNowPlayingMovie.execute(params = None())
+    fun loadMovieOfTheWeek() {
+        val disposable = useCaseFirstNowPlayingMovie.execute(params = None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadMovieOfTheWeek, ::handleFailure)
+
+        addDisposable(disposable)
+    }
 
     private fun handleOnSuccessLoadMovieOfTheWeek(movie: Movie) {
         movieOfTheWeekData.value = movie.toMovieView()
     }
 
-    fun loadTvShowPremier() =
-        useCaseFirstNowPlayingTV.execute(None())
+    fun loadTvShowPremier() {
+        val disposable = useCaseFirstNowPlayingTV.execute(None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadTvShowPremier, ::handleFailure)
+
+        addDisposable(disposable)
+    }
 
     private fun handleOnSuccessLoadTvShowPremier(tv: TVShow) {
         tvShowPremierData.value = tv.toTVShowView()

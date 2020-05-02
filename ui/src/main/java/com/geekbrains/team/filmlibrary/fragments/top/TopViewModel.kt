@@ -15,7 +15,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-
 class TopViewModel @Inject constructor(
     private val useCaseTopRatedMovies: GetTopRatedMovies,
     private val useCaseTopRatedTVShows: GetTopRatedTV
@@ -24,11 +23,15 @@ class TopViewModel @Inject constructor(
     val topRatedMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
     val topRatedTVShowsData: MutableLiveData<List<TVShowView>> = MutableLiveData()
 
-    fun loadTopRatedMovies() =
-        useCaseTopRatedMovies.execute(params = None())
+    fun loadTopRatedMovies() {
+        val disposable = useCaseTopRatedMovies.execute(params = None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadTopRatedMovies, ::handleFailure)
+
+        addDisposable(disposable)
+    }
+
 
     private fun handleOnSuccessLoadTopRatedMovies(list: List<Movie>) {
         topRatedMoviesData.value = list.map { it.toMovieView() }
