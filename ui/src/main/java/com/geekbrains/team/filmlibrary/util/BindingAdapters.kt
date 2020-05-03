@@ -13,7 +13,7 @@ fun loadPoster(view: ImageView, url: String?) {
             Picasso.get().load(url).into(view)
         }
         else {
-            Picasso.get().load(R.drawable.ic_no_poster).placeholder(R.drawable.ic_no_poster).into(view)
+            view.setImageResource(R.drawable.ic_no_poster)
         }
     }
 }
@@ -24,7 +24,7 @@ fun loadBackdrop(view: ImageView, url: String?) {
         if (url.isNotEmpty()) {
             Picasso.get().load(url).into(view)
         } else {
-            Picasso.get().load(R.drawable.ic_no_backdrop).placeholder(R.drawable.ic_no_backdrop).into(view)
+            view.setImageResource(R.drawable.ic_no_backdrop)
         }
     }
 }
