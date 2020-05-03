@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,11 +19,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
+import com.geekbrains.team.filmlibrary.adapters.Indicator
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
-import com.geekbrains.team.filmlibrary.model.PersonView
 import com.geekbrains.team.filmlibrary.model.MovieView
+import com.geekbrains.team.filmlibrary.model.PersonView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.full_film_info_fragment.*
@@ -42,6 +43,7 @@ class FullFilmInfoFragment : DaggerFragment() {
     lateinit var binding: FullFilmInfoFragmentBinding
     lateinit var listener: OnItemSelectedListener
 
+    private lateinit var mIndicator: Indicator
     private val infoAdapter by lazy {
         ImagesAdapter<MovieView>(layout = R.layout.full_film_info_item)
     }
@@ -74,22 +76,37 @@ class FullFilmInfoFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mIndicator = Indicator(context, indicator, indicator_item, infoAdapter)
         startObservers()
         loadMovieDetails()
         showMovieDetails()
     }
 
+    override fun onResume() {
+        super.onResume()
+        showProgressBar()
+        infoAdapter.clear()
+        loadMovieDetails()
+    }
+
+    private fun showProgressBar() {
+        progress.visibility = VISIBLE
+        scrollView.visibility = GONE
+    }
+
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
+            hideProgressBar()
         })
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 infoAdapter.data = it
-                startIndicators()
-                setCurrentIndicator()
+                mIndicator.startIndicators()
+                mIndicator.setCurrentIndicator(0)
                 binding.movie = it
+                hideProgressBar()
             }
         })
 
@@ -112,6 +129,11 @@ class FullFilmInfoFragment : DaggerFragment() {
         })
     }
 
+    private fun hideProgressBar() {
+        progress.visibility = GONE
+        scrollView.visibility = VISIBLE
+    }
+
     private fun loadMovieDetails() {
         viewModel.loadMovieInfo(args.id)
         viewModel.loadSimilarMovies(args.id)
@@ -123,7 +145,7 @@ class FullFilmInfoFragment : DaggerFragment() {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    setCurrentIndicator(position)
+                    mIndicator.setCurrentIndicator(position)
                 }
             })
         }
@@ -136,52 +158,6 @@ class FullFilmInfoFragment : DaggerFragment() {
         similar_rv.apply {
             adapter = similarMoviesAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        }
-    }
-
-    private fun startIndicators() {
-        indicator.removeAllViews()
-        val indicators = arrayOfNulls<ImageView>(infoAdapter.itemCount)
-
-        for (i in indicators.indices) {
-            indicators[i] = ImageView(context)
-            indicators[i]?.setImageDrawable(
-                context?.let {
-                    ContextCompat.getDrawable(
-                        it,
-                        R.drawable.indicator_inactive
-                    )
-                }
-            )
-            indicators[i]?.layoutParams = indicator_item.layoutParams
-            indicator.addView(indicators[i])
-        }
-    }
-
-    private fun setCurrentIndicator(index: Int = 0) {
-        val childCount: Int = indicator.childCount
-        for (i in 0 until childCount) {
-            val imageView =
-                indicator.getChildAt(i) as ImageView
-            if (i == index) {
-                imageView.setImageDrawable(
-                    context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.indicator_active
-                        )
-                    }
-                )
-            } else {
-                imageView.setImageDrawable(
-                    context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.indicator_inactive
-                        )
-                    }
-                )
-            }
         }
     }
 }

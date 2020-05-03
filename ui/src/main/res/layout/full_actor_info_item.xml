@@ -31,7 +31,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_favorite_unactive"
+            android:src="@drawable/ic_favorite_inactive"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/photo_iv"
             tools:ignore="ContentDescription" />
@@ -44,9 +44,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:gravity="bottom"
-            android:text="Имя Фамилия"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photo_iv" />
+            app:layout_constraintTop_toBottomOf="@id/photo_iv"
+            tools:text="Full name" />
 
         <TextView
             android:id="@+id/original_name_tv"
@@ -54,9 +54,9 @@
             android:layout_width="290dp"
             android:layout_height="15dp"
             android:layout_marginStart="16dp"
-            android:text="Name Surname"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_tv" />
+            app:layout_constraintTop_toBottomOf="@id/name_tv"
+            tools:text="Name Surname" />
 
         <TextView
             android:id="@+id/roles_tv"
@@ -64,9 +64,9 @@
             android:layout_width="290dp"
             android:layout_height="15dp"
             android:layout_marginStart="16dp"
-            android:text="амплуа"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/original_name_tv" />
+            app:layout_constraintTop_toBottomOf="@id/original_name_tv"
+            tools:text="Role" />
 
         <LinearLayout
             android:layout_width="268dp"
@@ -82,7 +82,7 @@
                 style="@style/Subtitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="	9 июня, 1981 (38 лет)" />
+                tools:text="10.10.1960 (XX years)" />
 
             <TextView
                 android:id="@+id/motherland_tv"
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:text="	Иерусалим, Израиль" />
+                tools:text="USA" />
 
             <TextView
                 android:id="@+id/height_tv"
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                android:text="	1.60 м" />
+                tools:text="1.60 m" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

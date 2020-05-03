@@ -38,4 +38,9 @@ class ImagesAdapter<T>(
         val inflater = LayoutInflater.from(parent.context)
         return ViewHolderFactory.create(inflater, parent, viewType)
     }
+
+    fun clear(){
+        data = null
+        notifyDataSetChanged()
+    }
 }

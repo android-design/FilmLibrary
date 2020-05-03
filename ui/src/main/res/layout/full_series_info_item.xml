@@ -8,14 +8,6 @@
         <import type="android.text.TextUtils" />
 
         <variable
-            name="fullMovie"
-            type="com.geekbrains.team.domain.movies.model.MovieDetails" />
-
-        <variable
-            name="movie"
-            type="com.geekbrains.team.filmlibrary.model.MovieView" />
-
-        <variable
             name="tvShow"
             type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
@@ -43,9 +35,9 @@
                 android:layout_height="180dp"
                 android:layout_marginBottom="90dp"
                 android:scaleType="centerCrop"
+                android:src="@drawable/ic_no_backdrop"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/ic_no_backdrop" />
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/like_btn"
@@ -54,7 +46,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="@android:color/transparent"
-                android:scaleType="centerCrop"
                 android:src="@drawable/ic_favorite_inactive"
                 app:layout_constraintEnd_toEndOf="@id/title_iv"
                 app:layout_constraintTop_toTopOf="@id/title_iv"
@@ -65,9 +56,8 @@
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:background="@android:color/transparent"
-                android:scaleType="centerCrop"
                 android:src="@drawable/ic_play_circle"
-                android:visibility="@{movie == null ? (TextUtils.isEmpty(tvShow.trailer) ? View.GONE : View.VISIBLE) : (TextUtils.isEmpty(movie.trailer) ? View.GONE : View.VISIBLE)}"
+                android:visibility="@{TextUtils.isEmpty(tvShow.trailer) ? View.GONE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="@id/title_iv"
                 app:layout_constraintEnd_toEndOf="@id/title_iv"
                 app:layout_constraintStart_toStartOf="@id/title_iv"
@@ -85,7 +75,7 @@
                 android:gravity="bottom"
                 android:lines="1"
                 android:scrollHorizontally="true"
-                android:text="@{movie == null ? tvShow.name : movie.title}"
+                android:text='@{tvShow.name + "(" + tvShow.numberOfSeasons + " сезон(ов))"}'
                 app:layout_constraintBottom_toTopOf="@id/original_title_tv"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -98,7 +88,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:scrollHorizontally="true"
-                android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
+                android:text="@{tvShow.originalName}"
                 app:layout_constraintBottom_toTopOf="@id/genres_tv"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -109,7 +99,7 @@
                 android:layout_height="15dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="32dp"
-                android:text="@{movie == null ? tvShow.genres.toString() : movie.genres.toString()}"
+                android:text="@{tvShow.genres}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -127,7 +117,7 @@
                     style="@style/Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@{movie == null ? tvShow.firstAirDate : movie.releaseDate}" />
+                    android:text="@{tvShow.firstAirDate}" />
 
                 <TextView
                     android:id="@+id/produce_countries_tv"
@@ -135,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
-                    android:text="@{movie == null ? tvShow.originCountry : movie.productionCountries}" />
+                    android:text="@{tvShow.originCountry}" />
 
                 <TextView
                     android:id="@+id/duration_tv"
@@ -143,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
-                    android:text='@{movie == null ? tvShow.episodeRunTime + " " + @string/min : movie.runtime + " " + @string/min}' />
+                    android:text='@{String.valueOf(tvShow.episodeRunTime) + " " + @string/min}' />
 
             </LinearLayout>
 
@@ -174,7 +164,7 @@
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
+                    android:text="@{tvShow.voteAverage}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>

@@ -17,7 +17,7 @@ data class TVShowView(
     val genres: String, // Жанры (строки)
     val firstAirDate: String, // Год выхода первого сезона (строка, для уже вышедших. можно объединить, по аналогии с фильмами, если там объединяем)
     val originCountry: String, // Страны производства (строка)
-    val episodeRunTime: Int,
+    val episodeRunTime: String,
     val overview: String, // Описание
     val cast: List<String>, // Актёры (по идее массив моделей актёров)
     val productionCompanies: String // Площадка, на которой показывался (строка)
@@ -35,7 +35,7 @@ fun TVShow.toTVShowView() =
         // TODO Fix this to feature.
         images = images ?: listOf(),
         firstAirDate = firstAirDate,
-        episodeRunTime = episodeRunTime?.firstOrNull() ?: 0,
+        episodeRunTime = episodeRunTime.toString(),
         lastAirDate = lastAirDate ?: "",
         genres = genres.joinToString(),
         overview = overview,

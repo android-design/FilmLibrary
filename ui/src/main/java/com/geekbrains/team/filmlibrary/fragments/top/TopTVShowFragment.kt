@@ -75,6 +75,8 @@ class TopTVShowFragment : DaggerFragment() {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     adapter = tvShowsAdapter
                 }
+                topProgress.visibility = View.GONE
+                inner_top_recycler.visibility = View.VISIBLE
             }
         })
     }
