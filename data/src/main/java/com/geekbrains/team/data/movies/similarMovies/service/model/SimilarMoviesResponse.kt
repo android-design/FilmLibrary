@@ -1,4 +1,4 @@
-package com.geekbrains.team.data.movies.similarMovie.service.model
+package com.geekbrains.team.data.movies.similarMovies.service.model
 
 import com.geekbrains.team.data.Const
 import com.geekbrains.team.data.parseToDate
@@ -7,13 +7,13 @@ import com.google.gson.annotations.SerializedName
 
 data class SimilarMoviesResponse(
     val page: Int,
-    val results: List<MovieResponse>,
+    val results: List<SimilarMovieResponse>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
     val totalResults: Int
 ) {
-    data class MovieResponse(
+    data class SimilarMovieResponse(
         @SerializedName("popularity")
         val popularity: Double,
         @SerializedName("vote_count")

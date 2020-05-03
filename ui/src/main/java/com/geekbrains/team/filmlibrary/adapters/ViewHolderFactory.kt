@@ -10,7 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.databinding.*
-import com.geekbrains.team.filmlibrary.model.ActorView
+import com.geekbrains.team.filmlibrary.model.PersonView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.squareup.picasso.Picasso
@@ -50,7 +50,7 @@ object ViewHolderFactory {
 
     class SmallCardHolder(
         private val binding: SmallCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
             binding.movie = data as? MovieView
@@ -60,7 +60,7 @@ object ViewHolderFactory {
 
     class UpcomingSmallCardHolder(
         private val binding: UpcomingSmallCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
             binding.movie = data as? MovieView
@@ -70,7 +70,7 @@ object ViewHolderFactory {
 
     class LandscapeCardHolder(
         private val binding: LandscapeCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
             binding.movie = data as? MovieView
@@ -80,7 +80,7 @@ object ViewHolderFactory {
 
     class LandscapeTVCardHolder(
         private val binding: LandscapeTvShowCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
             binding.tvShow = data as? TVShowView
@@ -90,7 +90,7 @@ object ViewHolderFactory {
 
     class TopRatedCardHolder(
         private val binding: BigCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         private val play: ImageButton = binding.root.play_btn
         private val backDrop: ImageView = binding.root.title_iv
 
@@ -110,7 +110,7 @@ object ViewHolderFactory {
 
     class FullInfoCardHolder(
         private val binding: FullFilmInfoItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         private val play: ImageButton = binding.root.play_btn
         private val backDrop: ImageView = binding.root.title_iv
 
@@ -128,9 +128,9 @@ object ViewHolderFactory {
 
     class SmallActorCardItemHolder(
         private val binding: SmallActorCardItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), GenericAdapter.Binder {
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.actor = data as? ActorView
+            binding.actor = data as? PersonView
             binding.executePendingBindings()
         }
     }

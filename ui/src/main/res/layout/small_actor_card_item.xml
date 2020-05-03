@@ -7,7 +7,7 @@
 
         <variable
             name="actor"
-            type="com.geekbrains.team.filmlibrary.model.ActorView" />
+            type="com.geekbrains.team.filmlibrary.model.PersonView" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -31,6 +31,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
                 app:poster="@{actor.posterPath}"
+                android:src="@drawable/ic_no_poster"
                 tools:ignore="ContentDescription" />
 
             <TextView

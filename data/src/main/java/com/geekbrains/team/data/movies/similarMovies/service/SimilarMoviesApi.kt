@@ -1,6 +1,6 @@
-package com.geekbrains.team.data.movies.similarMovie.service
+package com.geekbrains.team.data.movies.similarMovies.service
 
-import com.geekbrains.team.data.movies.similarMovie.service.model.SimilarMoviesResponse
+import com.geekbrains.team.data.movies.similarMovies.service.model.SimilarMoviesResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,6 +12,6 @@ interface SimilarMoviesApi {
         @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
-        @Query("page") page: Int
+        @Query("page") page: Int?
     ): Single<SimilarMoviesResponse>
 }

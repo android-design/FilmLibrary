@@ -20,7 +20,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
-import com.geekbrains.team.filmlibrary.adapters.OneItemAdapter
+import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -50,7 +50,7 @@ class MainScreenFragment : DaggerFragment() {
     }
 
     private val topRatedMovieAdapter by lazy {
-        OneItemAdapter<MovieView>(
+        ImagesAdapter<MovieView>(
             clickListener = listener,
             layout = R.layout.big_card_item
         )
@@ -103,7 +103,7 @@ class MainScreenFragment : DaggerFragment() {
 
         viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                topRatedMovieAdapter.update(it)
+                topRatedMovieAdapter.data = it
                 startIndicators()
                 setCurrentIndicator(0)
             }

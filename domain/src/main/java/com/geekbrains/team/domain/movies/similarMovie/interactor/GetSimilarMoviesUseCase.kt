@@ -14,5 +14,5 @@ class GetSimilarMoviesUseCase @Inject constructor(private val repository: Simila
         return repository.fetch(id = params.id, page = params.page)
     }
 
-    data class Param(val id: Int, val page: Int)
+    data class Param(val id: Int, val page: Int?)
 }

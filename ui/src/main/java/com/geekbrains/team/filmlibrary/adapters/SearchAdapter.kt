@@ -8,7 +8,7 @@ import com.geekbrains.team.filmlibrary.fragments.search.model.SearchView
 import com.geekbrains.team.filmlibrary.fragments.search.model.SearchedMovieView
 import com.geekbrains.team.filmlibrary.fragments.search.model.SearchedTVShowView
 
-class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val VIEW_TYPE_MOVIE = 0
         const val VIEW_TYPE_TV_SHOW = 1
@@ -26,7 +26,6 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         mDataList.addAll(data)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
@@ -42,16 +41,13 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (mDataList[position]) {
+    override fun getItemViewType(position: Int) =
+        when (mDataList[position]) {
             is SearchedMovieView -> VIEW_TYPE_MOVIE
             else -> VIEW_TYPE_TV_SHOW
         }
-    }
 
-    override fun getItemCount(): Int {
-        return mDataList.size
-    }
+    override fun getItemCount() = mDataList.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
@@ -62,13 +58,11 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class MovieViewHolder(
         private val binding: LandscapeSearchMovieItemBinding,
-        private val delegate: OnItemSelectedListener?
+        private val listener: OnItemSelectedListener?
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        var listener: OnItemSelectedListener? = null
-
         fun bind(movie: SearchedMovieView) {
-            binding.listener = delegate
+            binding.listener = listener
             binding.movie = movie
             binding.executePendingBindings()
         }
@@ -76,13 +70,11 @@ class SearchAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class TVShowViewHolder(
         private val binding: LandscapeSearchTvshowItemBinding,
-        private val delegate: OnItemSelectedListener?
+        private val listener: OnItemSelectedListener?
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        var listener: OnItemSelectedListener? = null
-
         fun bind(tvShow: SearchedTVShowView) {
-            binding.listener = delegate
+            binding.listener = listener
             binding.tvShow = tvShow
             binding.executePendingBindings()
         }

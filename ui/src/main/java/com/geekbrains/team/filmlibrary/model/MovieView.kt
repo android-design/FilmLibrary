@@ -39,9 +39,9 @@ fun Movie.toMovieView() = MovieView(
     productionCountries = productionCountries?.joinToString { it.name } ?: "",
     runtime = runtime.toString(),
     overview = overview,
-    producer = producer ?: "No data",
-    writer = writer ?: "No data",
-    director = director ?: "No data"
+    producer = producer ?: "",
+    writer = writer ?: "",
+    director = director ?: ""
 )
 
 private fun Movie.movieImages(): List<String> = images?.let {

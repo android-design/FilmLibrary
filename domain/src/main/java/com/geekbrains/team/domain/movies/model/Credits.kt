@@ -28,9 +28,12 @@ data class Credits(
     )
 }
 
-fun Credits.CastPerson.toMovieActor(): Movie.Actor = Movie.Actor(
-    id = this.id, name = this.name, character = this.character, posterPath = this.profilePath)
+fun Credits.CastPerson.toMovieActor(): Movie.Actor =
+    Movie.Actor(
+        id = id, name = name, character = character, posterPath = profilePath
+    )
 
-fun Credits.CrewPerson.toMovieMember(): Movie.Member = Movie.Member(
-    id = this.id, name = this.name, job = this.job, posterPath = this.profilePath ?: ""
-)
+fun Credits.CrewPerson.toMovieMember(): Movie.Member =
+    Movie.Member(
+        id = id, name = name, job = job, posterPath = profilePath
+    )
