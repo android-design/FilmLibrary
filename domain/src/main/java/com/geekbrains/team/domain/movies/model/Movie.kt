@@ -30,9 +30,7 @@ data class Movie(
     val releaseDate: Date,
     val revenue: Int = 0,
     val runtime: Int = 0,
-    // TODO Add class for actors.
     var cast: List<Actor>? = null, // Актеры
-    // TODO Add class for crew
     var crew: List<Member>? = null, // Команда
     val spokenLanguages: List<SpokenLanguage>? = null,
     val status: String? = null,
@@ -49,14 +47,15 @@ data class Movie(
     data class Actor(
         val id: Int,
         val name: String,
-        val path: String?,
+        val posterPath: String?,
         val character: String
     )
 
     data class Member(
-
+        val id: Int,
         val name: String,
-        val job: String
+        val job: String,
+        val posterPath: String?
     )
 
     data class ProductionCompany(
@@ -92,17 +91,14 @@ fun fillMoviesGenres(
         }
     }
 
-// TODO Fix this to one function
 fun fillMovieGenres(
     moviesGenres: List<Genre>,
     movie: Movie
-): Movie =
-    movie.apply {
-        val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
+) {
+    val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
 
-        movie.genreIds?.map {
-            val result = genresMoviesMap[it]
-            result?.let { movie.genres.add(result) }
-
-        }
+    movie.genreIds?.map {
+        val result = genresMoviesMap[it]
+        result?.let { movie.genres.add(result) }
     }
+}

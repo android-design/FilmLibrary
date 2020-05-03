@@ -14,8 +14,7 @@ class MovieCreditsRepositoryImpl @Inject constructor(private val api: MovieCredi
     override fun fetch(id: Int): Single<Credits> {
         return api.getMovieCredits(
             movieId = id,
-            apiKey = BuildConfig.API_KEY,
-            language = Const.LANGUAGE
+            apiKey = BuildConfig.API_KEY
         ).map { it.toCredits() }
     }
 }

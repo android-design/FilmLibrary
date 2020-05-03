@@ -7,6 +7,7 @@ import com.geekbrains.team.data.movies.imagesMovies.service.ImagesMoviesApi
 import com.geekbrains.team.data.movies.movieCreadits.service.MovieCreditsApi
 import com.geekbrains.team.data.movies.nowPlayingMovies.service.NowPlayingMoviesApi
 import com.geekbrains.team.data.movies.searchMovies.service.SearchMoviesApi
+import com.geekbrains.team.data.movies.similarMovies.service.SimilarMoviesApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
 import com.geekbrains.team.data.movies.videosMovies.service.VideosMoviesApi
@@ -92,4 +93,8 @@ class RemoteModule {
     @Provides
     fun getVideosTVApi(retrofit: Retrofit): VideosTVApi =
         retrofit.create(VideosTVApi::class.java)
+
+    @Provides
+    fun getSimilarMoviesApi(retrofit: Retrofit) =
+        retrofit.create(SimilarMoviesApi::class.java)
 }
