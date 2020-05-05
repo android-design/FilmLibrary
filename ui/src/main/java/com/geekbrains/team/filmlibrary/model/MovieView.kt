@@ -22,7 +22,8 @@ data class MovieView(
     val overview: String, // Описание (строка)
     val producer: String,
     val writer: String,
-    val director: String
+    val director: String,
+    var like: Boolean = false
 )
 
 fun Movie.toMovieView() = MovieView(

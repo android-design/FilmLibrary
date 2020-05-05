@@ -1,6 +1,5 @@
 package com.geekbrains.team.filmlibrary.adapters
 
-interface OnItemSelectedListener {
-    fun openMovieDetails(id: Int)
+interface OnLikeClickListener {
     fun onLikeClick(id: Int)
 }

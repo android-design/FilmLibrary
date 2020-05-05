@@ -6,16 +6,24 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.geekbrains.team.data.movies.favoriteMovies.repository.FavoriteMoviesRepositoryImpl
+import com.geekbrains.team.domain.movies.favoriteMovies.interactor.AddFavoriteMovieIdUseCase
 import com.geekbrains.team.filmlibrary.Const.MIN_LUX
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.OnLikeClickListener
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.MainScreenFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), OnItemSelectedListener {
+class MainActivity: AppCompatActivity(), OnItemSelectedListener{
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
@@ -69,4 +77,9 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         val directions = MainScreenFragmentDirections.navigateToMovieDetails(id)
         navController.navigate(directions)
     }
+
+    override fun onLikeClick(id: Int) {
+        Toast.makeText(this, "Ha-Ha", Toast.LENGTH_SHORT).show()
+    }
+
 }

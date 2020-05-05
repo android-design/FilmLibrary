@@ -2,6 +2,7 @@ package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -18,10 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
-import com.geekbrains.team.filmlibrary.adapters.Indicator
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
-import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.*
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.PersonView
@@ -33,7 +31,7 @@ import kotlinx.android.synthetic.main.main_screen_fragment.topPager
 import kotlinx.android.synthetic.main.pager_indicator_item.*
 import javax.inject.Inject
 
-class FullFilmInfoFragment : DaggerFragment() {
+class FullFilmInfoFragment : DaggerFragment(), OnItemSelectedListener {
     private val args: FullFilmInfoFragmentArgs by navArgs()
 
     @Inject
@@ -41,29 +39,29 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     private val viewModel by viewModels<FullFilmInfoViewModel> { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
-    lateinit var listener: OnItemSelectedListener
+    val onItemSelectedListener: OnItemSelectedListener = this
 
     private lateinit var mIndicator: Indicator
     private val infoAdapter by lazy {
-        ImagesAdapter<MovieView>(layout = R.layout.full_film_info_item)
+        ImagesAdapter<MovieView>(clickListener = onItemSelectedListener,layout = R.layout.full_film_info_item)
     }
 
     private val actorsAdapter by lazy {
-        ItemsAdapter<PersonView>(clickListener = listener, layout = R.layout.small_actor_card_item)
+        ItemsAdapter<PersonView>(clickListener = onItemSelectedListener, layout = R.layout.small_actor_card_item)
     }
 
     private val similarMoviesAdapter by lazy {
-        ItemsAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
+        ItemsAdapter<MovieView>(clickListener = onItemSelectedListener, layout = R.layout.small_card_item)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if(context is OnItemSelectedListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context must implement OnItemSelectedListener")
-        }
-    }
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+////        if(context is OnItemSelectedListener) {
+////            onItemSelectedListener = context
+////        } else {
+////            throw RuntimeException("$context must implement OnItemSelectedListener")
+////        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -159,5 +157,14 @@ class FullFilmInfoFragment : DaggerFragment() {
             adapter = similarMoviesAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
+    }
+
+    override fun openMovieDetails(id: Int) {
+        viewModel.loadMovieInfo(id)
+    }
+
+    override fun onLikeClick(id: Int) {
+        viewModel.addInFavorite(id)
+        Log.d("onLikeClick() ", "Pushed")
     }
 }

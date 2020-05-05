@@ -41,7 +41,8 @@ data class Movie(
     val voteCount: Int,
     var producer: String? = null,
     var writer: String? = null,
-    var director: String? = null
+    var director: String? = null,
+    var like: Boolean = false
 ) : MovieAndTVShow() {
 
     data class Actor(
