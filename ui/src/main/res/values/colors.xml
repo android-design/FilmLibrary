@@ -12,15 +12,18 @@
     <color name="dayBackgroundLight">#FAFAFA</color>
     <color name="dayTextPrimary">#263238</color>
     <color name="dayTextSecondary">#5B787F</color>
-    <color name="backgroundSearchTopBar">#7EA8B1</color>
+    <color name="dayBackgroundSearchTopBar">#7EA8B1</color>
+    <color name="dayLineColor">#BDBDBD</color>
 
 
     <!-- Night -->
     <color name="nightBackgroundDark">#263238</color>
-    <color name="nightBackgroundLight">#32424A</color>
-    <color name="nightBackgroundSearchTopBar">#7EA8B1</color>
+    <color name="nightBackgroundLight">#29404C</color>
     <color name="nightTextPrimary">#FAFAFA</color>
     <color name="nightTextSecondary">#BDBDBD</color>
     <color name="nightRateText">#5B787F</color>
+    <color name="nightBackgroundSearchTopBar">#5B787F</color>
+    <color name="nightLineColor">#5B787F</color>
+
 
 </resources>

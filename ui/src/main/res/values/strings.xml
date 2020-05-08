@@ -38,4 +38,9 @@
     <string name="settings">settings</string>
     <string name="reset">Reset</string>
     <string name="min"> min</string>
+    <string name="add_to_list">Add to\nwaiting list</string>
+    <string name="watch_trailer">Watch\ntrailer</string>
+    <string name="add_to_favorite">Add\nto favorites</string>
+    <string name="added_to_list">Added to\nwaiting list</string>
+    <string name="added_to_favorite">Added\nto favorites</string>
 </resources>

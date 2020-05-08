@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -35,6 +33,7 @@ import javax.inject.Inject
 
 class FullFilmInfoFragment : DaggerFragment() {
     private val args: FullFilmInfoFragmentArgs by navArgs()
+    private val maxLines = 8
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -76,7 +75,7 @@ class FullFilmInfoFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mIndicator = Indicator(context, indicator, indicator_item, infoAdapter)
+        initUI()
         startObservers()
         loadMovieDetails()
         showMovieDetails()
@@ -89,9 +88,15 @@ class FullFilmInfoFragment : DaggerFragment() {
         loadMovieDetails()
     }
 
-    private fun showProgressBar() {
-        progress.visibility = VISIBLE
-        scrollView.visibility = GONE
+    private fun initUI() {
+        mIndicator = Indicator(context, indicator, indicator_item, infoAdapter)
+        description_tv.setOnClickListener {
+            run {
+                if (description_tv.maxLines == maxLines)
+                    description_tv.maxLines = Int.MAX_VALUE
+                else description_tv.maxLines = maxLines
+            }
+        }
     }
 
     private fun startObservers() {
@@ -129,9 +134,12 @@ class FullFilmInfoFragment : DaggerFragment() {
         })
     }
 
+    private fun showProgressBar() {
+        listener.showProgress()
+    }
+
     private fun hideProgressBar() {
-        progress.visibility = GONE
-        scrollView.visibility = VISIBLE
+        listener.hideProgress()
     }
 
     private fun loadMovieDetails() {

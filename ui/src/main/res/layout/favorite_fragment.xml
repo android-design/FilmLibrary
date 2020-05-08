@@ -9,7 +9,7 @@
         android:id="@+id/abl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/nightBackgroundSearchTopBar"
+        android:background="?attr/backgroundSearchTopBarColor"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -32,6 +32,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabBackground="?attr/tabBackgroundColor"
             app:tabGravity="fill"
             app:tabMode="fixed" />
     </com.google.android.material.appbar.AppBarLayout>

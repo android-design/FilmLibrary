@@ -52,10 +52,10 @@ class SearchFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mAdapter.attachListener(listener)
-
         startObservers()
         initUI()
         showInfo()
+        listener.hideProgress()
     }
 
     private fun startObservers() {

@@ -2,16 +2,14 @@ package com.geekbrains.team.filmlibrary.fragments.mainScreen
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.view.WindowManager
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,10 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
+import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
 import com.geekbrains.team.filmlibrary.adapters.Indicator
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
-import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -32,6 +30,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
 import kotlinx.android.synthetic.main.pager_indicator_item.*
 import javax.inject.Inject
+
 
 class MainScreenFragment : DaggerFragment() {
 
@@ -75,6 +74,7 @@ class MainScreenFragment : DaggerFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        listener.showProgress()
         binding = DataBindingUtil.inflate(inflater, R.layout.main_screen_fragment, null, false)
         return binding.root
     }
@@ -89,7 +89,6 @@ class MainScreenFragment : DaggerFragment() {
     }
 
     private fun startObservers() {
-
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
             hideProgressBar()
@@ -145,8 +144,7 @@ class MainScreenFragment : DaggerFragment() {
     }
 
     private fun hideProgressBar() {
-        mainProgress.visibility = GONE
-        scroll.visibility = VISIBLE
+        listener.hideProgress()
     }
 
     private fun getInfoFromServer() {

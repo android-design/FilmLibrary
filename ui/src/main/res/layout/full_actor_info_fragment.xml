@@ -9,7 +9,7 @@
         android:id="@+id/abl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/nightBackgroundSearchTopBar"
+        android:background="?attr/backgroundSearchTopBarColor"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="35dp"
-                android:background="@color/IconSecondary"
+                android:background="?attr/lineColor"
                 app:layout_constraintTop_toBottomOf="@id/indicator" />
 
             <ImageView
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="35dp"
-                android:background="@color/IconSecondary"
+                android:background="?attr/lineColor"
                 app:layout_constraintTop_toBottomOf="@id/description_tv" />
 
             <TextView
@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="28dp"
-                android:background="@color/IconSecondary"
+                android:background="?attr/lineColor"
                 app:layout_constraintTop_toBottomOf="@id/filmography_rv" />
 
             <TextView
