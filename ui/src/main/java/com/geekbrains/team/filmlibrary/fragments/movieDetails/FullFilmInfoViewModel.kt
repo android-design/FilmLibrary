@@ -15,6 +15,7 @@ import com.geekbrains.team.filmlibrary.model.toMovieView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers.io
 import javax.inject.Inject
 
 class FullFilmInfoViewModel @Inject constructor(
@@ -46,7 +47,8 @@ class FullFilmInfoViewModel @Inject constructor(
     }
 
     fun addInFavorite(id: Int) {
-        addFavoriteMovieIdUseCase.execute(AddFavoriteMovieIdUseCase.Params(id)).subscribe(object : DisposableCompletableObserver(){
+        addFavoriteMovieIdUseCase.execute(AddFavoriteMovieIdUseCase.Params(id)).subscribeOn(io())
+            .observeOn(AndroidSchedulers.mainThread()).subscribe(object : DisposableCompletableObserver(){
             override fun onComplete() {
                 Log.d("addInFavorite() ", "Success")
             }

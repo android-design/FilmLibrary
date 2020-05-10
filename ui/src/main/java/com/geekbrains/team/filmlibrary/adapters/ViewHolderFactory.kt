@@ -117,6 +117,7 @@ object ViewHolderFactory {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.movie = data as? MovieView
             binding.movie?.let {
+                binding.listener = listener
                 binding.executePendingBindings()
                 play.setOnClickListener { v: View ->
                     v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.trailer)))

@@ -33,7 +33,7 @@ class FavoriteMovieFragment: DaggerFragment() {
     private val mAdapter: ItemsAdapter<MovieView> by lazy {
         ItemsAdapter<MovieView>(
             clickListener = listener,
-            layout = R.layout.small_card_item
+            layout = R.layout.landscape_card_item
         )
     }
 
