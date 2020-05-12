@@ -11,7 +11,10 @@ import com.geekbrains.team.data.movies.similarMovies.service.SimilarMoviesApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.upcomingMovies.service.UpcomingMoviesApi
 import com.geekbrains.team.data.movies.videosMovies.service.VideosMoviesApi
+import com.geekbrains.team.data.tv.credits.service.TVCreditsApi
+import com.geekbrains.team.data.tv.details.service.DetailsTVApi
 import com.geekbrains.team.data.tv.genresTV.service.GenresTVApi
+import com.geekbrains.team.data.tv.images.service.TVImagesApi
 import com.geekbrains.team.data.tv.nowPlayingTV.service.NowPlayingTVApi
 import com.geekbrains.team.data.tv.searchTV.service.SearchTVApi
 import com.geekbrains.team.data.tv.topRatedTV.service.TopRatedTVApi
@@ -95,6 +98,18 @@ class RemoteModule {
         retrofit.create(VideosTVApi::class.java)
 
     @Provides
-    fun getSimilarMoviesApi(retrofit: Retrofit) =
+    fun getSimilarMoviesApi(retrofit: Retrofit): SimilarMoviesApi =
         retrofit.create(SimilarMoviesApi::class.java)
+
+    @Provides
+    fun getDetailsTVApi(retrofit: Retrofit): DetailsTVApi =
+        retrofit.create(DetailsTVApi::class.java)
+
+    @Provides
+    fun getTVCreditsApi(retrofit: Retrofit): TVCreditsApi =
+        retrofit.create(TVCreditsApi::class.java)
+
+    @Provides
+    fun getTVImagesApi(retrofit: Retrofit): TVImagesApi =
+        retrofit.create(TVImagesApi::class.java)
 }

@@ -1,8 +1,8 @@
-package com.geekbrains.team.domain.movies.commonRepository
+package com.geekbrains.team.domain.tv.credits.repository
 
 import com.geekbrains.team.domain.base.model.Credits
 import io.reactivex.Single
 
-interface MovieCreditsRepository {
+interface TVCreditsRepository {
     fun fetch(id: Int): Single<Credits>
 }

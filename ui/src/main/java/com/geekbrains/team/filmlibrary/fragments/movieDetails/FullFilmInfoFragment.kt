@@ -1,6 +1,5 @@
 package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,35 +38,31 @@ class FullFilmInfoFragment : DaggerFragment(), OnItemSelectedListener {
 
     private val viewModel by viewModels<FullFilmInfoViewModel> { viewModelFactory }
     lateinit var binding: FullFilmInfoFragmentBinding
-    val onItemSelectedListener: OnItemSelectedListener = this
+    private val onItemSelectedListener: OnItemSelectedListener = this
 
     private lateinit var mIndicator: Indicator
     private val infoAdapter by lazy {
-        ImagesAdapter<MovieView>(clickListener = onItemSelectedListener,layout = R.layout.full_film_info_item)
+        ImagesAdapter<MovieView>(clickListener = onItemSelectedListener,
+            layout = R.layout.full_film_info_item)
     }
 
     private val actorsAdapter by lazy {
-        ItemsAdapter<PersonView>(clickListener = onItemSelectedListener, layout = R.layout.small_actor_card_item)
+        ItemsAdapter<PersonView>(clickListener = onItemSelectedListener,
+            layout = R.layout.small_actor_card_item)
     }
 
     private val similarMoviesAdapter by lazy {
-        ItemsAdapter<MovieView>(clickListener = onItemSelectedListener, layout = R.layout.small_card_item)
+        ItemsAdapter<MovieView>(clickListener = onItemSelectedListener,
+            layout = R.layout.small_card_item)
     }
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-////        if(context is OnItemSelectedListener) {
-////            onItemSelectedListener = context
-////        } else {
-////            throw RuntimeException("$context must implement OnItemSelectedListener")
-////        }
-//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.full_film_info_fragment, null, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.full_film_info_fragment,
+            null, false)
         return binding.root
     }
 
@@ -150,12 +145,14 @@ class FullFilmInfoFragment : DaggerFragment(), OnItemSelectedListener {
 
         actors_rv.apply {
             adapter = actorsAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,
+                false)
         }
 
         similar_rv.apply {
             adapter = similarMoviesAdapter
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL,
+                false)
         }
     }
 

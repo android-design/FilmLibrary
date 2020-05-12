@@ -1,10 +1,10 @@
-package com.geekbrains.team.data.movies.movieCreadits.service.model
+package com.geekbrains.team.data.tv.credits.service.model
 
 import com.geekbrains.team.data.Const
 import com.geekbrains.team.domain.base.model.Credits
 import com.google.gson.annotations.SerializedName
 
-data class MovieCreditsResponse(
+data class TVCreditsResponse(
     val id: Int,
     val cast: List<Cast>,
     val crew: List<Member>
@@ -36,7 +36,7 @@ data class MovieCreditsResponse(
     )
 }
 
-fun MovieCreditsResponse.Cast.toCastPerson(): Credits.CastPerson = Credits.CastPerson(
+fun TVCreditsResponse.Cast.toCastPerson(): Credits.CastPerson = Credits.CastPerson(
     castId = this.castId,
     character = this.character,
     creditId = this.creditId,
@@ -47,7 +47,7 @@ fun MovieCreditsResponse.Cast.toCastPerson(): Credits.CastPerson = Credits.CastP
     profilePath = this.profilePath?.let { Const.IMAGE_PREFIX + it } ?: ""
 )
 
-fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.CrewPerson(
+fun TVCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.CrewPerson(
     creditId = this.creditId,
     department = this.department,
     gender = this.gender,
@@ -57,7 +57,7 @@ fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.Cre
     profilePath = this.profilePath.let { Const.IMAGE_PREFIX + it }
 )
 
-fun MovieCreditsResponse.toCredits(): Credits =
+fun TVCreditsResponse.toCredits(): Credits =
     Credits(
         cast = cast.map { it.toCastPerson() },
         crew = crew.map { it.toCrewPerson() }

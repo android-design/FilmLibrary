@@ -15,8 +15,10 @@ import javax.inject.Singleton
         MainScreenFragmentModule::class, FullFilmInfoFragmentModule::class, SearchFragmentModule::class,
         FavoriteFragmentsModule::class, TopFragmentsModule::class, UpcomingMoviesModule::class,
         SearchMoviesModule::class, SearchTVModule::class, GenresModule::class, FavoriteMoviesModule::class,
-        NowPlayingModule::class, TopRatedMoviesModule::class, MovieDetailsModule::class, TopRatedTVModule::class, ImagesModule::class,
-        VideosModule::class, FullFilmInfoFragmentModule::class, MovieCreditsModule::class, SimilarMoviesModule::class]
+        NowPlayingModule::class, TopRatedMoviesModule::class, MovieDetailsModule::class,
+        TopRatedTVModule::class, ImagesModule::class, VideosModule::class,
+        FullFilmInfoFragmentModule::class, MovieCreditsModule::class, SimilarMoviesModule::class,
+        DetailsTVModule::class, TVCreditsModule::class]
 )
 interface AppComponent : AndroidInjector<App> {
     @Component.Factory
