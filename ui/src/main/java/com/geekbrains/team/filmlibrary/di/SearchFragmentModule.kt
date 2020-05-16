@@ -1,9 +1,7 @@
 package com.geekbrains.team.filmlibrary.di
 
 import androidx.lifecycle.ViewModel
-import com.geekbrains.team.filmlibrary.fragments.search.SearchFragment
-import com.geekbrains.team.filmlibrary.fragments.search.SearchSettingsFragment
-import com.geekbrains.team.filmlibrary.fragments.search.SearchViewModel
+import com.geekbrains.team.filmlibrary.fragments.search.*
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -24,8 +22,14 @@ abstract class SearchFragmentModule {
             ViewModelBuilder::class
         ]
     )
-    internal abstract fun searchSettingsFragment(): SearchSettingsFragment
+    internal abstract fun searchMovieFragment(): SearchMovieFragment
 
+    @ContributesAndroidInjector(
+        modules = [
+            ViewModelBuilder::class
+        ]
+    )
+    internal abstract fun searchTVShowFragment(): SearchTVShowFragment
 
     @Binds
     @IntoMap

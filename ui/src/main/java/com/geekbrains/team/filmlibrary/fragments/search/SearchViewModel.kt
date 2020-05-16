@@ -1,6 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.search
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.movies.searchMovies.interactor.GetSearchedMovies
 import com.geekbrains.team.domain.tv.model.TVShow
@@ -14,6 +15,7 @@ import com.geekbrains.team.filmlibrary.model.toTVShowView
 import com.geekbrains.team.filmlibrary.util.LoadState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -90,5 +92,13 @@ class SearchViewModel @Inject constructor(
         handleFailure(failure)
 
         loadingTVState.value = LoadState.Error(failure)
+    }
+
+    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
+        if (visibleItemCount + lastVisibleItemPosition + 5 >= totalItemCount) {
+
+            loadingTVState.postValue(LoadState.Loading)
+            loadSearchedTV(currentQuery, ++currentTVPage)
+        }
     }
 }
