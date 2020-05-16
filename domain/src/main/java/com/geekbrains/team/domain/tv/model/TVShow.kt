@@ -95,7 +95,7 @@ data class TVShow(
 fun fillTVGenres(
     tvGenres: List<Genre>,
     tv: List<TVShow>
-): List<MovieAndTVShow> =
+): List<TVShow> =
     tv.apply {
         val genresTVMap = tvGenres.map { it.id to it.name }.toMap()
 

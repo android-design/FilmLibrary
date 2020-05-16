@@ -39,6 +39,9 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_searchSettingsFragment"
+            app:destination="@id/searchSettingsFragment" />
     </fragment>
 
     <fragment
@@ -60,5 +63,9 @@
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchSettingsFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.search.SearchSettingsFragment"
+        android:label="SearchSettingsFragment" />
 
 </navigation>

@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.topRatedMovies.service
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.Expose
@@ -67,6 +68,7 @@ fun ResponseTopRatedMovies.toMovie(): MutableList<Movie> = results.map { movie -
         originalLanguage = movie.originalLanguage,
         voteAverage = (movie.voteAverage * 10).toInt(),
         overview = movie.overview,
-        releaseDate = movie.releaseDate.parseToDate()
+        releaseDate = movie.releaseDate.parseToDate(),
+        releaseYear = movie.releaseDate.getYear()
     )
 }.toMutableList()

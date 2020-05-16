@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.detailsMovies.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
@@ -95,5 +96,6 @@ fun MovieDetailsResponse.toMovie() = Movie(
             logoPath = it.logoPath, name = it.name, originCountry = it.originCountry
         )
     },
-    runtime = runtime
+    runtime = runtime,
+    releaseYear = releaseDate.getYear()
 )

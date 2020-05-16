@@ -2,9 +2,11 @@ package com.geekbrains.team.data.movies.searchMovies.service.model
 
 import com.geekbrains.team.data.Const.IMAGE_PREFIX
 import com.geekbrains.team.data.Const.POSTER_AND_BACKDROP_PREFIX
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 
 data class ResponseSearchMovies(
@@ -31,7 +33,7 @@ data class ResponseSearchMovies(
         @SerializedName("title")
         val title: String,
         @SerializedName("release_date")
-        val releaseDate: String,
+        val releaseDate: String?,
         @SerializedName("original_language")
         val originalLanguage: String,
         @SerializedName("original_title")
@@ -49,7 +51,7 @@ data class ResponseSearchMovies(
     )
 }
 
-fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
+fun ResponseSearchMovies.toSearchMovie(): MutableList<Movie> =
     results.map { movie ->
         Movie(
             id = movie.id,
@@ -65,6 +67,7 @@ fun ResponseSearchMovies.toSearchMovie(): List<Movie> =
             originalLanguage = movie.originalLanguage,
             voteAverage = (movie.voteAverage * 10).toInt(),
             overview = movie.overview,
-            releaseDate = movie.releaseDate.parseToDate()
+            releaseDate = movie.releaseDate.parseToDate(),
+            releaseYear = movie.releaseDate.getYear()
         )
-    }
+    }.toMutableList()

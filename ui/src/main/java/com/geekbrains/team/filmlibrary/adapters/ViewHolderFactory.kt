@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ToggleButton
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.databinding.*
+import com.geekbrains.team.filmlibrary.fragments.search.DateSettings
 import com.geekbrains.team.filmlibrary.model.PersonView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
@@ -44,7 +46,37 @@ object ViewHolderFactory {
             R.layout.small_actor_card_item -> SmallActorCardItemHolder(
                 SmallActorCardItemBinding.inflate(inflater, parent, false)
             )
+            R.layout.settings_item -> SettingsItemHolder(
+                SettingsItemBinding.inflate(inflater, parent, false)
+            )
+            R.layout.landscape_search_item -> LandscapeSearchHolder(
+                LandscapeSearchItemBinding.inflate(inflater, parent, false)
+            )
             else -> throw Exception("Wrong view type")
+        }
+    }
+
+    class SettingsItemHolder(
+        private val binding: SettingsItemBinding
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+            (data as? DateSettings)?.let {
+                binding.data = data
+                binding.root.findViewById<ToggleButton>(R.id.button)
+                    .setOnCheckedChangeListener { buttonView, isChecked ->
+                        if (!buttonView.isPressed) {
+                            return@setOnCheckedChangeListener
+                        }
+
+                        if (isChecked) {
+                            listener?.addId(data.id)
+                        } else {
+                            listener?.removeId(data.id)
+                        }
+                    }
+                binding.executePendingBindings()
+            }
+
         }
     }
 
@@ -74,6 +106,20 @@ object ViewHolderFactory {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
             binding.movie = data as? MovieView
+            binding.executePendingBindings()
+        }
+    }
+
+    class LandscapeSearchHolder(
+        private val binding: LandscapeSearchItemBinding
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
+        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+            binding.listener = listener
+            when (data) {
+                is MovieView -> binding.movie = data
+                is TVShowView -> binding.tvShow = data
+                else -> throw IllegalArgumentException()
+            }
             binding.executePendingBindings()
         }
     }

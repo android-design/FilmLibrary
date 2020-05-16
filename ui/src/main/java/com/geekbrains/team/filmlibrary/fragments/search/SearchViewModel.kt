@@ -1,55 +1,94 @@
 package com.geekbrains.team.filmlibrary.fragments.search
 
 import androidx.lifecycle.MutableLiveData
-import com.geekbrains.team.domain.base.model.MovieAndTVShow
 import com.geekbrains.team.domain.movies.model.Movie
-import com.geekbrains.team.domain.search.interactor.GetSearchedResult
+import com.geekbrains.team.domain.movies.searchMovies.interactor.GetSearchedMovies
 import com.geekbrains.team.domain.tv.model.TVShow
+import com.geekbrains.team.domain.tv.searchTV.interactor.GetSearchedTV
+import com.geekbrains.team.filmlibrary.addTo
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
-import com.geekbrains.team.filmlibrary.fragments.search.model.SearchView
-import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedMovieView
-import com.geekbrains.team.filmlibrary.fragments.search.model.toSearchedTVShowView
+import com.geekbrains.team.filmlibrary.model.MovieView
+import com.geekbrains.team.filmlibrary.model.TVShowView
+import com.geekbrains.team.filmlibrary.model.toMovieView
+import com.geekbrains.team.filmlibrary.model.toTVShowView
+import com.geekbrains.team.filmlibrary.util.LoadState
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val useCaseSearchedResult: GetSearchedResult
-) :
-    BaseViewModel() {
+    private val useCaseSearchedMovies: GetSearchedMovies,
+    private val useCaseSearchedTV: GetSearchedTV
+) : BaseViewModel() {
 
-    var currentReleaseYear: Int? = null
-    var isNeedSearchMovies: Boolean = true
-    var isNeedSearchTVShows: Boolean = true
+    var searchedMoviesData: MutableLiveData<List<MovieView>> = MutableLiveData()
+    var searchedTVData: MutableLiveData<List<TVShowView>> = MutableLiveData()
 
-    var searchedMoviesData: MutableLiveData<List<SearchView>> = MutableLiveData()
+    var currentQuery = ""
 
-    fun loadSearchedMovies(query: String, page: Int) {
-        val disposable = useCaseSearchedResult.execute(
-            params = GetSearchedResult.Params(
+    val newMoviePage
+        get() = currentMoviePage != 1
+    var currentMoviePage = 1
+
+    val newTVPage
+        get() = currentTVPage != 1
+    var currentTVPage = 1
+    var loadingMovieState = MutableLiveData<LoadState>()
+    var loadingTVState = MutableLiveData<LoadState>()
+
+    fun loadSearchedMovies(query: String, page: Int? = null) {
+        loadingMovieState.value = LoadState.Loading
+
+        useCaseSearchedMovies.execute(
+            params = GetSearchedMovies.Params(
                 query = query,
-                releaseYear = currentReleaseYear,
-                page = page,
-                isNeedSearchMovies = isNeedSearchMovies,
-                isNeedSearchTVShows = isNeedSearchTVShows
+                page = page
             )
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::handleOnSuccessLoadSearchedMovies, ::handleFailure)
-
-        addDisposable(disposable)
+            .subscribe(::handleOnSuccessLoadSearchedMovies, ::handleFailureLoadSearchedMovies)
+            .addTo(compositeDisposable)
     }
 
 
-    private fun handleOnSuccessLoadSearchedMovies(list: List<MovieAndTVShow>) {
-        searchedMoviesData.value = list.map {
-            when (it) {
-                is Movie -> it.toSearchedMovieView()
-                is TVShow -> it.toSearchedTVShowView()
-                else -> throw Throwable("Ooops")
-            }
+    private fun handleOnSuccessLoadSearchedMovies(result: List<Movie>) {
+        searchedMoviesData.value = result.map {
+            it.toMovieView()
         }
+        loadingMovieState.value = LoadState.Done
+    }
+
+    private fun handleFailureLoadSearchedMovies(failure: Throwable) {
+        handleFailure(failure)
+
+        loadingMovieState.value = LoadState.Error(failure)
+    }
+
+    fun loadSearchedTV(query: String, page: Int? = null) {
+        loadingTVState.value = LoadState.Loading
+        useCaseSearchedTV.execute(
+            params = GetSearchedTV.Params(
+                query = query,
+                page = page
+            )
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(::handleOnSuccessLoadSearchedTV, ::handleFailureLoadLoadSearchedTV)
+            .addTo(compositeDisposable)
+    }
+
+    private fun handleOnSuccessLoadSearchedTV(result: List<TVShow>) {
+        searchedTVData.value = result.map {
+            it.toTVShowView()
+        }
+        loadingTVState.value = LoadState.Done
+    }
+
+    private fun handleFailureLoadLoadSearchedTV(failure: Throwable) {
+        handleFailure(failure)
+
+        loadingTVState.value = LoadState.Error(failure)
     }
 }

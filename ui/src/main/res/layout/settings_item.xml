@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.geekbrains.team.filmlibrary.fragments.search.DateSettings" />
+
+        <variable
+            name="listener"
+            type="com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_settings"
+            android:checked='@{data.isChecked}'
+            android:text='@{data.title}'
+            android:textAllCaps="false"
+            android:textOff='@{data.title}'
+            android:textOn='@{data.title}' />
+    </LinearLayout>
+</layout>

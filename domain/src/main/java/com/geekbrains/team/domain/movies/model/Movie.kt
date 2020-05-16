@@ -28,6 +28,7 @@ data class Movie(
     val productionCompanies: List<ProductionCompany>? = null,
     val productionCountries: List<ProductionCountry>? = null,
     val releaseDate: Date,
+    val releaseYear: String,
     val revenue: Int = 0,
     val runtime: Int = 0,
     var cast: List<Actor>? = null, // Актеры
@@ -75,21 +76,6 @@ data class Movie(
         val name: String
     )
 }
-
-fun fillMoviesGenres(
-    moviesGenres: List<Genre>,
-    movies: List<Movie>
-): List<Movie> =
-    movies.apply {
-        val genresMoviesMap = moviesGenres.map { it.id to it.name }.toMap()
-
-        map { movie ->
-            movie.genreIds?.map {
-                val result = genresMoviesMap[it]
-                result?.let { movie.genres.add(result) }
-            }
-        }
-    }
 
 fun fillMovieGenres(
     moviesGenres: List<Genre>,

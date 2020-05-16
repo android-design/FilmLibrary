@@ -68,6 +68,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="Rate" parent="@android:style/TextAppearance.Medium">

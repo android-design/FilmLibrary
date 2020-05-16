@@ -71,12 +71,13 @@ class TopTVShowFragment : DaggerFragment() {
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 tvShowsAdapter.update(it)
                 diffResult.dispatchUpdatesTo(tvShowsAdapter)
-                inner_top_recycler.apply {
+                inner_recycler.apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     adapter = tvShowsAdapter
                 }
-                topProgress.visibility = View.GONE
-                inner_top_recycler.visibility = View.VISIBLE
+                // TODO Extract to function
+                progress_bar.visibility = View.GONE
+                inner_recycler.visibility = View.VISIBLE
             }
         })
     }

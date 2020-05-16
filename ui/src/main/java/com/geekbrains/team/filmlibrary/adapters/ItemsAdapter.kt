@@ -3,21 +3,32 @@ package com.geekbrains.team.filmlibrary.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.geekbrains.team.filmlibrary.model.MovieView
+import com.geekbrains.team.filmlibrary.Const.PRELOAD_FROM_SERVER_ITEMS_COYUNT
 
 class ItemsAdapter<T>(
-    val clickListener: OnItemSelectedListener? = null, val layout: Int
+    val clickListener: OnItemSelectedListener? = null,
+    val layout: Int,
+    val onScrollToLastPageListener: (() -> Unit)? = null
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val data: MutableList<T> = ArrayList()
+    var isAllItemsLoaded: Boolean = false
 
     fun update(items: List<T>) {
         this.data.clear()
         this.data.addAll(items)
     }
 
+    fun addItems(items: List<T>) {
+        this.data.addAll(items)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (!isAllItemsLoaded && position >= data.size - PRELOAD_FROM_SERVER_ITEMS_COYUNT) {
+            onScrollToLastPageListener?.invoke()
+        }
+
         (holder as? Binder)?.bind(
             data = data[position],
             listener = clickListener

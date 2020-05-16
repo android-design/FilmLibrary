@@ -22,7 +22,8 @@ data class MovieView(
     val overview: String, // Описание (строка)
     val producer: String,
     val writer: String,
-    val director: String
+    val director: String,
+    val releaseYear:String
 )
 
 fun Movie.toMovieView() = MovieView(
@@ -41,7 +42,8 @@ fun Movie.toMovieView() = MovieView(
     overview = overview,
     producer = producer ?: "",
     writer = writer ?: "",
-    director = director ?: ""
+    director = director ?: "",
+    releaseYear = releaseYear
 )
 
 private fun Movie.movieImages(): List<String> = images?.let {

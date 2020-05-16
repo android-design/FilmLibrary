@@ -6,10 +6,11 @@ import com.geekbrains.team.data.database.AppDatabase
 import com.geekbrains.team.data.movies.favoriteMovies.dao.FavoriteMoviesDao
 import dagger.Module
 import dagger.Provides
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
-class DatabaseModule {
+class DatabaseModule{
 
     @Singleton
     @Provides

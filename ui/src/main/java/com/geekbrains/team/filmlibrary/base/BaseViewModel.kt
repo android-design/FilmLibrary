@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel() {
-    private val compositeDisposable by lazy { CompositeDisposable() }
+    protected val compositeDisposable by lazy { CompositeDisposable() }
 
     var failure: MutableLiveData<Throwable> = MutableLiveData()
 
@@ -14,7 +14,7 @@ abstract class BaseViewModel : ViewModel() {
         compositeDisposable.add(disposable)
     }
 
-    protected fun handleFailure(failure: Throwable) {
+    protected open fun handleFailure(failure: Throwable) {
         this.failure.value = failure
     }
 

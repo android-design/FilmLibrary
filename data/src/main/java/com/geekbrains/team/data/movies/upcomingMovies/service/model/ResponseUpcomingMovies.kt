@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.upcomingMovies.service.model
 
 import com.geekbrains.team.data.Const
+import com.geekbrains.team.data.getYear
 import com.geekbrains.team.data.parseToDate
 import com.geekbrains.team.domain.movies.model.Movie
 import com.google.gson.annotations.SerializedName
@@ -63,6 +64,7 @@ fun ResponseUpcomingMovies.toMovie(): List<Movie> =
             originalLanguage = movie.originalLanguage,
             voteAverage = (movie.voteAverage * 10).toInt(),
             overview = movie.overview,
-            releaseDate = movie.releaseDate.parseToDate()
+            releaseDate = movie.releaseDate.parseToDate(),
+            releaseYear = movie.releaseDate.getYear()
         )
     }

@@ -1,5 +1,6 @@
 package com.geekbrains.team.filmlibrary.fragments.mainScreen
 
+import android.widget.SearchView
 import androidx.lifecycle.MutableLiveData
 import com.geekbrains.team.domain.base.None
 import com.geekbrains.team.domain.movies.model.Movie
@@ -9,13 +10,18 @@ import com.geekbrains.team.domain.movies.topRatedMovies.interactor.GetRandomTopR
 import com.geekbrains.team.domain.movies.upcomingMovies.interactor.GetUpcomingMovies
 import com.geekbrains.team.domain.tv.model.TVShow
 import com.geekbrains.team.domain.tv.nowPlayingTV.interactor.GetFirstNowPlayingTV
+import com.geekbrains.team.filmlibrary.addTo
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.geekbrains.team.filmlibrary.model.toMovieView
 import com.geekbrains.team.filmlibrary.model.toTVShowView
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainScreenViewModel @Inject constructor(
@@ -61,12 +67,11 @@ class MainScreenViewModel @Inject constructor(
     }
 
     fun loadRandomTopRatedMovie() {
-        val disposable = useCaseRandomTopRatedMovie.execute(None())
+        useCaseRandomTopRatedMovie.execute(None())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::handleOnSuccessLoadRandomTopRatedMovie, ::handleFailure)
-
-        addDisposable(disposable)
+            .addTo(compositeDisposable)
     }
 
     private fun handleOnSuccessLoadRandomTopRatedMovie(randomTopRatedMovie: Movie) {

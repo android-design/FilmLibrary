@@ -73,12 +73,13 @@ class TopMovieFragment : DaggerFragment() {
                 val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
                 moviesAdapter.update(it)
                 diffResult.dispatchUpdatesTo(moviesAdapter)
-                inner_top_recycler.apply {
+                inner_recycler.apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     adapter = moviesAdapter
                 }
-                topProgress.visibility = GONE
-                inner_top_recycler.visibility = VISIBLE
+                // TODO Extract to function
+                progress_bar.visibility = GONE
+                inner_recycler.visibility = VISIBLE
             }
         })
     }

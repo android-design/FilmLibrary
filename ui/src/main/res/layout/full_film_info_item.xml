@@ -169,7 +169,7 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/series_rating_tv"
+                    android:id="@+id/rating"
                     style="@style/Subtitle1"
                     android:layout_width="16dp"
                     android:layout_height="match_parent"

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="movie"
+            type="com.geekbrains.team.filmlibrary.model.MovieView" />
+
+        <variable
+            name="tvShow"
+            type="com.geekbrains.team.filmlibrary.model.TVShowView" />
+
+        <variable
+            name="listener"
+            type="com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        android:onClick="@{() -> listener.openMovieDetails(movie == null ? tvShow.id : movie.id)}"
+        app:cardCornerRadius="4dp"
+        app:cardMaxElevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/cover_iv"
+                android:layout_width="68dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_no_poster"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:poster='@{movie == null ? tvShow.posterPath : movie.posterPath}'
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                style="@style/Headline3"
+                android:layout_width="244dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                android:text='@{movie == null ? tvShow.name : movie.title}'
+                app:layout_constraintStart_toEndOf="@id/cover_iv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Fight club" />
+
+            <TextView
+                android:id="@+id/original_title_tv"
+                style="@style/Subtitle2"
+                android:layout_width="234dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="4dp"
+                android:text="@{movie == null ? tvShow.originalName : movie.originalTitle}"
+                app:layout_constraintStart_toStartOf="@id/title_tv"
+                app:layout_constraintTop_toBottomOf="@id/title_tv"
+                tools:text="Fight club" />
+
+            <TextView
+                android:id="@+id/release_date"
+                style="@style/Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text='@{movie == null ? tvShow.firstAirDate : movie.releaseYear}'
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/original_title_tv"
+                tools:text="2020" />
+
+            <ImageView
+                android:id="@+id/rating_image"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_imdb"
+                app:layout_constraintBottom_toBottomOf="@+id/rating"
+                app:layout_constraintEnd_toStartOf="@+id/rating"
+                app:layout_constraintTop_toTopOf="@+id/rating"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/rating"
+                style="@style/Subtitle1"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{movie == null ? tvShow.voteAverage : movie.voteAverage}"
+                app:layout_constraintBottom_toBottomOf="@+id/release_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/release_date"
+                tools:text="88" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

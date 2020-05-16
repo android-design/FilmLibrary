@@ -4,13 +4,13 @@
     android:layout_height="match_parent">
 
     <ProgressBar
-        android:id="@+id/topProgress"
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/inner_top_recycler"
+        android:id="@+id/inner_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>

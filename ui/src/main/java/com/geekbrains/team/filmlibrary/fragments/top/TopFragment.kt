@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.TabAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -33,7 +32,7 @@ class TopFragment : Fragment() {
     }
 
     private fun showInfo() {
-        val mAdapter = ((context as MainActivity).supportFragmentManager).run {
+        val mAdapter = childFragmentManager.run {
             TabAdapter(
                 this,
                 this@TopFragment.lifecycle,

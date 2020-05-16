@@ -11,7 +11,7 @@ interface SearchTVApi {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("query") query: String,
-        @Query("page") page: Int
+        @Query("page") page: Int?
 
     ): Single<ResponseSearchTVShow>
 }
