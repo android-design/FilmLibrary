@@ -2,7 +2,6 @@ package com.geekbrains.team.data.actors.details.service.model
 
 import com.google.gson.annotations.SerializedName
 
-
 data class ActorDetailsResponse(
     val birthday: String?,
     val deathday: String?,
@@ -16,6 +15,13 @@ data class ActorDetailsResponse(
     val popularity: Double,
 
     @SerializedName("place_of_birth")
+    val placeOfBirthday: String?,
 
+    @SerializedName("profile_path")
+    val profilePath: String?,
 
+    val homepage: String,
+
+    @SerializedName("imdb_id")
+    val imbdId: String?
 )
