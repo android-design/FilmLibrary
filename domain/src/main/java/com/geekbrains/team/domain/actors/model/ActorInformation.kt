@@ -10,16 +10,9 @@ data class ActorInformation(
     val popularity: Double,
     var profilePath: String? = null,
     val alsoKnownAs: List<String>,
-    val placeOfBirth: String,
-    val imdbId: String,
+    val placeOfBirth: String?,
+    val imdbId: String?,
     val homepage: String?,
-    var cast: List<CardMovie>,
-    var crew: List<CardMovie>
-) {
-    data class CardMovie(
-        val id: Int,
-        val characterOrJob: String,
-        val posterPath: String?,
-        val title: String
-    )
-}
+    var movieCredits: ActorCreditsInfo? = null,
+    var tvCredits: ActorCreditsInfo? = null
+)

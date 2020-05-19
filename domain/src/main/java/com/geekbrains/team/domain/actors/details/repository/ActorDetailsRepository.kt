@@ -4,5 +4,5 @@ import com.geekbrains.team.domain.actors.model.ActorInformation
 import io.reactivex.Single
 
 interface ActorDetailsRepository {
-    fun fetch(): Single<ActorInformation>
+    fun fetch(id: Int): Single<ActorInformation>
 }

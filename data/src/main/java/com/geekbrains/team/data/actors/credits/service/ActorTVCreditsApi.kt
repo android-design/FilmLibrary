@@ -1,17 +1,16 @@
-package com.geekbrains.team.data.actors.details.service
+package com.geekbrains.team.data.actors.credits.service
 
 import com.geekbrains.team.data.actors.credits.service.model.ActorCreditsResponse
-import com.geekbrains.team.data.actors.details.service.model.ActorDetailsResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ActorDetailsApi {
-    @GET("/person/{person_id}?")
-    fun getActorDetails(
+interface ActorTVCreditsApi {
+    @GET("/person/{person_id}/tv_credits?")
+    fun getActorTVCredits(
         @Path("person_id") id: Int,
         @Query("api_key") apiKey: String,
         @Query("language") language: String
-    ): Single<ActorDetailsResponse>
+    ): Single<ActorCreditsResponse>
 }

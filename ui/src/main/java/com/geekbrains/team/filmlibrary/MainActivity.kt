@@ -20,6 +20,7 @@ class MainActivity: AppCompatActivity(), OnItemSelectedListener{
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)

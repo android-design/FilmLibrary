@@ -1,6 +1,8 @@
 package com.geekbrains.team.data.di
 
 import com.geekbrains.team.data.Const.BASE_URL
+import com.geekbrains.team.data.actors.credits.service.ActorMovieCreditsApi
+import com.geekbrains.team.data.actors.credits.service.ActorTVCreditsApi
 import com.geekbrains.team.data.movies.detailsMovies.service.MovieDetailsApi
 import com.geekbrains.team.data.movies.genresMovies.service.GenresMoviesApi
 import com.geekbrains.team.data.movies.imagesMovies.service.ImagesMoviesApi
@@ -24,6 +26,7 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 
 /**
@@ -112,4 +115,12 @@ class RemoteModule {
     @Provides
     fun getTVImagesApi(retrofit: Retrofit): TVImagesApi =
         retrofit.create(TVImagesApi::class.java)
+
+    @Provides
+    fun getActorMovieCredits(retrofit: Retrofit): ActorMovieCreditsApi =
+        retrofit.create(ActorMovieCreditsApi::class.java)
+
+    @Provides
+    fun getActorTVCredits(retrofit: Retrofit): ActorTVCreditsApi =
+        retrofit.create(ActorTVCreditsApi::class.java)
 }

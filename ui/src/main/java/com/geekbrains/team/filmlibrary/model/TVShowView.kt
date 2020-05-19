@@ -19,9 +19,15 @@ data class TVShowView(
     val originCountry: String, // Страны производства (строка)
     val episodeRunTime: String,
     val overview: String, // Описание
-    val cast: List<String>, // Актёры (по идее массив моделей актёров)
     val productionCompanies: String // Площадка, на которой показывался (строка)
-)
+) {
+    data class Actor(
+        val id: Int,
+        val name: String,
+        val posterPath: String?,
+        val character: String
+    )
+}
 
 fun TVShow.toTVShowView() =
     TVShowView(
@@ -33,7 +39,7 @@ fun TVShow.toTVShowView() =
         voteAverage = voteAverage.toString(),
         trailer = trailer(),
         // TODO Fix this to feature.
-        images = images ?: listOf(),
+        images = images?.posters?.map { it.url } ?: listOf(),
         firstAirDate = firstAirDate,
         episodeRunTime = episodeRunTime.toString(),
         lastAirDate = lastAirDate ?: "",
@@ -41,7 +47,6 @@ fun TVShow.toTVShowView() =
         overview = overview,
         originCountry = originCountry.toString(),
         posterPath = posterPath,
-        cast = cast ?: listOf(),
         productionCompanies = productionCompanies?.map { it.name }.toString()
     )
 

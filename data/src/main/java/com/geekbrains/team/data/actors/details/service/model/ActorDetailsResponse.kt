@@ -1,5 +1,6 @@
 package com.geekbrains.team.data.actors.details.service.model
 
+import com.geekbrains.team.domain.actors.model.ActorInformation
 import com.google.gson.annotations.SerializedName
 
 data class ActorDetailsResponse(
@@ -25,3 +26,19 @@ data class ActorDetailsResponse(
     @SerializedName("imdb_id")
     val imbdId: String?
 )
+
+fun ActorDetailsResponse.toActorInformation() =
+    ActorInformation(
+        id = this.id,
+        name = this.name,
+        birthday = this.birthday,
+        deathDay = this.deathday,
+        alsoKnownAs = this.alsoKnownAs,
+        gender = this.gender,
+        biography = this.biography,
+        popularity = this.popularity,
+        placeOfBirth = this.placeOfBirthday,
+        profilePath = this.profilePath,
+        homepage = this.homepage,
+        imdbId = this.imbdId
+    )
