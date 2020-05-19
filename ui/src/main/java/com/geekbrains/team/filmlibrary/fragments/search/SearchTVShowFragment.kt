@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterTest
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterSearch
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.ProgressAdapter
 import com.geekbrains.team.filmlibrary.model.TVShowView
@@ -29,16 +29,16 @@ class SearchTVShowFragment : DaggerFragment() {
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val searchedTVAdapter: ItemsAdapterTest<TVShowView> by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ItemsAdapterTest<TVShowView>(
+    private val searchedTVAdapter: ItemsAdapterSearch<TVShowView> by lazy(mode = LazyThreadSafetyMode.NONE) {
+        ItemsAdapterSearch(
             clickListener = listener,
             layout = R.layout.landscape_search_item,
-            comparator = ItemsAdapterTest.COMPARATOR_TVSHOW
+            comparator = ItemsAdapterSearch.COMPARATOR_TVSHOW
         )
     }
 
-    private val progressTVAdapter: ProgressAdapter by lazy {
-        ProgressAdapter()
+    private val progressAdapter: ProgressAdapter by lazy {
+        ProgressAdapter { viewModel.loadSearchedTVMoore() }
     }
 
     override fun onAttach(context: Context) {
@@ -54,9 +54,7 @@ class SearchTVShowFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_inner_fragment, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.search_inner_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,7 +66,7 @@ class SearchTVShowFragment : DaggerFragment() {
     private fun initViews() {
         with(inner_recycler) {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = MergeAdapter(searchedTVAdapter, progressTVAdapter)
+            adapter = MergeAdapter(searchedTVAdapter, progressAdapter)
         }
     }
 
@@ -79,10 +77,10 @@ class SearchTVShowFragment : DaggerFragment() {
 
         viewModel.searchedTVData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                if (!viewModel.newTVPage) {
+                if (viewModel.isFirstTVShowPage) {
                     searchedTVAdapter.submitList(data)
                     inner_recycler.scrollToPosition(0)
-                    (parentFragment as? SearchFragment)?.setupScrollListener()
+                    (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) { viewModel.loadSearchedTVMoore() }
                 } else {
                     val newList = listOf(searchedTVAdapter.currentList, data).flatten()
 
@@ -92,9 +90,7 @@ class SearchTVShowFragment : DaggerFragment() {
         })
 
         viewModel.loadingTVState.observe(viewLifecycleOwner, Observer { loadState ->
-            progressTVAdapter.loadState = loadState
+            progressAdapter.loadState = loadState
         })
     }
-
-
 }

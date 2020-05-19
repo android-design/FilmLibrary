@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.util.LoadState
+import kotlinx.android.synthetic.main.landscape_progress_item.view.*
 
 
-class ProgressAdapter :
+class ProgressAdapter(val onRetryClickListener: (() -> Unit)? = null) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var loadState: LoadState = LoadState.Done
@@ -32,6 +33,8 @@ class ProgressAdapter :
 
     override fun getItemCount(): Int = if (displayLoadStateAsItem(loadState)) 1 else 0
 
+    private fun displayLoadStateAsItem(loadState: LoadState) =
+        loadState is LoadState.Loading || loadState is LoadState.Error
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -39,11 +42,32 @@ class ProgressAdapter :
         return ProgressViewHolder(view)
     }
 
-    internal class ProgressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ProgressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind() {
+            itemView.retry_button.setOnClickListener {
+                onRetryClickListener?.invoke()
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
+                itemVisibility(itemView, true)
+            }
 
-    private fun displayLoadStateAsItem(loadState: LoadState): Boolean {
-        return loadState is LoadState.Loading || loadState is LoadState.Error
+            when (loadState) {
+                is LoadState.Loading -> itemVisibility(itemView, true)
+                else -> itemVisibility(itemView, false)
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as? ProgressViewHolder)?.bind()
+    }
+
+    private fun itemVisibility(itemView: View, showPB: Boolean) {
+        if (showPB) {
+            itemView.retry_button.visibility = View.INVISIBLE
+            itemView.progressBar.visibility = View.VISIBLE
+        } else {
+            itemView.retry_button.visibility = View.VISIBLE
+            itemView.progressBar.visibility = View.INVISIBLE
+        }
     }
 }

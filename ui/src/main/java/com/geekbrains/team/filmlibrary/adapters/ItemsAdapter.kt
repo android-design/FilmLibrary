@@ -3,7 +3,7 @@ package com.geekbrains.team.filmlibrary.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.geekbrains.team.filmlibrary.Const.PRELOAD_FROM_SERVER_ITEMS_COYUNT
+import com.geekbrains.team.filmlibrary.Const.PRELOAD_FROM_SERVER_ITEMS_COUNT
 
 class ItemsAdapter<T>(
     val clickListener: OnItemSelectedListener? = null,
@@ -25,7 +25,7 @@ class ItemsAdapter<T>(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (!isAllItemsLoaded && position >= data.size - PRELOAD_FROM_SERVER_ITEMS_COYUNT) {
+        if (!isAllItemsLoaded && position >= data.size - PRELOAD_FROM_SERVER_ITEMS_COUNT) {
             onScrollToLastPageListener?.invoke()
         }
 

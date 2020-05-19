@@ -15,7 +15,6 @@ import com.geekbrains.team.filmlibrary.adapters.TabAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.search_fragment.*
-import kotlinx.android.synthetic.main.search_inner_fragment.*
 import javax.inject.Inject
 
 class SearchFragment : DaggerFragment() {
@@ -35,9 +34,7 @@ class SearchFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_fragment, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.search_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,14 +48,10 @@ class SearchFragment : DaggerFragment() {
             if ((event.action == KeyEvent.ACTION_DOWN) &&
                 (keyCode == KeyEvent.KEYCODE_ENTER)
             ) {
-                // TODO Show PB and hide keyboard
-
                 search_et.text.toString().let {
                     viewModel.currentQuery = it
-                    viewModel.currentMoviePage = 1
-                    viewModel.loadSearchedMovies(it)
-                    viewModel.currentTVPage = 1
-                    viewModel.loadSearchedTV(it)
+                    viewModel.loadSearchedMovies()
+                    viewModel.loadSearchedTV()
                 }
             }
             true
@@ -80,10 +73,10 @@ class SearchFragment : DaggerFragment() {
         }.attach()
     }
 
-    fun setupScrollListener() {
-        val layoutManager = inner_recycler.layoutManager as? LinearLayoutManager
+    fun setupScrollListener(recyclerView: RecyclerView, callBack: () -> Unit) {
+        val layoutManager = recyclerView.layoutManager as? LinearLayoutManager
         layoutManager?.let {
-            with(inner_recycler) {
+            with(recyclerView) {
                 clearOnScrollListeners()
 
                 addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -93,7 +86,9 @@ class SearchFragment : DaggerFragment() {
                         val visibleItemCount = layoutManager.childCount
                         val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
 
-                        viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+                        viewModel.listScrolled(
+                            visibleItemCount, lastVisibleItem, totalItemCount, callBack
+                        )
                     }
                 })
             }
