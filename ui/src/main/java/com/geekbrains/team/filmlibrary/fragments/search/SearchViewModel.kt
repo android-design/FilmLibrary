@@ -1,6 +1,7 @@
 package com.geekbrains.team.filmlibrary.fragments.search
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.geekbrains.team.domain.movies.model.Movie
 import com.geekbrains.team.domain.movies.searchMovies.interactor.GetSearchedMovies
 import com.geekbrains.team.domain.tv.model.TVShow
@@ -59,16 +60,23 @@ class SearchViewModel @Inject constructor(
             .addTo(compositeDisposable)
     }
 
-
     private fun handleOnSuccessLoadSearchedMovies(
         result: List<Movie>,
         isLoadMoore: Boolean = false
     ) {
-        searchedMoviesData.value = result.map {
-            it.toMovieView()
-        }
+
         if (isLoadMoore) {
             loadingMovieState.value = LoadState.Done
+
+            searchedMoviesData.value = searchedMoviesData.value?.toMutableList().apply {
+                this?.addAll(result.map {
+                    it.toMovieView()
+                })
+            }
+        } else {
+            searchedMoviesData.value = result.map {
+                it.toMovieView()
+            }
         }
     }
 
@@ -138,12 +146,18 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun handleOnSuccessLoadSearchedTV(result: List<TVShow>, isLoadMoore: Boolean = false) {
-        searchedTVData.value = result.map {
-            it.toTVShowView()
-        }
-
         if (isLoadMoore) {
             loadingTVState.value = LoadState.Done
+
+            searchedTVData.value = searchedTVData.value?.toMutableList().apply {
+                this?.addAll(result.map {
+                    it.toTVShowView()
+                })
+            }
+        } else {
+            searchedTVData.value = result.map {
+                it.toTVShowView()
+            }
         }
     }
 

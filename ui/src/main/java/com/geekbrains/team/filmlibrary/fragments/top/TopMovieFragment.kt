@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -17,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -31,10 +30,11 @@ class TopMovieFragment : DaggerFragment() {
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val moviesAdapter: ItemsAdapter<MovieView> by lazy {
-        ItemsAdapter<MovieView> (
+    private val moviesAdapter by lazy {
+        ItemsAdapterNew(
             clickListener = listener,
-            layout = R.layout.landscape_card_item
+            layout = R.layout.landscape_card_item,
+            comparator = ItemsAdapterNew.COMPARATOR_MOVIE
         )
     }
 
@@ -51,40 +51,42 @@ class TopMovieFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.top_inner_fragment, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.top_inner_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUI()
         startObservers()
-        loadTopRatedMovies()
+        getInfoFromServer()
+    }
+
+    private fun initUI() {
+        listener.showProgress()
+
+        with(inner_recycler) {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = moviesAdapter
+        }
     }
 
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
+            listener.hideProgress()
+
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.topRatedMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(moviesAdapter.data, it)
-                val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                moviesAdapter.update(it)
-                diffResult.dispatchUpdatesTo(moviesAdapter)
-                inner_recycler.apply {
-                    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    adapter = moviesAdapter
-                }
-                // TODO Extract to function
-                progress_bar.visibility = GONE
-                inner_recycler.visibility = VISIBLE
+                listener.hideProgress()
+
+                moviesAdapter.submitList(it)
             }
         })
     }
 
-    private fun loadTopRatedMovies() {
+    private fun getInfoFromServer() {
         viewModel.loadTopRatedMovies()
     }
 }

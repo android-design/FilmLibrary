@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterSearch
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.ProgressAdapter
 import com.geekbrains.team.filmlibrary.model.MovieView
@@ -29,11 +29,11 @@ class SearchMovieFragment : DaggerFragment() {
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val searchedMovieAdapter: ItemsAdapterSearch<MovieView> by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ItemsAdapterSearch<MovieView>(
+    private val searchedMovieAdapter: ItemsAdapterNew<MovieView> by lazy(mode = LazyThreadSafetyMode.NONE) {
+        ItemsAdapterNew<MovieView>(
             clickListener = listener,
             layout = R.layout.landscape_card_item,
-            comparator = ItemsAdapterSearch.COMPARATOR_MOVIE
+            comparator = ItemsAdapterNew.COMPARATOR_MOVIE
         )
     }
 
@@ -59,32 +59,32 @@ class SearchMovieFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
-        startObservers()
+        initUI()
+        val recreatedFragment = savedInstanceState != null
+        startObservers(recreatedFragment)
     }
 
-    private fun initViews() {
+    private fun initUI() {
         with(inner_recycler) {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = MergeAdapter(searchedMovieAdapter, progressAdapter)
         }
+
+        (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) {
+            viewModel.loadSearchedMoviesMoore()
+        }
     }
 
-    private fun startObservers() {
+    private fun startObservers(recreatedFragment: Boolean) {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.searchedMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                if (viewModel.isFirstMoviePage) {
-                    searchedMovieAdapter.submitList(data)
+                searchedMovieAdapter.submitList(data)
+                if (viewModel.isFirstMoviePage && !recreatedFragment) {
                     inner_recycler.scrollToPosition(0)
-                    (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) { viewModel.loadSearchedMoviesMoore() }
-                } else {
-                    val newList = listOf(searchedMovieAdapter.currentList, data).flatten()
-
-                    searchedMovieAdapter.submitList(newList)
                 }
             }
         })

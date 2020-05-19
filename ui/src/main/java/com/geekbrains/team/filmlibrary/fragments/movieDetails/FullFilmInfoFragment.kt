@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.geekbrains.team.filmlibrary.Const.DESCRIPTION_MAX_LINES
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
 import com.geekbrains.team.filmlibrary.adapters.Indicator
@@ -26,14 +27,12 @@ import com.geekbrains.team.filmlibrary.model.PersonView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.full_film_info_fragment.*
-import kotlinx.android.synthetic.main.main_screen_fragment.indicator
-import kotlinx.android.synthetic.main.main_screen_fragment.topPager
 import kotlinx.android.synthetic.main.pager_indicator_item.*
 import javax.inject.Inject
 
 class FullFilmInfoFragment : DaggerFragment() {
     private val args: FullFilmInfoFragmentArgs by navArgs()
-    private val maxLines = 8
+
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -57,12 +56,13 @@ class FullFilmInfoFragment : DaggerFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is OnItemSelectedListener) {
+        if (context is OnItemSelectedListener) {
             listener = context
         } else {
             throw RuntimeException("$context must implement OnItemSelectedListener")
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -75,43 +75,40 @@ class FullFilmInfoFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        listener.showProgress()
+
         initUI()
         startObservers()
-        loadMovieDetails()
-        showMovieDetails()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        showProgressBar()
-        infoAdapter.clear()
-        loadMovieDetails()
+        savedInstanceState ?: loadMovieDetails()
+
+        showMovieDetails()
     }
 
     private fun initUI() {
         mIndicator = Indicator(context, indicator, indicator_item, infoAdapter)
+
         description_tv.setOnClickListener {
-            run {
-                if (description_tv.maxLines == maxLines)
-                    description_tv.maxLines = Int.MAX_VALUE
-                else description_tv.maxLines = maxLines
-            }
+            if (description_tv.maxLines == DESCRIPTION_MAX_LINES)
+                description_tv.maxLines = Int.MAX_VALUE
+            else description_tv.maxLines = DESCRIPTION_MAX_LINES
         }
     }
 
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
-            hideProgressBar()
+            listener.hideProgress()
         })
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 infoAdapter.data = it
+                topPager.setCurrentItem(viewModel.currentMoviePoster, false)
                 mIndicator.startIndicators()
-                mIndicator.setCurrentIndicator(0)
+                mIndicator.setCurrentIndicator(viewModel.currentMoviePoster)
                 binding.movie = it
-                hideProgressBar()
+                listener.hideProgress()
             }
         })
 
@@ -134,14 +131,6 @@ class FullFilmInfoFragment : DaggerFragment() {
         })
     }
 
-    private fun showProgressBar() {
-        listener.showProgress()
-    }
-
-    private fun hideProgressBar() {
-        listener.hideProgress()
-    }
-
     private fun loadMovieDetails() {
         viewModel.loadMovieInfo(args.id)
         viewModel.loadSimilarMovies(args.id)
@@ -153,17 +142,19 @@ class FullFilmInfoFragment : DaggerFragment() {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
+
                     mIndicator.setCurrentIndicator(position)
+                    viewModel.currentMoviePoster = position
                 }
             })
         }
 
-        actors_rv.apply {
+        with(actors_rv) {
             adapter = actorsAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }
 
-        similar_rv.apply {
+        with(similar_rv) {
             adapter = similarMoviesAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         }

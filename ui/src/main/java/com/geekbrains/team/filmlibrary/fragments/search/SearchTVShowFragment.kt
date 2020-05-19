@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterSearch
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.ProgressAdapter
 import com.geekbrains.team.filmlibrary.model.TVShowView
@@ -29,11 +29,11 @@ class SearchTVShowFragment : DaggerFragment() {
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val searchedTVAdapter: ItemsAdapterSearch<TVShowView> by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ItemsAdapterSearch(
+    private val searchedTVAdapter: ItemsAdapterNew<TVShowView> by lazy(mode = LazyThreadSafetyMode.NONE) {
+        ItemsAdapterNew(
             clickListener = listener,
             layout = R.layout.landscape_tv_show_card_item,
-            comparator = ItemsAdapterSearch.COMPARATOR_TVSHOW
+            comparator = ItemsAdapterNew.COMPARATOR_TVSHOW
         )
     }
 
@@ -59,32 +59,33 @@ class SearchTVShowFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
-        startObservers()
+        val recreatedFragment = savedInstanceState != null
+
+        initUI()
+        startObservers(recreatedFragment)
     }
 
-    private fun initViews() {
+    private fun initUI() {
         with(inner_recycler) {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             adapter = MergeAdapter(searchedTVAdapter, progressAdapter)
         }
+
+        (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) {
+            viewModel.loadSearchedTVMoore()
+        }
     }
 
-    private fun startObservers() {
+    private fun startObservers(recreatedFragment: Boolean) {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.searchedTVData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                if (viewModel.isFirstTVShowPage) {
-                    searchedTVAdapter.submitList(data)
+                searchedTVAdapter.submitList(data)
+                if (viewModel.isFirstTVShowPage && !recreatedFragment) {
                     inner_recycler.scrollToPosition(0)
-                    (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) { viewModel.loadSearchedTVMoore() }
-                } else {
-                    val newList = listOf(searchedTVAdapter.currentList, data).flatten()
-
-                    searchedTVAdapter.submitList(newList)
                 }
             }
         })

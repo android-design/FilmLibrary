@@ -27,19 +27,28 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
 
         setContentView(R.layout.activity_main)
         setUpNavigation()
-        setSensor()
+        val firstAppLaunch = (savedInstanceState == null)
+        setSensor(firstAppLaunch)
+
+
     }
 
     private fun setUpNavigation() {
         NavigationUI.setupWithNavController(btv, navController)
     }
 
-    private fun setSensor() {
+    private fun setSensor(firstAppLaunch: Boolean) {
+        if (firstAppLaunch) {
+            // Init default night mode.
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         val mySensorManager =
             getSystemService(Context.SENSOR_SERVICE) as? SensorManager
         val lightSensor: Sensor? = mySensorManager?.getDefaultSensor(Sensor.TYPE_LIGHT)
 
         lightSensor?.let {
+
             mySensorManager.registerListener(
                 lightSensorListener,
                 it,

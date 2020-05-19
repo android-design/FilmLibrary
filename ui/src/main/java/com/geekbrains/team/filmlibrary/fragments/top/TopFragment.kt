@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.top_fragment.*
 
 class TopFragment : Fragment() {
+
     private lateinit var listener: OnItemSelectedListener
 
     private val pageTitleList by lazy {
@@ -35,27 +36,21 @@ class TopFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.top_fragment, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.top_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         showInfo()
-        listener.hideProgress()
     }
 
     private fun showInfo() {
-        val mAdapter = childFragmentManager.run {
+        viewPager.adapter = childFragmentManager.run {
             TabAdapter(
                 this,
                 this@TopFragment.lifecycle,
                 listOf(TopMovieFragment(), TopTVShowFragment())
             )
-        }
-
-        mAdapter.let {
-            viewPager.adapter = mAdapter
         }
 
         TabLayoutMediator(tabs, viewPager) { tab, position ->

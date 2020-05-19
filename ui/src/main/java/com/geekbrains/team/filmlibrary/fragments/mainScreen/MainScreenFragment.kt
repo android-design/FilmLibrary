@@ -2,13 +2,11 @@ package com.geekbrains.team.filmlibrary.fragments.mainScreen
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Point
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -19,10 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
-import com.geekbrains.team.filmlibrary.adapters.Indicator
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
-import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.*
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -43,13 +38,18 @@ class MainScreenFragment : DaggerFragment() {
     private lateinit var mIndicator: Indicator
 
     private val nowPlayingAdapter by lazy {
-        ItemsAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
+        ItemsAdapterNew(
+            clickListener = listener,
+            layout = R.layout.small_card_item,
+            comparator = ItemsAdapterNew.COMPARATOR_MOVIE
+        )
     }
 
     private val upcomingAdapter by lazy {
-        ItemsAdapter<MovieView>(
+        ItemsAdapterNew(
             clickListener = listener,
-            layout = R.layout.upcoming_small_card_item
+            layout = R.layout.upcoming_small_card_item,
+            comparator = ItemsAdapterNew.COMPARATOR_MOVIE
         )
     }
 
@@ -82,43 +82,66 @@ class MainScreenFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mIndicator = Indicator(context, indicator, indicator_item, topRatedMovieAdapter)
+        initUI()
         startObservers()
-        getInfoFromServer()
-        showInfo()
+        savedInstanceState ?: getInfoFromServer()
+    }
+
+    private fun initUI() {
+        mIndicator = Indicator(context, indicator, indicator_item, topRatedMovieAdapter)
+
+        with(today_recycler) {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = nowPlayingAdapter
+        }
+
+        with(soon_recycler) {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            adapter = upcomingAdapter
+        }
+
+        with(topPager) {
+            adapter = topRatedMovieAdapter
+            registerOnPageChangeCallback(object : OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    mIndicator.setCurrentIndicator(position)
+                    viewModel.currentPositionTopRatedMovie = position
+                }
+            })
+        }
     }
 
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
-            hideProgressBar()
+            listener.hideProgress()
         })
 
         viewModel.upcomingMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(upcomingAdapter.data, it)
-                val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                upcomingAdapter.update(it)
-                diffResult.dispatchUpdatesTo(upcomingAdapter)
+                upcomingAdapter.submitList(it)
             }
         })
 
         viewModel.nowPlayingMoviesData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(nowPlayingAdapter.data, it)
-                val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                nowPlayingAdapter.update(it)
-                diffResult.dispatchUpdatesTo(nowPlayingAdapter)
+                nowPlayingAdapter.submitList(it)
             }
         })
 
         viewModel.randomTopRatedMovieData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
                 topRatedMovieAdapter.data = it
-                topPager.currentItem = 0
-                mIndicator.startIndicators()
-                mIndicator.setCurrentIndicator(0)
-                hideProgressBar()
+                topPager.setCurrentItem(
+                    viewModel.currentPositionTopRatedMovie,
+                    false
+                )
+                with(mIndicator) {
+                    startIndicators()
+                    setCurrentIndicator(viewModel.currentPositionTopRatedMovie)
+                }
+                listener.hideProgress()
             }
         })
 
@@ -143,37 +166,11 @@ class MainScreenFragment : DaggerFragment() {
         })
     }
 
-    private fun hideProgressBar() {
-        listener.hideProgress()
-    }
-
     private fun getInfoFromServer() {
         viewModel.loadNowPlayingMovies()
         viewModel.loadUpcomingMovies()
         viewModel.loadRandomTopRatedMovie()
         viewModel.loadMovieOfTheWeek()
         viewModel.loadTvShowPremier()
-    }
-
-    private fun showInfo() {
-        today_recycler.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            adapter = nowPlayingAdapter
-        }
-
-        soon_recycler.apply {
-            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-            adapter = upcomingAdapter
-        }
-
-        topPager.apply {
-            adapter = topRatedMovieAdapter
-            registerOnPageChangeCallback(object : OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    mIndicator.setCurrentIndicator(position)
-                }
-            })
-        }
     }
 }

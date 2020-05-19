@@ -38,6 +38,8 @@ class MainScreenViewModel @Inject constructor(
     val movieOfTheWeekData: MutableLiveData<MovieView> = MutableLiveData()
     val tvShowPremierData: MutableLiveData<TVShowView> = MutableLiveData()
 
+    var currentPositionTopRatedMovie:Int = 0
+
     fun loadNowPlayingMovies(page: Int = 1) {
         val disposable =
             useCaseNowPlayingMovies.execute(params = GetNowPlayingMovies.Params(page = page))

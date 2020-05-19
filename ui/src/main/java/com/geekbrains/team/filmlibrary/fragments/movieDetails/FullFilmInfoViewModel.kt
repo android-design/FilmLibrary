@@ -23,6 +23,8 @@ class FullFilmInfoViewModel @Inject constructor(
     val crewLiveData: MutableLiveData<List<PersonView>> = MutableLiveData()
     val similarMoviesLiveData: MutableLiveData<List<MovieView>> = MutableLiveData()
 
+    var currentMoviePoster = 0
+
     fun loadMovieInfo(id: Int) {
         val disposable = useCaseMovieInfo.execute(params = GetMovieDetailsUseCase.Params(id = id))
             .subscribeOn(Schedulers.io())

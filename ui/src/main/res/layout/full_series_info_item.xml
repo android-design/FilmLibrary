@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -13,8 +15,7 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView
         android:id="@+id/series_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -68,9 +69,8 @@
                 android:id="@+id/title_tv"
                 style="@style/Headline2"
                 android:layout_width="290dp"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:gravity="bottom"
                 android:lines="1"
@@ -83,7 +83,7 @@
                 android:id="@+id/original_title_tv"
                 style="@style/Subtitle2"
                 android:layout_width="290dp"
-                android:layout_height="15dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:ellipsize="end"
                 android:lines="1"
@@ -96,7 +96,7 @@
                 android:id="@+id/genres_tv"
                 style="@style/Subtitle1"
                 android:layout_width="290dp"
-                android:layout_height="15dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="32dp"
                 android:text="@{tvShow.genres}"
@@ -161,7 +161,7 @@
                 <TextView
                     android:id="@+id/rating"
                     style="@style/Subtitle1"
-                    android:layout_width="16dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@{tvShow.voteAverage}"

@@ -53,9 +53,10 @@ class SearchFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        listener.hideProgress()
+
         initUI()
         showInfo()
-        listener.hideProgress()
     }
 
     private fun initUI() {

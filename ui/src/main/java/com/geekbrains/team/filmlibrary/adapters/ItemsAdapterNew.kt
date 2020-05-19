@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 
-class ItemsAdapterSearch<T>(
+class ItemsAdapterNew<T>(
     val clickListener: OnItemSelectedListener? = null,
     val layout: Int,
     comparator: DiffUtil.ItemCallback<T>

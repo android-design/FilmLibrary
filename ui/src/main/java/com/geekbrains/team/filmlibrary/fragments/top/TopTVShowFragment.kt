@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
@@ -29,10 +30,11 @@ class TopTVShowFragment : DaggerFragment() {
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val tvShowsAdapter: ItemsAdapter<TVShowView> by lazy {
-        ItemsAdapter<TVShowView>(
+    private val tvShowsAdapter by lazy {
+        ItemsAdapterNew(
             clickListener = listener,
-            layout = R.layout.landscape_tv_show_card_item
+            layout = R.layout.landscape_tv_show_card_item,
+            comparator = ItemsAdapterNew.COMPARATOR_TVSHOW
         )
     }
 
@@ -49,40 +51,43 @@ class TopTVShowFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.top_inner_fragment, container, false)
-    }
+    ): View?  = inflater.inflate(R.layout.top_inner_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUI()
         startObservers()
-        loadTopRatedTVShows()
+        getInfoFromServer()
+    }
+
+    private fun initUI() {
+        listener.showProgress()
+
+        with(inner_recycler) {
+            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            adapter = tvShowsAdapter
+        }
     }
 
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
+            listener.hideProgress()
+
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.topRatedTVShowsData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                val diffUtilCallback = DiffUtilsCallback(tvShowsAdapter.data, it)
-                val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-                tvShowsAdapter.update(it)
-                diffResult.dispatchUpdatesTo(tvShowsAdapter)
-                inner_recycler.apply {
-                    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                    adapter = tvShowsAdapter
-                }
-                // TODO Extract to function
-                progress_bar.visibility = View.GONE
-                inner_recycler.visibility = View.VISIBLE
+                listener.hideProgress()
+
+                tvShowsAdapter.submitList(it)
+
             }
         })
     }
 
-    private fun loadTopRatedTVShows() {
+    private fun getInfoFromServer() {
         viewModel.loadTopRatedTVShows()
     }
 }
