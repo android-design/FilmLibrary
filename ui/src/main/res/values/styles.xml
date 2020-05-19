@@ -1,5 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <attr format="reference" name="cardStyle"/>
+    <attr format="reference|color" name="tabBackgroundColor"/>
+    <attr format="reference|color" name="backgroundSearchTopBarColor"/>
+    <attr format="reference|color" name="lineColor"/>
+
     <!-- Темы. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
@@ -9,19 +14,16 @@
         <item name="android:textColorPrimary">@color/dayTextPrimary</item>
         <item name="android:textColorSecondary">@color/dayTextSecondary</item>
         <item name="android:windowBackground">@color/dayBackgroundDark</item>
-        <item name="cardBackgroundColor">@color/dayBackgroundLight</item>
+        <item name="cardViewStyle">@style/cardStyle.Light</item>
+        <item name="tabBackgroundColor">@color/dayBackgroundLight</item>
+        <item name="lineColor">@color/dayLineColor</item>
+        <item name="backgroundSearchTopBarColor">@color/dayBackgroundSearchTopBar</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="NightTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">@color/nightBackgroundLight</item>
-        <item name="colorPrimaryDark">@color/nightBackgroundDark</item>
-        <item name="colorAccent">@color/IconPrimary</item>
-        <item name="android:textColorPrimary">@color/nightTextPrimary</item>
-        <item name="android:textColorSecondary">@color/nightTextSecondary</item>
-        <item name="android:windowBackground">@color/nightBackgroundDark</item>
-        <item name="cardBackgroundColor">@color/nightBackgroundLight</item>
+    <style name="cardStyle.Light" parent="CardView.Light">
+        <item name="cardBackgroundColor">@color/dayBackgroundLight</item>
     </style>
 
     <style name="AppTheme.Launcher">
@@ -66,7 +68,7 @@
 
     <style name="Subtitle2" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
@@ -103,6 +105,5 @@
         <item name="android:textColor">@color/dayTextSecondary</item>
         <item name="tabSelectedTextColor">@color/colorAccent</item>
         <item name="tabIndicatorColor">@color/colorAccent</item>
-
     </style>
 </resources>

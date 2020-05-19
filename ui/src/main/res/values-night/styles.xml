@@ -1,6 +1,5 @@
 <resources>
 
-    <!-- Темы. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/nightBackgroundLight</item>
@@ -9,92 +8,14 @@
         <item name="android:textColorPrimary">@color/nightTextPrimary</item>
         <item name="android:textColorSecondary">@color/nightTextSecondary</item>
         <item name="android:windowBackground">@color/nightBackgroundDark</item>
-        <item name="cardBackgroundColor">@color/nightBackgroundLight</item>
+        <item name="cardViewStyle">@style/cardStyle.Dark</item>
+        <item name="tabBackgroundColor">@color/nightBackgroundLight</item>
+        <item name="lineColor">@color/nightLineColor</item>
+        <item name="backgroundSearchTopBarColor">@color/nightBackgroundSearchTopBar</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
-    <style name="NightTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">@color/nightBackgroundLight</item>
-        <item name="colorPrimaryDark">@color/nightBackgroundDark</item>
-        <item name="colorAccent">@color/IconPrimary</item>
-        <item name="android:textColorPrimary">@color/nightTextPrimary</item>
-        <item name="android:textColorSecondary">@color/nightTextSecondary</item>
-        <item name="android:windowBackground">@color/nightBackgroundDark</item>
+    <style name="cardStyle.Dark" parent="CardView.Dark">
         <item name="cardBackgroundColor">@color/nightBackgroundLight</item>
-    </style>
-
-    <style name="WindowAnimationTransition">
-        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <!-- Тексты. -->
-    <style name="Headline1" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="Headline2" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="Headline3" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="Subtitle1" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="Subtitle2" parent="@android:style/TextAppearance.Small">
-        <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="Rate" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">10sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="Search" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="Buttons" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="Chips" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textStyle">normal</item>
-    </style>
-
-    <style name="SearchSettingsTab" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/dayTextSecondary</item>
-        <item name="tabSelectedTextColor">@color/colorAccent</item>
-        <item name="tabIndicatorColor">@color/colorAccent</item>
-
     </style>
 </resources>

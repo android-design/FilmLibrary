@@ -6,6 +6,8 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
@@ -68,5 +70,15 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     override fun openMovieDetails(id: Int) {
         val directions = MainScreenFragmentDirections.navigateToMovieDetails(id)
         navController.navigate(directions)
+    }
+
+    override fun showProgress() {
+        mainProgress.visibility = VISIBLE
+        host.visibility = GONE
+    }
+
+    override fun hideProgress() {
+        mainProgress.visibility = GONE
+        host.visibility = VISIBLE
     }
 }

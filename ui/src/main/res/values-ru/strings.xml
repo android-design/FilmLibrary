@@ -40,4 +40,9 @@
     <string name="reset">Сбросить</string>
     <string name="min"> мин</string>
     <string name="retry">Повторить</string>
+    <string name="add_to_list">Добавить\nв Лист ожидания</string>
+    <string name="watch_trailer">Смотреть\nтрейлер</string>
+    <string name="add_to_favorite">Добавить\nв Избранное</string>
+    <string name="added_to_list">Добавлено\nв Лист ожидания</string>
+    <string name="added_to_favorite">Добавлено\nв Избранное</string>
 </resources>

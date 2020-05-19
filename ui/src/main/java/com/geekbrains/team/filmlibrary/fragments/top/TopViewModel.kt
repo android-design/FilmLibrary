@@ -32,7 +32,6 @@ class TopViewModel @Inject constructor(
         addDisposable(disposable)
     }
 
-
     private fun handleOnSuccessLoadTopRatedMovies(list: List<Movie>) {
         topRatedMoviesData.value = list.map { it.toMovieView() }
     }

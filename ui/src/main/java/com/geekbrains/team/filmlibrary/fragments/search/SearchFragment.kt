@@ -41,6 +41,7 @@ class SearchFragment : DaggerFragment() {
 
         initUI()
         showInfo()
+        listener.hideProgress()
     }
 
     private fun initUI() {
