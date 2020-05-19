@@ -46,39 +46,36 @@ object ViewHolderFactory {
             R.layout.small_actor_card_item -> SmallActorCardItemHolder(
                 SmallActorCardItemBinding.inflate(inflater, parent, false)
             )
-            R.layout.settings_item -> SettingsItemHolder(
-                SettingsItemBinding.inflate(inflater, parent, false)
-            )
-            R.layout.landscape_search_item -> LandscapeSearchHolder(
-                LandscapeSearchItemBinding.inflate(inflater, parent, false)
-            )
+//            R.layout.settings_item -> SettingsItemHolder(
+//                SettingsItemBinding.inflate(inflater, parent, false)
+//            )
             else -> throw Exception("Wrong view type")
         }
     }
 
-    class SettingsItemHolder(
-        private val binding: SettingsItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            (data as? DateSettings)?.let {
-                binding.data = data
-                binding.root.findViewById<ToggleButton>(R.id.button)
-                    .setOnCheckedChangeListener { buttonView, isChecked ->
-                        if (!buttonView.isPressed) {
-                            return@setOnCheckedChangeListener
-                        }
-
-                        if (isChecked) {
-                            listener?.addId(data.id)
-                        } else {
-                            listener?.removeId(data.id)
-                        }
-                    }
-                binding.executePendingBindings()
-            }
-
-        }
-    }
+//    class SettingsItemHolder(
+//        private val binding: SettingsItemBinding
+//    ) : RecyclerView.ViewHolder(binding.root), Binder {
+//        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+//            (data as? DateSettings)?.let {
+//                binding.data = data
+//                binding.root.findViewById<ToggleButton>(R.id.button)
+//                    .setOnCheckedChangeListener { buttonView, isChecked ->
+//                        if (!buttonView.isPressed) {
+//                            return@setOnCheckedChangeListener
+//                        }
+//
+//                        if (isChecked) {
+//                            listener?.addId(data.id)
+//                        } else {
+//                            listener?.removeId(data.id)
+//                        }
+//                    }
+//                binding.executePendingBindings()
+//            }
+//
+//        }
+//    }
 
     class SmallCardHolder(
         private val binding: SmallCardItemBinding
@@ -106,20 +103,6 @@ object ViewHolderFactory {
         override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
             binding.listener = listener
             binding.movie = data as? MovieView
-            binding.executePendingBindings()
-        }
-    }
-
-    class LandscapeSearchHolder(
-        private val binding: LandscapeSearchItemBinding
-    ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.listener = listener
-            when (data) {
-                is MovieView -> binding.movie = data
-                is TVShowView -> binding.tvShow = data
-                else -> throw IllegalArgumentException()
-            }
             binding.executePendingBindings()
         }
     }

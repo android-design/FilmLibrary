@@ -1,5 +1,6 @@
 package com.geekbrains.team.filmlibrary.fragments.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
+import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.TabAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.android.support.DaggerFragment
@@ -18,6 +20,8 @@ import kotlinx.android.synthetic.main.search_fragment.*
 import javax.inject.Inject
 
 class SearchFragment : DaggerFragment() {
+
+    private lateinit var listener: OnItemSelectedListener
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -29,6 +33,16 @@ class SearchFragment : DaggerFragment() {
             getString(R.string.movies),
             getString(R.string.tvShows)
         )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnItemSelectedListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnItemSelectedListener")
+        }
     }
 
     override fun onCreateView(

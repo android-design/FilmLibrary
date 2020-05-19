@@ -32,7 +32,7 @@ class SearchTVShowFragment : DaggerFragment() {
     private val searchedTVAdapter: ItemsAdapterSearch<TVShowView> by lazy(mode = LazyThreadSafetyMode.NONE) {
         ItemsAdapterSearch(
             clickListener = listener,
-            layout = R.layout.landscape_search_item,
+            layout = R.layout.landscape_tv_show_card_item,
             comparator = ItemsAdapterSearch.COMPARATOR_TVSHOW
         )
     }

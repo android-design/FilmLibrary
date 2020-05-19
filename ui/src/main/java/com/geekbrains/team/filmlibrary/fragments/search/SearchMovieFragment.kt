@@ -32,7 +32,7 @@ class SearchMovieFragment : DaggerFragment() {
     private val searchedMovieAdapter: ItemsAdapterSearch<MovieView> by lazy(mode = LazyThreadSafetyMode.NONE) {
         ItemsAdapterSearch<MovieView>(
             clickListener = listener,
-            layout = R.layout.landscape_search_item,
+            layout = R.layout.landscape_card_item,
             comparator = ItemsAdapterSearch.COMPARATOR_MOVIE
         )
     }

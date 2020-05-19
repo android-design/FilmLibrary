@@ -46,8 +46,8 @@
                 android:gravity="bottom"
                 android:lines="1"
                 android:text='@{tvShow.name}'
-                app:layout_constraintStart_toEndOf="@id/cover_iv"
-                app:layout_constraintBottom_toTopOf="@id/original_title_tv" />
+                app:layout_constraintBottom_toTopOf="@id/original_title_tv"
+                app:layout_constraintStart_toEndOf="@id/cover_iv" />
 
             <TextView
                 android:id="@+id/original_title_tv"
@@ -59,40 +59,44 @@
                 android:gravity="bottom"
                 android:lines="1"
                 android:text="@{tvShow.originalName}"
-                app:layout_constraintStart_toStartOf="@id/title_tv"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/rating_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/title_tv" />
+
+            <TextView
+                android:id="@+id/release_date"
+                style="@style/Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text='@{tvShow.firstAirDate}'
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/original_title_tv"
+                tools:text="2020" />
+
+            <ImageView
+                android:id="@+id/rating_image"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_imdb"
+                app:layout_constraintBottom_toBottomOf="@+id/rating"
+                app:layout_constraintEnd_toStartOf="@+id/rating"
+                app:layout_constraintTop_toTopOf="@+id/rating"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/rating"
+                style="@style/Subtitle1"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:text="@{tvShow.voteAverage}"
+                app:layout_constraintBottom_toBottomOf="@+id/release_date"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/ic_imdb"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/rating"
-                    style="@style/Subtitle1"
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@{tvShow.voteAverage}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-            </LinearLayout>
+                app:layout_constraintTop_toTopOf="@+id/release_date"
+                tools:text="88" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

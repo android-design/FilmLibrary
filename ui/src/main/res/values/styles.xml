@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <attr format="reference" name="cardStyle"/>
-    <attr format="reference|color" name="tabBackgroundColor"/>
-    <attr format="reference|color" name="backgroundSearchTopBarColor"/>
-    <attr format="reference|color" name="lineColor"/>
+    <attr name="cardStyle" format="reference" />
+    <attr name="tabBackgroundColor" format="reference|color" />
+    <attr name="backgroundSearchTopBarColor" format="reference|color" />
+    <attr name="lineColor" format="reference|color" />
 
     <!-- Темы. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -68,7 +68,7 @@
 
     <style name="Subtitle2" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
@@ -87,9 +87,11 @@
 
     <style name="Buttons" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textAllCaps">true</item>
+        <item name="backgroundTint">#00BCD4</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="Chips" parent="@android:style/TextAppearance.Medium">
