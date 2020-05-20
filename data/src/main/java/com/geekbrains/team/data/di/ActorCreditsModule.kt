@@ -5,8 +5,10 @@ import com.geekbrains.team.data.actors.credits.repository.ActorTVCreditsReposito
 import com.geekbrains.team.domain.actors.details.repository.ActorMovieCreditsRepository
 import com.geekbrains.team.domain.actors.details.repository.ActorTVCreditsRepository
 import dagger.Binds
+import dagger.Module
 import javax.inject.Singleton
 
+@Module
 abstract class ActorCreditsModule {
     @Binds
     @Singleton
