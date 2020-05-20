@@ -1,205 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl"
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="actorInfo"
+            type="com.geekbrains.team.domain.actors.model.ActorInformation" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/nightBackgroundSearchTopBar"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <Toolbar
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            tools:ignore="NewApi">
+            android:layout_height="wrap_content"
+            android:background="@color/nightBackgroundSearchTopBar"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/main_tv"
-                style="@style/Headline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/nightTextPrimary" />
-        </Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+            <Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                tools:ignore="NewApi">
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/abl">
+                <TextView
+                    android:id="@+id/main_tv"
+                    style="@style/Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/nightTextPrimary" />
+            </Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/abl">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/topPager"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/indicator"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="15dp"
-                app:layout_constraintEnd_toEndOf="@id/topPager"
-                app:layout_constraintStart_toStartOf="@id/topPager"
-                app:layout_constraintTop_toBottomOf="@id/topPager" />
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/topPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/line1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="35dp"
-                android:background="@color/IconSecondary"
-                app:layout_constraintTop_toBottomOf="@id/indicator" />
+                <LinearLayout
+                    android:id="@+id/indicator"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    app:layout_constraintEnd_toEndOf="@id/topPager"
+                    app:layout_constraintStart_toStartOf="@id/topPager"
+                    app:layout_constraintTop_toBottomOf="@id/topPager" />
 
-            <ImageView
-                android:id="@+id/photo_iv"
-                android:layout_width="80dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line1"
-                tools:ignore="ContentDescription" />
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@color/IconSecondary"
+                    app:layout_constraintTop_toBottomOf="@id/indicator" />
 
-            <TextView
-                android:id="@+id/description_tv"
-                style="@style/Subtitle2"
-                android:layout_width="224dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/photo_iv"
-                app:layout_constraintTop_toBottomOf="@id/line1" />
+                <ImageView
+                    android:id="@+id/photo_iv"
+                    android:layout_width="80dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    app:poster = "@{actorInfo.profilePath}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1"
+                    tools:ignore="ContentDescription" />
 
-            <View
-                android:id="@+id/line2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="35dp"
-                android:background="@color/IconSecondary"
-                app:layout_constraintTop_toBottomOf="@id/description_tv" />
+                <TextView
+                    android:id="@+id/description_tv"
+                    style="@style/Subtitle2"
+                    android:layout_width="224dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@{actorInfo.biography}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/photo_iv"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
 
-            <TextView
-                android:id="@+id/filmography_tv"
-                style="@style/Headline2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:gravity="bottom"
-                android:text="@string/filmography"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line2" />
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@color/IconSecondary"
+                    app:layout_constraintTop_toBottomOf="@id/description_tv" />
 
-            <ImageButton
-                android:id="@+id/filmography_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_chevron_right"
-                app:layout_constraintBottom_toBottomOf="@id/filmography_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/filmography_tv"
-                tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/filmography_tv"
+                    style="@style/Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="bottom"
+                    android:text="@string/filmography"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/filmography_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toBottomOf="@id/filmography_tv" />
+                <ImageButton
+                    android:id="@+id/filmography_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_chevron_right"
+                    app:layout_constraintBottom_toBottomOf="@id/filmography_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/credits_cast_movies_rv"
+                    tools:ignore="ContentDescription" />
 
-            <View
-                android:id="@+id/line4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="28dp"
-                android:background="@color/IconSecondary"
-                app:layout_constraintTop_toBottomOf="@id/filmography_rv" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/credits_cast_movies_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/filmography_tv" />
 
-            <TextView
-                android:id="@+id/awards_tv"
-                style="@style/Headline2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:gravity="bottom"
-                android:text="@string/awards"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line4" />
+                <TextView
+                    android:id="@+id/credits_cast_movies_tv"
+                    style="@style/Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="bottom"
+                    android:text="@string/filmography"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/credits_cast_movies_rv" />
 
-            <TextView
-                android:id="@+id/last_year_tv"
-                style="@style/Headline2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="bottom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/awards_tv" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/credits_cast_tvshows_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/filmography_tv" />
 
-            <TextView
-                android:id="@+id/awards_list_tv"
-                style="@style/Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="bottom"
-                android:text=""
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/last_year_tv" />
 
-            <TextView
-                android:id="@+id/all_awards_tv"
-                style="@style/Headline2"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:gravity="bottom"
-                android:text="@string/crew"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/awards_list_tv" />
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@color/IconSecondary"
+                    app:layout_constraintTop_toBottomOf="@id/credits_cast_tvshows_rv" />
 
-            <ImageButton
-                android:id="@+id/soon_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_chevron_right"
-                app:layout_constraintBottom_toBottomOf="@id/all_awards_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/all_awards_tv"
-                tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/credits_crew_movies_tv"
+                    style="@style/Headline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:gravity="bottom"
+                    android:text="@string/awards"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/credits_cast_tvshows_rv" />
 
-            <View
-                android:id="@+id/line5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="28dp"
-                android:background="@color/IconSecondary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/all_awards_tv" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/credits_crew_movies_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/credits_crew_movies_tv" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/credirts_crew_tvshows_tv"
+                    style="@style/Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="bottom"
+                    android:text=""
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/credits_crew_movies_rv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/credits_crew_tvshows_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/credirts_crew_tvshows_tv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
