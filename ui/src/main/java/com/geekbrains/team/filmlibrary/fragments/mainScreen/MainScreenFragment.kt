@@ -12,15 +12,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.*
+import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
+import com.geekbrains.team.filmlibrary.adapters.Indicator
+import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
+import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
-import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
 import kotlinx.android.synthetic.main.pager_indicator_item.*
@@ -84,7 +85,7 @@ class MainScreenFragment : DaggerFragment() {
 
         initUI()
         startObservers()
-        savedInstanceState ?: getInfoFromServer()
+        getInfoFromServer()
     }
 
     private fun initUI() {
@@ -167,6 +168,10 @@ class MainScreenFragment : DaggerFragment() {
     }
 
     private fun getInfoFromServer() {
+        if (viewModel.upcomingMoviesData.value != null) {
+            return
+        }
+
         viewModel.loadNowPlayingMovies()
         viewModel.loadUpcomingMovies()
         viewModel.loadRandomTopRatedMovie()
