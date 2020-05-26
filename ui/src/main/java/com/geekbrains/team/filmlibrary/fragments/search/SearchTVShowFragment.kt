@@ -17,6 +17,7 @@ import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.ProgressAdapter
+import com.geekbrains.team.filmlibrary.addOnScrollListenerPagination
 import com.geekbrains.team.filmlibrary.model.TVShowView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.search_inner_fragment.*
@@ -67,12 +68,10 @@ class SearchTVShowFragment : DaggerFragment() {
 
     private fun initUI() {
         with(inner_recycler) {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            layoutManager = manager
             adapter = MergeAdapter(searchedTVAdapter, progressAdapter)
-        }
-
-        (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) {
-            viewModel.loadSearchedTVMoore()
+            addOnScrollListenerPagination(manager) { viewModel.loadSearchedTVMoore() }
         }
     }
 

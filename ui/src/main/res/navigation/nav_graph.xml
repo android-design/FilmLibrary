@@ -39,23 +39,19 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
-        <action
-            android:id="@+id/action_searchFragment_to_searchSettingsFragment"
-            app:destination="@id/searchSettingsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.geekbrains.team.filmlibrary.fragments.favorites.FavoriteFragment"
-        android:label="FavoritesFragment" >
+        android:label="FavoritesFragment">
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.geekbrains.team.filmlibrary.fragments.movieDetails.FullFilmInfoFragment"
-        android:label="MovieDetailsFragment" >
+        android:name="com.geekbrains.team.filmlibrary.fragments.movieDetails.FullFilmInfoFragment">
         <argument
             android:name="id"
             app:argType="integer" />
@@ -63,9 +59,6 @@
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/searchSettingsFragment"
-        android:name="com.geekbrains.team.filmlibrary.fragments.search.SearchSettingsFragment"
-        android:label="SearchSettingsFragment" />
+
 
 </navigation>

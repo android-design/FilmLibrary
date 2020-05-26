@@ -9,6 +9,7 @@ interface TopRatedMoviesApi {
     fun getTopMovies(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
-        @Query("page") page: Int
+        @Query("page") page: Int?,
+        @Query("region") region: String
     ): Single<ResponseTopRatedMovies>
 }

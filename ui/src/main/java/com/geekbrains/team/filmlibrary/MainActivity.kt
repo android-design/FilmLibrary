@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), OnItemSelectedListener {
 
-    val navController by lazy { findNavController(R.id.nav_host_fragment) }
+    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         setUpNavigation()
         val firstAppLaunch = (savedInstanceState == null)
         setSensor(firstAppLaunch)
-
-
     }
 
     private fun setUpNavigation() {
@@ -90,4 +88,6 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         mainProgress.visibility = GONE
         host.visibility = VISIBLE
     }
+
+
 }

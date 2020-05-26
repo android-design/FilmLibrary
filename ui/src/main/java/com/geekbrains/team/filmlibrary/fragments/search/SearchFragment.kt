@@ -88,26 +88,4 @@ class SearchFragment : DaggerFragment() {
             tab.text = pageTitleList.getOrNull(position)
         }.attach()
     }
-
-    fun setupScrollListener(recyclerView: RecyclerView, callBack: () -> Unit) {
-        val layoutManager = recyclerView.layoutManager as? LinearLayoutManager
-        layoutManager?.let {
-            with(recyclerView) {
-                clearOnScrollListeners()
-
-                addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        val totalItemCount = layoutManager.itemCount
-                        val visibleItemCount = layoutManager.childCount
-                        val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-
-                        viewModel.listScrolled(
-                            visibleItemCount, lastVisibleItem, totalItemCount, callBack
-                        )
-                    }
-                })
-            }
-        }
-    }
 }

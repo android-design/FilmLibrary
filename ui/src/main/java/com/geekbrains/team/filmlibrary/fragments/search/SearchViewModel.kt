@@ -169,15 +169,4 @@ class SearchViewModel @Inject constructor(
             currentTVPage--
         }
     }
-
-    fun listScrolled(
-        visibleItemCount: Int,
-        lastVisibleItemPosition: Int,
-        totalItemCount: Int,
-        callBack: () -> Unit
-    ) {
-        if (visibleItemCount + lastVisibleItemPosition + PRELOAD_FROM_SERVER_ITEMS_COUNT >= totalItemCount) {
-            callBack.invoke()
-        }
-    }
 }

@@ -9,16 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.MergeAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
-import com.geekbrains.team.filmlibrary.model.TVShowView
-import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
+import com.geekbrains.team.filmlibrary.adapters.ProgressAdapter
+import com.geekbrains.team.filmlibrary.addOnScrollListenerPagination
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.top_inner_fragment.*
 import javax.inject.Inject
@@ -38,6 +37,10 @@ class TopTVShowFragment : DaggerFragment() {
         )
     }
 
+    private val progressAdapter: ProgressAdapter by lazy {
+        ProgressAdapter { viewModel.loadTopRatedTVShowMoore() }
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -51,7 +54,7 @@ class TopTVShowFragment : DaggerFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View?  = inflater.inflate(R.layout.top_inner_fragment, container, false)
+    ): View? = inflater.inflate(R.layout.top_inner_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,32 +65,48 @@ class TopTVShowFragment : DaggerFragment() {
     }
 
     private fun initUI() {
-        listener.showProgress()
+        setProgressBarVisible(true)
 
         with(inner_recycler) {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            adapter = tvShowsAdapter
+            val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            layoutManager = manager
+            adapter = MergeAdapter(tvShowsAdapter, progressAdapter)
+
+            addOnScrollListenerPagination(manager) { viewModel.loadTopRatedTVShowMoore() }
         }
     }
 
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { error ->
-            listener.hideProgress()
+            setProgressBarVisible(false)
 
             Toast.makeText(context, error.localizedMessage, Toast.LENGTH_LONG).show()
         })
 
         viewModel.topRatedTVShowsData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                listener.hideProgress()
+                setProgressBarVisible(false)
 
                 tvShowsAdapter.submitList(it)
-
             }
+        })
+
+        viewModel.loadingTVShowState.observe(viewLifecycleOwner, Observer { loadState ->
+            progressAdapter.loadState = loadState
         })
     }
 
+    private fun setProgressBarVisible(show: Boolean) {
+        if (show) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+        }
+    }
+
     private fun getInfoFromServer() {
-        viewModel.loadTopRatedTVShows()
+        if (viewModel.topRatedTVShowsData.value?.isEmpty() != false) {
+            viewModel.loadTopRatedTVShows()
+        }
     }
 }

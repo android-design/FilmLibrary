@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.movies.topRatedMovies.repository
 
 import com.geekbrains.team.data.BuildConfig
+import com.geekbrains.team.data.Const.BASE_REGION
 import com.geekbrains.team.data.Const.LANGUAGE
 import com.geekbrains.team.data.movies.topRatedMovies.service.TopRatedMoviesApi
 import com.geekbrains.team.data.movies.topRatedMovies.service.toMovie
@@ -13,7 +14,12 @@ class TopRatedMoviesRepositoryImpl @Inject constructor(private val api: TopRated
     TopRatedMoviesRepository {
 
     override fun fetch(page: Int): Single<MutableList<Movie>> {
-        return api.getTopMovies(apiKey = BuildConfig.API_KEY, language = LANGUAGE, page = page)
+        return api.getTopMovies(
+            apiKey = BuildConfig.API_KEY,
+            language = LANGUAGE,
+            page = page,
+            region = BASE_REGION
+        )
             .map { response ->
                 response.toMovie()
             }

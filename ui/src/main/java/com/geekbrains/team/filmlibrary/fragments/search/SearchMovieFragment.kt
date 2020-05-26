@@ -17,6 +17,7 @@ import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.ProgressAdapter
+import com.geekbrains.team.filmlibrary.addOnScrollListenerPagination
 import com.geekbrains.team.filmlibrary.model.MovieView
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.search_inner_fragment.*
@@ -29,8 +30,8 @@ class SearchMovieFragment : DaggerFragment() {
     private val viewModel by viewModels<SearchViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val searchedMovieAdapter: ItemsAdapterNew<MovieView> by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ItemsAdapterNew<MovieView>(
+    private val searchedMovieAdapter by lazy(mode = LazyThreadSafetyMode.NONE) {
+        ItemsAdapterNew(
             clickListener = listener,
             layout = R.layout.landscape_card_item,
             comparator = ItemsAdapterNew.COMPARATOR_MOVIE
@@ -66,12 +67,10 @@ class SearchMovieFragment : DaggerFragment() {
 
     private fun initUI() {
         with(inner_recycler) {
-            layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            val manager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            layoutManager = manager
             adapter = MergeAdapter(searchedMovieAdapter, progressAdapter)
-        }
-
-        (parentFragment as? SearchFragment)?.setupScrollListener(inner_recycler) {
-            viewModel.loadSearchedMoviesMoore()
+            addOnScrollListenerPagination(manager) { viewModel.loadSearchedMoviesMoore() }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.geekbrains.team.data.tv.topRatedTV.repository
 
 import com.geekbrains.team.data.BuildConfig
+import com.geekbrains.team.data.Const.BASE_REGION
 import com.geekbrains.team.data.Const.LANGUAGE
 import com.geekbrains.team.data.tv.topRatedTV.service.TopRatedTVApi
 import com.geekbrains.team.data.tv.topRatedTV.service.model.toTVShow
@@ -13,7 +14,12 @@ class TopRatedTVRepositoryImpl @Inject constructor(private val api: TopRatedTVAp
     TopRatedTVRepository {
 
     override fun fetch(page: Int): Single<MutableList<TVShow>> {
-        return api.getTopTV(apiKey = BuildConfig.API_KEY, language = LANGUAGE, page = page)
+        return api.getTopTV(
+            apiKey = BuildConfig.API_KEY,
+            language = LANGUAGE,
+            page = page,
+            region = BASE_REGION
+        )
             .map { response ->
                 response.toTVShow()
             }

@@ -23,7 +23,7 @@ class ProgressAdapter(val onRetryClickListener: (() -> Unit)? = null) :
                 } else if (displayNewItem && !displayOldItem) {
                     notifyItemInserted(0)
                 } else if (displayOldItem && displayNewItem) {
-                    notifyItemChanged(0)
+                    notifyItemChanged(0, false)
                 }
                 field = loadState
             }
@@ -44,16 +44,12 @@ class ProgressAdapter(val onRetryClickListener: (() -> Unit)? = null) :
 
     inner class ProgressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            itemView.retry_button.setOnClickListener {
+            itemView.retryButton.setOnClickListener {
                 onRetryClickListener?.invoke()
-
-                itemVisibility(itemView, true)
             }
 
-            when (loadState) {
-                is LoadState.Loading -> itemVisibility(itemView, true)
-                else -> itemVisibility(itemView, false)
-            }
+            itemView.progressBar.visibility = toVisibility(loadState == LoadState.Loading)
+            itemView.retryButton.visibility = toVisibility(loadState != LoadState.Loading)
         }
     }
 
@@ -61,13 +57,9 @@ class ProgressAdapter(val onRetryClickListener: (() -> Unit)? = null) :
         (holder as? ProgressViewHolder)?.bind()
     }
 
-    private fun itemVisibility(itemView: View, showPB: Boolean) {
-        if (showPB) {
-            itemView.retry_button.visibility = View.INVISIBLE
-            itemView.progressBar.visibility = View.VISIBLE
-        } else {
-            itemView.retry_button.visibility = View.VISIBLE
-            itemView.progressBar.visibility = View.INVISIBLE
-        }
+    private fun toVisibility(constraint: Boolean): Int = if (constraint) {
+        View.VISIBLE
+    } else {
+        View.INVISIBLE
     }
 }
