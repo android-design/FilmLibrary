@@ -59,6 +59,21 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/navigateToActorDetails"
+            app:destination="@id/actorDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/actorDetailsFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.actorDetails.FullActorInfoFragment"
+        android:label="ActorDetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/navigateToMovieDetails"
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
 
 </navigation>

@@ -1,8 +1,8 @@
 package com.geekbrains.team.domain.actors.details.interactor
 
 import com.geekbrains.team.domain.actors.details.repository.ActorDetailsRepository
-import com.geekbrains.team.domain.actors.details.repository.ActorMovieCreditsRepository
-import com.geekbrains.team.domain.actors.details.repository.ActorTVCreditsRepository
+import com.geekbrains.team.domain.actors.credits.repository.ActorMovieCreditsRepository
+import com.geekbrains.team.domain.actors.credits.repository.ActorTVCreditsRepository
 import com.geekbrains.team.domain.actors.model.ActorInformation
 import com.geekbrains.team.domain.base.UseCase
 import io.reactivex.Single

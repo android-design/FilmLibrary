@@ -9,7 +9,7 @@
 
         <variable
             name="listener"
-            type="com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener" />
+            type="com.geekbrains.team.filmlibrary.adapters.OnLikeClickListener" />
 
         <variable
             name="movie"

@@ -7,16 +7,15 @@ data class ActorCreditsInfo(
 ) {
     data class MovieInfo(
         val id: Int,
+        val title: String,
         val character: String,
-        val backdropPath: String?,
         val posterPath: String
     )
 
     data class JobInfo(
         val id: Int,
-        val department: String,
+        val title: String,
         val job: String,
-        val backdropPath: String?,
         val posterPath: String
     )
 }

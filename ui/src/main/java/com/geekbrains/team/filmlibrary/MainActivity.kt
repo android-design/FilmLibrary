@@ -12,14 +12,15 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.geekbrains.team.filmlibrary.Const.MIN_LUX
+import com.geekbrains.team.filmlibrary.adapters.OnActorSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.MainScreenFragmentDirections
+import com.geekbrains.team.filmlibrary.fragments.movieDetails.FullFilmInfoFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity: AppCompatActivity(), OnItemSelectedListener{
+class MainActivity: AppCompatActivity(), OnItemSelectedListener, OnActorSelectedListener {
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -72,8 +73,9 @@ class MainActivity: AppCompatActivity(), OnItemSelectedListener{
         navController.navigate(directions)
     }
 
-    override fun onLikeClick(id: Int) {
-        Toast.makeText(this, "Ha-Ha", Toast.LENGTH_SHORT).show()
+    override fun openActorDetails(id: Int) {
+        val directions = FullFilmInfoFragmentDirections.navigateToActorDetails(id)
+        navController.navigate(directions)
     }
 
 }

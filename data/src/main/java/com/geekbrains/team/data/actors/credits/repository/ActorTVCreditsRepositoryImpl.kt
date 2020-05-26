@@ -4,7 +4,7 @@ import com.geekbrains.team.data.BuildConfig
 import com.geekbrains.team.data.Const
 import com.geekbrains.team.data.actors.credits.service.ActorTVCreditsApi
 import com.geekbrains.team.data.actors.credits.service.model.toActorCreditsInfo
-import com.geekbrains.team.domain.actors.details.repository.ActorTVCreditsRepository
+import com.geekbrains.team.domain.actors.credits.repository.ActorTVCreditsRepository
 import com.geekbrains.team.domain.actors.model.ActorCreditsInfo
 import io.reactivex.Single
 import javax.inject.Inject

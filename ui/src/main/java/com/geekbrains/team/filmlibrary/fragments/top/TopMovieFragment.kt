@@ -31,8 +31,8 @@ class TopMovieFragment : DaggerFragment() {
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val moviesAdapter: ItemsAdapter<MovieView> by lazy {
-        ItemsAdapter<MovieView> (
+    private val moviesAdapter: ItemsAdapter<MovieView, OnItemSelectedListener> by lazy {
+        ItemsAdapter<MovieView, OnItemSelectedListener> (
             clickListener = listener,
             layout = R.layout.landscape_card_item
         )

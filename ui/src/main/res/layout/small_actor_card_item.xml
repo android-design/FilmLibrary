@@ -8,6 +8,11 @@
         <variable
             name="actor"
             type="com.geekbrains.team.filmlibrary.model.PersonView" />
+
+        <variable
+            name = "listener"
+            type = "com.geekbrains.team.filmlibrary.adapters.OnActorSelectedListener" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -15,6 +20,7 @@
         android:layout_height="220dp"
         android:layout_margin="5dp"
         android:layout_marginBottom="32dp"
+        android:onClick="@{() -> listener.openActorDetails(actor.id)}"
         app:cardCornerRadius="4dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -41,21 +41,21 @@ class MainScreenFragment : DaggerFragment() {
     private val viewModel by viewModels<MainScreenViewModel> { viewModelFactory }
     private lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
-    private lateinit var mIndicator: Indicator
+    private lateinit var mIndicator: Indicator<MovieView, OnItemSelectedListener>
 
     private val nowPlayingAdapter by lazy {
-        ItemsAdapter<MovieView>(clickListener = listener, layout = R.layout.small_card_item)
+        ItemsAdapter<MovieView, OnItemSelectedListener>(clickListener = listener, layout = R.layout.small_card_item)
     }
 
     private val upcomingAdapter by lazy {
-        ItemsAdapter<MovieView>(
+        ItemsAdapter<MovieView, OnItemSelectedListener>(
             clickListener = listener,
             layout = R.layout.upcoming_small_card_item
         )
     }
 
     private val topRatedMovieAdapter by lazy {
-        ImagesAdapter<MovieView>(
+        ImagesAdapter<MovieView, OnItemSelectedListener>(
             clickListener = listener,
             layout = R.layout.big_card_item
         )

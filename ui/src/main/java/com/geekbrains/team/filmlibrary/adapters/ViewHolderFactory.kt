@@ -51,8 +51,8 @@ object ViewHolderFactory {
     class SmallCardHolder(
         private val binding: SmallCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.listener = listener
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnItemSelectedListener
             binding.movie = data as? MovieView
             binding.executePendingBindings()
         }
@@ -61,8 +61,8 @@ object ViewHolderFactory {
     class UpcomingSmallCardHolder(
         private val binding: UpcomingSmallCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.listener = listener
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnItemSelectedListener
             binding.movie = data as? MovieView
             binding.executePendingBindings()
         }
@@ -71,8 +71,8 @@ object ViewHolderFactory {
     class LandscapeCardHolder(
         private val binding: LandscapeCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.listener = listener
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnItemSelectedListener
             binding.movie = data as? MovieView
             binding.executePendingBindings()
         }
@@ -81,8 +81,8 @@ object ViewHolderFactory {
     class LandscapeTVCardHolder(
         private val binding: LandscapeTvShowCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.listener = listener
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnItemSelectedListener
             binding.tvShow = data as? TVShowView
             binding.executePendingBindings()
         }
@@ -94,8 +94,8 @@ object ViewHolderFactory {
         private val play: ImageButton = binding.root.play_btn
         private val backDrop: ImageView = binding.root.title_iv
 
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
-            binding.listener = listener
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnItemSelectedListener
             binding.movie = data as? MovieView
 
             binding.movie?.let {
@@ -114,10 +114,10 @@ object ViewHolderFactory {
         private val play: ImageButton = binding.root.play_btn
         private val backDrop: ImageView = binding.root.title_iv
 
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
             binding.movie = data as? MovieView
             binding.movie?.let {
-                binding.listener = listener
+                binding.listener = listener as OnLikeClickListener
                 binding.executePendingBindings()
                 play.setOnClickListener { v: View ->
                     v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.trailer)))
@@ -130,7 +130,8 @@ object ViewHolderFactory {
     class SmallActorCardItemHolder(
         private val binding: SmallActorCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root), Binder {
-        override fun <T> bind(data: T, position: Int, listener: OnItemSelectedListener?) {
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnActorSelectedListener
             binding.actor = data as? PersonView
             binding.executePendingBindings()
         }

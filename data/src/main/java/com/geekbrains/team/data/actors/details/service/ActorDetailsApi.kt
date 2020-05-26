@@ -8,7 +8,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ActorDetailsApi {
-    @GET("/person/{person_id}?")
+    @GET("/3/person/{person_id}?")
     fun getActorDetails(
         @Path("person_id") id: Int,
         @Query("api_key") apiKey: String,

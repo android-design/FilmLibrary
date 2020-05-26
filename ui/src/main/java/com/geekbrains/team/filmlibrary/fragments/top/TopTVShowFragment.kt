@@ -29,8 +29,8 @@ class TopTVShowFragment : DaggerFragment() {
     private val viewModel by viewModels<TopViewModel>({ activity as MainActivity }) { viewModelFactory }
     private lateinit var listener: OnItemSelectedListener
 
-    private val tvShowsAdapter: ItemsAdapter<TVShowView> by lazy {
-        ItemsAdapter<TVShowView>(
+    private val tvShowsAdapter: ItemsAdapter<TVShowView, OnItemSelectedListener> by lazy {
+        ItemsAdapter<TVShowView, OnItemSelectedListener>(
             clickListener = listener,
             layout = R.layout.landscape_tv_show_card_item
         )

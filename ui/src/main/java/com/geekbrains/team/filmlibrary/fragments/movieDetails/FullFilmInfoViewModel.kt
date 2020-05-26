@@ -1,6 +1,5 @@
 package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
-import android.text.PrecomputedText
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.geekbrains.team.domain.movies.favoriteMovies.interactor.AddFavoriteMovieIdUseCase

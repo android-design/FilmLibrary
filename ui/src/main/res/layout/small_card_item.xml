@@ -52,7 +52,6 @@
                 android:layout_marginEnd="4dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_favorite_inactive"
-                android:onClick="@{() -> listener.onLikeClick(movie == null ? tvShow.id : movie.id)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />

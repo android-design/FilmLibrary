@@ -7,7 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ActorTVCreditsApi {
-    @GET("/person/{person_id}/tv_credits?")
+    @GET("/3/person/{person_id}/tv_credits?")
     fun getActorTVCredits(
         @Path("person_id") id: Int,
         @Query("api_key") apiKey: String,
