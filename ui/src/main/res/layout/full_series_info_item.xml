@@ -8,6 +8,9 @@
         <import type="android.text.TextUtils" />
 
         <variable
+            name = "listener"
+            type = "com.geekbrains.team.filmlibrary.adapters.OnLikeClickListener"/>
+        <variable
             name="tvShow"
             type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 

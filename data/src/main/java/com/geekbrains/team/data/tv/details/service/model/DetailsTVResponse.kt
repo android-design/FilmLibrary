@@ -119,6 +119,7 @@ data class DetailsTVResponse(
 fun DetailsTVResponse.toTVShow(): TVShow = TVShow(
     id = this.id,
     originalName = this.originalName,
+    episodeRunTime = runTime,
     name = this.name,
     popularity = (this.popularity).toInt(),
     overview = this.overview,

@@ -15,6 +15,9 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/navigateToSeriesDetails"
+            app:destination="@id/seriesDetailsFragment" />
     </fragment>
 
     <fragment
@@ -27,6 +30,9 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/navigateToSeriesDetails"
+            app:destination="@id/seriesDetailsFragment" />
     </fragment>
 
     <fragment
@@ -39,6 +45,9 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/navigateToSeriesDetails"
+            app:destination="@id/seriesDetailsFragment" />
     </fragment>
 
     <fragment
@@ -48,6 +57,9 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/navigateToSeriesDetails"
+            app:destination="@id/seriesDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -74,6 +86,21 @@
         <action
             android:id="@+id/navigateToMovieDetails"
             app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/seriesDetailsFragment"
+        android:name="com.geekbrains.team.filmlibrary.fragments.tvDetails.FullSeriesInfoFragment"
+        android:label="ActorDetailsFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/navigateToActorDetails"
+            app:destination="@id/actorDetailsFragment" />
+        <action
+            android:id="@+id/navigateToSeriesDetails"
+            app:destination="@id/seriesDetailsFragment" />
     </fragment>
 
 </navigation>

@@ -55,16 +55,16 @@ class GetTVDetailsUseCase @Inject constructor(
             producer = personByJob(credits, PRODUCER)
             writer = personByDepartment(credits, WRITING)
         }
-
     }
-
-    private fun personByJob(credits: Credits, filter: String)  =
-        credits.crew?.filter {person -> person.job.equals(filter, true)}
-            ?.take(ELEMENTS_TO_TAKE)?.joinToString { it.name }
-
-    private fun personByDepartment(credits: Credits, filter: String) =
-        credits.crew?.filter {person -> person.department.equals(filter, true)}
-            ?.take(ELEMENTS_TO_TAKE)?.joinToString { it.name }
-
 }
+
+private fun personByJob(credits: Credits, filter: String): String?  =
+    credits.crew?.filter { person -> person.job.equals(filter, true) }
+        ?.take(GetTVDetailsUseCase.ELEMENTS_TO_TAKE)
+        ?.joinToString { it.name }
+
+private fun personByDepartment(credits: Credits, filter: String): String? =
+    credits.crew?.filter { person -> person.department.equals(filter, true) }
+        ?.take(GetTVDetailsUseCase.ELEMENTS_TO_TAKE)
+        ?.joinToString { it.name }
 

@@ -42,15 +42,15 @@ data class SimilarTVShowsResponse (
 
 fun SimilarTVShowsResponse.toTVShowList(): List<TVShow> =
     results.map { response -> TVShow(
-         backdropPath = response.backdropPath.let { Const.POSTER_AND_BACKDROP_PREFIX + it } ?: "",
+         backdropPath = response.backdropPath.let { Const.POSTER_AND_BACKDROP_PREFIX + it },
          firstAirDate = response.firstAirDate,
          id = response.id,
          name = response.name,
          originalLanguage = response.originalLanguage,
          originalName = response.originalName,
          overview = response.overview,
-         popularity = response.popularity,
+         popularity = response.popularity.toInt(),
          posterPath = response.posterPath?.let { Const.IMAGE_PREFIX + it } ?: "",
-         voteAverage = response.voteAverage,
+         voteAverage = (response.voteAverage * 10).toInt(),
          voteCount = response.voteCount
     ) }

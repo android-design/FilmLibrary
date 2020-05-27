@@ -1,5 +1,6 @@
 package com.geekbrains.team.filmlibrary.fragments.tvDetails
 
+import android.util.Log
 import com.geekbrains.team.domain.tv.details.interactor.GetTVDetailsUseCase
 import com.geekbrains.team.filmlibrary.base.BaseViewModel
 import com.geekbrains.team.filmlibrary.model.PersonView
@@ -32,7 +33,7 @@ class FullTvInfoViewModel @Inject constructor(
         addDisposable(disposable)
     }
 
-    fun loadSimilarMovies(id: Int, page: Int) {
+    fun loadSimilarTVShows(id: Int, page: Int) {
         val disposable = getSimilarTVShowsUseCase.execute(GetSimilarTVShowsUseCase.Params(id, page))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -48,5 +49,6 @@ class FullTvInfoViewModel @Inject constructor(
 
     private fun handleOnSuccessLoadSimilarMovies(movies: List<TVShow>) {
         similarTVShowsLiveData.value = movies.map { it.toTVShowView() }
+        Log.d("loadSimilarMovies()", movies[1].posterPath)
     }
 }

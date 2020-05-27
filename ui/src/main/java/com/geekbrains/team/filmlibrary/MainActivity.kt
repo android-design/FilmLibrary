@@ -73,6 +73,11 @@ class MainActivity: AppCompatActivity(), OnItemSelectedListener, OnActorSelected
         navController.navigate(directions)
     }
 
+    override fun openSeriesDetails(id: Int) {
+        val directions = MainScreenFragmentDirections.navigateToSeriesDetails(id)
+        navController.navigate(directions)
+    }
+
     override fun openActorDetails(id: Int) {
         val directions = FullFilmInfoFragmentDirections.navigateToActorDetails(id)
         navController.navigate(directions)

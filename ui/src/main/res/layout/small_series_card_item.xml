@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,7 +10,7 @@
 
         <variable
             name="tvShow"
-            type="com.geekbrains.team.filmlibrary.fragments.search.model.SearchedTVShowView" />
+            type="com.geekbrains.team.filmlibrary.model.TVShowView" />
 
         <variable
             name="listener"
@@ -17,48 +18,66 @@
 
     </data>
 
-    <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="115dp"
+        android:layout_height="255dp"
         android:layout_margin="5dp"
-        android:onClick="@{() -> listener.openSeriesDetails(tvShow.id)}"
+        android:onClick="@{() -> listener.openSeriesDetails(tvShow.id )}"
         app:cardCornerRadius="4dp"
-        app:cardMaxElevation="8dp">
+        app:cardElevation="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/cover_iv"
-                android:layout_width="68dp"
-                android:layout_height="match_parent"
+                android:id="@+id/title_iv"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_no_poster"
-                app:layout_constraintStart_toStartOf="parent"
-                app:poster='@{tvShow.posterPath}'
+                app:layout_constraintTop_toTopOf="parent"
+                app:poster="@{tvShow.posterPath}"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/like_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_favorite_inactive"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/title_tv"
                 style="@style/Headline3"
-                android:layout_width="244dp"
+                android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_margin="4dp"
+                android:ellipsize="end"
                 android:gravity="bottom"
-                android:text='@{tvShow.name}'
-                app:layout_constraintStart_toEndOf="@id/cover_iv"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:lines="2"
+                android:scrollHorizontally="true"
+                android:text="@{ tvShow.name }"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_iv" />
 
             <TextView
-                android:id="@+id/original_title_tv"
+                android:id="@+id/genre_tv"
                 style="@style/Subtitle2"
-                android:layout_width="234dp"
-                android:layout_height="16dp"
-                android:text="@{tvShow.originalName}"
-                app:layout_constraintStart_toStartOf="@id/title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:text='@{ tvShow.genres }'
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
             <LinearLayout
@@ -83,16 +102,16 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/series_rating_tv"
+                    android:id="@+id/rating_tv"
                     style="@style/Subtitle1"
                     android:layout_width="16dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@{tvShow.voteAverage}"
+                    android:text="@{ tvShow.voteAverage }"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </layout>

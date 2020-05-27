@@ -28,14 +28,14 @@ data class TVShow(
     val originalLanguage: String,
     val originalName: String,
     val overview: String,
-    val popularity: Double,
+    val popularity: Int,
     val posterPath: String,
     val productionCompanies: List<ProductionCompany>? = null,
     val seasons: List<Season>? = null,
     val status: String? = null,
     val type: String? = null,
     var videos: List<Video>? = null,
-    val voteAverage: Double,
+    val voteAverage: Int,
     val voteCount: Int,
     var cast: List<Actor>? = null, // Актеры
     var crew: List<Member>? =null, //Съемочная группа

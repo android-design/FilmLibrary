@@ -44,6 +44,13 @@ object ViewHolderFactory {
             R.layout.small_actor_card_item -> SmallActorCardItemHolder(
                 SmallActorCardItemBinding.inflate(inflater, parent, false)
             )
+            R.layout.full_series_info_item -> FullSeriesInfoCardHolder(
+                FullSeriesInfoItemBinding.inflate(inflater, parent, false)
+            )
+            R.layout.small_series_card_item -> SmallSeriesCardHolder(
+                SmallSeriesCardItemBinding.inflate(inflater, parent, false)
+            )
+
             else -> throw Exception("Wrong view type")
         }
     }
@@ -135,5 +142,35 @@ object ViewHolderFactory {
             binding.actor = data as? PersonView
             binding.executePendingBindings()
         }
+    }
+
+    class FullSeriesInfoCardHolder(
+        private val binding: FullSeriesInfoItemBinding
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
+        private val play: ImageButton = binding.root.play_btn
+        private val backDrop: ImageView = binding.root.title_iv
+
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.tvShow = data as? TVShowView
+            binding.tvShow?.let {
+                binding.listener = listener as OnLikeClickListener
+                binding.executePendingBindings()
+                play.setOnClickListener { v: View ->
+                    v.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it.trailer)))
+                }
+                Picasso.get().load(it.images[position]).into(backDrop)
+            }
+        }
+    }
+
+    class SmallSeriesCardHolder(
+        private val binding: SmallSeriesCardItemBinding
+    ) : RecyclerView.ViewHolder(binding.root), Binder {
+        override fun <T, S> bind(data: T, position: Int, listener: S?) {
+            binding.listener = listener as? OnItemSelectedListener
+            binding.tvShow = data as? TVShowView
+            binding.executePendingBindings()
+        }
+
     }
 }
