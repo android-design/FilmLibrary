@@ -1,7 +1,7 @@
 package com.geekbrains.team.data.movies.movieCreadits.service.model
 
 import com.geekbrains.team.data.Const
-import com.geekbrains.team.domain.movies.model.Credits
+import com.geekbrains.team.domain.base.model.Credits
 import com.google.gson.annotations.SerializedName
 
 data class MovieCreditsResponse(
@@ -57,7 +57,8 @@ fun MovieCreditsResponse.Member.toCrewPerson(): Credits.CrewPerson = Credits.Cre
     profilePath = this.profilePath.let { Const.IMAGE_PREFIX + it }
 )
 
-fun MovieCreditsResponse.toCredits(): Credits = Credits(
-    cast = cast.map { it.toCastPerson() },
-    crew = crew.map { it.toCrewPerson() }
-)
+fun MovieCreditsResponse.toCredits(): Credits =
+    Credits(
+        cast = cast.map { it.toCastPerson() },
+        crew = crew.map { it.toCrewPerson() }
+    )

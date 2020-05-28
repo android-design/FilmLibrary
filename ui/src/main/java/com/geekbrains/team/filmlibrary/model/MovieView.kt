@@ -24,6 +24,8 @@ data class MovieView(
     val writer: String,
     val director: String,
     val releaseYear:String
+    val director: String,
+    var like: Boolean = false
 )
 
 fun Movie.toMovieView() = MovieView(

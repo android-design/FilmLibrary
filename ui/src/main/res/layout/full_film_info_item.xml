@@ -10,8 +10,8 @@
         <import type="android.text.TextUtils" />
 
         <variable
-            name="fullMovie"
-            type="com.geekbrains.team.domain.movies.model.MovieDetails" />
+            name="listener"
+            type="com.geekbrains.team.filmlibrary.adapters.OnLikeClickListener" />
 
         <variable
             name="movie"
@@ -37,21 +37,48 @@
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_no_backdrop" />
 
-        <TextView
-            android:id="@+id/title_tv"
-            style="@style/Headline2"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="6dp"
-            android:ellipsize="end"
-            android:gravity="bottom"
-            android:scrollHorizontally="true"
-            android:text="@{movie == null ? tvShow.name : movie.title}"
-            app:layout_constraintBottom_toTopOf="@id/original_title_tv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_iv" />
+            <ImageButton
+                android:id="@+id/like_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:onClick="@{() -> listener.onLikeClick(movie == null ? tvShow.id : movie.id)}"
+                android:src="@drawable/ic_favorite_inactive"
+                app:layout_constraintEnd_toEndOf="@id/title_iv"
+                app:layout_constraintTop_toTopOf="@id/title_iv"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/play_btn"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_play_circle"
+                android:visibility="@{movie == null ? (TextUtils.isEmpty(tvShow.trailer) ? View.GONE : View.VISIBLE) : (TextUtils.isEmpty(movie.trailer) ? View.GONE : View.VISIBLE)}"
+                app:layout_constraintBottom_toBottomOf="@id/title_iv"
+                app:layout_constraintEnd_toEndOf="@id/title_iv"
+                app:layout_constraintStart_toStartOf="@id/title_iv"
+                app:layout_constraintTop_toTopOf="@id/title_iv"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                style="@style/Headline2"
+                android:layout_width="290dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:text="@{movie == null ? tvShow.name : movie.title}"
+                app:layout_constraintBottom_toTopOf="@id/original_title_tv"
+                app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/original_title_tv"
