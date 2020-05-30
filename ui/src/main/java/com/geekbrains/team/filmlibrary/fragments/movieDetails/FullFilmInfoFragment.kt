@@ -20,10 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.geekbrains.team.filmlibrary.Const.DESCRIPTION_MAX_LINES
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
-import com.geekbrains.team.filmlibrary.adapters.Indicator
-import com.geekbrains.team.filmlibrary.adapters.ItemsAdapter
-import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.*
 import com.geekbrains.team.filmlibrary.databinding.FullFilmInfoFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.PersonView
@@ -90,7 +87,7 @@ class FullFilmInfoFragment : DaggerFragment(), OnLikeClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listener.showProgress()
+        onItemSelectedListener.showProgress()
 
         initUI()
         startObservers()
@@ -118,7 +115,7 @@ class FullFilmInfoFragment : DaggerFragment(), OnLikeClickListener {
     private fun startObservers() {
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
-            listener.hideProgress()
+            onItemSelectedListener.hideProgress()
         })
 
         viewModel.movieDetailsLiveData.observe(viewLifecycleOwner, Observer { data ->
@@ -128,7 +125,7 @@ class FullFilmInfoFragment : DaggerFragment(), OnLikeClickListener {
                 mIndicator.startIndicators()
                 mIndicator.setCurrentIndicator(viewModel.currentMoviePoster)
                 binding.movie = it
-                listener.hideProgress()
+                onItemSelectedListener.hideProgress()
             }
         })
 

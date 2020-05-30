@@ -23,8 +23,7 @@ data class MovieView(
     val producer: String,
     val writer: String,
     val director: String,
-    val releaseYear:String
-    val director: String,
+    val releaseYear:String,
     var like: Boolean = false
 )
 
