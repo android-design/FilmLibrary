@@ -1,4 +1,7 @@
-package com.geekbrains.team.domain.movies.model
+package com.geekbrains.team.domain.base.model
+
+import com.geekbrains.team.domain.movies.model.Movie
+import com.geekbrains.team.domain.tv.model.TVShow
 
 data class Credits(
     val cast: List<CastPerson>?,
@@ -35,5 +38,14 @@ fun Credits.CastPerson.toMovieActor(): Movie.Actor =
 
 fun Credits.CrewPerson.toMovieMember(): Movie.Member =
     Movie.Member(
+        id = id, name = name, job = job, posterPath = profilePath
+    )
+fun Credits.CastPerson.toTVShowActor(): TVShow.Actor =
+    TVShow.Actor(
+        id = id, name = name, character = character, posterPath = profilePath
+    )
+
+fun Credits.CrewPerson.toTVShowMember(): TVShow.Member =
+    TVShow.Member(
         id = id, name = name, job = job, posterPath = profilePath
     )

@@ -8,16 +8,19 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.geekbrains.team.filmlibrary.Const.MIN_LUX
+import com.geekbrains.team.filmlibrary.adapters.OnActorSelectedListener
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
 import com.geekbrains.team.filmlibrary.fragments.mainScreen.MainScreenFragmentDirections
+import com.geekbrains.team.filmlibrary.fragments.movieDetails.FullFilmInfoFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), OnItemSelectedListener {
+class MainActivity: AppCompatActivity(), OnItemSelectedListener, OnActorSelectedListener {
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
 
@@ -89,5 +92,16 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
         host.visibility = VISIBLE
     }
 
+
+
+    override fun openSeriesDetails(id: Int) {
+        val directions = MainScreenFragmentDirections.navigateToSeriesDetails(id)
+        navController.navigate(directions)
+    }
+
+    override fun openActorDetails(id: Int) {
+        val directions = FullFilmInfoFragmentDirections.navigateToActorDetails(id)
+        navController.navigate(directions)
+    }
 
 }
