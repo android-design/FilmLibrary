@@ -4,24 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
+import com.geekbrains.team.filmlibrary.MainActivity
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.fragments.favorites.adapter.FavoriteAdapter
-import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.favorite_inner_fragment.*
-import javax.inject.Inject
+import com.geekbrains.team.filmlibrary.adapters.TabAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.favorite_fragment.*
 
-class FavoriteFragment : DaggerFragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+class FavoriteFragment : Fragment() {
 
-    private val viewModel by viewModels<FavoriteViewModel> { viewModelFactory }
-
-    private val mAdapter = FavoriteAdapter()
-
+    private val pageTitleList by lazy {
+        arrayListOf(
+            getString(R.string.movies),
+            getString(R.string.tvShows)
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,15 +31,23 @@ class FavoriteFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        films_rv?.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = mAdapter
+        showInfo()
+    }
+
+    private fun showInfo() {
+        val mAdapter = ((context as MainActivity).supportFragmentManager).run {
+            TabAdapter(
+                this,
+                this@FavoriteFragment.lifecycle,
+                listOf(FavoriteMovieFragment(), FavoriteTVShowFragment())
+            )
         }
 
-        viewModel.favoriteMoviesData.observe(viewLifecycleOwner, Observer { movies ->
-            mAdapter.movies = movies
-        })
-
-        viewModel.loadFavoriteMovies()
+        mAdapter.let {
+            viewPager.adapter = it
+        }
+        TabLayoutMediator(tabs, viewPager) {tab, position ->
+            tab.text = pageTitleList.getOrNull(position)
+        }.attach()
     }
 }

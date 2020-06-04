@@ -163,7 +163,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
-                    android:text="@{tvShow.overview}"
+                    android:text="@{tvShow.director}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/director_title_tv" />
 
@@ -187,7 +187,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
-                    android:text="@{tvShow.overview}"
+                    android:text="@{tvShow.writer}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/screenplay_title_tv" />
 
@@ -211,7 +211,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="2dp"
                     android:gravity="bottom"
-                    android:text="@{tvShow.overview}"
+                    android:text="@{tvShow.producer}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/producer_title_tv" />
 

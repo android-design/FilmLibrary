@@ -10,8 +10,8 @@
         <import type="android.text.TextUtils" />
 
         <variable
-            name="fullMovie"
-            type="com.geekbrains.team.domain.movies.model.MovieDetails" />
+            name="listener"
+            type="com.geekbrains.team.filmlibrary.adapters.OnLikeClickListener" />
 
         <variable
             name="movie"

@@ -280,7 +280,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="24dp"
-                    android:onClick="@{() -> listener.openMovieDetails(tvShowPremier.id)}"
+                    android:onClick="@{() -> listener.openSeriesDetails(tvShowPremier.id)}"
                     app:cardCornerRadius="4dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,9 @@
 package com.geekbrains.team.domain.movies.movieDetails.interactor
 
 import com.geekbrains.team.domain.base.UseCase
+import com.geekbrains.team.domain.base.model.Credits
+import com.geekbrains.team.domain.base.model.toMovieActor
+import com.geekbrains.team.domain.base.model.toMovieMember
 import com.geekbrains.team.domain.movies.commonRepository.MovieCreditsRepository
 import com.geekbrains.team.domain.movies.commonRepository.MoviesGenresRepository
 import com.geekbrains.team.domain.movies.commonRepository.MoviesImagesRepository

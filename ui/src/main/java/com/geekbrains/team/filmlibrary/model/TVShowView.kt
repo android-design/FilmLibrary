@@ -19,9 +19,18 @@ data class TVShowView(
     val originCountry: String, // Страны производства (строка)
     val episodeRunTime: String,
     val overview: String, // Описание
-    val cast: List<String>, // Актёры (по идее массив моделей актёров)
-    val productionCompanies: String // Площадка, на которой показывался (строка)
-)
+    val productionCompanies: String, // Площадка, на которой показывался (строка)
+    var director:String? = null,
+    var writer: String? = null,
+    var producer: String? = null
+) {
+    data class Actor(
+        val id: Int,
+        val name: String,
+        val posterPath: String?,
+        val character: String
+    )
+}
 
 fun TVShow.toTVShowView() =
     TVShowView(
@@ -33,7 +42,7 @@ fun TVShow.toTVShowView() =
         voteAverage = voteAverage.toString(),
         trailer = trailer(),
         // TODO Fix this to feature.
-        images = images ?: listOf(),
+        images = images?.posters?.map { it.url } ?: listOf(),
         firstAirDate = firstAirDate,
         episodeRunTime = episodeRunTime.toString(),
         lastAirDate = lastAirDate ?: "",
@@ -41,8 +50,10 @@ fun TVShow.toTVShowView() =
         overview = overview,
         originCountry = originCountry.toString(),
         posterPath = posterPath,
-        cast = cast ?: listOf(),
-        productionCompanies = productionCompanies?.map { it.name }.toString()
+        productionCompanies = productionCompanies?.map { it.name }.toString(),
+        director = director,
+        writer = writer,
+        producer = producer
     )
 
 private fun TVShow.trailer(): String = videos?.firstOrNull {

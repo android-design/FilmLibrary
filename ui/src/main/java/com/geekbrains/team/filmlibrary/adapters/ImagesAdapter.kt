@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.model.MovieView
 import com.geekbrains.team.filmlibrary.model.TVShowView
 
-class ImagesAdapter<T>(
-    val clickListener: OnItemSelectedListener? = null, val layout: Int
+class ImagesAdapter<T, S>(
+    val clickListener: S? = null, val layout: Int
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

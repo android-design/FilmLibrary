@@ -7,21 +7,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.geekbrains.team.filmlibrary.R
-import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
 import com.geekbrains.team.filmlibrary.adapters.Indicator
 import com.geekbrains.team.filmlibrary.adapters.ItemsAdapterNew
 import com.geekbrains.team.filmlibrary.adapters.OnItemSelectedListener
+import com.geekbrains.team.filmlibrary.adapters.ImagesAdapter
 import com.geekbrains.team.filmlibrary.databinding.MainScreenFragmentBinding
 import com.geekbrains.team.filmlibrary.model.MovieView
+import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.main_screen_fragment.*
 import kotlinx.android.synthetic.main.pager_indicator_item.*
@@ -36,7 +40,7 @@ class MainScreenFragment : DaggerFragment() {
     private val viewModel by viewModels<MainScreenViewModel> { viewModelFactory }
     private lateinit var binding: MainScreenFragmentBinding
     private lateinit var listener: OnItemSelectedListener
-    private lateinit var mIndicator: Indicator
+    private lateinit var mIndicator: Indicator<MovieView, OnItemSelectedListener>
 
     private val nowPlayingAdapter by lazy {
         ItemsAdapterNew(
@@ -55,7 +59,7 @@ class MainScreenFragment : DaggerFragment() {
     }
 
     private val topRatedMovieAdapter by lazy {
-        ImagesAdapter<MovieView>(
+        ImagesAdapter<MovieView, OnItemSelectedListener>(
             clickListener = listener,
             layout = R.layout.big_card_item
         )
@@ -114,6 +118,7 @@ class MainScreenFragment : DaggerFragment() {
     }
 
     private fun startObservers() {
+
         viewModel.failure.observe(viewLifecycleOwner, Observer { msg ->
             Toast.makeText(context, msg.localizedMessage, Toast.LENGTH_LONG).show()
             listener.hideProgress()

@@ -1,104 +1,118 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/series_card"
-    android:layout_width="match_parent"
-    android:layout_height="273dp"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="8dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/series_tv">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="info"
+            type="com.geekbrains.team.domain.actors.model.ActorInformation" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/series_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="273dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/series_tv">
 
-        <ImageView
-            android:id="@+id/photo_iv"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/like_btn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_favorite_inactive"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photo_iv"
-            tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/photo_iv"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/name_tv"
-            style="@style/Headline2"
-            android:layout_width="290dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:gravity="bottom"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photo_iv"
-            tools:text="Full name" />
-
-        <TextView
-            android:id="@+id/original_name_tv"
-            style="@style/Subtitle2"
-            android:layout_width="290dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/name_tv"
-            tools:text="Name Surname" />
-
-        <TextView
-            android:id="@+id/roles_tv"
-            style="@style/Subtitle1"
-            android:layout_width="290dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/original_name_tv"
-            tools:text="Role" />
-
-        <LinearLayout
-            android:layout_width="268dp"
-            android:layout_height="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            <ImageButton
+                android:id="@+id/like_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_favorite_inactive"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photo_iv"
+                tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/date_of_birth_tv"
-                style="@style/Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                tools:text="10.10.1960 (XX years)" />
-
-            <TextView
-                android:id="@+id/motherland_tv"
-                style="@style/Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/name_tv"
+                style="@style/Headline2"
+                android:layout_width="290dp"
+                android:layout_height="16dp"
                 android:layout_marginStart="16dp"
-                tools:text="USA" />
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photo_iv"
+                tools:text="Full name" />
 
             <TextView
-                android:id="@+id/height_tv"
+                android:id="@+id/original_name_tv"
                 style="@style/Subtitle2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="290dp"
+                android:layout_height="15dp"
                 android:layout_marginStart="16dp"
-                tools:text="1.60 m" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name_tv"
+                tools:text="Name Surname" />
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/roles_tv"
+                style="@style/Subtitle1"
+                android:layout_width="290dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/original_name_tv"
+                tools:text="Role" />
+
+            <LinearLayout
+                android:layout_width="268dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/date_of_birth_tv"
+                    style="@style/Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    tools:text="10.10.1960 (XX years)" />
+
+                <TextView
+                    android:id="@+id/motherland_tv"
+                    style="@style/Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    tools:text="USA" />
+
+                <TextView
+                    android:id="@+id/height_tv"
+                    style="@style/Subtitle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    tools:text="1.60 m" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

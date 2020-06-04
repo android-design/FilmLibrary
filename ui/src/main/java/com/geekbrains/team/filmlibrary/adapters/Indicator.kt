@@ -7,11 +7,11 @@ import androidx.core.content.ContextCompat
 import com.geekbrains.team.filmlibrary.R
 import com.geekbrains.team.filmlibrary.model.MovieView
 
-class Indicator(
+class Indicator<T, S>(
     val context : Context?,
     private val indicator: LinearLayout,
     private val indicatorItem: LinearLayout,
-    val adapter: ImagesAdapter<MovieView>
+    val adapter: ImagesAdapter<T, S>
 ) {
 
     fun startIndicators() {

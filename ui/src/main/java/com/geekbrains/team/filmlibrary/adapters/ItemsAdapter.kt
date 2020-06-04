@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.geekbrains.team.filmlibrary.Const.PRELOAD_FROM_SERVER_ITEMS_COUNT
 
-class ItemsAdapter<T>(
-    val clickListener: OnItemSelectedListener? = null,
+class ItemsAdapter<T, S>(
+    val clickListener: S? = null,
     val layout: Int,
     val onScrollToLastPageListener: (() -> Unit)? = null
 ) :

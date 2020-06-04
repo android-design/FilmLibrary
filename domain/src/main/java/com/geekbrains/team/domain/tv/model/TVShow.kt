@@ -1,6 +1,7 @@
 package com.geekbrains.team.domain.tv.model
 
 import com.geekbrains.team.domain.base.model.Genre
+import com.geekbrains.team.domain.base.model.Images
 import com.geekbrains.team.domain.base.model.MovieAndTVShow
 import com.geekbrains.team.domain.base.model.Video
 
@@ -36,9 +37,12 @@ data class TVShow(
     var videos: List<Video>? = null,
     val voteAverage: Int,
     val voteCount: Int,
-    // TODO Add class for actors.
-    val cast: List<String>? = null, // Актеры
-    val images: List<String>? = null
+    var cast: List<Actor>? = null, // Актеры
+    var crew: List<Member>? =null, //Съемочная группа
+    var images: Images? = null,
+    var director: String? = null,
+    var writer: String? = null,
+    var producer: String? = null
 ) : MovieAndTVShow() {
     data class CreatedBy(
         val creditId: String,
@@ -90,6 +94,20 @@ data class TVShow(
         val posterPath: String,
         val seasonNumber: Int
     )
+
+    data class Actor(
+        val id: Int,
+        val name: String,
+        val posterPath: String?,
+        val character: String
+    )
+
+    data class Member (
+        val id: Int,
+        val name: String,
+        val job: String,
+        val posterPath: String?
+    )
 }
 
 fun fillTVGenres(
@@ -105,4 +123,17 @@ fun fillTVGenres(
                 result?.let { tvShow.genres.add(result) }
             }
         }
+    }
+
+fun fillTVGenres(
+    tvGenres: List<Genre>,
+    tvShow: TVShow
+): TVShow =
+    tvShow.apply {
+        val genresTVMap = tvGenres.map { it.id to it.name }.toMap()
+        tvShow.genreIds?.map {
+            val result = genresTVMap[it]
+            result?.let { tvShow.genres.add(result) }
+        }
+
     }
