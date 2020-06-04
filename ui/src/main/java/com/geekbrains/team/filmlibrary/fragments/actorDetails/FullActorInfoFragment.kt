@@ -24,6 +24,8 @@ import com.geekbrains.team.filmlibrary.model.toPersonView
 import com.geekbrains.team.filmlibrary.util.DiffUtilsCallback
 import kotlinx.android.synthetic.main.full_actor_info_fragment.*
 import kotlinx.android.synthetic.main.full_film_info_fragment.*
+import kotlinx.android.synthetic.main.full_film_info_fragment.scrollView
+import kotlinx.android.synthetic.main.full_series_info_fragment.*
 import javax.inject.Inject
 
 class FullActorInfoFragment: DaggerFragment() {

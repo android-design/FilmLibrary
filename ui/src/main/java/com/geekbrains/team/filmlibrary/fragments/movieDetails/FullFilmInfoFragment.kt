@@ -2,11 +2,8 @@ package com.geekbrains.team.filmlibrary.fragments.movieDetails
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -45,7 +42,7 @@ class FullFilmInfoFragment : DaggerFragment(), OnLikeClickListener {
     lateinit var binding: FullFilmInfoFragmentBinding
     private val onLikeClickListener: OnLikeClickListener = this
     private lateinit var onActorSelectedListener: OnActorSelectedListener
-    private lateinit var onItemSelectedListener: OnItemSelectedListener
+    private lateinit var listener: OnItemSelectedListener
 
 
     private lateinit var mIndicator: Indicator<MovieView, OnLikeClickListener>
@@ -60,7 +57,7 @@ class FullFilmInfoFragment : DaggerFragment(), OnLikeClickListener {
     }
 
     private val similarMoviesAdapter by lazy {
-        ItemsAdapter<MovieView, OnItemSelectedListener>(clickListener = onItemSelectedListener,
+        ItemsAdapter<MovieView, OnItemSelectedListener>(clickListener = listener,
             layout = R.layout.small_card_item)
     }
 
@@ -74,7 +71,7 @@ class FullFilmInfoFragment : DaggerFragment(), OnLikeClickListener {
         }
 
         if (context is OnItemSelectedListener) {
-            onItemSelectedListener = context
+            listener = context
         } else {
             throw RuntimeException("$context must implement OnItemSelectedListener")
         }
